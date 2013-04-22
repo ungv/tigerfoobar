@@ -1,0 +1,1 @@
+<?php $notification = array('check_date'=>'20130422','date'=>'20130413','status'=>'1','link'=>'http://www.easyphp.org/components.php','message'=>'New component for EasyPHP DevServer 12.1 : PHP 5.5.0 beta 3'); ?>

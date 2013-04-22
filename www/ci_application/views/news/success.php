@@ -1,0 +1,1 @@
+<h1>Story added</h1>

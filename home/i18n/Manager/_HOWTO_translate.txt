@@ -1,0 +1,10 @@
+To add new language:
+- copy the file from a existing language. Prefer English to be sure it's up to date 
+- Change [Language] Section at the beginnig and the end of the file
+- translate items (IMPORTANT : keep %d or %s order in sentences !)
+- IMPORTANT: for IDS_MYSQL_LANGUAGE item, choose one that exists in mysql\share directory !
+- test with the manager
+- send the translated file to thierry@easyphp.org
+
+To update a language:
+- send the updated file to thierry@easyphp.org

@@ -1,0 +1,87 @@
+[Albanian]
+IDS_START               =&startimi
+IDS_STOP                =&ndalimi
+IDS_PENDING             =pregatitje...
+IDS_HELP_CMDLINE        =Zgjedhjet per EasyPHP.exe
+IDS_ERROR_MYSQL         =MySql nuk mundet te startohet : \n%s\n\nA te startohet Apache serveri?
+IDS_ANOTHER_APACHE_RUN  =Nje Apache server eshte ende ne pune.
+IDS_APACHE_ALREADY_RUN  =Apache server eshte ne pune.
+IDS_APACHEMSG_UNEXPECTED_END=Perfundim i paperzaktuar i Apache serverit!
+IDS_PORT_OCCUPE         =Apache nuk mund te punoj : porta aktuale eshte koliduar me nje server se faqeve te rrjetes
+IDS_SERVER_RUN_ERROR    =Nuk mundet ta perpunoj serverin : %s
+IDS_EXPERT_MODE_WARNING =Vemendje ! ky modus mundeson ndrimin e shenimeve te konfigurimit; nje konfigurim i gabuar mundet ta pengoj servimin.\nA jeni shum sigurt ?
+IDS_SWITCH_SSL          =Apache serverin ta restartoj ?
+IDS_NEW_EASYPHP_VERSION =Nje version me i rri (%s) eshte gati. A do ta hapi EasyPHP faqen ne internet ?
+IDS_RESTART             =Serverin ta restartoj ?
+IDS_MYSQLMSG_UNEXPECTED_END=Perfundim i paperzaktuar i MySql !
+IDS_STATE_STARTED       =startuar
+IDS_STATE_STOPPED       =ndalur
+IDS_HELPCTX_IDC_SERVICE =Server Apache dhe MySql jan startuar si service dhe punojn, edhe ne qe rast askush nuk lajmerohet.\nKy opcion qendron ne systemet operative si Windows NT, 2000,  XP dhe operatori ka drejte te administrimit.
+IDS_HELPCTX_NOHELP      =Ska ndihme per kete teme.
+IDS_ERROR_STOP_SERVER   =Serveri nuk mundet te ndalet : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=E lejon nje dialog te paraqitet, se a duhet me u shiku nje EasyPHP-Version. Nevoitet nje qasje ne internet 
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Kur te ndrohen konfigurimet athere restarohen serverat automatikisht
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Kjo fush per hyrje e mundson zaktimin e rregullimit te startimit te MySql bankes se shenimeve. \npor Startimi si servis nuk e pranon kete; athere duheni ti beni konfigurimet ne shenime e jo si shtes.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Ky opcion e mundeson startimin e servera te automatizuar nga EasyPHP. Kur jane te vendosura si service athere pergjegjet windowsi dhe i aktivison poashtu ketu servera.
+IDS_ERROR_RESTART_SERVER=Serveri nuk mundet te startohet : %s
+IDS_ERROR_INSTALL_SERVICE=Servisi nuk mundet me u vendos : %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apache statusi
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySql statusi
+IDS_HELPCTX_ID_PIN      =Kete dialog gjithmon me e paraqit
+IDS_HELPCTX_ID_HELP_CONTEXT=paraqit ndihmen
+IDS_HELPCTX_IDSL_VIEW   =zvoglon dritaren apo / zgjonon
+IDS_LOG_RESTART_SERVERS =Server starton nga fillimi...
+IDS_ERROR_APACHE_CONF   =Gabim ne Apache shenim per konfiguration:\n\n"%s"\n\nA ta editoj ?
+IDS_LOG_CHANGE_CONF     =shenimet e konfugurimit kan ndryshuar
+IDS_LOG_START_SERVERS   =Serverin me e startu
+IDS_NOT_ADMIN           =Nuk keni drejta te administrimit: Disa zgjedhje nuk jan te gatshme.\n\nA te vazhdoj ?
+IDS_ERROR_BROWSER       =Browseri si Internet Exploreri nuk mundet me u startu : kopio kete adress dhe vendose ne Browser ku duhet: "%s".\n(Per ta zhidh kete problem duhet ta vendosni nje Browser)
+IDS_ERROR_REMOVE_SERVICE=Servisi nuk mundet te ndalet : %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART		=&restarto
+IDS_SERVER_KILL			=&rrezoje serverin
+#dialog about
+IDS_ABOUT_TITLE         =titulli per EasyPHP
+IDS_ABOUT_PRESENTATION  =EasyPHP, nje installacion i lehtsuar per Apache, MySql dhe PHP, perkthyer nga Shita e programuar :
+IDS_ABOUT_VISIT_SITE    =Per informatione tjera visito EasyPHP-faqen:
+IDS_ABOUT_SEE_LICENCE   =&shiko drejten the licencen
+IDS_ABOUT_CHECK_VERSION =&kontrolloj versionin
+
+IDS_MAIN_STATUS                 =Status
+IDS_MAIN_CHECK_WINDOWSTART      =Ne windows-&start drejtperdrejt te startohen (vetem me drejta administratore)
+IDS_MAIN_SERVICE                =st&artoj Apache and MySql si service (vetem me drejta administratore)
+IDS_MAIN_AUTOSERVEURSSTART  =&serverat me i startu nga EasyPHP
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&kerko versionin aktuell ne startim
+IDS_MAIN_CONFAUTORELOAD         =&ndrimet e konfigurationeve me i perpunuar automatikisht
+IDS_MAIN_MYSQL_ARGUMENTS        =MySql argumentacione
+IDS_MAIN_APPLIQUER				=&percaktim
+IDS_MAIN_FERMER					=&mbylle
+IDS_MAIN_ABOUT					=&informacione
+
+IDS_MENU_HELP                   =ndi&hme
+IDS_MENU_LOGFILES               =&shenimet e protokolluara
+IDS_MENU_CONFIGURATION          =&konfiguracioni
+IDS_MENU_EXPLORE                =&Explorer i windowsit
+IDS_MENU_ADMINISTRATION         =&Administrimi
+IDS_MENU_WEBLOCAL               =Rrjeta lokale si &Web
+IDS_MENU_QUIT                   =&Tung
+
+IDS_MENU_HELP_INTRODUCTION      =udhzim&e
+IDS_MENU_HELP_STARTPHP          =&startimi me PHP
+IDS_MENU_HELP_FAQ               =&FAQ pyetje
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache gabime
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache qa&ssja 
+IDS_MENU_LOGFILES_MYSQLERR      =&MySql gabime
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &Shtesat
+IDS_MYSQL_LANGUAGE              =english
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS            =Ndali sherbimet e serverave
+IDS_EXT_ERROR_DEPENDANCE        =Shtesat e kuqe nuk duhen me u shfrytzu se shkaktojne probleme te varshmerise.\nShiko ne dokumentation te shfrytzimit e shtesave.
+IDS_CONF_CHECK_SERVERS_PORT     =Kontrolloje TCP porten para startimit
+IDS_CONF_LANGUAGE               =Gjuha
+IDS_CONF_PREFERENCES            =Regullimi
+IDS_TRANSLATED_BY               =Perkthyer... nga B.Shita
+[/Albanian]

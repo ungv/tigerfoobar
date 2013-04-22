@@ -1,0 +1,52 @@
+[Fri Apr 19 22:03:26.961936 2013] [mpm_winnt:notice] [pid 14484:tid 464] AH00455: Apache/2.4.2 (Win32) PHP/5.4.6 configured -- resuming normal operations
+[Fri Apr 19 22:03:26.962936 2013] [mpm_winnt:notice] [pid 14484:tid 464] AH00456: Server built: Apr 20 2012 19:24:55
+[Fri Apr 19 22:03:26.962936 2013] [core:notice] [pid 14484:tid 464] AH00094: Command line: 'C:\\Users\\Sean\\Desktop\\EASYPH~1.1\\Apache\\bin\\apache.exe -d C:/Users/Sean/Desktop/EasyPHP-12.1/apache'
+[Fri Apr 19 22:03:27.193949 2013] [mpm_winnt:notice] [pid 14484:tid 464] AH00418: Parent: Created child process 10816
+[Fri Apr 19 22:03:28.407019 2013] [mpm_winnt:notice] [pid 10816:tid 472] AH00354: Child: Starting 64 worker threads.
+[Fri Apr 19 22:04:02.317958 2013] [mpm_winnt:notice] [pid 14484:tid 464] AH00424: Parent: Received restart signal -- Restarting the server.
+[Fri Apr 19 22:04:02.434965 2013] [mpm_winnt:notice] [pid 14484:tid 464] AH00455: Apache/2.4.2 (Win32) PHP/5.4.6 configured -- resuming normal operations
+[Fri Apr 19 22:04:02.434965 2013] [mpm_winnt:notice] [pid 14484:tid 464] AH00456: Server built: Apr 20 2012 19:24:55
+[Fri Apr 19 22:04:02.434965 2013] [core:notice] [pid 14484:tid 464] AH00094: Command line: 'C:\\Users\\Sean\\Desktop\\EASYPH~1.1\\Apache\\bin\\apache.exe -d C:/Users/Sean/Desktop/EasyPHP-12.1/apache'
+[Fri Apr 19 22:04:02.451966 2013] [mpm_winnt:notice] [pid 14484:tid 464] AH00418: Parent: Created child process 18272
+[Fri Apr 19 22:04:03.328016 2013] [mpm_winnt:notice] [pid 18272:tid 468] AH00354: Child: Starting 64 worker threads.
+[Fri Apr 19 22:04:09.819387 2013] [mpm_winnt:notice] [pid 10816:tid 472] AH00364: Child: All worker threads have exited.
+[Fri Apr 19 22:04:48.645608 2013] [mpm_winnt:notice] [pid 14484:tid 464] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Fri Apr 19 22:04:50.645722 2013] [mpm_winnt:notice] [pid 18272:tid 468] AH00364: Child: All worker threads have exited.
+[Fri Apr 19 22:04:50.672724 2013] [mpm_winnt:notice] [pid 14484:tid 464] AH00430: Parent: Child process exited successfully.
+[Sat Apr 20 10:57:40.516970 2013] [mpm_winnt:notice] [pid 4852:tid 464] AH00455: Apache/2.4.2 (Win32) PHP/5.4.6 configured -- resuming normal operations
+[Sat Apr 20 10:57:40.516970 2013] [mpm_winnt:notice] [pid 4852:tid 464] AH00456: Server built: Apr 20 2012 19:24:55
+[Sat Apr 20 10:57:40.516970 2013] [core:notice] [pid 4852:tid 464] AH00094: Command line: 'C:\\Users\\Sean\\Desktop\\EASYPH~1.1\\Apache\\bin\\apache.exe -d C:/Users/Sean/Desktop/EasyPHP-12.1/apache'
+[Sat Apr 20 10:57:40.538971 2013] [mpm_winnt:notice] [pid 4852:tid 464] AH00418: Parent: Created child process 18500
+[Sat Apr 20 10:57:41.458024 2013] [mpm_winnt:notice] [pid 18500:tid 472] AH00354: Child: Starting 64 worker threads.
+[Sat Apr 20 11:18:13.609499 2013] [mpm_winnt:notice] [pid 4852:tid 464] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sat Apr 20 11:18:15.609613 2013] [mpm_winnt:notice] [pid 18500:tid 472] AH00364: Child: All worker threads have exited.
+[Sat Apr 20 11:18:15.633614 2013] [mpm_winnt:notice] [pid 4852:tid 464] AH00430: Parent: Child process exited successfully.
+[Sat Apr 20 11:19:33.471066 2013] [mpm_winnt:notice] [pid 16892:tid 464] AH00455: Apache/2.4.2 (Win32) PHP/5.4.6 configured -- resuming normal operations
+[Sat Apr 20 11:19:33.471066 2013] [mpm_winnt:notice] [pid 16892:tid 464] AH00456: Server built: Apr 20 2012 19:24:55
+[Sat Apr 20 11:19:33.472066 2013] [core:notice] [pid 16892:tid 464] AH00094: Command line: 'C:\\Users\\Sean\\Desktop\\EASYPH~1.1\\Apache\\bin\\apache.exe -d C:/Users/Sean/Desktop/EasyPHP-12.1/apache'
+[Sat Apr 20 11:19:33.491068 2013] [mpm_winnt:notice] [pid 16892:tid 464] AH00418: Parent: Created child process 14312
+[Sat Apr 20 11:19:34.357117 2013] [mpm_winnt:notice] [pid 14312:tid 472] AH00354: Child: Starting 64 worker threads.
+[Sat Apr 20 11:44:52.878972 2013] [mpm_winnt:notice] [pid 16892:tid 464] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sat Apr 20 11:44:54.879086 2013] [mpm_winnt:notice] [pid 14312:tid 472] AH00364: Child: All worker threads have exited.
+[Sat Apr 20 11:44:54.906087 2013] [mpm_winnt:notice] [pid 16892:tid 464] AH00430: Parent: Child process exited successfully.
+[Sat Apr 20 11:45:09.601928 2013] [mpm_winnt:notice] [pid 7948:tid 464] AH00455: Apache/2.4.2 (Win32) PHP/5.4.6 configured -- resuming normal operations
+[Sat Apr 20 11:45:09.601928 2013] [mpm_winnt:notice] [pid 7948:tid 464] AH00456: Server built: Apr 20 2012 19:24:55
+[Sat Apr 20 11:45:09.601928 2013] [core:notice] [pid 7948:tid 464] AH00094: Command line: 'C:\\Users\\Sean\\Desktop\\EASYPH~1.1\\Apache\\bin\\apache.exe -d C:/Users/Sean/Desktop/EasyPHP-12.1/apache'
+[Sat Apr 20 11:45:09.618929 2013] [mpm_winnt:notice] [pid 7948:tid 464] AH00418: Parent: Created child process 17684
+[Sat Apr 20 11:45:10.453977 2013] [mpm_winnt:notice] [pid 17684:tid 472] AH00354: Child: Starting 64 worker threads.
+[Sat Apr 20 12:31:07.540673 2013] [mpm_winnt:notice] [pid 7948:tid 464] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sat Apr 20 12:31:09.540787 2013] [mpm_winnt:notice] [pid 17684:tid 472] AH00364: Child: All worker threads have exited.
+[Sat Apr 20 12:31:09.567789 2013] [mpm_winnt:notice] [pid 7948:tid 464] AH00430: Parent: Child process exited successfully.
+[Sun Apr 21 23:46:00.319439 2013] [mpm_winnt:notice] [pid 12260:tid 464] AH00455: Apache/2.4.2 (Win32) PHP/5.4.6 configured -- resuming normal operations
+[Sun Apr 21 23:46:00.338440 2013] [mpm_winnt:notice] [pid 12260:tid 464] AH00456: Server built: Apr 20 2012 19:24:55
+[Sun Apr 21 23:46:00.338440 2013] [core:notice] [pid 12260:tid 464] AH00094: Command line: 'C:\\Users\\Sean\\Desktop\\TIGERF~1\\Apache\\bin\\apache.exe -d C:/Users/Sean/Desktop/tigerfoobar/apache'
+[Sun Apr 21 23:46:00.355441 2013] [mpm_winnt:notice] [pid 12260:tid 464] AH00418: Parent: Created child process 7248
+[Sun Apr 21 23:46:01.154486 2013] [mpm_winnt:notice] [pid 7248:tid 472] AH00354: Child: Starting 64 worker threads.
+[Sun Apr 21 23:50:25.483605 2013] [mpm_winnt:notice] [pid 12260:tid 464] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sun Apr 21 23:50:27.483720 2013] [mpm_winnt:notice] [pid 7248:tid 472] AH00364: Child: All worker threads have exited.
+[Sun Apr 21 23:50:27.506721 2013] [mpm_winnt:notice] [pid 12260:tid 464] AH00430: Parent: Child process exited successfully.
+[Sun Apr 21 23:50:39.828426 2013] [mpm_winnt:notice] [pid 11124:tid 464] AH00455: Apache/2.4.2 (Win32) PHP/5.4.6 configured -- resuming normal operations
+[Sun Apr 21 23:50:39.829426 2013] [mpm_winnt:notice] [pid 11124:tid 464] AH00456: Server built: Apr 20 2012 19:24:55
+[Sun Apr 21 23:50:39.829426 2013] [core:notice] [pid 11124:tid 464] AH00094: Command line: 'C:\\Users\\Sean\\Desktop\\TIGERF~1\\Apache\\bin\\apache.exe -d C:/Users/Sean/Desktop/tigerfoobar/apache'
+[Sun Apr 21 23:50:39.845427 2013] [mpm_winnt:notice] [pid 11124:tid 464] AH00418: Parent: Created child process 10712
+[Sun Apr 21 23:50:40.621471 2013] [mpm_winnt:notice] [pid 10712:tid 472] AH00354: Child: Starting 64 worker threads.

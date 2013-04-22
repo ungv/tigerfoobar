@@ -1,0 +1,82 @@
+[Lietuvio]
+IDS_START               =&Paleisti
+IDS_STOP                =&Sustabdyti
+IDS_PENDING             =Vyksta...
+IDS_HELP_CMDLINE        =Rodyti EasyPHP.exe jungiklius
+IDS_ERROR_MYSQL         =Negali paleisti MySql: \n%s\n\nGal norëtumët paleisti Apache?
+IDS_DEFAULT_MYSQLARG    =--skip-name-resolve --language=lithuanian
+IDS_ANOTHER_APACHE_RUN  =Kitas Apache serveris jau yra paleistas.
+IDS_APACHE_ALREADY_RUN  =Apache jau paleistas.
+IDS_APACHEMSG_UNEXPECTED_END =Apache darbà nutraukë!
+IDS_PORT_OCCUPE         =Apache negali pasileisti: kitas Web serveris naudoja Web portà
+IDS_SERVER_RUN_ERROR    =Serveris negali pasileisti: %s
+IDS_EXPERT_MODE_WARNING =Dëmesio! Ðis rëþimas leis jums keisti nustatymø failus ir netinkami nustatymai galës trukdyti serveriui.\nAr tuo esate tikras?
+IDS_SWITCH_SSL          =Perkrauti Apache?
+IDS_NEW_EASYPHP_VERSION =Aptikta nauja versija (%s). Apsilankysite EasyPhp tinklapyje?
+IDS_RESTART             =Perkrautas serveris
+IDS_MYSQLMSG_UNEXPECTED_END =MySql darbà nutraukë!
+IDS_STATE_STARTED       =Paleistas
+IDS_STATE_STOPPED       =Sustabdytas
+IDS_HELPCTX_IDC_SERVICE =Apache ir MySql serveriai yra paleisti, ir yra prieinami, jei nëra prisijungusiø vartotojø.\nÐi galimybë prieinama tik NT/2K ir XP Windows ir jeigu vartotojas yra kompiuterio administratorius.
+IDS_HELPCTX_NOHELP      =Èia pagalbos nëra.
+IDS_ERROR_STOP_SERVER   =Negali sustabdyti serverio: %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Rodyti praneðimà, jeigu iðleista nauja EasyPHP versija. Reikalingas Interneto ryðys.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Serveris automatiðkai persikrauna, jei jo nustatymø failas yra pakeistas.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Nustatykite MySql vykdymo parametrus.\nJeigu paleidþiate MySql darbo stotá, tai naudokite nustatymø failà.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Uþdëjus ðià varnelæ, EasyPHP pasileis kartu su Windows. Jei jûs paleisite serverá kaip darbo stotá, tai automatiðkai pasileis kartu su Windows.
+IDS_ERROR_RESTART_SERVER=Negali perkrauti serverio: %s
+IDS_ERROR_INSTALL_SERVICE=Negali ádiegti darbo stoties: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apache bûsena
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySql bûsena
+IDS_HELPCTX_ID_PIN      =Langas visada virðuje
+IDS_HELPCTX_ID_HELP_CONTEXT=Pagalba
+IDS_HELPCTX_IDSL_VIEW   =Sumaþinti/padidinti langà
+IDS_LOG_RESTART_SERVERS =Serveris perkrautas
+IDS_ERROR_APACHE_CONF   =Klaida Apache nustatymø faile:\n\n""%s""\n\nRedaguoti?
+IDS_LOG_CHANGE_CONF     =Nustatymø failas pakeistas
+IDS_LOG_START_SERVERS   =Serveris paleistas
+IDS_NOT_ADMIN           =Jûs neesate administratorius: kai kurie veiksmai bus draudþiami.\n\nTæsti?
+IDS_ERROR_BROWSER       =Negali paleisti narðyklës: nukopijuokite ðá adresà á savo mëgstamiausià narðyklæ: ""%s"".\n(kad paðalintumëte ðià klaidà, nustatykite ant numatytosios narðyklës)
+IDS_ERROR_REMOVE_SERVICE=Negali iðdiegti darbo stoties: %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART		=&Perkrauti
+IDS_SERVER_KILL			=&Nutraukti
+#dialog about
+IDS_ABOUT_TITLE			=Apie EasyPHP
+IDS_ABOUT_PRESENTATION	=EasyPHP, tai lengvas bûdas instaliuoti Apache, MySql ir PHP, kurá sukûrë:
+IDS_ABOUT_VISIT_SITE	=Daugiau informacijos EasyPHP tinklapyje:
+IDS_ABOUT_SEE_LICENCE	=&Perþiûrëti licenzijà
+IDS_ABOUT_CHECK_VERSION	=&Tikrinti versijà
+
+IDS_MAIN_STATUS      		=Bûsena
+IDS_MAIN_CHECK_WINDOWSTART	=Paleisti kartu su &Windows.
+IDS_MAIN_SERVICE          	=&Paleisti Apache ir MySql darbo stotis (tik administratoriui)           
+IDS_MAIN_AUTOSERVEURSSTART  =&Serverá paleisti kartu su EasyPHP
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=Aptikti naujà &versijà paleidus programà
+IDS_MAIN_CONFAUTORELOAD		=A&utomatiðkai aptikti serverio nustatymø pakeitimus
+IDS_MAIN_MYSQL_ARGUMENTS	=MySql argumentai
+IDS_MAIN_APPLIQUER			=&Pritaikyti
+IDS_MAIN_FERMER				=&Uþdaryti
+IDS_MAIN_ABOUT				=&Info...
+
+IDS_MENU_HELP				=P&agalba
+IDS_MENU_LOGFILES      		=&Registro failai
+IDS_MENU_CONFIGURATION 		=N&ustatymai
+IDS_MENU_EXPLORE       		=&Narðyti
+IDS_MENU_ADMINISTRATION		=&Valdymas
+IDS_MENU_WEBLOCAL      		=Vietinis &Web
+IDS_MENU_QUIT				=&Iðeiti
+
+IDS_MENU_HELP_INTRODUCTION	=&Ádiegimas
+IDS_MENU_HELP_STARTPHP		=&Paleisti su PHP
+IDS_MENU_HELP_FAQ			=&DUK
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache klaidos
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache p&rieiga
+IDS_MENU_LOGFILES_MYSQLERR	=&MySql klaidos
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &Plëtiniai
+IDS_MYSQL_LANGUAGE			=english
+
+IDS_TRANSLATED_BY   		=tadzikaz <tadzikaz@gmail.com>
+[/Lietuvio]

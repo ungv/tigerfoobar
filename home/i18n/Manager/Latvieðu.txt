@@ -1,0 +1,105 @@
+[Latvieðu]
+IDS_START               =&Sâkt
+IDS_STOP                =&Beigt
+IDS_PENDING             =Notiek process...
+IDS_HELP_CMDLINE        =Parâdît EasyPHP.exe opcijas
+IDS_ERROR_MYSQL         =Nevar palaist MySql : \n%s\n\nVai gribat palaist Apache ?
+IDS_ANOTHER_APACHE_RUN  =Cits Apache serveris jau darbojas.
+IDS_APACHE_ALREADY_RUN  =Apache serveris jau darbojas.
+IDS_APACHEMSG_UNEXPECTED_END =Negaidîts pârtraukums Apache darbîbâ!
+IDS_PORT_OCCUPE         =Nevar palaist Apache : portu lieto cits Web serveris, vai to bloíç ugunsmûris.
+IDS_SERVER_RUN_ERROR    =Nevar palaist serveri : %s
+IDS_EXPERT_MODE_WARNING =Uzmanîbu ! Ðis reþîms ïauj veikt izmaiòas uzstâdîjumu failos un nepareizi uzstâdîjumi var traucçt serveru darbîbu.\nVai vçlaties turpinât?
+IDS_SWITCH_SSL          =Restartçt Apache?
+IDS_NEW_EASYPHP_VERSION =Ir pieejama jauna versija (%s). Iet uz EasyPHP websaitu ?
+IDS_RESTART             =Restartçt serverus
+IDS_MYSQLMSG_UNEXPECTED_END =Negaidîts pârtraukums MySql darbîbâ!
+IDS_STATE_STARTED       =Palaists
+IDS_STATE_STOPPED       =Apturçts
+IDS_HELPCTX_IDC_SERVICE =Apache un MySql darbojâs kâ serveri un ir pieejami pat tad ja nav neviena aktîva lietotâja.\nÐî iespçja ir pieejama tikai NT/2K un XP Windows un ja lietotâjs ir datora administrâtors.
+IDS_HELPCTX_NOHELP      =Palîdzîba nav pieejama.
+IDS_ERROR_STOP_SERVER   =Nevar apturçt serveri: %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Parâdît dialoga logu, ja ir pieejama jauna EasyPHP versija. Nepiecieðams Interneta pieslçgums.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Ja tiek izmanîti serveru konfigurâcijas faili, tad serveri automâtiski restartçjas.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Uzstâdît MySql palaiðanas parametrus.\nJa Jûs MySql laiþat kâ servisu, tad izmantojiet konfigurâcijas failu.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Palaist EasyPHP kopâ ar Windows. Ja serveri tiek palaisti kâ servisi, tad tie tiks automâtiski palaisti kopâ ar Windows.
+IDS_ERROR_RESTART_SERVER=Nevar restartçt serveri: %s
+IDS_ERROR_INSTALL_SERVICE=Nevar uzstâdît servisu: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apache stâvoklis
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySql  stâvoklis
+IDS_HELPCTX_ID_PIN      =Vienmçr râdît ðo dialogu.
+IDS_HELPCTX_ID_HELP_CONTEXT=Râdît palîdzîbu
+IDS_HELPCTX_IDSL_VIEW   =Samazinât/palielinât logu
+IDS_LOG_RESTART_SERVERS =Serveri restartçjas...
+IDS_ERROR_APACHE_CONF   =Kïûme Apache konfigurâcijas failâ:\n\n""%s""\n\nLabot ?
+IDS_LOG_CHANGE_CONF     =Konfigurâcijas fails izmainîts
+IDS_LOG_START_SERVERS   =Serveri palaiþas
+IDS_NOT_ADMIN           =Jûs neesat administrâtors: daþas darbîbas nebûs pieejamas.\n\nTurpinât?
+IDS_ERROR_BROWSER       =Nevar palaist pârlûku: iekopçjiet ðo adresi interneta pârlûkâ: ""%s"".\n(lai izlabotu ðo kïûmi, nosakiet noklusçto pârlûku)
+IDS_ERROR_REMOVE_SERVICE=Nevar noòemt servisu: %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART		=&Restartçt
+IDS_SERVER_KILL			=&Aizvçrt
+#dialog about
+IDS_ABOUT_TITLE			=Par EasyPHP
+IDS_ABOUT_PRESENTATION	=EasyPHP - vieglâko veidu kâ uzstâdît Apche, MySql un PHP - izveidoja:
+IDS_ABOUT_VISIT_SITE	=Plaðâkai informâcijai, apmeklçjiet EasyPHP mâjas lapu:
+IDS_ABOUT_SEE_LICENCE	=&Apskatît licenci
+IDS_ABOUT_CHECK_VERSION	=&Pârbaudît versiju
+
+IDS_MAIN_STATUS      		=Stâvoklis
+IDS_MAIN_CHECK_WINDOWSTART	=&Palaist kopâ ar Windows.
+IDS_MAIN_SERVICE          	=P&alaist Apache un MySql kâ servisus (tikai administrâtoriem)           
+IDS_MAIN_AUTOSERVEURSSTART  =&Palaist serveri, kad tiek palaista ðî aplikâcija.
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Palaiðanas laikâ pârbaudît versiju
+IDS_MAIN_CONFAUTORELOAD		=&Automâtiski òemt vçrâ serveru konfigurâciju izmaiòas
+IDS_MAIN_MYSQL_ARGUMENTS	=MySql argumenti
+IDS_MAIN_APPLIQUER			=A&pstiprinât
+IDS_MAIN_FERMER				=&Aizvçrt
+IDS_MAIN_ABOUT				=&Informâcija...
+
+IDS_MENU_HELP				=&Palîdzîba
+IDS_MENU_LOGFILES      		=&Log faili
+IDS_MENU_CONFIGURATION 		=&Konfigurâcija
+IDS_MENU_EXPLORE       		=&Izpçtît
+IDS_MENU_ADMINISTRATION		=&Administrâcija
+IDS_MENU_WEBLOCAL      		=Lokâlâs &Weblapas
+IDS_MENU_QUIT				=&Iziet
+
+IDS_MENU_HELP_INTRODUCTION	=&Ievads
+IDS_MENU_HELP_STARTPHP		=&Par PHP
+IDS_MENU_HELP_FAQ			=&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache kïûmes
+IDS_MENU_LOGFILES_APACHE_ACCESS=P&iekïuve Apache
+IDS_MENU_LOGFILES_MYSQLERR	=&MySql kïûmes
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &paplaðinâjumi
+IDS_MYSQL_LANGUAGE			=english
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS		=Apturçt serverus
+IDS_EXT_ERROR_DEPENDANCE	=Sarkanie paplaðinâjumi nevar tikt izmantoti, jo tiem ir atkarîbas problçmas :).\nPârbaudiet ðo paplaðinâjumu uzstâdîðanas rokasgrâmatas.
+IDS_CONF_CHECK_SERVERS_PORT	=Pirms sâkt, pârbaudiet servera TCP portu.
+IDS_CONF_LANGUAGE			=Valoda
+IDS_CONF_PREFERENCES		=Konfigurâcija
+
+IDS_UPDATE_FILE         	=Fails
+IDS_UPDATE_CURRENT_VERSION 	=Paðreizçjais
+IDS_UPDATE_NEW_VERSION  	=Jauns
+IDS_UPDATE_FILE_SIZE    	=Izmçrs
+IDS_UPDATE_FILE_HASH    	=Hash
+IDS_UPDATE_WEB_FILE_ERROR 	=KÏÛDA : Nevar iegût jauninâjuma datus no Interneta
+IDS_UPDATE_HASH_DATA_ERROR 	=ERROR : Nevar iegût hash datus no Interneta
+IDS_UPDATE_UP_TO_DATE   	=Visi faili ir jaunâkie pieejamie.
+IDS_UPDATE_UPDATING     	=Atjauninâs "%s"...
+IDS_UPDATE_BAD_HASH     	=Bad Hash for  "%s"\n%s\nvajadzçtu bût\n%s
+IDS_UPDATE_FILE_ERROR   	=Kïûda atjauninoties "%s" : %d !
+IDS_UPDATE_NEED_RESTART 	=Lai pabeigtu atjauninâðanu restartçjiet EasyPHP.\nRestartçt tagad ?
+IDS_REMOVABLE_DRIVE     	=Jûs esat palaidis EasyPHP no pârvietojamas atmiòas iekârtas. Vai gribat reìenerçt conf failus pirms serveru palaiðanas?
+IDS_PORT_OCCUPE_XP			=%s portu (%d) izmanto %s !
+IDS_FOLDER_CHANGED			=EasyPHP move from "%s" to "%s" folder.\nRegenerate configuration files ?
+IDS_PROMPT_QUIT				=Vai tieðâm gribi iziet no EasyPHP ?
+IDS_ALWAYS_VISIBLE			=Vienmçr redzams
+IDS_USB_REMOVED_QUIT		=USB iekârta atslçgta, EasyPHP beidz darbu
+[/Latvieðu]

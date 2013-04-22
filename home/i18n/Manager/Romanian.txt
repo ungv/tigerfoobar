@@ -1,0 +1,106 @@
+[Romanian]
+IDS_START               =&Start
+IDS_STOP                =&Stop
+IDS_PENDING             =Asteptare...
+IDS_HELP_CMDLINE        =Afiseaza optiunile pt Easy.PHP.exe
+IDS_ERROR_MYSQL         =MySql nu poate fi pornit : \n%s\n\nDoresti sa pornesti Apache ?
+IDS_ANOTHER_APACHE_RUN  =Alta sesiune de Apache este deja pornita.
+IDS_APACHE_ALREADY_RUN  =Apache este deja activ.
+IDS_APACHEMSG_UNEXPECTED_END=Inchidere subita a sesiunii de Apache !
+IDS_PORT_OCCUPE         =Apache nu poate fi pornit : alt server Web este activ pe portul Wb sau portul este blocat de firewall.
+IDS_SERVER_RUN_ERROR    =Nu poate fi pornit serverul : %s
+IDS_EXPERT_MODE_WARNING =Atentie ! Selectarea acestui mod iti permite sa modifici configuratia fisierului si o configurare neadecvata poate bloca serverul.\nDoresti asta?
+IDS_SWITCH_SSL          =Repornire Apache?
+IDS_NEW_EASYPHP_VERSION =O noua versiune (%s) este disponibila. Vrei sa accesezi siteul EasyPHP?
+IDS_RESTART             =Repornire servere
+IDS_MYSQLMSG_UNEXPECTED_END=Inchidere neasteptata a MySql !
+IDS_STATE_STARTED       =Pornit
+IDS_STATE_STOPPED       =Oprit
+IDS_HELPCTX_IDC_SERVICE =Apache si Mysql sunt pornite ca servere, si sunt disponibile chiar daca nici un user nu este conectat.\nAceasta optiune este disponibila doar in NT/2K si Windows XP si daca userul are drepturi de Administrator pe computer.
+IDS_HELPCTX_NOHELP      =Nu existe informatii in plus disponibile.
+IDS_ERROR_STOP_SERVER   =Serverul nu poate fi oprit : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Afiseaza o casuta de dialog daca o noua versiune de EasyPHP este disponibila. E necesara o conexiune la internet.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Serverele sunt repornite autoat daca fisierele de configuratie sunt modificate.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Parametrii de executie MySql.\nDaca MySql functioneaza ca si serviciu, e recomandat sa se foloseasca fisierul de configurare.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Aceasta optiune permite pornirea EasyPHP odata cu Windowsul. Daca serverele functioneaza ca si servicii, acestea vor fi pornite automat odata cu Windowsul.
+IDS_ERROR_RESTART_SERVER=Serverul nu poate fi repornit : %s
+IDS_ERROR_INSTALL_SERVICE=Nu poate fi instalat acest serviciu : %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Parametrii de stare Apache
+IDS_HELPCTX_IDC_STATUS_MYSQL=Parametrii de stare MySql
+IDS_HELPCTX_ID_PIN      =Afiseza totdeauna acest mesaj.
+IDS_HELPCTX_ID_HELP_CONTEXT=Ajutor
+IDS_HELPCTX_IDSL_VIEW   =Micsoreaza/mareste fereastra
+IDS_LOG_RESTART_SERVERS =Serverele se repornesc...
+IDS_ERROR_APACHE_CONF   =Eroare in fisierul de configurare Apache:\n\n""%s""\n\nEditare ?
+IDS_LOG_CHANGE_CONF     =Fisierul de configurare a fost modificat
+IDS_LOG_START_SERVERS   =Pornire servere
+IDS_NOT_ADMIN           =Nu esti Administrator: anumite optiuni nu vor fi disponibile.\n\nContinui?
+IDS_ERROR_BROWSER       =Nu poate fi pornit browserul : copaza aceasta adresa in browserul tau : ""%s"".\n(pentru corectarea acestei eroori e necesara definirea unui browser principal)
+IDS_ERROR_REMOVE_SERVICE=Acest serviciu nu poate fi dezinstalat : %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART		=&Reporneste
+IDS_SERVER_KILL			=&Opreste
+#dialog about
+IDS_ABOUT_TITLE			=Despre EasyPHP
+IDS_ABOUT_PRESENTATION	=EasyPHP , o forma mai usoara de instalare a Apache, MySql si PHP. A fost creat de :
+IDS_ABOUT_VISIT_SITE	=Pt informatii in plus vizitati siteul EasyPHP :
+IDS_ABOUT_SEE_LICENCE	=&Citeste licenta
+IDS_ABOUT_CHECK_VERSION	=&Verifica versiunea
+
+IDS_MAIN_STATUS      		=Starea actuala
+IDS_MAIN_CHECK_WINDOWSTART	=P&orneste odata cu Windows-ul
+IDS_MAIN_SERVICE          	=&Porneste Apache si MySql ca si servicii (doar daca esti Administrator)
+IDS_MAIN_AUTOSERVEURSSTART  =&Porneste serverul cand se porneste acest program
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Verifica versiunea la pornire
+IDS_MAIN_CONFAUTORELOAD		=&Verificare automata a modificarilor din fisierele de configuratie a serverelor
+IDS_MAIN_MYSQL_ARGUMENTS	=Argumente MySql
+IDS_MAIN_APPLIQUER			=E&fectueaza
+IDS_MAIN_FERMER				=&Inchide
+IDS_MAIN_ABOUT				=&Informatii...
+
+IDS_MENU_HELP				=&Ajutor
+IDS_MENU_LOGFILES      		=&Loguri
+IDS_MENU_CONFIGURATION 		=&Configurare
+IDS_MENU_EXPLORE       		=&Exploreaza
+IDS_MENU_ADMINISTRATION		=&Administreaza
+IDS_MENU_WEBLOCAL      		=Server &local
+IDS_MENU_QUIT				=&Iesire
+
+IDS_MENU_HELP_INTRODUCTION	=&Introducere
+IDS_MENU_HELP_STARTPHP		=&Porneste cu PHP
+IDS_MENU_HELP_FAQ			=FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=&Erori in Apache
+IDS_MENU_LOGFILES_APACHE_ACCESS=A&ccesare Apache
+IDS_MENU_LOGFILES_MYSQLERR	=&Erori in MySql 
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=&Extensii PHP
+# choose one language that exists in mysql\share directory !
+IDS_MYSQL_LANGUAGE			=romanian
+
+IDS_LOG_STOP_SERVERS		=Opreste serverele
+IDS_EXT_ERROR_DEPENDANCE	=Extensiile in rosu nu pot fi folosite datorita problemelor de dependinta..\nVerifica ghidul de instalre al acestora.
+IDS_CONF_CHECK_SERVERS_PORT =Verifica portul TCP al serverului inainte de pornire
+IDS_CONF_LANGUAGE			=Limba
+IDS_CONF_PREFERENCES		=Configurare
+IDS_TRANSLATED_BY			=Ady&Danny
+
+IDS_UPDATE_FILE         	=Fisier
+IDS_UPDATE_CURRENT_VERSION 	=Versiunea actuala
+IDS_UPDATE_NEW_VERSION  	=Nou
+IDS_UPDATE_FILE_SIZE    	=Dimensiune
+IDS_UPDATE_FILE_HASH    	=Hash
+IDS_UPDATE_WEB_FILE_ERROR	=Eroare: nu se poate face upgrade de pe internet
+IDS_UPDATE_HASH_DATA_ERROR  =Eroare: nu poate fi efectuat hash de pe internet
+IDS_UPDATE_UP_TO_DATE   	=Toate fisierele sunt actualizate
+IDS_UPDATE_UPDATING     	=Updatare "%s"...
+IDS_UPDATE_BAD_HASH     	=Hash cu eroori pt "%s"\n%s\ntrebuia sa fie\n%s
+IDS_UPDATE_FILE_ERROR   	=Upgrade esuat. Eroare "%s" : %d !
+IDS_UPDATE_NEED_RESTART 	=Reporneste EasyPHP pentru finalizarea actualizarii.\nRepornire acum?
+IDS_REMOVABLE_DRIVE     	=EasyPHP ruleaza de pe un drive mobil. Vrei sa reactualizezi fisierele de configurare inaintea repornirii serverelor?
+IDS_PORT_OCCUPE_XP			=%s portul (%d) este folosit de %s !
+IDS_FOLDER_CHANGED			=EasyPHP a fost mutat din dosarul "%s" in dosarul "%s".\nReactualizare fisiere de configuratie?
+IDS_PROMPT_QUIT				=Inchizi EasyPHP?
+IDS_ALWAYS_VISIBLE			=Vizibil tot timpul
+IDS_USB_REMOVED_QUIT		=Cheia USB a fost scoasa. EasyPHP se va inchide
+[/Romanian]

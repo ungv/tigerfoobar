@@ -1,0 +1,139 @@
+130419 22:03:23 [Note] Plugin 'FEDERATED' is disabled.
+130419 22:03:23 InnoDB: The InnoDB memory heap is disabled
+130419 22:03:23 InnoDB: Mutexes and rw_locks use Windows interlocked functions
+130419 22:03:23 InnoDB: Compressed tables use zlib 1.2.3
+130419 22:03:23 InnoDB: Initializing buffer pool, size = 16.0M
+130419 22:03:23 InnoDB: Completed initialization of buffer pool
+InnoDB: The first specified data file .\ibdata1 did not exist:
+InnoDB: a new database to be created!
+130419 22:03:23  InnoDB: Setting file .\ibdata1 size to 10 MB
+InnoDB: Database physically writes the file full: wait...
+130419 22:03:25  InnoDB: Log file .\ib_logfile0 did not exist: new to be created
+InnoDB: Setting log file .\ib_logfile0 size to 5 MB
+InnoDB: Database physically writes the file full: wait...
+130419 22:03:26  InnoDB: Log file .\ib_logfile1 did not exist: new to be created
+InnoDB: Setting log file .\ib_logfile1 size to 5 MB
+InnoDB: Database physically writes the file full: wait...
+InnoDB: Doublewrite buffer not found: creating new
+InnoDB: Doublewrite buffer created
+InnoDB: 127 rollback segment(s) active.
+InnoDB: Creating foreign key constraint system tables
+InnoDB: Foreign key constraint system tables created
+130419 22:03:28  InnoDB: Waiting for the background threads to start
+130419 22:03:29 InnoDB: 1.1.8 started; log sequence number 0
+130419 22:03:29 [Note] Server hostname (bind-address): '127.0.0.1'; port: 3306
+130419 22:03:29 [Note]   - '127.0.0.1' resolves to '127.0.0.1';
+130419 22:03:29 [Note] Server socket created on IP: '127.0.0.1'.
+130419 22:03:30 [Note] Event Scheduler: Loaded 0 events
+130419 22:03:30 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: ready for connections.
+Version: '5.5.27-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
+130419 22:04:49 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: Normal shutdown
+
+130419 22:04:49 [Note] Event Scheduler: Purging the queue. 0 events
+130419 22:04:49  InnoDB: Starting shutdown...
+130419 22:04:49  InnoDB: Shutdown completed; log sequence number 1595675
+130419 22:04:49 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: Shutdown complete
+
+130420 10:57:39 [Note] Plugin 'FEDERATED' is disabled.
+130420 10:57:39 InnoDB: The InnoDB memory heap is disabled
+130420 10:57:39 InnoDB: Mutexes and rw_locks use Windows interlocked functions
+130420 10:57:39 InnoDB: Compressed tables use zlib 1.2.3
+130420 10:57:39 InnoDB: Initializing buffer pool, size = 16.0M
+130420 10:57:39 InnoDB: Completed initialization of buffer pool
+130420 10:57:39 InnoDB: highest supported file format is Barracuda.
+130420 10:57:39  InnoDB: Waiting for the background threads to start
+130420 10:57:40 InnoDB: 1.1.8 started; log sequence number 1595675
+130420 10:57:40 [Note] Server hostname (bind-address): '127.0.0.1'; port: 3306
+130420 10:57:40 [Note]   - '127.0.0.1' resolves to '127.0.0.1';
+130420 10:57:40 [Note] Server socket created on IP: '127.0.0.1'.
+130420 10:57:40 [Note] Event Scheduler: Loaded 0 events
+130420 10:57:40 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: ready for connections.
+Version: '5.5.27-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
+130420 11:18:14 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: Normal shutdown
+
+130420 11:18:14 [Note] Event Scheduler: Purging the queue. 0 events
+130420 11:18:14  InnoDB: Starting shutdown...
+130420 11:18:14  InnoDB: Shutdown completed; log sequence number 1595675
+130420 11:18:14 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: Shutdown complete
+
+130420 11:19:32 [Note] Plugin 'FEDERATED' is disabled.
+130420 11:19:32 InnoDB: The InnoDB memory heap is disabled
+130420 11:19:32 InnoDB: Mutexes and rw_locks use Windows interlocked functions
+130420 11:19:32 InnoDB: Compressed tables use zlib 1.2.3
+130420 11:19:32 InnoDB: Initializing buffer pool, size = 16.0M
+130420 11:19:32 InnoDB: Completed initialization of buffer pool
+130420 11:19:32 InnoDB: highest supported file format is Barracuda.
+130420 11:19:33  InnoDB: Waiting for the background threads to start
+130420 11:19:34 InnoDB: 1.1.8 started; log sequence number 1595675
+130420 11:19:34 [Note] Server hostname (bind-address): '127.0.0.1'; port: 3306
+130420 11:19:34 [Note]   - '127.0.0.1' resolves to '127.0.0.1';
+130420 11:19:34 [Note] Server socket created on IP: '127.0.0.1'.
+130420 11:19:34 [Note] Event Scheduler: Loaded 0 events
+130420 11:19:34 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: ready for connections.
+Version: '5.5.27-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
+130420 11:44:53 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: Normal shutdown
+
+130420 11:44:53 [Note] Event Scheduler: Purging the queue. 0 events
+130420 11:44:53  InnoDB: Starting shutdown...
+130420 11:44:54  InnoDB: Shutdown completed; log sequence number 1595675
+130420 11:44:54 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: Shutdown complete
+
+130420 11:45:08 [Note] Plugin 'FEDERATED' is disabled.
+130420 11:45:08 InnoDB: The InnoDB memory heap is disabled
+130420 11:45:08 InnoDB: Mutexes and rw_locks use Windows interlocked functions
+130420 11:45:08 InnoDB: Compressed tables use zlib 1.2.3
+130420 11:45:08 InnoDB: Initializing buffer pool, size = 16.0M
+130420 11:45:08 InnoDB: Completed initialization of buffer pool
+130420 11:45:08 InnoDB: highest supported file format is Barracuda.
+130420 11:45:09  InnoDB: Waiting for the background threads to start
+130420 11:45:10 InnoDB: 1.1.8 started; log sequence number 1595675
+130420 11:45:10 [Note] Server hostname (bind-address): '127.0.0.1'; port: 3306
+130420 11:45:10 [Note]   - '127.0.0.1' resolves to '127.0.0.1';
+130420 11:45:10 [Note] Server socket created on IP: '127.0.0.1'.
+130420 11:45:10 [Note] Event Scheduler: Loaded 0 events
+130420 11:45:10 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: ready for connections.
+Version: '5.5.27-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
+130420 12:31:08 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: Normal shutdown
+
+130420 12:31:08 [Note] Event Scheduler: Purging the queue. 0 events
+130420 12:31:10  InnoDB: Starting shutdown...
+130420 12:31:10  InnoDB: Shutdown completed; log sequence number 1598774
+130420 12:31:10 [Note] C:\Users\Sean\Desktop\EASYPH~1.1\MySql\bin\mysqld.exe: Shutdown complete
+
+130421 23:45:58 [Note] Plugin 'FEDERATED' is disabled.
+130421 23:45:58 InnoDB: The InnoDB memory heap is disabled
+130421 23:45:58 InnoDB: Mutexes and rw_locks use Windows interlocked functions
+130421 23:45:58 InnoDB: Compressed tables use zlib 1.2.3
+130421 23:45:58 InnoDB: Initializing buffer pool, size = 16.0M
+130421 23:45:58 InnoDB: Completed initialization of buffer pool
+130421 23:45:59 InnoDB: highest supported file format is Barracuda.
+130421 23:45:59  InnoDB: Waiting for the background threads to start
+130421 23:46:00 InnoDB: 1.1.8 started; log sequence number 1598774
+130421 23:46:00 [Note] Server hostname (bind-address): '127.0.0.1'; port: 3306
+130421 23:46:00 [Note]   - '127.0.0.1' resolves to '127.0.0.1';
+130421 23:46:00 [Note] Server socket created on IP: '127.0.0.1'.
+130421 23:46:01 [Note] Event Scheduler: Loaded 0 events
+130421 23:46:01 [Note] C:\Users\Sean\Desktop\TIGERF~1\MySql\bin\mysqld.exe: ready for connections.
+Version: '5.5.27-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
+130421 23:50:26 [Note] C:\Users\Sean\Desktop\TIGERF~1\MySql\bin\mysqld.exe: Normal shutdown
+
+130421 23:50:26 [Note] Event Scheduler: Purging the queue. 0 events
+130421 23:50:28  InnoDB: Starting shutdown...
+130421 23:50:29  InnoDB: Shutdown completed; log sequence number 1598784
+130421 23:50:29 [Note] C:\Users\Sean\Desktop\TIGERF~1\MySql\bin\mysqld.exe: Shutdown complete
+
+130421 23:50:39 [Note] Plugin 'FEDERATED' is disabled.
+130421 23:50:39 InnoDB: The InnoDB memory heap is disabled
+130421 23:50:39 InnoDB: Mutexes and rw_locks use Windows interlocked functions
+130421 23:50:39 InnoDB: Compressed tables use zlib 1.2.3
+130421 23:50:39 InnoDB: Initializing buffer pool, size = 16.0M
+130421 23:50:39 InnoDB: Completed initialization of buffer pool
+130421 23:50:39 InnoDB: highest supported file format is Barracuda.
+130421 23:50:39  InnoDB: Waiting for the background threads to start
+130421 23:50:40 InnoDB: 1.1.8 started; log sequence number 1598784
+130421 23:50:40 [Note] Server hostname (bind-address): '127.0.0.1'; port: 3306
+130421 23:50:40 [Note]   - '127.0.0.1' resolves to '127.0.0.1';
+130421 23:50:40 [Note] Server socket created on IP: '127.0.0.1'.
+130421 23:50:40 [Note] Event Scheduler: Loaded 0 events
+130421 23:50:40 [Note] C:\Users\Sean\Desktop\TIGERF~1\MySql\bin\mysqld.exe: ready for connections.
+Version: '5.5.27-log'  socket: ''  port: 3306  MySQL Community Server (GPL)

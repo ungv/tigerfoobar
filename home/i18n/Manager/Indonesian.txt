@@ -1,0 +1,87 @@
+[Indonesian]
+IDS_START               =&Start
+IDS_STOP                =&Stop
+IDS_PENDING             =Tangguhkan...
+IDS_HELP_CMDLINE        =Tampilkan pilihan untuk EasyPHP.exe
+IDS_ERROR_MYSQL         =Tidak dapat menjalankan MySQL : \n%s\n\nApakah ingin menjalankan Apache ?
+IDS_ANOTHER_APACHE_RUN  =Server Apache lain sedang running
+IDS_APACHE_ALREADY_RUN  =Apache sedang running
+IDS_APACHEMSG_UNEXPECTED_END=Unexpected end of Apache !
+IDS_PORT_OCCUPE         =Apache tidak dapat dijalankan : Server Web lain menggunakan port Web
+IDS_SERVER_RUN_ERROR    =Tidak dapat menjalankan server : %s
+IDS_EXPERT_MODE_WARNING =Perhatian ! Mode ini mengijinkan untuk mengubah file konfigurasi dan konfigurasi yang buruk dapat mengganggu server.\nApakah anda yakin ?
+IDS_SWITCH_SSL          =Restart Apache ?
+IDS_NEW_EASYPHP_VERSION =Versi baru (%s) sudah tersedia. Kunjungi website EasyPhp ?
+IDS_RESTART             =Restart servers
+IDS_MYSQLMSG_UNEXPECTED_END =Unexpected end of MySql !
+IDS_STATE_STARTED       =Started
+IDS_STATE_STOPPED       =Stopped
+IDS_HELPCTX_IDC_SERVICE =Apache dan MySql berjalan sebagai server, dan tersedia meskipun tidak ada user yang logged in.\nPilihan ini tersedia hanya pada NT/2K dan Windows XP dan jika user adalah administrator komputer ini.
+IDS_HELPCTX_NOHELP      =Tidak ada pertolongan untuk ini.
+IDS_ERROR_STOP_SERVER   =Tidak dapat menghentikan server  : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Tampilkan kotak dialog jika versi terbaru dari EasyPhp sudah tersedia. Membutuhkan koneksi Internet.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Server secara otomatis restarted jika file konfigurasi diubah.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Set parameter eksekusi untuk MySql.\nJika menjalankan MySql sebagai service, lebih baik gunakan file konfigurasi.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Pilihan ini mengijinkan untuk menjalankan EasyPhp pada Windows startup. Jika menjalankan server sebagai service, maka akan secara otomatis berjalan pada Windows startup.
+IDS_ERROR_RESTART_SERVER=Tidak dapat men-restart server : %s
+IDS_ERROR_INSTALL_SERVICE=Tidak dapat meng-install service: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Status Apache
+IDS_HELPCTX_IDC_STATUS_MYSQL=Status MySql
+IDS_HELPCTX_ID_PIN      =Selalu menampilkan dialog ini.
+IDS_HELPCTX_ID_HELP_CONTEXT=Tampilkan help
+IDS_HELPCTX_IDSL_VIEW   =Memperbesar/memperkecil window
+IDS_LOG_RESTART_SERVERS =Server sedang restart...
+IDS_ERROR_APACHE_CONF   =Error dalam file konfigurasi Apache :\n\n""%s""\n\nEdit ?
+IDS_LOG_CHANGE_CONF     =File konfigurasi sudah diubah
+IDS_LOG_START_SERVERS   =Servers starting
+IDS_NOT_ADMIN           =Anda bukan administrator : beberapa aksi tidak akan tersedia.\n\nLanjutkan ?
+IDS_ERROR_BROWSER       =Tidak dapat menjalankan browser : copy alamat ini ke browser favorit anda : ""%s"".\n(untuk memperbaiki error ini, tentukan browser default)
+IDS_ERROR_REMOVE_SERVICE=Tidak dapat uninstall service : %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART			=&Restart
+IDS_SERVER_KILL				=&Kill
+#dialog about
+IDS_ABOUT_TITLE				=Tentang EasyPHP
+IDS_ABOUT_PRESENTATION		=EasyPHP, cara mudah menginstall Apache, MySql dan PHP yang dibuat oleh :
+IDS_ABOUT_VISIT_SITE		=Untuk informasi, kunjungi home page EasyPHP :
+IDS_ABOUT_SEE_LICENCE		=&Lihat lisensi
+IDS_ABOUT_CHECK_VERSION		=&Periksa versi
+
+IDS_MAIN_STATUS      		=Status
+IDS_MAIN_CHECK_WINDOWSTART	=&Start pada windows startup.
+IDS_MAIN_SERVICE          	=St&art Apache dan MySql sebagai service (hanya administrator)
+IDS_MAIN_AUTOSERVEURSSTART  =&Jalankan server saat aplikasi ini start
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Periksa versi saat startup
+IDS_MAIN_CONFAUTORELOAD		=&Pertimbangan otomatis dari perubahan konfigurasi server
+IDS_MAIN_MYSQL_ARGUMENTS	=Argumen MySql
+IDS_MAIN_APPLIQUER			=A&pply
+IDS_MAIN_FERMER				=&Tutup
+IDS_MAIN_ABOUT				=&Info...
+
+IDS_MENU_HELP				=&Help
+IDS_MENU_LOGFILES      		=&File Log
+IDS_MENU_CONFIGURATION 		=&Konfiguration
+IDS_MENU_EXPLORE       		=&Explore
+IDS_MENU_ADMINISTRATION		=&Administrasi
+IDS_MENU_WEBLOCAL      		=&Web Lokal
+IDS_MENU_QUIT				=E&xit
+
+IDS_MENU_HELP_INTRODUCTION	=&Pendahuluan
+IDS_MENU_HELP_STARTPHP		=&Start dengan PHP
+IDS_MENU_HELP_FAQ			=&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache Error
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache A&cces
+IDS_MENU_LOGFILES_MYSQLERR	=&MySql Error
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &Extension
+IDS_MYSQL_LANGUAGE			=english
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS            =Hentikan server
+IDS_EXT_ERROR_DEPENDANCE        =Ekstensi berwarna merah tidak dapat digunakan karena ada masalah dependensi. \nPeriksa panduan instalasi ekstensi tersebut.
+IDS_CONF_CHECK_SERVERS_PORT     =Periksa port TCP server sebelum dijalankan
+IDS_CONF_LANGUAGE               =Bahasa
+IDS_CONF_PREFERENCES            =Konfigurasi
+IDS_TRANSLATED_BY               =Fadjar Tandabawana
+[/Indonesian]

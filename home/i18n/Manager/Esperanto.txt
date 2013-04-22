@@ -1,0 +1,86 @@
+[Esperanto]
+IDS_START               =&Startigi
+IDS_STOP                =&Haltigi
+IDS_PENDING             =Gisatende...
+IDS_HELP_CMDLINE        =Montras la EasyPHP.exe opciojn
+IDS_ERROR_MYSQL         =Nestartebla MySQL : \n%s\n\nStarti Apache ?
+IDS_ANOTHER_APACHE_RUN  =alia Apache servilo jam startita.
+IDS_APACHE_ALREADY_RUN  =Apache jam startita.
+IDS_APACHEMSG_UNEXPECTED_END=Neatendita Apache fino.
+IDS_PORT_OCCUPE         =La servilo ne povis starti car alia servilo jam uzas la necesan havenon.
+IDS_SERVER_RUN_ERROR    =La servilo ne estas startebla : %s
+IDS_EXPERT_MODE_WARNING =Atentu ! Tiu modalo ebligas modifi konfigursliparojn kaj malbona konfiguro povas difekti la serviloj plenumon.\nCu vi estas certa ?
+IDS_SWITCH_SSL          =Tiu opcio nur estos funkciiva okaze de venonta Apache starteco.\nCu vi volas restartigi Apache servilon nun ?
+IDS_NEW_EASYPHP_VERSION =EasyPHP versio %s estas havebla.\nCu vi volas iri al pagaro por telekargi gin ?
+IDS_RESTART             =Restartas la servilojn
+IDS_MYSQLMSG_UNEXPECTED_END=MySql finigis neatendite !
+IDS_STATE_STARTED       =Startita
+IDS_STATE_STOPPED       =Haltita
+IDS_HELPCTX_IDC_SERVICE =La Apache kaj MySql serviloj estas startitaj tiel mastruma sistemo servoj, kaj atingeblaj spite ke neniu estas konektita al la komputilo. Tiu opcio nur estas atingebla kun Windows NT, 2000 kaj XP.
+IDS_HELPCTX_NOHELP      =Ne helpo atingebla pri tiu rubriko
+IDS_ERROR_STOP_SERVER   =La servilo estis nehaltebla : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Montras dialogo skatolon tam nova EasyPHP versio estas atingebla. Bezonas ttt-jo konekton.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=La serviloj automate restartas se iliaj konfigursliparoj estis modifitaj.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Tiu pa?o ebligas especifi la MySql plenumo parametrojn.\rTiuj parametroj ne estos funkciivaj okaze MySql estis mastruma sistemo servo startita. Tiu okazo bezonas modifi la konfigursliparon. 
+IDS_ERROR_RESTART_SERVER=Tiu opcio ebligas starti la servilojn ekde la EasyPHP starteco. Eokaze estis mastruma sistemo servo startitaj, la serviloj automate startigos guste kiam Windows startos.
+IDS_ERROR_INSTALL_SERVICE =La servo estis neinstalebla : %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apache servilo stato
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySql servilo stato
+IDS_HELPCTX_ID_PIN       =Ebligas "alpingli" la fenestron kaj ciam videbligas gin.
+IDS_HELPCTX_ID_HELP_CONTEXT =Montras helpon
+IDS_HELPCTX_IDSL_VIEW    =Malpliigi/Pliigi la fenestron
+IDS_LOG_RESTART_SERVERS  =Serviloj restarteco
+IDS_ERROR_APACHE_CONF    =Eraro en la Apache konfigursliparo Apache:\n\n""%s""\n\nMantir la konfigursliparon ?
+IDS_LOG_CHANGE_CONF      =Modifita konfigursliparo
+IDS_LOG_START_SERVERS    =Serviloj starteco
+IDS_NOT_ADMIN            =Vi ne estas administranto : multaj agadoj estos neageblaj al vi.\n\nDaurigi ?
+IDS_ERROR_BROWSER        =Neebla starti la retumilon : Kopi tiun adreson al gi : ""%s"".\n(difini retumilon foreste korekti tiun eraron)
+IDS_ERROR_REMOVE_SERVICE =La servo estis nemalinstalebla : %s
+IDS_STARTPHP_URL   		=http://www.manucorp.com/
+
+#Menu server
+IDS_SERVER_RESTART   	=&Restartigi
+IDS_SERVER_KILL    		=&Mortigi
+#dialog about
+IDS_ABOUT_TITLE    		=pri EasyPHP
+IDS_ABOUT_PRESENTATION  =EasyPHP, la Apache, MySql et PHP senpena instaleco, estis plenumita de :
+IDS_ABOUT_VISIT_SITE  	=Por informotigi pri tiu distribuo evolueco, vizitu la pagon :
+IDS_ABOUT_SEE_LICENCE  	=&Vidi la licencon
+IDS_ABOUT_CHECK_VERSION =&Konstati la version
+#main dialog
+IDS_MAIN_STATUS        	=Estato
+IDS_MAIN_CHECK_WINDOWSTART =&Startigi EasyPHP samtempe kun Windows (nur administrantoj)
+IDS_MAIN_SERVICE        =Startigi la servilojn tiel mastruma sistemo servoj (nur administrantoj)
+IDS_MAIN_AUTOSERVEURSSTART  =&Starteco automata de la serviloj startante la EasyPHP utilajo
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=Konstati la novajn &versiojn startante
+IDS_MAIN_CONFAUTORELOAD =Automata aplikeco de la serviloj konfigur&modifoj 
+IDS_MAIN_MYSQL_ARGUMENTS=MySql argumentoj
+IDS_MAIN_APPLIQUER   	=A&pliki
+IDS_MAIN_FERMER    		=&Fermi
+IDS_MAIN_ABOUT    		=pri EasyPHP
+
+IDS_MENU_HELP            =&Helpo
+IDS_MENU_LOGFILES        =&Liparoj Log
+IDS_MENU_CONFIGURATION   =&Konfiguro
+IDS_MENU_EXPLORE         =&Esplori
+IDS_MENU_ADMINISTRATION  =&Administrado
+IDS_MENU_WEBLOCAL        =&Ttt loka
+IDS_MENU_QUIT            =&Forlasi
+
+IDS_MENU_HELP_INTRODUCTION =&Enkonduko
+IDS_MENU_HELP_STARTPHP   =&Ekkomenci kun PHP
+IDS_MENU_HELP_FAQ        =&Oftaj Demandoj
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache eraro
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache eniro
+IDS_MENU_LOGFILES_MYSQLERR=&MySql eraro
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &aldonoj 
+IDS_MYSQL_LANGUAGE   	=english
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS  	=Serviloj halto
+IDS_EXT_ERROR_DEPENDANCE=La rugnocitaj aldonoj estas neuzeblaj car estis dependeco eraritaj.\nKonsultu tiuj aldonoj instalecohelpon por korekti tiujn erarojn.
+IDS_CONF_CHECK_SERVERS_PORT=Konstati la havenoj neuzecon de aliaj serviloj.
+IDS_CONF_LANGUAGE   	=Lingvo
+IDS_CONF_PREFERENCES  	=Preferoj
+IDS_TRANSLATED_BY   	=Maljuna Kris "cdeparte@ac-rennes.fr"
+[/Esperanto]

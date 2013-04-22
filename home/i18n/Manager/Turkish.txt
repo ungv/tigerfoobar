@@ -1,0 +1,86 @@
+[Turkish]
+IDS_START               =&Baþlat
+IDS_STOP                =&Durdur
+IDS_PENDING             =Askýda...
+IDS_HELP_CMDLINE        =EasyPHP.exe anahtarlarýný göster
+IDS_ERROR_MYSQL         =MySql Baþlatýlamadý : \n%s\n\nApache 'yi baþlatmak ister misiniz ?
+IDS_ANOTHER_APACHE_RUN  =Baþka bir Apache sunucusu zaten çalýþýyor.
+IDS_APACHE_ALREADY_RUN  =Apache zaten çalýþýyor.
+IDS_APACHEMSG_UNEXPECTED_END =Apache beklenmeyen þekilde sonlandý !
+IDS_PORT_OCCUPE         =Apache baþlatýlamýyor : baþka bir Web sunucu Web portunu kullanýyor
+IDS_SERVER_RUN_ERROR    =Sunucu çalýþamýyor : %s
+IDS_EXPERT_MODE_WARNING =Dikkat ! Bu modda konfigurasyon dosyalarýnýzý deðiþtirebilirsiniz ve kötü bir konfigurasyon sunucularýnýzý bozabilir.\nEmin misiniz ?
+IDS_SWITCH_SSL          =Apache yeniden baþlasýn mý?
+IDS_NEW_EASYPHP_VERSION =Yeni versiyon (%s) kullanýlabilir. EasyPhp web sayfasýna gitmek ister misiniz ?
+IDS_RESTART             =Sunucularý yeniden baþlat
+IDS_MYSQLMSG_UNEXPECTED_END =MySql beklenmeyen þekilde sonlandý !
+IDS_STATE_STARTED       =Baþlatýldý
+IDS_STATE_STOPPED       =Durduruldu
+IDS_HELPCTX_IDC_SERVICE =Apache ve MySql sunucu olarak çalýþýr ve kullanýcý giriþ yapmadan kullanýlabilir \nBu seçenek sadece on NT/2K ve XP Windows de ve kullanýcý bilgisayar yöneticisi ise çalýþýr.
+IDS_HELPCTX_NOHELP      =Bunun hakkýnda yardým yok.
+IDS_ERROR_STOP_SERVER   =Sunucu durdurulamadý  : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Eðer Easy PHP nin yeni versiyonu kullanýlabilir durumdaysa bu diyaloðu göster. Ýnternet baðlantýsý gerektirir.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Sunucular yeniden baþladý. Konfigurasyon dosyalarý deðiþmiþ olabilir.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=MySql çalýþma parametrelerini düzenle.\nEðer MySql i servis olarak çalýþtýrýyorsanýz, konfigurasyon dosyasýný onun yerine kullanýn.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Bu anahtar ile EasyPHP yi windows baþlangýcýnda çalýþtýrabilirsiniz. Eðer sunucularý servis olarak çalýþtýrýrsanýz, Windows açýlýþýnda otomatik olarak çalýþacaktýr.
+IDS_ERROR_RESTART_SERVER=Sunucu yeniden baþlatýlamadý : %s
+IDS_ERROR_INSTALL_SERVICE=Servis yüklenemedi: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apache durumu
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySql  durumu
+IDS_HELPCTX_ID_PIN      =Herzaman bu mesajý görüntüle.
+IDS_HELPCTX_ID_HELP_CONTEXT=Yardýmý görüntüle
+IDS_HELPCTX_IDSL_VIEW   =Pencereyi küçült/büyüt
+IDS_LOG_RESTART_SERVERS =Sunucular yeniden baþlatýlýyor...
+IDS_ERROR_APACHE_CONF   =Apache konfigurasyon dosyasý hatalý:\n\n""%s""\n\nEdit ?
+IDS_LOG_CHANGE_CONF     =Konfigurasyon dosyasý deðiþmiþ.
+IDS_LOG_START_SERVERS   =Sunucular baþlatýlýyor
+IDS_NOT_ADMIN           =Yönetici deðilsiniz : Bazý iþlemler kullanýlamaz.\n\nContinue ?
+IDS_ERROR_BROWSER       =Browser çalýþtýrýlamadý : favori browser ýnýzýn adresini kopyalayýn : ""%s"".\n(to correct this error, define a default browser)
+IDS_ERROR_REMOVE_SERVICE=servis kaldýrýlamadý : %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART		=&Yeniden Baþlat
+IDS_SERVER_KILL			=&Sonlandýr
+#dialog about
+IDS_ABOUT_TITLE			=EasyPHP Hakkýnda
+IDS_ABOUT_PRESENTATION	=EasyPHP, Apache, MySql ve PHP için kolay bir kurulum yoludur, yapýmcýsý :
+IDS_ABOUT_VISIT_SITE	=Danýþma için, EasyPHP web sayfasý :
+IDS_ABOUT_SEE_LICENCE	=&Lisans ý Görüntüle
+IDS_ABOUT_CHECK_VERSION	=&Versiyon Kontrol et
+
+IDS_MAIN_STATUS      		=Durum
+IDS_MAIN_CHECK_WINDOWSTART	=&Windows baþlarken baþlat.
+IDS_MAIN_SERVICE          	=Apache ve MySql i servis olarak b&aþlat (Sadece Yönetici)
+IDS_MAIN_AUTOSERVEURSSTART  =&Bu uygulama baþlayýnca sunucu çalýþacak.
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Baþlangýçta versiyonu kontrol et.
+IDS_MAIN_CONFAUTORELOAD		=&Sunucu konfigurasyon deðiþikliðini otomatik algýlasýn.
+IDS_MAIN_MYSQL_ARGUMENTS	=MySql argumanlarý
+IDS_MAIN_APPLIQUER			=U&ygula
+IDS_MAIN_FERMER				=&Kapat
+IDS_MAIN_ABOUT				=&Bilgi...
+
+IDS_MENU_HELP				=&Yardým
+IDS_MENU_LOGFILES      		=&Log Dosyalarý
+IDS_MENU_CONFIGURATION 		=&Konfigurasyon
+IDS_MENU_EXPLORE       		=&Araþtýr
+IDS_MENU_ADMINISTRATION		=&Yönetim
+IDS_MENU_WEBLOCAL      		=Yerel &Web
+IDS_MENU_QUIT				=&Çýk
+
+IDS_MENU_HELP_INTRODUCTION	=&Tanýtým
+IDS_MENU_HELP_STARTPHP		=&PHP ile baþlat
+IDS_MENU_HELP_FAQ			=&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache Hatasý
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache E&riþimi
+IDS_MENU_LOGFILES_MYSQLERR	=&MySql Hatasý
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &Uzantýsý
+IDS_MYSQL_LANGUAGE		=english
+
+IDS_LOG_STOP_SERVERS		=Bu sunucularý durdur
+IDS_EXT_ERROR_DEPENDANCE	=Kýrmýzý olan eklentiler kullanýlamýyor, çünkü bunlarýn baðýmlýlýk problemi var. \n Bu uzantýlarý kurulum klavuzundan kontrol ediniz.
+IDS_CONF_CHECK_SERVERS_PORT	=Baþlatmadan önce sunucunuzun TCP portlarýný kontrol ediniz
+IDS_CONF_LANGUAGE			=Dil
+IDS_CONF_PREFERENCES		=Konfigurasyon
+IDS_TRANSLATED_BY			=Eren Mustafa KESDi (www.kesdi.com)
+[/Turkish]

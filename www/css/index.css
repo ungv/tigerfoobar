@@ -1,0 +1,37 @@
+/*----------------------------------
+|
+|	General Stylings
+|
+----------------------------------*/
+
+/*General-------------------------*/
+
+	*{
+		padding:0px;
+		margin:0px;
+	}
+
+	body, html{
+		min-width:100%;
+		min-height:100%;
+	}
+
+	body{
+		color:#444;
+		font-family:verdana;
+	}
+
+/*Header---------------------------*/
+
+	header{
+		/*vertical, then horizontal*/
+		width:900px;
+		margin:0px auto;
+	}
+
+/*Main-----------------------------*/
+
+	#main{
+		width:900px;
+		margin:0px auto;
+	}

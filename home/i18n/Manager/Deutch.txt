@@ -1,0 +1,87 @@
+[Deutsch]
+IDS_START                             =&Start
+IDS_STOP                              =&Stopp
+IDS_PENDING                           =Vorbereitung...
+IDS_HELP_CMDLINE                      =Wahlmöglichkeiten für EasyPHP.exe
+IDS_ERROR_MYSQL                       =MySql kann nicht gestartet werden : \n%s\n\nMöchten Sie Apache starten?
+IDS_ANOTHER_APACHE_RUN                =Ein anderer Apache Server läuft schon.
+IDS_APACHE_ALREADY_RUN                =Apache Server läuft schon.
+IDS_APACHEMSG_UNEXPECTED_END          =Unerwartetes Ausführungsende von Apache!
+IDS_PORT_OCCUPE                       =Apache kann nicht starten: Ein anderer Web-Server benutzt den Port!
+IDS_SERVER_RUN_ERROR                  =Kann Server nicht starten: %s
+IDS_EXPERT_MODE_WARNING               =Achtung! Dieser Modus erlaubt das Ändern von Konfigurationsdateien; eine falsche Konfiguration kann den Serverbetrieb beeinträchtigen.\nSind Sie sicher?
+IDS_SWITCH_SSL                        =Apache neu starten?
+IDS_NEW_EASYPHP_VERSION               =Eine neue Version (%s) ist verfügbar. Zur EasyPHP Web-Site gehen?
+IDS_RESTART                           =Servern neu starten?
+IDS_MYSQLMSG_UNEXPECTED_END           =Unerwartetes Ende von MySql!
+IDS_STATE_STARTED                     =Gestartet
+IDS_STATE_STOPPED                     =Gestoppt
+IDS_HELPCTX_IDC_SERVICE               =Die Server Apache und MySql sind als Service gestartet und sind verfügbar, selbst wenn niemand auf der Maschine eingeloggt ist.\nDiese Option ist nur verfügbar auf den Betriebssystemen Windows NT, 2000, XP, Vista und 7. Außerdem muß der User als Administrator angemeldet sein.
+IDS_HELPCTX_NOHELP                    =Keine Hilfe für dieses Thema verfügbar.
+IDS_ERROR_STOP_SERVER                 =Der Server konnte nicht gestoppt werden: %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION =Zeigt einen Dialog mit der Frage ob nach einer neuen EasyPHP-Version gesucht werden soll. Benötigt eine bestehende Internet-Anbindung.
+IDS_HELPCTX_IDC_CONFAUTORELOAD        =Die Server werden automatisch neu gestartet, wenn die Konfigurationsdateien verändert wurden.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS       =Dieses Eingabefeld erlaubt die Ausführungsparameter von MySql zu bestimmen. \nBeim Starten als Service werden diese Einstellungen nicht berücksichtigt; sie müssen deshalb in den Konfigurationsdateien direkt geändert werden.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART     =Diese Option erlaubt das Hochfahren der Server beim Starten von EasyPHP. Sollten die Server als Dienst gestarten werden, werden Sie automatisch beim Hochfahren von Windows aktiviert.
+IDS_ERROR_RESTART_SERVER              =Das Server könnte nicht gestartet werden: %s
+IDS_ERROR_INSTALL_SERVICE             =Der Service konnte nicht installiert werden: %s
+IDS_HELPCTX_IDC_STATUS_APACHE         =Apache Status
+IDS_HELPCTX_IDC_STATUS_MYSQL          =MySql Status
+IDS_HELPCTX_ID_PIN                    =Immer diesen Dialog anzeigen
+IDS_HELPCTX_ID_HELP_CONTEXT           =Hilfe anzeigen
+IDS_HELPCTX_IDSL_VIEW                 =Das Fenster verkleinern / vergrößern
+IDS_LOG_RESTART_SERVERS               =Server startet neu...
+IDS_ERROR_APACHE_CONF                 =Fehler in der Apache-Konfigurationdatei:\n\n"%s"\n\nEditieren?
+IDS_LOG_CHANGE_CONF                   =Konfigurationdateien geändert
+IDS_LOG_START_SERVERS                 =Server starten
+IDS_NOT_ADMIN                         =Sie sind nicht als Administrator angemeldet: Einige Funktionen stehen daher nicht zur Verfügung.\n\nTrotzdem weiter?
+IDS_ERROR_BROWSER                     =Browser kann nicht gestartet werden: Kopieren Sie diese Adresse in den Browser: "%s".\n(Um dieses Problem zu beheben müssen Sie einen Browser auswählen.)
+IDS_ERROR_REMOVE_SERVICE              =Der Service konnte nicht entfernt werden: %s
+IDS_STARTPHP_URL		                  =http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART		                =&Neustart
+IDS_SERVER_KILL			                  =B&eenden
+
+#dialog about
+IDS_ABOUT_TITLE			                  =Über EasyPHP
+IDS_ABOUT_PRESENTATION	              =EasyPHP, eine einfache Installation von Apache, MySql und PHP, wurde programmiert von:
+IDS_ABOUT_VISIT_SITE	                =Für weitere Informationen besuche die EasyPHP-Homepage:
+IDS_ABOUT_SEE_LICENCE	                =&Siehe Lizenz
+IDS_ABOUT_CHECK_VERSION	              =&Version kontrollieren
+
+IDS_MAIN_STATUS      		                  =Status
+IDS_MAIN_CHECK_WINDOWSTART	              =Mit Windows automatisch &starten (Nur als Administrator)
+IDS_MAIN_SERVICE          	              =St&arte Apache und MySql als Service (Nur durch Administrator)
+IDS_MAIN_AUTOSERVEURSSTART                =&Server beim Hochfahren der Anwendung starten
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP =&Überprüfe Version beim Hochfahren
+IDS_MAIN_CONFAUTORELOAD		                =&Konfigurationsänderungen der Server automatisch berücksichtigen
+IDS_MAIN_MYSQL_ARGUMENTS	                =MySql Argumente
+IDS_MAIN_APPLIQUER			                  =&Übernehmen
+IDS_MAIN_FERMER				                    =&Schließen
+IDS_MAIN_ABOUT				                    =&Info
+
+IDS_MENU_HELP				                  =&Hilfe
+IDS_MENU_LOGFILES      	              =&Logdateien
+IDS_MENU_CONFIGURATION 	              =&Konfiguration
+IDS_MENU_EXPLORE       	              =&Explorer
+IDS_MENU_ADMINISTRATION	              =&Administration
+IDS_MENU_WEBLOCAL      	              =Lokales &Web
+IDS_MENU_QUIT				                  =B&eenden
+
+IDS_MENU_HELP_INTRODUCTION	          =&Einführung
+IDS_MENU_HELP_STARTPHP	              =&Start mit PHP
+IDS_MENU_HELP_FAQ			                =&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR          =&Apache Fehler
+IDS_MENU_LOGFILES_APACHE_ACCESS       =Apache Z&ugriffe 
+IDS_MENU_LOGFILES_MYSQLERR	          =&MySql Fehler
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP  =PHP &Erweiterungen
+IDS_MYSQL_LANGUAGE			              =german
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS		              =Stoppe die Server
+IDS_EXT_ERROR_DEPENDANCE	            =Erweiterungen in ROT können nicht benutzt werden weil sie ein Problem mit Abhängigkeiten haben.\nBitte Anleitung zur Installation von Erweiterungen lesen.
+IDS_CONF_CHECK_SERVERS_PORT	          =Prüfe TCP Port des Servers vor dem Start
+IDS_CONF_LANGUAGE			                =Sprache
+IDS_CONF_PREFERENCES		              =Konfiguration
+[/Deutsch]

@@ -1,0 +1,87 @@
+[Italiano]
+IDS_START =&Avvia
+IDS_STOP =&Ferma
+IDS_PENDING =Attendere...
+IDS_HELP_CMDLINE =Visualizza comandi per EasyPHP.exe
+IDS_ERROR_MYSQL =Impossibile lanciare MySql: \n%s\n\n Vuoi\nlanciare Apache?
+IDS_DEFAULT_MYSQLARG =--skip-name-resolve --language=italian
+IDS_ANOTHER_APACHE_RUN =Un altro Apache è già in esecuzione.
+IDS_APACHE_ALREADY_RUN =Apache è già avviato.
+IDS_APACHEMSG_UNEXPECTED_END=Apache è stato fermato inaspettatamente!
+IDS_PORT_OCCUPE =Il servizio non può essere avviato perchè un altro servizio utilizza la stessa porta
+IDS_EXPERT_MODE_WARNING =Attenzione! Questa modalità ti permette di modificare i file di configurazione. Cambiamenti errati possono bloccare il server.\nSei sicuro di procedere?
+IDS_SERVER_RUN_ERROR =Non posso avviare il server: %s
+IDS_SWITCH_SSL =Vuoi riavviare Apache?
+IDS_NEW_EASYPHP_VERSION =Nuova versione (%s) disponibile. Vai sul sito di EasyPHP?
+IDS_RESTART =Riavvia server
+IDS_MYSQLMSG_UNEXPECTED_END=MySql è stato fermato inaspettatamente!
+IDS_STATE_STARTED =Avviato
+IDS_STATE_STOPPED =Non avviato
+IDS_HELPCTX_IDC_SERVICE =I server Apache and MySql sono avviati e disponibili.\nQuesta opzione è disponibile in Windows NT/2K/XP e solo per gli utenti connessi come amministratore.
+IDS_HELPCTX_NOHELP =Nessun aiuto per questo argomento
+IDS_ERROR_STOP_SERVER =Non posso fermare il server: %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Avvisa se è disponibile una nuova versione di EasyPHP. Serve il collegamento internet.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=I server sono automaticamente riavviati se i rispettivi file di configurazione vengono modificati.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Imposta i parametri di esecuzione per MySql.\nSe avvii MySql come servizio va usato il file di configurazione.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Permette di lanciare EasyPHP direttamente all'avvio di Windows. Se fai girare i server come servizi, essi saranno avviati automaticamente all'avvio di Windows.
+IDS_ERROR_RESTART_SERVER=Non posso riavviare il server: %s
+IDS_ERROR_INSTALL_SERVICE=Non posso installare il servizio: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Stato Apache
+IDS_HELPCTX_IDC_STATUS_MYSQL=Stato MySql
+IDS_HELPCTX_ID_PIN =Mostra sempre questa finestra.
+IDS_HELPCTX_ID_HELP_CONTEXT=Visualizza aiuto
+IDS_HELPCTX_IDSL_VIEW =Riduci a icona/ingrandisci finestra
+IDS_LOG_RESTART_SERVERS =I server si stanno riavviando...
+IDS_ERROR_APACHE_CONF =Errore nel file di configurazione Apache:\n\n""%s""\n\nEdit ?
+IDS_LOG_CHANGE_CONF =Configurazione modificata
+IDS_LOG_START_SERVERS =Avvio server
+IDS_NOT_ADMIN =Non sei connesso come amministratore, alcune opzioni non saranno disponibili.\n\nContinuare?
+IDS_ERROR_BROWSER =Non posso avviare il browser: copia questo indirizzo nella barra degli indirizzi del tuo browser: ""%s"".\n(per correggere questo errore, imposta il browser predefinito)
+IDS_ERROR_REMOVE_SERVICE=Non posso disinstallare il servizio: %s
+IDS_STARTPHP_URL =http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART =Riavvia
+IDS_SERVER_KILL =Termina
+#dialog about
+IDS_ABOUT_TITLE =Info su EasyPHP
+IDS_ABOUT_PRESENTATION =EasyPHP, il modo più semplice per installare Apache, MySql e PHP è una creazione di:
+IDS_ABOUT_VISIT_SITE =Per informazioni, visita la Home Page di EasyPHP:
+IDS_ABOUT_SEE_LICENCE =Vedi licenza
+IDS_ABOUT_CHECK_VERSION =Controlla versione
+
+IDS_MAIN_STATUS =Stato
+IDS_MAIN_CHECK_WINDOWSTART =Lancia EasyPHP all'avvio di Windows
+IDS_MAIN_SERVICE =Lancia Apache e Mysql come servizi (solo amministratore)
+IDS_MAIN_AUTOSERVEURSSTART =Partenza automatica dei server all'avvio dell'applicazione
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=Controlla nuova versione all'avvio
+IDS_MAIN_CONFAUTORELOAD =Controllo automatico delle modifiche alla configurazione dei servers
+IDS_MAIN_MYSQL_ARGUMENTS =Argomenti MySql
+IDS_MAIN_APPLIQUER =Applica
+IDS_MAIN_FERMER =Annulla
+IDS_MAIN_ABOUT =Info
+
+IDS_MENU_HELP =Aiuto
+IDS_MENU_LOGFILES =File di log
+IDS_MENU_CONFIGURATION =Configurazione
+IDS_MENU_EXPLORE =Esplora file
+IDS_MENU_ADMINISTRATION =Amministrazione
+IDS_MENU_WEBLOCAL =Sito Locale
+IDS_MENU_QUIT =&Esci
+
+IDS_MENU_HELP_INTRODUCTION =Introduzione
+IDS_MENU_HELP_STARTPHP =Primi passi con PHP
+IDS_MENU_HELP_FAQ =FAQ
+IDS_MENU_LOGFILES_APACHE_ERR =Apache errori
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache accessi
+IDS_MENU_LOGFILES_MYSQLERR =MySql errori
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=Estensioni PHP
+IDS_MYSQL_LANGUAGE =italian
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS =Ferma il server
+IDS_EXT_ERROR_DEPENDANCE =Estensioni in rosso non possono essere utilizzate perché hanno problemi di dipendenze.\nControlla le guide all'installazione di tali estensioni.
+IDS_CONF_CHECK_SERVERS_PORT =Controlla le porte TCP dei server prima di avviarli
+IDS_CONF_LANGUAGE =Linguaggio
+IDS_CONF_PREFERENCES =Configurazione
+[/Italiano]

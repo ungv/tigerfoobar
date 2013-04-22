@@ -1,0 +1,106 @@
+[Dansk]
+IDS_START					=&Start
+IDS_STOP					=&Stop
+IDS_PENDING					=Venter...
+IDS_HELP_CMDLINE				=Vis kommandovalg for EasyPHP.exe
+IDS_ERROR_MYSQL				=Kan ikke starte MySQL: \n%s\n\nVil du starte Apache?
+IDS_DEFAULT_MYSQLARG    		=--skip-name-resolve --language=english
+IDS_ANOTHER_APACHE_RUN  		=En anden Apache-server er allerede startet.
+IDS_APACHE_ALREADY_RUN  		=Apache kører allerede.
+IDS_APACHEMSG_UNEXPECTED_END		=Uventet afbrud i Apache!
+IDS_PORT_OCCUPE				=Apache kan ikke køres: En anden webserver anvender webporten eller porten blokeres af en firewall.
+IDS_SERVER_RUN_ERROR    		=Kan ikke køre serveren: %s
+IDS_EXPERT_MODE_WARNING			=Advarsel! Det her tillader dig at modificere indstillingsfiler og en dårlig indstilling kan forstyrre servere.\nEr du sikker?
+IDS_SWITCH_SSL          		=Genstart Apache?
+IDS_NEW_EASYPHP_VERSION			=En ny version (%s) er tilgængelig. Vil du gå til EasyPHP's webside?
+IDS_RESTART             		=Genstarter server
+IDS_MYSQLMSG_UNEXPECTED_END		=Uventet afbrud i MySQL!
+IDS_STATE_STARTED       		=Startet
+IDS_STATE_STOPPED       		=Stoppet
+IDS_HELPCTX_IDC_SERVICE 		=Apache og MySQL køres som servere, og er tilgængelig selv om ingen brugere er logget på.\nDenne indstilling er kun tilgængelig under Windows NT/2000 og XP, og hvis brugeren har administratorstatus på computeren.
+IDS_HELPCTX_NOHELP      		=Ingen hjælpetekst er skrevet for dette.
+IDS_ERROR_STOP_SERVER   		=Kan ikke stoppe serveren: %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION	=Vis en dialogboks, hvis en ny version af EasyPHP er tilgængelig. Kræver internetforbindelse.
+IDS_HELPCTX_IDC_CONFAUTORELOAD	=Serverne genstarter automatisk, hvis deres indstillingsfil er ændret.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS	=Indstil ekspeditionsparametrene for MySQL.\nHvis du kører MySQL som en service, skal du bruge konfigurasionsfilen i stedet.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART	=Dette lader dig køre EasyPHP når Windows starter op. Hvis du kører serverne som service, vil de automatisk starte når Windows starter op.
+IDS_ERROR_RESTART_SERVER		=Kan ikke genstarte serveren: %s
+IDS_ERROR_INSTALL_SERVICE		=Kan ikke installere servicen: %s
+IDS_HELPCTX_IDC_STATUS_APACHE		=Apache-tilstand
+IDS_HELPCTX_IDC_STATUS_MYSQL		=MySQL-tilstand
+IDS_HELPCTX_ID_PIN			=Vis altid denne dialogboks.
+IDS_HELPCTX_ID_HELP_CONTEXT		=Vis hjælp
+IDS_HELPCTX_IDSL_VIEW			=Minimer/maksimer vinduet
+IDS_LOG_RESTART_SERVERS			=Serverne genstarter...
+IDS_ERROR_APACHE_CONF   		=Fejl i Apache-konfigurationsfilen:\n\n""%s""\n\nRedigere?
+IDS_LOG_CHANGE_CONF			=Konfigurationsfilen ændret
+IDS_LOG_START_SERVERS			=Servere starter
+IDS_NOT_ADMIN				=Du har ikke administratorstatus: Visse handlinger vil ikke være tilgængelige.\n\nFortsætte?
+IDS_ERROR_BROWSER				=Kan ikke starte browseren: Kopier denne adresse ind i din favorit browser: ""%s"".\n(for at rette denne fejl, definer en standard browser)
+IDS_ERROR_REMOVE_SERVICE		=Kan ikke afinstallere servicen: %s
+IDS_STARTPHP_URL        		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART        		=&Genstart
+IDS_SERVER_KILL            		=&Afbryd
+#Dialog "About"
+IDS_ABOUT_TITLE            		=Om EasyPHP
+IDS_ABOUT_PRESENTATION    		=EasyPHP, en enkel måde at installere Apache, MySQL og PHP er lavet af:
+IDS_ABOUT_VISIT_SITE    		=For mere information besøg EasyPHP's hjemmeside:
+IDS_ABOUT_SEE_LICENCE    		=&Vis lisens
+IDS_ABOUT_CHECK_VERSION    		=&Tjek version
+
+IDS_MAIN_STATUS				=Status
+IDS_MAIN_CHECK_WINDOWSTART  		=&Start EasyPHP når Windows starter.
+IDS_MAIN_SERVICE            		=St&art Apache og MySQL som service (kun administratorer).       
+IDS_MAIN_AUTOSERVEURSSTART  		=&Start servere når denne applikation starter.
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP	=&Tjek version ved start.
+IDS_MAIN_CONFAUTORELOAD			=&Automatisk kontrol af serverens konfigurationsændringer.
+IDS_MAIN_MYSQL_ARGUMENTS    		=MySQL-argument
+IDS_MAIN_APPLIQUER			=A&nvend
+IDS_MAIN_FERMER				=&Luk
+IDS_MAIN_ABOUT				=&Info...
+
+IDS_MENU_HELP				=&Hjælp
+IDS_MENU_LOGFILES				=&Logfiler
+IDS_MENU_CONFIGURATION			=&Konfiguration
+IDS_MENU_EXPLORE				=&Udforsk
+IDS_MENU_ADMINISTRATION			=&Administration
+IDS_MENU_WEBLOCAL				=Lokal &Web
+IDS_MENU_QUIT				=&Exit
+
+IDS_MENU_HELP_INTRODUCTION		=&Introduktion
+IDS_MENU_HELP_STARTPHP			=&Start med PHP
+IDS_MENU_HELP_FAQ				=&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR		=&Apache fejl
+IDS_MENU_LOGFILES_APACHE_ACCESS	=Apache A&cces
+IDS_MENU_LOGFILES_MYSQLERR		=&MySQL fejl
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &Extension
+IDS_MYSQL_LANGUAGE			=Dansk
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS			=Stop serverne
+IDS_EXT_ERROR_DEPENDANCE		=Extensions markeret med rødt kan ikke bruges pga. problemer med dependencies.\nTjek installationsguide for disse extensions.
+IDS_CONF_CHECK_SERVERS_PORT		=Kontroller serverens TCP-port før start.
+IDS_CONF_LANGUAGE				=Sprog
+IDS_CONF_PREFERENCES			=Konfiguration
+
+IDS_UPDATE_FILE         		=Fil
+IDS_UPDATE_CURRENT_VERSION 		=Nuværende
+IDS_UPDATE_NEW_VERSION  		=Ny
+IDS_UPDATE_FILE_SIZE    		=Størrelse
+IDS_UPDATE_FILE_HASH    		=Hash
+IDS_UPDATE_WEB_FILE_ERROR 		=FEJL: Kan ikke modtage updaterede data fra internettet.
+IDS_UPDATE_HASH_DATA_ERROR 		=FEJL: Kan ikke modtage hash data fra internettet.
+IDS_UPDATE_UP_TO_DATE   		=Alle filer er allerede opdaterede.
+IDS_UPDATE_UPDATING     		=Opdaterer "%s"...
+IDS_UPDATE_BAD_HASH     		=Dårlig hash for "%s"\n%s\nburde være\n%s
+IDS_UPDATE_FILE_ERROR   		=Fejl under opdatering "%s": %d!
+IDS_UPDATE_NEED_RESTART 		=Genstart EasyPHP for at afslutte opdateringen.\nGenstart nu?
+IDS_REMOVABLE_DRIVE     		=Du kører EasyPHP fra et flytbart drev. Ønsker du at forny konfigutationsfilerne før opstart af serverne?
+IDS_PORT_OCCUPE_XP			=%s port (%d) bruges af %s!
+IDS_FOLDER_CHANGED			=EasyPHP flyttes fra mappen "%s" til mappen "%s".\nForny konfigutationsfilerne?
+IDS_PROMPT_QUIT				=Ønsker du virkelig at afslutte EasyPHP?
+IDS_ALWAYS_VISIBLE			=Altid synlig
+IDS_USB_REMOVED_QUIT			=USB-nøgle er fjernet, EasyPHP vil afslutte.
+[/Dansk]

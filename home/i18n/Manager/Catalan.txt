@@ -1,0 +1,108 @@
+[Catalan]
+IDS_START                   =&Iniciar       
+IDS_STOP                    =&Aturar        
+IDS_PENDING                 =En espera...  
+IDS_HELP_CMDLINE            =Mostra les opcions d'EasyPHP.exe
+IDS_ERROR_MYSQL             =Impossible d'arrencar MySql : \n%s\n\nArrencar Apache?
+IDS_DEFAULT_MYSQLARG        =--skip-name-resolve --language=spanish
+IDS_ANOTHER_APACHE_RUN      =Un altre servidor Apache ja està en funcionament.
+IDS_APACHE_ALREADY_RUN      =Apache ja ha estat arrencat.
+IDS_APACHEMSG_UNEXPECTED_END=Apache s'ha tancat de manera inesperada!
+IDS_PORT_OCCUPE             =No s'ha pogut arrencar el servidor: un altre servidor utilitza el port requerit.
+IDS_SERVER_RUN_ERROR        =No s'ha pogut arrencar el servidor: %s
+IDS_EXPERT_MODE_WARNING     =Atenció! Aquest mode permet de modificar fitxers de configuració i una mala configuració podria afectar el funcionament dels servidors.\nN'estàs segur?
+IDS_SWITCH_SSL              =Aquesta opció només es tindrà en compte a la propera arrencada d'Apache.\nVols reiniciar Apache ara?
+IDS_NEW_EASYPHP_VERSION     =La versió %s d'EasyPhp és disponible.\nVols anar al web per descarregar-la?
+IDS_RESTART                 =Reinicia els servidors
+IDS_MYSQLMSG_UNEXPECTED_END =MySql ha acabat de manera inesperada!
+IDS_STATE_STARTED           =Iniciat        
+IDS_STATE_STOPPED           =Aturat         
+IDS_HELPCTX_IDC_SERVICE     =Els servidors Apache i MySql són iniciats com a serveis, i són accessibles encara que ningú s'hagi validat a la màquina.\nAquesta opció només és disponible sobre els Windows NT, 2000 i XP i si l'usuari és administrador de la màquina.
+IDS_HELPCTX_NOHELP          =No hi ha ajuda disponible per a aquest apartat
+IDS_ERROR_STOP_SERVER       =No s'ha pogut aturar el servidor: %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Mostra una quadre de diàleg si hi ha una nova versió d'EasyPHP disponible. Necessita una connexió d'Internet a l'inici.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Els servidors són reiniciats automàticament si es modifiquen els seus fitxers de configuració.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Aquesta finestra permet d'especificar els paràmetres d'execució de MySql.\nAquests paràmetres no es tindran en compte en cas d'una arrencada com a servei, llavors cal modificar el fitxer de configuració.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Aquesta opció permet d'arrencar els servidors a l'inici d'EasyPHP. En cas d'utilització com a servei, els servidors són arrencats automàticament en iniciar el Windows.
+IDS_ERROR_RESTART_SERVER    =No s'ha pogut reiniciar el servidor: %s
+IDS_ERROR_INSTALL_SERVICE   =No s'ha pogut instal·lar el servei: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Estat del servidor Apache
+IDS_HELPCTX_IDC_STATUS_MYSQL=Estat del servidor MySql
+IDS_HELPCTX_ID_PIN          =Permet de fixar la finestra deixant-la sempre visible.
+IDS_HELPCTX_ID_HELP_CONTEXT =Mostra l'ajuda
+IDS_HELPCTX_IDSL_VIEW       =Redueix/amplia la finestra
+IDS_LOG_RESTART_SERVERS     =Reinici dels servidors
+IDS_ERROR_APACHE_CONF       =Error en el fitxer de configuració d'Apache:\n\n""%s""\n\nEditar el fitxer de configuració?
+IDS_LOG_CHANGE_CONF         =El fitxer de configuració ha estat modificat
+IDS_LOG_START_SERVERS       =Arrencada dels servidors
+IDS_NOT_ADMIN               =No ets administrador: no podràs accedir a moltes accions.\n\nContinuar?
+IDS_ERROR_BROWSER           =Impossible d'iniciar el navegador: copia aquesta adreça en aquest: ""%s"".\n(per corregir aquest error defineix un navegador per defecte)
+IDS_ERROR_REMOVE_SERVICE    =El servei no ha pogut ser desinstal·lat: %s
+IDS_STARTPHP_URL            =http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART          =&Reiniciar
+IDS_SERVER_KILL             =&Liquidar
+#dialog about
+IDS_ABOUT_TITLE             =Quant a EasyPHP
+IDS_ABOUT_PRESENTATION      =EasyPHP, el paquet d'instal·lació fàcil d'Apache, MySql i PHP ha estat realitzat per:
+IDS_ABOUT_VISIT_SITE        =Per estar al corrent de l'evolució d'aquesta distribució, visiteu el web:
+IDS_ABOUT_SEE_LICENCE       =&Veure la llicència
+IDS_ABOUT_CHECK_VERSION     =&Revisar versió
+#main dialog
+IDS_MAIN_STATUS             =Estat
+IDS_MAIN_CHECK_WINDOWSTART  =&Arrencar EasyPhp en iniciar el Windows (només administradors)
+IDS_MAIN_SERVICE            =Arrencar els servidors com a &servei (només administradors)
+IDS_MAIN_AUTOSERVEURSSTART  =&Inici automàtic dels servidors a l'arrencada de l'aplicació
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=Verificar noves versions a l'arrencada
+IDS_MAIN_CONFAUTORELOAD     =Presa en compte automàtica de les &modificacions de configuració dels servidors
+IDS_MAIN_MYSQL_ARGUMENTS    =Arguments MySql
+IDS_MAIN_APPLIQUER          =A&plicar
+IDS_MAIN_FERMER             =&Tancar
+IDS_MAIN_ABOUT              =Info...
+
+IDS_MENU_HELP               =&Ajuda
+IDS_MENU_LOGFILES           =&Fitxers Log
+IDS_MENU_CONFIGURATION      =&Configuració
+IDS_MENU_EXPLORE            =&Explorar
+IDS_MENU_ADMINISTRATION     =A&dministració
+IDS_MENU_WEBLOCAL           =&Web local
+IDS_MENU_QUIT               =&Sortir
+
+IDS_MENU_HELP_INTRODUCTION  =&Introducció
+IDS_MENU_HELP_STARTPHP      =I&niciar-se en PHP
+IDS_MENU_HELP_FAQ           =&PMF
+IDS_MENU_LOGFILES_APACHE_ERR=Error &Apache
+IDS_MENU_LOGFILES_APACHE_ACCESS=A&ccés Apache
+IDS_MENU_LOGFILES_MYSQLERR=Error &MySql
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=E&xtensions PHP
+IDS_MYSQL_LANGUAGE          =spanish
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS        =Aturada dels servidors
+IDS_EXT_ERROR_DEPENDANCE    =Les extensions marcades en vermell no poden ser utilitzades perquè tenen errors de dependència.\nConsulteu la guia d'instal·lació d'aquestes extensions per corregir aquests errors.
+IDS_CONF_CHECK_SERVERS_PORT =Verificar que els ports no són utilitzats per d'altres servidors.
+IDS_CONF_LANGUAGE           =Idioma
+IDS_CONF_PREFERENCES        =Preferències
+IDS_TRANSLATED_BY           =
+
+IDS_UPDATE_FILE             =Fitxer
+IDS_UPDATE_CURRENT_VERSION  =Actual
+IDS_UPDATE_NEW_VERSION      =Nou
+IDS_UPDATE_FILE_SIZE        =Mida
+IDS_UPDATE_FILE_HASH        =Hash
+IDS_UPDATE_WEB_FILE_ERROR   =ERROR : Impossible de recuperar les informacions d'actualització.
+IDS_UPDATE_HASH_DATA_ERROR  =ERROR : Impossible de recuperar els hash dels fitxers.
+IDS_UPDATE_UP_TO_DATE       =Tots els fitxers estan al dia.
+IDS_UPDATE_UPDATING         =Actualització de "%s"...
+IDS_UPDATE_BAD_HASH         =Hash incorrecte pel fitxer "%s"\n%s\nhauria de ser\n%s
+IDS_UPDATE_FILE_ERROR       =Error d'actualització "%s"! : %d !
+IDS_UPDATE_NEED_RESTART     =Reinicieu EasyPHP per tal que els canvis es tinguin en compte...
+IDS_REMOVABLE_DRIVE         =EasyPHP s'executa a partir d'un disc mòbil. Voleu regenerar els fitxers de configuració?
+
+IDS_PORT_OCCUPE_XP      	=El port d'%s (%d) és ocupat per %s !
+IDS_FOLDER_CHANGED      	=La carpeta d'EasyPHP ha canviat de "%s" a "%s".\nRegenerar els fitxers de configuració?
+IDS_PROMPT_QUIT         	=Vols tancar l'EasyPHP?
+IDS_ALWAYS_VISIBLE      	=Sempre visible
+IDS_USB_REMOVED_QUIT    	=La clau USB ha estat retirada, EasyPHP es tancarà tot seguit.
+[/Catalan]

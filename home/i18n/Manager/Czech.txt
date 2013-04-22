@@ -1,0 +1,88 @@
+[Czech]
+IDS_START               =&Start
+IDS_STOP                =&Stop
+IDS_PENDING             =Pøíprava...
+IDS_HELP_CMDLINE        =Nastavení pro EasyPHP.exe
+IDS_ERROR_MYSQL         =Nemohu spustit MySQL: \n%s\n\nChcete spustit Apache?
+IDS_ANOTHER_APACHE_RUN  =Jinı Apache server ji bìí.
+IDS_APACHE_ALREADY_RUN  =Apache ji bìí.
+IDS_APACHEMSG_UNEXPECTED_END =Neoèekávané ukonèení Apache!
+IDS_PORT_OCCUPE         =Server Apache nemùe bıst spuštìn: port ji pouívá jinı Web server
+IDS_SERVER_RUN_ERROR    =Nemohu spustit obsluhu: %s
+IDS_EXPERT_MODE_WARNING =Vıstraha! \nTento zpùsob zmìny konfiguraèních souborù mùe vést k chybné konfiguraci a ukonèení slueb serveru.\nMá se pokraèovat?
+IDS_SWITCH_SSL          =Restart Apache?
+IDS_NEW_EASYPHP_VERSION =Nová verze (%s) je ji pøipravena. Pøejít na www.EasyPHP.org?
+IDS_RESTART             =Restart obsluh
+IDS_MYSQLMSG_UNEXPECTED_END =Neoèekávanı konec MySQL!
+IDS_STATE_STARTED       =Bìí...
+IDS_STATE_STOPPED       =Neaktivní
+IDS_HELPCTX_IDC_SERVICE =Apache a MySQL beí, obsluhy jsou pøipraveny, ádnı uivatel není pøipojen.\nTato volba je podporována pouze na NT/2K a XP Windows a jestlie uivatel je administrátor systému.
+IDS_HELPCTX_NOHELP      =Pro toto téma není k dispozici ádná nápovìda.
+IDS_ERROR_STOP_SERVER   =Nemohu ukonèit obsluhu: %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Zobrazit dialogové okno jestlie existuje novı pøeklad EasyPHP. Je nutní pøipojení na Internet.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Automaticky znovu inicializuj obsluhy jestlie jejich konfiguraèní soubor byl upraven.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Nastavení øídících parametrù pro MySQL.\nBìí-li MySQL sluba, mìòte redìji konfiguraèní soubor pøímo.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Toto nastavení automaticky spustí sluby EasyPHP pøi startu systému.
+IDS_ERROR_RESTART_SERVER=Nemohu znovu spustit obsluhu: %s
+IDS_ERROR_INSTALL_SERVICE=Nemohu instalovat slubu: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apache status
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySQL  status
+IDS_HELPCTX_ID_PIN      =Vdy zobrazuj tento dialog.
+IDS_HELPCTX_ID_HELP_CONTEXT=Zobrazení nápovìdy
+IDS_HELPCTX_IDSL_VIEW   =Minimalizuj/maximalizuj okno
+IDS_LOG_RESTART_SERVERS =Obsluhy jsou znovuspouštìny...
+IDS_ERROR_APACHE_CONF   =Chyba v konfiguraèním souboru Apache:\n\n""%s""\n\nUpravit?
+IDS_LOG_CHANGE_CONF     =Konfiguraèní soubor byl zmìnìn
+IDS_LOG_START_SERVERS   =Spouštím obsluhy
+IDS_NOT_ADMIN           =Nejste administrátor systému: nìkteré sluby nebudou dosaitelné.\n\nPokraèovat?
+IDS_ERROR_BROWSER       =Nemohu spustit prohlíeè: vlote adresu preferovaného prohlíeèe: ""%s"".\n(opravte tuto chybu, zvolte prohlíeè)
+IDS_ERROR_REMOVE_SERVICE=Nemohu odinstalovat slubu: %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART		=&Restart
+IDS_SERVER_KILL			=U&konèit
+#dialog about
+IDS_ABOUT_TITLE			=Více o EasyPHP...
+IDS_ABOUT_PRESENTATION	=EasyPHP, snadná cesta k instalaci Apache, MySQL a PHP. \nAplikaci vytvoøili a zkompletovali:
+IDS_ABOUT_VISIT_SITE	=Pro více informací, navštivte stránky EasyPHP:
+IDS_ABOUT_SEE_LICENCE	=&Zobraz licenci
+IDS_ABOUT_CHECK_VERSION	=&Kontrola verze
+
+IDS_MAIN_STATUS      		=Status
+IDS_MAIN_CHECK_WINDOWSTART	=Spus pøi startu s&ystému (jen administrátor)
+IDS_MAIN_SERVICE          	=Sp&us Apache a MySQL jako sluby (jen administrátor)           
+IDS_MAIN_AUTOSERVEURSSTART  =&Spus obsluhy pøi startu aplikace
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Kontrola verze pøi startu
+IDS_MAIN_CONFAUTORELOAD		=Au&tomatická kontrola zmìn konfigurace pro obsluhy
+
+IDS_MAIN_MYSQL_ARGUMENTS	=MySQL parametry
+IDS_MAIN_APPLIQUER			=A&plikovat
+IDS_MAIN_FERMER				=&Zavøít
+IDS_MAIN_ABOUT				=&Informace...
+
+IDS_MENU_HELP				=&Nápovìda
+IDS_MENU_LOGFILES      		=Soubory &zpráv (log)
+IDS_MENU_CONFIGURATION 		=&Konfigurace
+IDS_MENU_EXPLORE       		=&Procházet
+IDS_MENU_ADMINISTRATION		=&Administrace
+IDS_MENU_WEBLOCAL      		=Lokální &Web
+IDS_MENU_QUIT				=Kon&ec
+
+IDS_MENU_HELP_INTRODUCTION	=&Úvod
+IDS_MENU_HELP_STARTPHP		=&Start s PHP
+IDS_MENU_HELP_FAQ			=&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache soubor chyb
+IDS_MENU_LOGFILES_APACHE_ACCESS=A&pache soubor pøístupù
+IDS_MENU_LOGFILES_MYSQLERR	=&MySQL soubor chyb
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &Extenze
+IDS_MYSQL_LANGUAGE			=czech
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS		=Ukonèuji obsluhy
+IDS_EXT_ERROR_DEPENDANCE	=Èervenì oznaèené extenze nemohou bıt pouity, vyskytli se problémy v závislostech.\nKontrolu extenzí naleznete v prùvodci instalací.
+IDS_CONF_CHECK_SERVERS_PORT	=&Provést kontrolu portù pro obsluhy pøed startem
+IDS_CONF_LANGUAGE			=Jazyk
+IDS_CONF_PREFERENCES		=Konfigurace
+IDS_TRANSLATED_BY			=Ing. Petr Tomek <petr.tomek@centrum.cz>
+[/Czech]

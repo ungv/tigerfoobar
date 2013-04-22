@@ -1,0 +1,105 @@
+[Bulgarian]
+IDS_START               =&Стартирай
+IDS_STOP                =&Спри
+IDS_PENDING             =Изчаква...
+IDS_HELP_CMDLINE        =Показвай превключванията за EasyPHP.exe
+IDS_ERROR_MYSQL         =Не успях да стартирам MySql : \n%s\n\nЖелаете ли да стартирам Apache ?
+IDS_ANOTHER_APACHE_RUN  =Друг Apache сървър вече е стартиран.
+IDS_APACHE_ALREADY_RUN  =Apache е вече стартиран.
+IDS_APACHEMSG_UNEXPECTED_END =Възникна неочаквана грешка и спря Apache !
+IDS_PORT_OCCUPE         =Apache не може да бъде стартиран : друг уеб сървър използва Уеб порта или е блокирано от защитна стена (firewall).
+IDS_SERVER_RUN_ERROR    =Не мога да стартирам : %s
+IDS_EXPERT_MODE_WARNING =Внимание ! Този режим Ви позволява да модифицирате конфигурационните файлове, а лошата конфигурация би могла да доведе до поява на грешки в сървърите.\nСигурни ли сте, че желаете това ?
+IDS_SWITCH_SSL          =Рестарт на Apache ?
+IDS_NEW_EASYPHP_VERSION =Налична е нова версия (%s) . Да Ви отведа ли до EasyPHP уеб страницата ?
+IDS_RESTART             =Рестартирам сървърите
+IDS_MYSQLMSG_UNEXPECTED_END =Възникна неочаквана грешка и спря MySql !
+IDS_STATE_STARTED       =Стартиран
+IDS_STATE_STOPPED       =Спрян
+IDS_HELPCTX_IDC_SERVICE =Apache и MySql сървърите са стартирани, и те ще бъдат активни, дори и да няма log-нат потребител.\nТази опция е налична, единствено на NT/2K и XP Windows и ако Вие сте главният администратор на този компютър.
+IDS_HELPCTX_NOHELP      =Няма помощна информация, за това.
+IDS_ERROR_STOP_SERVER   =Не мога да спра сървърите  : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Показвай диалоговия прозорец, ако е налична нова версия на EasyPhp. За това е нужна Internet връзка.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Да се рестартират ли автоматично сървърите, ако е модифицирана нова конфигурация.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Задайте параметри, по които да действа MySql.\nАко Вие стартирате MySql като сървър, използвайте конфиг. файла за тази цел.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Тази настройка Ви позволява да стартирате EasyPHP, със стартирането на Windows. Ако Вие сте използвали опцията, за стартиране на сървърите (mysql и apache), те също ще се включат със стартирането на Windows.
+IDS_ERROR_RESTART_SERVER=Не успях да стартирам сървъра : %s
+IDS_ERROR_INSTALL_SERVICE=Не мога да инсталирам сервизната услуга: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apache е
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySql  е
+IDS_HELPCTX_ID_PIN      =Винаги показвай този диалог.
+IDS_HELPCTX_ID_HELP_CONTEXT=Показвай помощната информация
+IDS_HELPCTX_IDSL_VIEW   =Минимизиране/Максимизиране на прозореца
+IDS_LOG_RESTART_SERVERS =Сървърите са рестартирани ...
+IDS_ERROR_APACHE_CONF   =Грешка в конфиг. файла на Apache:\n\n""%s""\n\nРедакция ?
+IDS_LOG_CHANGE_CONF     =Конфиг. файла е променен
+IDS_LOG_START_SERVERS   =Сървърите са стартирани
+IDS_NOT_ADMIN           =Вие не сте администратор : някой операция, няма да се приемат или просто няма да са налични.\n\nПродължаване ?
+IDS_ERROR_BROWSER       =Не мога да стартирам браузъра : копирайте този адрес във вашият любим браузър : ""%s"".\n(за да се поправи тази грешка, дефинирайте браузъра)
+IDS_ERROR_REMOVE_SERVICE=Не мога да де-инсталирам сервизните услуги : %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Меню сървъри
+IDS_SERVER_RESTART		=&Рестарт
+IDS_SERVER_KILL			=&Прекъсни
+#Диалогов прозорец - относно EasyPhp
+IDS_ABOUT_TITLE			=Относно EasyPHP
+IDS_ABOUT_PRESENTATION	=EasyPHP, е лесен начин за инсталация на Apache, MySql и PHP създаден е от :
+IDS_ABOUT_VISIT_SITE	=За повече информация посетете, уеб страницата на EasyPHP :
+IDS_ABOUT_SEE_LICENCE	=&Прочети лицензите
+IDS_ABOUT_CHECK_VERSION	=&Провери за ъпдейт!
+
+IDS_MAIN_STATUS      		=Статус
+IDS_MAIN_CHECK_WINDOWSTART	=&Стартирай заедно с Windows.
+IDS_MAIN_SERVICE          	=Ст&арт на Apache и MySql услуги (единствено от админ.)           
+IDS_MAIN_AUTOSERVEURSSTART  =&Стартирай сървъра, когато се стартира тази апликация
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Проверка на версия при стартиране
+IDS_MAIN_CONFAUTORELOAD		=&Автоматична проверка на модифицираната конфигурация на сървърите
+IDS_MAIN_MYSQL_ARGUMENTS	=MySql аргументи
+IDS_MAIN_APPLIQUER			=П&отвърди
+IDS_MAIN_FERMER				=&Затвори
+IDS_MAIN_ABOUT				=&Инфо...
+
+IDS_MENU_HELP				=&Помощ
+IDS_MENU_LOGFILES      		=&Лог Файлове
+IDS_MENU_CONFIGURATION 		=&Конфигурация
+IDS_MENU_EXPLORE       		=&Отвори главната дир.
+IDS_MENU_ADMINISTRATION		=&Администрация
+IDS_MENU_WEBLOCAL      		=Локален &Уеб
+IDS_MENU_QUIT				=&Изход
+
+IDS_MENU_HELP_INTRODUCTION	=&Въведение
+IDS_MENU_HELP_STARTPHP		=&УЕБ-а на PHP
+IDS_MENU_HELP_FAQ			=&ЧЗВ
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache Грешки
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache Д&остъп
+IDS_MENU_LOGFILES_MYSQLERR	=&MySql Грешки
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &Разширения
+IDS_MYSQL_LANGUAGE			=english
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS		=Спря сървърите
+IDS_EXT_ERROR_DEPENDANCE	=Добавките (разширенията) в червено, не могат да бъдат използвани, защото имат проблем или не се поддържат.\nПроверете, тези добавки в инсталационното ръководство.
+IDS_CONF_CHECK_SERVERS_PORT	=Проверете TCP порта на сървърите, преди да ги стартирате
+IDS_CONF_LANGUAGE			=Език
+IDS_CONF_PREFERENCES		=Конфигурация
+
+IDS_UPDATE_FILE         	=Файл
+IDS_UPDATE_CURRENT_VERSION 	=Текущ
+IDS_UPDATE_NEW_VERSION  	=Нов
+IDS_UPDATE_FILE_SIZE    	=Големина
+IDS_UPDATE_FILE_HASH    	=Хаш
+IDS_UPDATE_WEB_FILE_ERROR 	=ГРЕШКА : Не мога да ъпгрейдна дата от Уеб-а
+IDS_UPDATE_HASH_DATA_ERROR 	=ГРЕШКА : Не мога да  retreive хаш дата от Уеб-а
+IDS_UPDATE_UP_TO_DATE   	=Вие вече разполагате с последната версия
+IDS_UPDATE_UPDATING     	=Ъпдейтвам "%s"...
+IDS_UPDATE_BAD_HASH     	=Лош Хаш за   "%s"\n%s\nshould be\n%s
+IDS_UPDATE_FILE_ERROR   	=Грешка при ъпгрейда "%s" : %d !
+IDS_UPDATE_NEED_RESTART 	=Ре-стартирайте EasyPHP за да приключите ъпгрейда.\nРестарт сега ?
+IDS_REMOVABLE_DRIVE     	=Вие сте стартирали EasyPHP от не постоянно у-во. Желаете ли да, регенерирате конфиг. файловете, преди стартирането на сървърите ?
+IDS_PORT_OCCUPE_XP			=%s порт (%d) се използва от %s !
+IDS_FOLDER_CHANGED			=EasyPHP преместен от "%s" в "%s" папка.\nРегенериране на кофиг. файлове ?
+IDS_PROMPT_QUIT				=Наистина ли желаете да, изключите EasyPHP ?
+IDS_ALWAYS_VISIBLE			=Винаги видим
+IDS_USB_REMOVED_QUIT		=USB ключа преместен, EasyPHP се изкл.
+[/Bulgarian]

@@ -1,0 +1,85 @@
+[Chinese]
+IDS_START               =&开始
+IDS_STOP                =&停止
+IDS_PENDING             =运行中....
+IDS_HELP_CMDLINE        =显示 EasyPHP.exe
+IDS_ERROR_MYSQL         =无法启动 MySQL : \n%s\n\n?是否启动 Apache ?
+IDS_DEFAULT_MYSQLARG    ==--skip-name-resolve --language=简体中文
+IDS_ANOTHER_APACHE_RUN  =系统中已有另一个Apache运行中.
+IDS_APACHE_ALREADY_RUN  =Apache已经处在运行中.
+IDS_APACHEMSG_UNEXPECTED_END= Apache 未正常停止!
+IDS_PORT_OCCUPE         =无法启动Apache  : 端口已经被另一Web服务器占用.
+IDS_SERVER_RUN_ERROR    =无法启动服务器 : %s
+IDS_EXPERT_MODE_WARNING =注意 ! 该模式下您将有权改动配置文件，配置文件损坏将
+导致服务器失效.\n?确认?
+IDS_SWITCH_SSL          =重启 Apache ?
+IDS_NEW_EASYPHP_VERSION =检测到新版本(%s).是否登录 EasyPhp ?
+IDS_RESTART             =重启服务器
+IDS_MYSQLMSG_UNEXPECTED_END =MySql没有正常关闭 !
+IDS_STATE_STARTED       =已启动
+IDS_STATE_STOPPED       =已停止
+IDS_HELPCTX_IDC_SERVICE =注册 Apache 和 MySql 为系统服务（需要Administrator
+权限）.
+IDS_HELPCTX_NOHELP      =没有帮助文件.
+IDS_ERROR_STOP_SERVER   =停止服务出错  : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=当检测到新版本时，显示提示信息.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=当配置文件修改时，系统自动重启服务.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=MySql启动参数设置.\n如果已经注册mysql服务，
+请使用配置文件.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Window启动时同时启动EasyPHP.
+IDS_ERROR_RESTART_SERVER=无法启动系统 : %s
+IDS_ERROR_INSTALL_SERVICE=无法安装服务 : %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apache 状态
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySql  状态
+IDS_HELPCTX_ID_PIN      =已经显示.
+IDS_HELPCTX_ID_HELP_CONTEXT=帮助
+IDS_HELPCTX_IDSL_VIEW   =最小化/最大化
+IDS_LOG_RESTART_SERVERS =服务器重启...
+IDS_ERROR_APACHE_CONF   =Apache配置文件有错误:\n\n""%s""\n\n修改 ?
+IDS_LOG_CHANGE_CONF     =配置文件被修改
+IDS_LOG_START_SERVERS   =启动EasyPHP服务
+IDS_NOT_ADMIN           =非超级用户 : 某些修改将失效.\n\n继续 ?
+IDS_ERROR_BROWSER       =无法启动浏览器 : 拷贝该URL至浏览器 : ""%s"".\n(请正
+确定义默认浏览器)
+IDS_ERROR_REMOVE_SERVICE=无法卸载服务 : %s
+IDS_STARTPHP_URL                =http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART              =&重启
+IDS_SERVER_KILL                 =&结束
+#dialog about
+IDS_ABOUT_TITLE                 =关于 EasyPHP
+IDS_ABOUT_PRESENTATION  =EasyPHP, 快速简单安装Apache, MySql 和 PHP 制作者 :
+IDS_ABOUT_VISIT_SITE    =更多信息请 查询 EasyPHP 主页 :
+IDS_ABOUT_SEE_LICENCE   =&阅读Licence
+IDS_ABOUT_CHECK_VERSION =&检测新版本
+
+IDS_MAIN_STATUS                 =状态
+IDS_MAIN_CHECK_WINDOWSTART      =&Windows启动时系统启动.
+IDS_MAIN_SERVICE                =&注册 Apache 和 MySql 为系统服务 (仅限
+administrator)           
+IDS_MAIN_AUTOSERVEURSSTART    =&程序启动时系统启动
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&启动时同时检测新版本
+IDS_MAIN_CONFAUTORELOAD         =&检测系统配置文件是否被修改  
+IDS_MAIN_MYSQL_ARGUMENTS        =MySql参数
+IDS_MAIN_APPLIQUER              =应用
+IDS_MAIN_FERMER                 =&配置
+IDS_MAIN_ABOUT                  =&关于...
+
+IDS_MENU_HELP                   =&帮助
+IDS_MENU_LOGFILES               =&日志
+IDS_MENU_CONFIGURATION          =&配置
+IDS_MENU_EXPLORE                =&打开
+IDS_MENU_ADMINISTRATION         =&管理
+IDS_MENU_WEBLOCAL               =本地&Web页面
+IDS_MENU_QUIT                   =&退出
+
+IDS_MENU_HELP_INTRODUCTION      =&说明
+IDS_MENU_HELP_STARTPHP          =&启动 PHP
+IDS_MENU_HELP_FAQ               =&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache 错误
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache A&ccess
+IDS_MENU_LOGFILES_MYSQLERR      =&MySql 错误
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP 扩展
+IDS_MYSQL_LANGUAGE              =english
+[/Chinese]

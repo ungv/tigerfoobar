@@ -1,0 +1,103 @@
+
+[Japanese]
+IDS_START               =実行
+IDS_STOP                =停止
+IDS_PENDING             =起動開始
+IDS_HELP_CMDLINE        =EasyPHP.exeの起動パラメーターを表示
+IDS_ERROR_MYSQL         =MySQLを起動できませんでした : \n%s\n\nApacheを起動したいですか？
+IDS_ANOTHER_APACHE_RUN  =他のApacheサーバーが既に動いています。
+IDS_APACHE_ALREADY_RUN  =Apacheは既に実行中です。
+IDS_APACHEMSG_UNEXPECTED_END=Apacheが予期せぬ終了をしました !
+IDS_PORT_OCCUPE         =Apacheは起動できませんでした : ウェブポートを他のウェブサーバーが使用中かファイヤーウォールに妨害されました。
+IDS_SERVER_RUN_ERROR    =サーバーを起動できませんでした : %s
+IDS_EXPERT_MODE_WARNING =ご注意！このモードは設定ファイルを変更でき、悪い設定でサーバーを乱すことがあります。それでもいいですか？
+IDS_SWITCH_SSL          =Apacheを再起動しますか？
+IDS_NEW_EASYPHP_VERSION =新しいバージョン(%s)があります。EasyPHPのサイトへ行きますか？
+IDS_RESTART             =サーバーを再起動
+IDS_MYSQLMSG_UNEXPECTED_END=MySQLが予期せぬ終了をしました !
+IDS_STATE_STARTED       =実行中
+IDS_STATE_STOPPED       =停止中
+IDS_HELPCTX_IDC_SERVICE =ApacheとMySqlがサーバーとして動作中です。それらはユーザーがログインしていなくても利用可能です。\nこのオプションはNT/2Kか、XPのWindowsで、あなたがパソコンの管理者の場合のみ利用できます。
+IDS_HELPCTX_NOHELP      =このためのヘルプはありません。
+IDS_ERROR_STOP_SERVER   =サーバーを停止できない : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=もし新しいEasyPHPがあればダイアログを表示します。インターネットへの接続が必要です。
+IDS_HELPCTX_IDC_CONFAUTORELOAD=設定ファイルが修正されると自動的にサーバーを再起動します。
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=MySqlの実行パラメータを設定する。\nもしMySqlのサービスが動作中なら、その代わりに設定ファイルを使ってください。
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=このスイッチでWindowsの起動時にEasyPHPを起動できます。もしサービスとしてサーバーを走らせるなら、Windowsの起動時に自動的に起動するでしょう。
+IDS_ERROR_RESTART_SERVER=サーバーを再起動できなかった : %s
+IDS_ERROR_INSTALL_SERVICE=サービスをインストールできなかった : %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apacheの状態
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySqlの状態
+IDS_HELPCTX_ID_PIN      =この画面を常に手前に表示する。
+IDS_HELPCTX_ID_HELP_CONTEXT=ヘルプを表示
+IDS_HELPCTX_IDSL_VIEW   =ウィンドウを、最小化/最大化、する
+IDS_LOG_RESTART_SERVERS =サーバーを再起動...
+IDS_ERROR_APACHE_CONF   =エラー: Apacheの設定ファイル file:\n\n""%s""\n\n編集しますか？
+IDS_LOG_CHANGE_CONF     =設定ファイルが修正されました
+IDS_LOG_START_SERVERS   =サーバーを起動
+IDS_NOT_ADMIN           =あなたは管理者ではありません : 若干できないことがあるでしょう。\n\nそれでも続けますか？
+IDS_ERROR_BROWSER       =ブラウザを起動できない : このアドレスをブラウザにコピーしてください : ""%s"".\n（このエラーを直すには、標準のブラウザを設定してください）
+IDS_ERROR_REMOVE_SERVICE=サービスをアンインストールできません : %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART		=再起動
+IDS_SERVER_KILL			=強制終了
+#dialog about
+IDS_ABOUT_TITLE			=EasyPHPについて
+IDS_ABOUT_PRESENTATION	=Apache、MySql、PHPをとても簡単にインストールできるEasyPHPを作ったのは :
+IDS_ABOUT_VISIT_SITE	=さらに情報を得たいときは、EasyPHPのホームページを訪れてください :
+IDS_ABOUT_SEE_LICENCE	=ライセンスを表示
+IDS_ABOUT_CHECK_VERSION	=新しいバージョンを調べる
+
+IDS_MAIN_STATUS      		=状態
+IDS_MAIN_CHECK_WINDOWSTART	=Windowsと一緒に起動（スタートアップ）
+IDS_MAIN_SERVICE          	=サービスとしてApacheとMySqlを起動（管理者のみ可能）
+IDS_MAIN_AUTOSERVEURSSTART  =このソフトの起動時にサーバーを起動
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=起動時に新しいバージョンがあるか調べる
+IDS_MAIN_CONFAUTORELOAD		=サーバーの設定が変更されると自動的に再起動
+IDS_MAIN_MYSQL_ARGUMENTS	=MySqlの引数
+IDS_MAIN_APPLIQUER			=適用
+IDS_MAIN_FERMER				=閉じる
+IDS_MAIN_ABOUT				=情報...
+
+IDS_MENU_HELP				=ヘルプ
+IDS_MENU_LOGFILES      		=ログファイル
+IDS_MENU_CONFIGURATION 		=設定
+IDS_MENU_EXPLORE       		=エクスプローラ
+IDS_MENU_ADMINISTRATION		=管理
+IDS_MENU_WEBLOCAL      		=ローカルウェブ
+IDS_MENU_QUIT				=終了
+
+IDS_MENU_HELP_INTRODUCTION	=入門
+IDS_MENU_HELP_STARTPHP		=PHPを始めよう
+IDS_MENU_HELP_FAQ			=&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=Apacheエラーログ
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apacheアクセスログ
+IDS_MENU_LOGFILES_MYSQLERR	=MySqlエラーログ
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=拡張PHP
+IDS_MYSQL_LANGUAGE			=japanese
+
+IDS_LOG_STOP_SERVERS		=サーバーを停止
+IDS_EXT_ERROR_DEPENDANCE	=赤の拡張は使うことが出来ません。なぜなら依存性問題を持っているからです。\nそれら拡張のインストールガイドを調べてみてください。
+IDS_CONF_CHECK_SERVERS_PORT =起動前にサーバーのTCPポートを調べる
+IDS_CONF_LANGUAGE			=言語
+IDS_CONF_PREFERENCES		=設定
+IDS_TRANSLATED_BY			=HU "hu_renraku@yahoo.co.jp"
+
+IDS_UPDATE_FILE         	=ファイル
+IDS_UPDATE_CURRENT_VERSION 	=最新
+IDS_UPDATE_NEW_VERSION  	=新しい
+IDS_UPDATE_FILE_SIZE    	=大きさ
+IDS_UPDATE_FILE_HASH    	=ハッシュ
+IDS_UPDATE_WEB_FILE_ERROR	=エラー : ウェブからアップグレードデータを探してとってこれなかった
+IDS_UPDATE_HASH_DATA_ERROR  =エラー : ウェブからハッシュデータを探してとってこれなかった
+IDS_UPDATE_UP_TO_DATE   	=ファイルはすべて新しいです
+IDS_UPDATE_UPDATING     	=アップデート "%s"...
+IDS_UPDATE_BAD_HASH     	=ハッシュが間違っている "%s"\n%s\nするべきです\n%s
+IDS_UPDATE_FILE_ERROR   	=アップグレード中のエラー "%s" : %d !
+IDS_UPDATE_NEED_RESTART 	=アップグレードを完了させるためEasyPHPを再起動
+IDS_REMOVABLE_DRIVE     	=あなたはリムーバブルドライブからEasyPHPを作動しています。サーバーを走らせる前に設定ファイルを生き返らせたいですか？
+IDS_PORT_OCCUPE_XP			=%s ポート (%d) は %s によって使用中！
+IDS_FOLDER_CHANGED			=EasyPHPは"%s"から"%s"フォルダに移動した。\n設定ファイルを生き返らせますか？
+[/Japanese]

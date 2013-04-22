@@ -1,0 +1,105 @@
+[Greek]
+IDS_START               =&Εκκίνηση
+IDS_STOP                =&Διακοπή
+IDS_PENDING             =Σε αναμονή...
+IDS_HELP_CMDLINE        =Επίδειξη των επιλογών του EasyPHP.exe
+IDS_ERROR_MYSQL         =Η εκκίνηση της MySql δέν είναι δυνατή : \n%s\n\nΘέλετε να εκκινήσει ο Apache ?
+IDS_ANOTHER_APACHE_RUN  =Ενας άλλος Apache server τρέχει ήδη.
+IDS_APACHE_ALREADY_RUN  =Ο Apache τρέχει ήδη.
+IDS_APACHEMSG_UNEXPECTED_END =Απροσδόκητος τερματισμός του Apache !
+IDS_PORT_OCCUPE         =Ο Apache δεν μπορεί να εκκινήσει : ένας άλλος Web server χρησιμοποιεί την πόρτα ή η πόρτα είναι μπλοκαρισμένη από ένα τείχος προστασίας.
+IDS_SERVER_RUN_ERROR    =Ο server δεν μπορεί να εκκινήσει : %s
+IDS_EXPERT_MODE_WARNING =Προσοχή ! Αυτή η επιλογή σας επιτρέπει να τροποποιήσετε τα αρχεία διαμόρφωσης και μια εσφαλμένη διαμόρφωση μπορεί να επιρεάσει τη λειτουργία των servers.\nΕίστε σίγουροι ?
+IDS_SWITCH_SSL          =Να επανεκκινήσει ο Apache ?
+IDS_NEW_EASYPHP_VERSION =Μία νέα έκδοση (%s) είναι διαθέσιμη. Θέλετε να μεταβείτε στο website του EasyPHP ?
+IDS_RESTART             =Οι servers επανεκκινούν.
+IDS_MYSQLMSG_UNEXPECTED_END =Απροσδόκητος τερματισμός της MySql !
+IDS_STATE_STARTED       =Η εκκίνηση πραγματοποιήθηκε
+IDS_STATE_STOPPED       =Η διακοπή πραγματοποιήθηκε
+IDS_HELPCTX_IDC_SERVICE =Ο Apache και η MySql τρέχουν σαν servers και είναι διαθέσιμοι ακόμα και αν κανένας χρήστης δεν είναι συνδεδμένος.\nΑυτή η επιλογή είναι διαθέσιμη  μόνο στα Windows NT/2K και στα XP εαν ο χρήστης είναι ο administrator του υπολογιστή.
+IDS_HELPCTX_NOHELP      =Δεν υπάρχει διαθέσιμη βοήθεια.
+IDS_ERROR_STOP_SERVER   =Ο server δεν μπορέι να σταματήσει : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Ειδοποίηση αν υπάρχει διαθέσιμη μια νέα έκδοση του EasyPHP. Χρειάζεται σύνδεση Internet.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Οι servers επανεκκινούν αυτόματα αν το αρχείο διαμόρφωσης αλλάξει.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Ρυθμίστε τις παραμέτρους εκτέλεσης για την MySql.\nΑν τρέχετε την MySql ως υπηρεσία χρησιμοποιήστε το αρχείο διαμόρφωσης.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Αυτή η επιλοή ξεκινά το EasyPHP με την εκκίνηση των Windows. Αν οι servers τρέχουν ως υπηρεσίες , θα εκκινήσουν και αυτές αυτόματα.
+IDS_ERROR_RESTART_SERVER=Δεν είναι δυνατή η επανεκκίνηση του server : %s
+IDS_ERROR_INSTALL_SERVICE=Δεν είναι δυνατή η εγκατάσταση της υπηρεσίας: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Κατάσταση Apache
+IDS_HELPCTX_IDC_STATUS_MYSQL=Κατάσταση MySql
+IDS_HELPCTX_ID_PIN      =Επίδειξη πάντοτε αυτού του διαλόγου.
+IDS_HELPCTX_ID_HELP_CONTEXT=Επίδειξη βοήθειας
+IDS_HELPCTX_IDSL_VIEW   =Ελαχιστοποίηση/Μεγιστοποίηση του παραθύρου
+IDS_LOG_RESTART_SERVERS =Οι servers επανεκκινούν...
+IDS_ERROR_APACHE_CONF   =Σφάλμα στο αρχείο διαμόρφωσης του Apache:\n\n""%s""\n\nΘα το τροποποιήσετε ?
+IDS_LOG_CHANGE_CONF     =Το αρχείο διαμόφωσης άλλαξε
+IDS_LOG_START_SERVERS   =Οι servers εκκινούν
+IDS_NOT_ADMIN           =Δεν είστε ο administrator : μερικές επιλογές δεν θα είναι διαθέσιμες.\n\nΘα συνεχίσετε ?
+IDS_ERROR_BROWSER       =Ο browser δεν μπορεί να εκκινήσει: αντιγράψτε αυτή τη διεύθυνση στον αγαπημένο σας browser : ""%s"".\n(για να διορθώσετε αυτό το σφάλμα , ορίστε έναν προεπιλγμένο browser)
+IDS_ERROR_REMOVE_SERVICE=Δεν είναι δυνατή η απεγκατάσταση της υπηρεσίας : %s
+IDS_STARTPHP_URL        =http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART        =&Επανεκκίνηση
+IDS_SERVER_KILL            =&Αμεση διακοπή
+#dialog about
+IDS_ABOUT_TITLE            =Σχετικά με το EasyPHP
+IDS_ABOUT_PRESENTATION    =Το EasyPHP είναι ένας εύκολος τρόπος εγκατάστασης των Apache, MySql, PHP και δημιουργήθηκε απο τους :
+IDS_ABOUT_VISIT_SITE    =Για πληροφορίες, επισκεφθείτε την σελίδα του EasyPHP :
+IDS_ABOUT_SEE_LICENCE    =&Αδεια χρήσης
+IDS_ABOUT_CHECK_VERSION    =&Ελέγχος έκδοσης
+
+IDS_MAIN_STATUS              =Κατάσταση
+IDS_MAIN_CHECK_WINDOWSTART    =&Εκκίνηση κατα την έναρξη των Windows.
+IDS_MAIN_SERVICE              =Ε&κκίνηση των Apache και MySql ως υπηρεσίες (μόνο για administrator)          
+IDS_MAIN_AUTOSERVEURSSTART  =Εκκί&νηση του server με τη φόρτωση της εφαρμογής
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=Ε&λεγχος έκδοσης κατα την εκκίνηση
+IDS_MAIN_CONFAUTORELOAD        =&Αμεση χρήση των αλλαγών διαμόρφωσης των servers
+IDS_MAIN_MYSQL_ARGUMENTS    =Επιλογές της MySql
+IDS_MAIN_APPLIQUER            =&Εφαρμογή
+IDS_MAIN_FERMER                =&Κλείσιμο
+IDS_MAIN_ABOUT                =&Πληροφορίες...
+
+IDS_MENU_HELP                =&Βοήθεια
+IDS_MENU_LOGFILES              =&Αρχεία καταγραφής
+IDS_MENU_CONFIGURATION         =&Διαμόρφωση
+IDS_MENU_EXPLORE               =&Εξερεύνηση
+IDS_MENU_ADMINISTRATION        =&Διαχείρηση
+IDS_MENU_WEBLOCAL              =Τ&οπικό Web
+IDS_MENU_QUIT                =Ε&ξοδος
+
+IDS_MENU_HELP_INTRODUCTION    =&Εισαγωγή
+IDS_MENU_HELP_STARTPHP        =&Ξεκινώντας με την PHP
+IDS_MENU_HELP_FAQ            =&Συχνές ερωτήσεις
+IDS_MENU_LOGFILES_APACHE_ERR=Σφάλμ&ατα Apache
+IDS_MENU_LOGFILES_APACHE_ACCESS=Σ&υνδέσεις Apache
+IDS_MENU_LOGFILES_MYSQLERR    =Σφά&λματα MySql
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &Extension
+IDS_MYSQL_LANGUAGE            =greek
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS        =Σταματήστε τους servers
+IDS_EXT_ERROR_DEPENDANCE    =Οι επεκτάσεις σε κόκκινο δεν μπορούν να χρησιμοποιηθούν γιατί έχουν προβλήματα εξάρτησης.\nΕλέξτε την εγκατάσταση αυτώνν των επεκτάσεων.
+IDS_CONF_CHECK_SERVERS_PORT =Ελεγχος των servers (TCP πόρτες) πριν την εκκίνηση τους
+IDS_CONF_LANGUAGE           =Γλώσσα
+IDS_CONF_PREFERENCES        =Διαμόρφωση
+IDS_TRANSLATED_BY           =Michelakos K. Ioannis "michelakos@webius.info"
+
+IDS_UPDATE_FILE             =Αρχείο
+IDS_UPDATE_CURRENT_VERSION  =Τρέχων
+IDS_UPDATE_NEW_VERSION      =Νέο
+IDS_UPDATE_FILE_SIZE        =Μέγεθος
+IDS_UPDATE_FILE_HASH        =Hash
+IDS_UPDATE_WEB_FILE_ERROR   =Σφάλμα : Δεν είναι δυνατή η λήψη των στοιχείων αναβάθμισης απο το Web
+IDS_UPDATE_HASH_DATA_ERROR  =Σφάλμα : Δεν είναι δυνατή η λήψη των στοιχείων hash απο το Web
+IDS_UPDATE_UP_TO_DATE       =Εχετε την τελευταία έκδοση.
+IDS_UPDATE_UPDATING         =Αναβάθμιση "%s"...
+IDS_UPDATE_BAD_HASH         =Εσφαλμένο Hash για  "%s"\n%s\nθα έπρεπε να είναι\n%s
+IDS_UPDATE_FILE_ERROR       =Σφάλμα αναβάθμισης "%s" : %d !
+IDS_UPDATE_NEED_RESTART     =Επανεκκινήστε το EasyPHP για να ολοκληρωθεί η αναβάθμιση.
+IDS_REMOVABLE_DRIVE         =Τρέχετε το EasyPHP απο φορητό δίσκο. Θέλετε να επαναδημιουργηθούν τα αρχεία διαμόρφωσης πριν τρέξουν οι servers ?
+IDS_PORT_OCCUPE_XP          =%s η πόρτα (%d) χρησιμοποιείτε από %s !
+IDS_FOLDER_CHANGED          =Το EasyPHP μετακινήθηκε απο τον κατάλογο "%s" στον κατάλογο "%s".\nΝα επαναδημιουργηθούν τα αρχεία διαμόρφωσης ?
+IDS_PROMPT_QUIT             =Θέλετε πραγματικά να τερματίσετε το EasyPHP ?
+IDS_ALWAYS_VISIBLE          =Πάντα ορατό
+[/Greek]

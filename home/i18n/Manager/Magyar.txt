@@ -1,0 +1,88 @@
+[Magyar]
+IDS_START               =&Start
+IDS_STOP                =&Stop
+IDS_PENDING             =Függõben...
+IDS_HELP_CMDLINE        =Az EasyPHP.exe kapcsolók megjelenítése.
+IDS_ERROR_MYSQL         =A MySql nem indítható: \n%s\n\nElindítjuk az Apache-ot ?
+IDS_DEFAULT_MYSQLARG    =--skip-name-resolve --language=hungarian
+IDS_ANOTHER_APACHE_RUN  =Egy másik Apache szerver már fut.
+IDS_APACHE_ALREADY_RUN  =Az Apache már fut.
+IDS_APACHEMSG_UNEXPECTED_END =Az Apache váratlanul leállt !
+IDS_PORT_OCCUPE         =Az Apache nem futtatható : másik Web szerver használja a Web portot
+IDS_SERVER_RUN_ERROR    =Nem tudom futtatni a szervert : %s
+IDS_EXPERT_MODE_WARNING =Figyelem ! Ez a mód engedélyezi a beállítási fájlok módosítását, amely megzavarhatja a szervert.\nBiztos vagy benne ?
+IDS_SWITCH_SSL          =Újraindítsam az Apache-ot ?
+IDS_NEW_EASYPHP_VERSION =Egy új verzió (%s) elérhetõ. Menjünk az EasyPhp honlapjára ?
+IDS_RESTART             =Szerverek újraindítása
+IDS_MYSQLMSG_UNEXPECTED_END =A MySql váratlanul leállt !
+IDS_STATE_STARTED       =Elindítva
+IDS_STATE_STOPPED       =Leállítva
+IDS_HELPCTX_IDC_SERVICE =Az Apache és a MySql szerverként fut, és akkor is elérhetõek, ha senki nincs bejelentkezve.\nEz az opció csak NT/2K és XP Windows alatt elérhetõ, ha a felhasználó adminisztrátori jogokkal rendelkezik.
+IDS_HELPCTX_NOHELP      =Nincs erre sugó.
+IDS_ERROR_STOP_SERVER   =Nem tudom leállítani a szervert  : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Párbeszédablakot mutat, ha az EasyPHP új verziója elérhetõ. Internet kapcsolat szükséges.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=A szerverek automatikusan újraindulnak, ha a beállítási fájljaikat módosították.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=A MySql végrehajtási paramétereinek beállítása.\nHa a MySql-t service-ként futtatod, használj inkább konfigurációs fájlt.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Ez a beállítás lehetõvé teszi, hogy az EasyPHP-t a Windows indítsa. Ha a szervereket service-ként futtatod, automatikusan indulnak a Windows betöltésekor.
+IDS_ERROR_RESTART_SERVER=Nem tudom újraindítani a szervert : %s
+IDS_ERROR_INSTALL_SERVICE=Nem tudom installálni szervice-ként : %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apache állapot
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySql állapot
+IDS_HELPCTX_ID_PIN      =Mindig mutasd ezt az ablakot.
+IDS_HELPCTX_ID_HELP_CONTEXT=Sugó megjelenítése
+IDS_HELPCTX_IDSL_VIEW   =Az ablak méretezése
+IDS_LOG_RESTART_SERVERS =A szerverek újraindulnak...
+IDS_ERROR_APACHE_CONF   =Hiba az Apache konfigurációs fájljában:\n\n""%s""\n\nSzerkeszted ?
+IDS_LOG_CHANGE_CONF     =Konfigurációs fájl megváltoztatva
+IDS_LOG_START_SERVERS   =A szerverek indulnak
+IDS_NOT_ADMIN           =Nem vagy adminisztrátor : néhány beállítás nem lesz elérhetõ.\n\nFolytatod ?
+IDS_ERROR_BROWSER       =Nem tudom elindítani a böngészõt : másold át ezt a címet a böngészõdbe : ""%s"".\n(a hiba javításához állíts be egy alapértelmezett böngészõt)
+IDS_ERROR_REMOVE_SERVICE=Nem tudom kikapcsolni a service-t : %s
+IDS_STARTPHP_URL  		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART  	=&Újraindítás
+IDS_SERVER_KILL   		=&Gyilkol
+#dialog about
+IDS_ABOUT_TITLE   		=EasyPHP infó
+IDS_ABOUT_PRESENTATION 	=EasyPHP, egyszerû módja az Apache, MySql és PHP telepítésének, szerzõk :
+IDS_ABOUT_VISIT_SITE 	=További információk az EasyPHP honlapján :
+IDS_ABOUT_SEE_LICENCE 	=&Licensz
+IDS_ABOUT_CHECK_VERSION =&Verzió ellenõrzése
+
+IDS_MAIN_STATUS        		=Állapot
+IDS_MAIN_CHECK_WINDOWSTART 	=&Windowsszal egyszerre indul.
+IDS_MAIN_SERVICE           	=Az &Apache és a MySql service-ként fut (csak adminisztrátorok)           
+IDS_MAIN_AUTOSERVEURSSTART  =A szerverek ezzel a programma&l egyszerre indulnak
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Verzió ellenõrzése induláskor
+IDS_MAIN_CONFAUTORELOAD  	=&Automatikus felülbírálat a szerverek beállításának a módosításakor
+IDS_MAIN_MYSQL_ARGUMENTS 	=MySql változók
+IDS_MAIN_APPLIQUER   		=Al&kalmaz
+IDS_MAIN_FERMER    			=&Bezár
+IDS_MAIN_ABOUT    			=&Infó...
+
+IDS_MENU_HELP    		 =&Sugó
+IDS_MENU_LOGFILES        =&Log fájlok
+IDS_MENU_CONFIGURATION   =&Beállítás
+IDS_MENU_EXPLORE         =Bö&ngészés
+IDS_MENU_ADMINISTRATION  =&Adminisztráció
+IDS_MENU_WEBLOCAL        =Helyi &Web
+IDS_MENU_QUIT    		 =&Kilép
+
+IDS_MENU_HELP_INTRODUCTION 	=&Bevezetés
+IDS_MENU_HELP_STARTPHP  	=A &PHP megismerése
+IDS_MENU_HELP_FAQ   		=&GYIK
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache hiba
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache h&ozzáférés
+IDS_MENU_LOGFILES_MYSQLERR 	=&MySql hiba
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &terjesztések
+IDS_MYSQL_LANGUAGE   		=hungarian
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS            =Szerverek leállítása
+IDS_EXT_ERROR_DEPENDANCE        =A pirossal jelölt kiterjesztések nem használhatóak, mert összefüggésbeli hibáik vannak.\Ellenõrízd a telepítési útmutatót.
+IDS_CONF_CHECK_SERVERS_PORT     =Ellenõrízd a szerver TCP portját mielõtt elindítod
+IDS_CONF_LANGUAGE               =Nyelv
+IDS_CONF_PREFERENCES            =Beállítások
+IDS_TRANSLATED_BY               =Fordítás: Frantique
+[/Magyar]

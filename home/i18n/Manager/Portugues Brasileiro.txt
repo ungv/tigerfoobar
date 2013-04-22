@@ -1,0 +1,109 @@
+[Portugues Brasileiro]
+;LanguageFile Version 5.3.4.0, Released in 2011/01/05
+;Traduzido para o Brasil por .:: DEVLAB :: ESTAÇÃOINFO ::.
+;http://devlab.estacaoinfo.com/!LinkManager/?LinkID=EASYPHP.LPF
+IDS_START               =Iniciar
+IDS_STOP                =Desligar
+IDS_PENDING             =Pendente...
+IDS_HELP_CMDLINE        =Mostrar mudanças para o EasyPHP.exe
+IDS_ERROR_MYSQL         =Não foi possível iniciar o MySQL: \n%s\n\nDeseja iniciar o Apache?
+IDS_ANOTHER_APACHE_RUN  =O Apache Server já está iniciado.
+IDS_APACHE_ALREADY_RUN  =O Apache Server já está iniciado.
+IDS_APACHEMSG_UNEXPECTED_END=O Apache foi desligado por algum erro inesperado!
+IDS_PORT_OCCUPE         =O Apache não pode ser iniciado: já existe um Web Server na mesma porta
+IDS_SERVER_RUN_ERROR    =Não é possível iniciar o Servidor: %s
+IDS_EXPERT_MODE_WARNING =Atenção! Neste modo, alterar as definições do Sistema, poderá provocar erros nos Servidores.\nDeseja continuar?
+IDS_SWITCH_SSL          =Reiniciar o Apache?
+IDS_NEW_EASYPHP_VERSION =A versão (%s) do EasyPHP encontra-se disponível . Deseja baixá-la no Site do EasyPHP?
+IDS_RESTART             =Reiniciar os Servidores
+IDS_MYSQLMSG_UNEXPECTED_END=O MySQL foi desligado por algum erro inesperado!
+IDS_STATE_STARTED       =Iniciado
+IDS_STATE_STOPPED       =Parado
+IDS_HELPCTX_IDC_SERVICE =O Servidores Apache e MySQL são iniciados como Serviços mesmo que não esteja logado na máquina com o seu usuário.\nEsta opção não está disponível  nos Windows NT, 2000 e XP e o seu usuário é o Administrador do Sistema.
+IDS_HELPCTX_NOHELP      =Não existe Ajuda para esta opção.
+IDS_ERROR_STOP_SERVER   =Não foi possível parar o Servidor: %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Avisar quando existir uma nova Versão do EasyPHP. Necessita de uma conexão com a Internet para efetuar o Download.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Os Servidores são reiniciados automaticamente se os Arquivos de Configuração forem alterados.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Esta opção permite especificar as definições do MySQL.\nAs mudanças podem ser efetuadas mesmo que os Servidores estejam definidos como Serviços. Será necessário alterar também o Arquivo de Configurações.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Esta opção permite iniciar os Servidores ao ativar o EasyPHP. No caso de definir os servidores como Serviços, estes serão ativados ao iniciar o Windows.
+IDS_ERROR_RESTART_SERVER=Não foi possível Reiniciar o Servidor: %s
+IDS_ERROR_INSTALL_SERVICE=Não foi possível instalar o Serviço: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Estado do Apache
+IDS_HELPCTX_IDC_STATUS_MYSQL=Estado do MySQL
+IDS_HELPCTX_ID_PIN      =Sempre mostrar o Diálogo.
+IDS_HELPCTX_ID_HELP_CONTEXT=Mostrar Ajuda
+IDS_HELPCTX_IDSL_VIEW   =Minimizar/Maximizar a janela
+IDS_LOG_RESTART_SERVERS =Os Servidores estão sendo Reiniciados...
+IDS_ERROR_APACHE_CONF   =Erro no Arquivo de Configuração do Apache:\n\n"%s"\n\nDeseja Editá-lo?
+IDS_LOG_CHANGE_CONF     =O Arquivo de Configuração foi salvo com Sucesso!
+IDS_LOG_START_SERVERS   =Inicialização dos Servidores
+IDS_NOT_ADMIN           =Você não está logado como Administrador!\nalgumas alterações não serão possíveis.\n\nDeseja Continuar?
+IDS_ERROR_BROWSER       =Não foi possível abrir o Browser. Acesse o endereço "%s" diretamente.\n\n(Para corrigir este erro defina um Browser padrão!)
+IDS_ERROR_REMOVE_SERVICE=Não foi possível desinstalar o Serviço: %s
+IDS_STARTPHP_URL		=http://www.php.net
+
+#Menu Server
+IDS_SERVER_RESTART		=Reiniciar
+IDS_SERVER_KILL			=Parar
+#About Dialog
+IDS_ABOUT_TITLE			=» Sobre o EasyPHP...
+IDS_ABOUT_PRESENTATION		=EasyPHP, o modo simples de instalar Apache, MySQL e PHP por um mesmo pacote foi criado por:
+IDS_ABOUT_VISIT_SITE		=\t\tTraduzido para o Brasil por DEVLAB :: ESTAÇÃOINFO
+IDS_ABOUT_SEE_LICENCE		=Ver Licença
+IDS_ABOUT_CHECK_VERSION		=Checar Versão
+
+IDS_MAIN_STATUS      		=Status
+IDS_MAIN_CHECK_WINDOWSTART	=Iniciar com o Windows (apenas Administrador).
+IDS_MAIN_SERVICE          	=Iniciar Apache e MySQL como Serviços (apenas Administrador).
+IDS_MAIN_AUTOSERVEURSSTART  	=Iniciar os Servidores automaticamente com o EasyPHP.
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=Checar novas Versões ao iniciar o Programa.
+IDS_MAIN_CONFAUTORELOAD		=Verificar Configurações dos Servidores ao alterar as Configurações.
+IDS_MAIN_MySQL_ARGUMENTS	=Opções do MySQL
+IDS_MAIN_APPLIQUER			=&Aplicar
+IDS_MAIN_FERMER				=&Fechar
+IDS_MAIN_ABOUT				=Sobre...
+
+IDS_MENU_HELP				=Ajuda
+IDS_MENU_LOGFILES      		=Arquivos de &Log
+IDS_MENU_CONFIGURATION 		=&Configuração
+IDS_MENU_EXPLORE       		=Explorar
+IDS_MENU_ADMINISTRATION		=Administração
+IDS_MENU_WEBLOCAL      		=Localhost
+IDS_MENU_QUIT				=Sair...
+
+IDS_MENU_HELP_INTRODUCTION	=Introdução
+IDS_MENU_HELP_STARTPHP		=Iniciar o PHP
+IDS_MENU_HELP_FAQ			=FAQ
+IDS_MENU_LOGFILES_APACHE_ERR	=Erros do Apache
+IDS_MENU_LOGFILES_APACHE_ACCESS	=A&cessar Apache
+IDS_MENU_LOGFILES_MYSQLERR	=Erros do &MySQL
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=Extensões &PHP
+#O Idioma deve existir na pasta "mysql/share"
+IDS_MYSQL_LANGUAGE		=portuguese
+
+IDS_LOG_STOP_SERVERS		=Parar os Servidores
+IDS_EXT_ERROR_DEPENDANCE	=As Extensões em vermelho não podem ser usadas por possuírem problemas em suas dependências.\nConsulte o Guia de instalação destas extensões.
+IDS_CONF_CHECK_SERVERS_PORT	=Checar as portas TCP do Servidor antes de iniciar.
+IDS_CONF_LANGUAGE			=Idioma
+IDS_CONF_PREFERENCES		=Configuração
+IDS_TRANSLATED_BY			=devlab.estacaoinfo.com/!LinkManager/?LinkID=ESPHP
+
+IDS_UPDATE_FILE         	=Arquivo
+IDS_UPDATE_CURRENT_VERSION 	=Atual
+IDS_UPDATE_NEW_VERSION  	=Novo
+IDS_UPDATE_FILE_SIZE    	=Tamanho
+IDS_UPDATE_FILE_HASH    	=Hash
+IDS_UPDATE_WEB_FILE_ERROR	=ERRO: Não foi possível receber os Dados de Atualização da Internet.
+IDS_UPDATE_HASH_DATA_ERROR  =ERRO: Não foi possível receber os Dados Hash de Atualização da Internet.
+IDS_UPDATE_UP_TO_DATE   	=Todos os Arquivos já estão Atualizados!!
+IDS_UPDATE_UPDATING     	=Atualizando "%s"...
+IDS_UPDATE_BAD_HASH     	=Hash incorreto para o item "%s"\n%s\n deveria ser\n%s.
+IDS_UPDATE_FILE_ERROR   	=Erro na Atualização de "%s": %d!
+IDS_UPDATE_NEED_RESTART 	=Reinicie o EasyPHP para finalizar a Atualização.\n\nDeseja reiniciar agora?
+IDS_REMOVABLE_DRIVE     	=Você está executando o EasyPHP a partir de um Drive removível. Deseja redefinir os Arquivos de Configuração antes de ativar os Servidores?
+IDS_PORT_OCCUPE_XP			=%s Porta (%d) está sendo usada por %s!
+IDS_FOLDER_CHANGED			=EasyPHP foi movido da Pasta "%s" para "%s".\n\nDeseja redefinir os Arquivos de Configuração?
+IDS_PROMPT_QUIT				=Deseja realmente fechar o EasyPHP?
+IDS_ALWAYS_VISIBLE			=Sempre visível
+IDS_USB_REMOVED_QUIT		=Drive USB removido. EasyPHP será encerrado.
+[/Portugues Brasileiro]

@@ -1,0 +1,105 @@
+[Slovenian]
+IDS_START               =&Zaûeni
+IDS_STOP                =&Ustavi
+IDS_PENDING             =Iöcem...
+IDS_HELP_CMDLINE        =Prikaûi stikala za EasyPHP.exe
+IDS_ERROR_MYSQL         =Ne morem zagnati MySql : \n%s\n\néeliö zagnati Apache ?
+IDS_ANOTHER_APACHE_RUN  =Drug Apache server je ûe zagnan.
+IDS_APACHE_ALREADY_RUN  =Apache je ûe v teku.
+IDS_APACHEMSG_UNEXPECTED_END =Nepricakovan konec Apacha !
+IDS_PORT_OCCUPE         =Apacha ne morem zagnati : drug Web server uporablja Web port ali pa je port zaprt s strani poûarnega zidu.
+IDS_SERVER_RUN_ERROR    =Ne morem zagnati serverja : %s
+IDS_EXPERT_MODE_WARNING =POZOR ! Ta nacin ti dovoljuje spreminjanje konfiguracije datotek in slaba konfiguration lahko moti delo serverja.\nAli si preprican ?
+IDS_SWITCH_SSL          =Ponovno zaûenem Apacha ?
+IDS_NEW_EASYPHP_VERSION =Nova verzija (%s) je na voljo. Pojdi na EasyPHP website ?
+IDS_RESTART             =Ponovno zaûeni server
+IDS_MYSQLMSG_UNEXPECTED_END =Nepricakovan konec MySqla !
+IDS_STATE_STARTED       =Zagnano
+IDS_STATE_STOPPED       =Ustavljeno
+IDS_HELPCTX_IDC_SERVICE =Apache in MySql delujeta kot serverja, in sta na voljo tudi ce ni nihce od uporabniov prijavljen.\nTa opcija je na voljo le na NT/2K in XP Windows in, ce je uporabnik administrator racunalnika.
+IDS_HELPCTX_NOHELP      =Ni pomoci za to.
+IDS_ERROR_STOP_SERVER   =Ne morem ustaviti serverja  : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Prikaûi okence dialoga, ce je na voljo nova verzija EasyPHP. Potrebujem Internetno povezavo.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Serverji bodo avtomaticno ponovno zagnani, ce bo spremenjena njihova konfiguracijska datoteka.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Doloci izvröilne parametre za MySql.\nCe uporabljaö MySql kot podporo, uporabi namesto konfiguracijsko datoteko.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=This switch allows you to run EasyPHP at Windows startup. If you run servers as services, they will be automatically run at Windows startup.
+IDS_ERROR_RESTART_SERVER=Ne morem ponovno zagnati serverja : %s
+IDS_ERROR_INSTALL_SERVICE=Ne morem namestiti podpore : %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Navedbe Apacha
+IDS_HELPCTX_IDC_STATUS_MYSQL=Navedbe MySql
+IDS_HELPCTX_ID_PIN      =vedno prikaûi ta dialog.
+IDS_HELPCTX_ID_HELP_CONTEXT=Prikaûi pomoc
+IDS_HELPCTX_IDSL_VIEW   =Pomajnöaj/povecaj okno
+IDS_LOG_RESTART_SERVERS =Serverje bodo ponovno zagnani...
+IDS_ERROR_APACHE_CONF   =Napaka v Apache konfiguracijski datoteki:\n\n""%s""\n\nUredi ?
+IDS_LOG_CHANGE_CONF     =Konfiguracija bo spremenjena
+IDS_LOG_START_SERVERS   =Zaganjam serverje
+IDS_NOT_ADMIN           =Nisi administrator : dolocene moûnosti ne bodo na voljo.\n\nNadaljujem ?
+IDS_ERROR_BROWSER       =Ne morem zagnati brskalnika : kopiraj ta naslov v tvoj priljubljeni brskalnik : ""%s"".\n(da popraviö to napako, definiraj tvoj privzeti brskalnik)
+IDS_ERROR_REMOVE_SERVICE=Ne morem odstraniti podpore : %s
+IDS_STARTPHP_URL        =http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART        	=&Ponovno zaûeni
+IDS_SERVER_KILL            	=&Ubij za zmeri...haha
+#dialog about
+IDS_ABOUT_TITLE            	=Nekaj o EasyPHP
+IDS_ABOUT_PRESENTATION    	=EasyPHP, najlaûji nacin kako namestiti Apache, MySql in PHP je naredil za vas :
+IDS_ABOUT_VISIT_SITE    	=Za informacije, obiöci EasyPHP home page :
+IDS_ABOUT_SEE_LICENCE    	=&Preglej licenco
+IDS_ABOUT_CHECK_VERSION    	=&Preveri verzijo
+
+IDS_MAIN_STATUS             =Status
+IDS_MAIN_CHECK_WINDOWSTART  =&Zaûeni ob zagonu windowsov.
+IDS_MAIN_SERVICE            =Za&ûeni Apache in MySql kot podpora (samo administrator)
+IDS_MAIN_AUTOSERVEURSSTART  =&Zaûeni server ko se zaûene ta aplikacija
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Poiöci novo verzijo ob zagonu
+IDS_MAIN_CONFAUTORELOAD     =&Automaticno razmiölanje o spremembi serverjeve konfiguracije
+IDS_MAIN_MYSQL_ARGUMENTS    =Argumenti MySql
+IDS_MAIN_APPLIQUER          =U&porabi
+IDS_MAIN_FERMER             =&Zapri
+IDS_MAIN_ABOUT              =&Info...
+
+IDS_MENU_HELP               =&Pomoc
+IDS_MENU_LOGFILES           =&Datoteke dnevnika
+IDS_MENU_CONFIGURATION      =&Konfiguracija
+IDS_MENU_EXPLORE            =&Raziöci
+IDS_MENU_ADMINISTRATION     =&Administrator
+IDS_MENU_WEBLOCAL           =Localni &Internet
+IDS_MENU_QUIT               =&Izhod
+
+IDS_MENU_HELP_INTRODUCTION  =&Predstavitev
+IDS_MENU_HELP_STARTPHP      =&Zaûeni s PHP
+IDS_MENU_HELP_FAQ           =&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=&Napaka Apache
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache A&cces
+IDS_MENU_LOGFILES_MYSQLERR  =&Napaka MySql
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &Dodatek
+IDS_MYSQL_LANGUAGE          =slovenian
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS        =Ustavi serverje
+IDS_EXT_ERROR_DEPENDANCE    =Dodatek v rdecem ne morem uporabiti zaradi teûav z nestabilnostjo.\nPreberi navodila pred insalacijo dodatka.
+IDS_CONF_CHECK_SERVERS_PORT =Preveri TCP port serverjev pred zagonom
+IDS_CONF_LANGUAGE           =Jezik
+IDS_CONF_PREFERENCES        =Konfiguracija
+
+IDS_UPDATE_FILE             =Datoteka
+IDS_UPDATE_CURRENT_VERSION  =Trenutno
+IDS_UPDATE_NEW_VERSION      =Nova
+IDS_UPDATE_FILE_SIZE        =Velikost
+IDS_UPDATE_FILE_HASH        =Hash
+IDS_UPDATE_WEB_FILE_ERROR   =NAPAKA : Ne morem pridobiti nadgradje programa z interneta
+IDS_UPDATE_HASH_DATA_ERROR  =NAPAKA : Ne morem pridobiti hash podatkov z interneta
+IDS_UPDATE_UP_TO_DATE       =Vse datoteke so posodobljene
+IDS_UPDATE_UPDATING         =Posodabljam "%s"...
+IDS_UPDATE_BAD_HASH         =Slab Hash za  "%s"\n%s\nmora biti\n%s
+IDS_UPDATE_FILE_ERROR       =Napaka nadgradnje "%s" : %d !
+IDS_UPDATE_NEED_RESTART     =Ponovno zaûeni EasyPHP za zakljucek nadgradnje.\nPonovno zaûenem sedaj ?
+IDS_REMOVABLE_DRIVE         =EasyPHP tece iz prenosnega diska. éeliö regenererati conf datoteke predno boö zagnal serverje ?
+IDS_PORT_OCCUPE_XP          =%s port (%d) uporablja %s !
+IDS_FOLDER_CHANGED          =EasyPHP premakni iz "%s" na "%s" direktorij.\nRegeneriram konfiguracijske datoteke ?
+IDS_PROMPT_QUIT             =Res ûeliö zapustiti EasyPHP ?
+IDS_ALWAYS_VISIBLE          =Vedno viden
+IDS_USB_REMOVED_QUIT        =USB kljuc odstranjene, EasyPHP bo koncal
+[/Slovenian]

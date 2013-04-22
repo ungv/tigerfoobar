@@ -1,0 +1,86 @@
+[Russian]
+IDS_START =&Запустить
+IDS_STOP =&Остановить
+IDS_PENDING =Выполняется...
+IDS_HELP_CMDLINE =Показать опции EasyPHP.exe
+IDS_ERROR_MYSQL =Не могу запустить MySql : \n%s\n\nХотите запустить Apache ?
+IDS_ANOTHER_APACHE_RUN =Другой сервер Apache уже запущен.
+IDS_APACHE_ALREADY_RUN =Apache уже запущен.
+IDS_APACHEMSG_UNEXPECTED_END =Непредвиденная ошибка Apache !
+IDS_PORT_OCCUPE =Apache не может быть запущен : другой веб-сервер использует порт
+IDS_SERVER_RUN_ERROR =Не могу запустить сервер : %s
+IDS_EXPERT_MODE_WARNING =Внимание ! Этот режим позволяет Вам изменять конфигурационные файлы, а неверный конфигурационный файл может нарушить функционирование сервера.\nВы уверены в своих действиях ?
+IDS_SWITCH_SSL =Перезапустить Apache ?
+IDS_NEW_EASYPHP_VERSION =Новая версия (%s) доступна. Перейти на сайт EasyPHP ?
+IDS_RESTART =Перезапустить сервера.
+IDS_MYSQLMSG_UNEXPECTED_END =Неожиданная ошибка MySql !
+IDS_STATE_STARTED =Активен
+IDS_STATE_STOPPED =Остановлен
+IDS_HELPCTX_IDC_SERVICE =Apache и MySql запущены как сервера и доступны даже если ни один пользователь не активен.\nЭта опция доступна только на NT/2K и Windows XP и только для пользователя с правами администратора.
+IDS_HELPCTX_NOHELP =Справка не доступна.
+IDS_ERROR_STOP_SERVER =Не могу остановить сервер : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Показывать окно диалога если новая версия EasyPHP доступна. Необходимо активное соединение с Интернет.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Сервера автоматически перезапускаются если их конфигурационные файла изменятся.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Установить параметры запуска MySql.\nЕсли MySQL запущен как сервис, используйте конфигурационные файлы.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Запускать EasyPHP при запуске Windows. Если сервера запускаются ка сервисы, они автоматически запускаются при старте Windows.
+IDS_ERROR_RESTART_SERVER=Не могу перезапустить сервер : %s
+IDS_ERROR_INSTALL_SERVICE=Не могу установить службу: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Состояние Apache
+IDS_HELPCTX_IDC_STATUS_MYSQL=Состояние MySql
+IDS_HELPCTX_ID_PIN =Всегда показывать этот диалог.
+IDS_HELPCTX_ID_HELP_CONTEXT=Показать справку.
+IDS_HELPCTX_IDSL_VIEW =Свернуть/развернуть окно
+IDS_LOG_RESTART_SERVERS =Сервера перезапускаются...
+IDS_ERROR_APACHE_CONF =Ошибка в файле конфигурации Apache :\n\n""%s""\n\nИзменить ?
+IDS_LOG_CHANGE_CONF =Файл конфигурации изменен.
+IDS_LOG_START_SERVERS =Сервера запускаются
+IDS_NOT_ADMIN =Вы не являетесь администратором : некоторые опции не будут доступны.\n\nПродолжить ?
+IDS_ERROR_BROWSER =Не могу запустить броузер : откройте этот адрес в Вашем броузере : ""%s"".\n(чтобы исправить эту ошибку, определите броузер по умолчанию )
+IDS_ERROR_REMOVE_SERVICE=Не могу удалить службу : %s
+IDS_STARTPHP_URL =http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART 		=&Перезапустить
+IDS_SERVER_KILL 		=&Закрыть
+#dialog about
+IDS_ABOUT_TITLE 		=О EasyPHP
+IDS_ABOUT_PRESENTATION 	=EasyPHP - простой путь инсталяции Apache, MySql и PHP создан :
+IDS_ABOUT_VISIT_SITE 	=Для информации, посетите домашнюю страницу EasyPHP :
+IDS_ABOUT_SEE_LICENCE 	=&Лицензия...
+IDS_ABOUT_CHECK_VERSION =&Версия...
+
+IDS_MAIN_STATUS 		=Статус
+IDS_MAIN_CHECK_WINDOWSTART =&Запускать при запуске Windows.
+IDS_MAIN_SERVICE 		=З&апускать Apache и MySql как службы (необходимы права администратора) 
+IDS_MAIN_AUTOSERVEURSSTART =За&пускать сервер когда приложение стартует
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Проверять версию при запуске
+IDS_MAIN_CONFAUTORELOAD =&Автоматически учитывать изменения конфигурации серверов
+IDS_MAIN_MYSQL_ARGUMENTS =Аргументы MySql
+IDS_MAIN_APPLIQUER 		=&Применить
+IDS_MAIN_FERMER 		=&Закрыть
+IDS_MAIN_ABOUT 			=&О программе...
+
+IDS_MENU_HELP 			=&Помощь
+IDS_MENU_LOGFILES 		=&Лог-файлы
+IDS_MENU_CONFIGURATION 	=&Конфигурация
+IDS_MENU_EXPLORE 		=&Проводник
+IDS_MENU_ADMINISTRATION =&Администрирование
+IDS_MENU_WEBLOCAL 		=Локальные &веб станицы
+IDS_MENU_QUIT =&Выход
+
+IDS_MENU_HELP_INTRODUCTION =&Введение
+IDS_MENU_HELP_STARTPHP 	=&PHP
+IDS_MENU_HELP_FAQ =&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=Ошибки &Apache
+IDS_MENU_LOGFILES_APACHE_ACCESS=&Доступ к Apache
+IDS_MENU_LOGFILES_MYSQLERR =Ошибки &MySql
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=&Расширения PHP
+IDS_MYSQL_LANGUAGE =russian
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS		=Stop the servers
+IDS_EXT_ERROR_DEPENDANCE	=Extensions in red can't be used because they have dependancy problems.\nCheck these extensions installation guide.
+IDS_CONF_CHECK_SERVERS_PORT	=Check server's TCP port before starting
+IDS_CONF_LANGUAGE		=Language
+IDS_CONF_PREFERENCES		=Configuration
+[/Russian]

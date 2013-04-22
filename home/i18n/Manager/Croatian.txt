@@ -1,0 +1,105 @@
+[Croatian]
+IDS_START               =&Pokreni
+IDS_STOP                =&Zaustavi
+IDS_PENDING             =Na èekanju...
+IDS_HELP_CMDLINE        =Prikaži opcije za EasyPHP.exe
+IDS_ERROR_MYSQL         =Greška u pokretanju MySql-a: \n%s\n\nŽelite li pokrenuti Apache?
+IDS_ANOTHER_APACHE_RUN  =Drugi Apache poslužitelj je veæ aktivan.
+IDS_APACHE_ALREADY_RUN  =Apache je veæ aktivan.
+IDS_APACHEMSG_UNEXPECTED_END =Neoèekivana greška u radu!
+IDS_PORT_OCCUPE         =Apache nije moguæe pokrenuti: drugi mrežni poslužitelj koristi mrežni izlaz ili je izlaz blokiran vatrozidom.
+IDS_SERVER_RUN_ERROR    =Nije moguæe pokrenuti poslužitelj: %s
+IDS_EXPERT_MODE_WARNING =Pažnja! Ovaj naèin rada omoguæava izmjenu postavki koje u sluèaju loše konfiguracije mogu dovesti do smetnji u radu poslužitelja.\nJeste li sigurni?
+IDS_SWITCH_SSL          =Ponovno pokretanje Apache-a?
+IDS_NEW_EASYPHP_VERSION = Dostupna je nova verzija (%s). Posjeti EasyPHP mrežnu stranicu?
+IDS_RESTART             =Ponovno pokretanje poslužitelja
+IDS_MYSQLMSG_UNEXPECTED_END =Neoèekivana greška u radu MySql-a!
+IDS_STATE_STARTED       =Aktivan
+IDS_STATE_STOPPED       =Zaustavljen
+IDS_HELPCTX_IDC_SERVICE =Apache i MySql pokrenuti su kao poslužitelji te su dostupni èak i ako nijedan korisnik nije prijavljen.\nOva moguænost je dostupna samo na NT/2K i XP Windows ukoliko korisnik ima administratorske ovlasti.
+IDS_HELPCTX_NOHELP      =Nema pomoæi.
+IDS_ERROR_STOP_SERVER   =Nije moguæe zaustaviti poslužitelj: %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Prikaži poruku kada je dostupna nova verzija EasyPHP-a. Potrebna je Internet veza.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Poslužitelji se automatski ponovno pokreæu ukoliko je izmijenjena datoteka s postavkama.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Namjesti postavke za pokretanje MySql-a.\nUkoliko se MySql pokreæe kao Windows service, postavke se namještaju u datoteci s postavkama.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Omoguæi pokretanje EasyPHP-a prilikom pokretanja Windows sustava. Ukoliko koristite poslužitelje kao Windows service, oni se automatski pokreæu prilikom pokretanja Windows sustava.
+IDS_ERROR_RESTART_SERVER=Nije moguæe ponovno pokrenuti poslužitelj: %s
+IDS_ERROR_INSTALL_SERVICE=Nije moguæe instalirati Windows service: %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Apache status
+IDS_HELPCTX_IDC_STATUS_MYSQL=MySql  status
+IDS_HELPCTX_ID_PIN      =Uvijek prikaži ovaj dijalog.
+IDS_HELPCTX_ID_HELP_CONTEXT=Prikaži pomoæ
+IDS_HELPCTX_IDSL_VIEW   =Smanji/poveæaj prozor
+IDS_LOG_RESTART_SERVERS =Poslužitelji se ponovno pokreæu...
+IDS_ERROR_APACHE_CONF   =Greška u Apache datoteci s postavkama:\n\n""%s""\n\nIzmijeni?
+IDS_LOG_CHANGE_CONF     =Datoteka s postavkama izmijenjena
+IDS_LOG_START_SERVERS   =Pokretanje poslužitelja
+IDS_NOT_ADMIN           =Nemate administratorske ovlasti: neke moguænosti neæe biti dostupne.\n\nŽelite li nastaviti?
+IDS_ERROR_BROWSER       =Nije moguæe pokrenuti preglednik: kopirajte ovu adresu u Vaš omiljeni preglednik: ""%s"".\n(za ispravljanje ove greške, odredite osnovni preglednik)
+IDS_ERROR_REMOVE_SERVICE=Nije moguæe odinstalirati Windows service: %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART		=&Ponovno pokreni
+IDS_SERVER_KILL			=&Ugasi
+#dialog about
+IDS_ABOUT_TITLE			=O EasyPHP
+IDS_ABOUT_PRESENTATION	=EasyPHP, lagan naèin instaliranja Apache-a, MySql-a i PHP-a kreirali su:
+IDS_ABOUT_VISIT_SITE	=Za više informacija, molimo Vas posjetite EasyPHP poèetnu stranicu:
+IDS_ABOUT_SEE_LICENCE	=&Proèitaj licencu
+IDS_ABOUT_CHECK_VERSION	=&Verzija
+
+IDS_MAIN_STATUS      		=Status
+IDS_MAIN_CHECK_WINDOWSTART	=&Pokreni prilikom pokretanja Windows-a.
+IDS_MAIN_SERVICE          	=Pokreni Apache i MySql kao Windows service (nužne administratorske ovlasti)           
+IDS_MAIN_AUTOSERVEURSSTART  =&Pokreni server prilikom pokretanja ovog programa
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Provjeri verziju prilikom pokretanja
+IDS_MAIN_CONFAUTORELOAD		=&Automatska primjena postavki poslužitelja prilikom promjena
+IDS_MAIN_MYSQL_ARGUMENTS	=MySql postavke
+IDS_MAIN_APPLIQUER			=P&rimijeni
+IDS_MAIN_FERMER				=&Zatvori
+IDS_MAIN_ABOUT				=&Info...
+
+IDS_MENU_HELP				=&Pomoæ
+IDS_MENU_LOGFILES      		=&Datoteke zabilješki
+IDS_MENU_CONFIGURATION 		=&Postavke
+IDS_MENU_EXPLORE       		=&Pregledaj
+IDS_MENU_ADMINISTRATION		=&Administracija
+IDS_MENU_WEBLOCAL      		=Lokalna &mreža
+IDS_MENU_QUIT				=&Izaði
+
+IDS_MENU_HELP_INTRODUCTION	=&Uvod
+IDS_MENU_HELP_STARTPHP		=&Prvi koraci s PHP-om
+IDS_MENU_HELP_FAQ			=&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=&Apache greška
+IDS_MENU_LOGFILES_APACHE_ACCESS=Apache p&ristup
+IDS_MENU_LOGFILES_MYSQLERR	=&MySql greška
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=PHP &ekstenzija
+IDS_MYSQL_LANGUAGE			=english
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS		=Zaustavi poslužitelje
+IDS_EXT_ERROR_DEPENDANCE	=Ekstenzije oznaèene crvenim ne mogu se koristiti jer nisu kompatibilne.\nProvjerite uputstva za instalaciju ekstenzija.
+IDS_CONF_CHECK_SERVERS_PORT	=Provjeri TCP izlaz poslužitelja prije pokretanja
+IDS_CONF_LANGUAGE			=Jezik
+IDS_CONF_PREFERENCES		=Postavke
+
+IDS_UPDATE_FILE         	=Datoteka
+IDS_UPDATE_CURRENT_VERSION 	=Trenutaèna verzija
+IDS_UPDATE_NEW_VERSION  	=Novo
+IDS_UPDATE_FILE_SIZE    	=Velièina
+IDS_UPDATE_FILE_HASH    	=Hash
+IDS_UPDATE_WEB_FILE_ERROR 	=GREŠKA: Nije moguæe preuzeti podatke za ažuriranje s Interneta
+IDS_UPDATE_HASH_DATA_ERROR 	=GREŠKA: Nije moguæe preuzeti hash podatke s Inerneta
+IDS_UPDATE_UP_TO_DATE   	=Imate ažuriranu verziju
+IDS_UPDATE_UPDATING     	=Ažuriranje "%s"...
+IDS_UPDATE_BAD_HASH     	=Loš Hash za  "%s"\n%s\ntrebao bi biti\n%s
+IDS_UPDATE_FILE_ERROR   	=Greška u ažuriranju "%s" : %d !
+IDS_UPDATE_NEED_RESTART 	=Ponovno pokreni EasyPHP kako bi se dovršilo ažuriranje.\nPonovno pokreni sada?
+IDS_REMOVABLE_DRIVE     	=EasyPHP je pokrenut s prijenosnog diska. Želite li ponovno kreirati conf datoteke prije pokretanja poslužitelja?
+IDS_PORT_OCCUPE_XP			=%s izlaz (%d) koristi %s !
+IDS_FOLDER_CHANGED			=EasyPHP je premješten iz mape "%s" u "%s" mapu.\nŽelite li ponovno kreirati datoteke s postavkama?
+IDS_PROMPT_QUIT				=Želiš li zaista napustiti EasyPHP?
+IDS_ALWAYS_VISIBLE			=Uvijek vidljiv
+IDS_USB_REMOVED_QUIT		=USB je odstranjen, EasyPHP se gasi
+[/Croatian]

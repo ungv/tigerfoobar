@@ -1,0 +1,103 @@
+[Spanish]
+IDS_START               =&Iniciar
+IDS_STOP                =&Detener
+IDS_PENDING             =Pendiente....
+IDS_HELP_CMDLINE        =Mostrar los conmutadores para EasyPHP.exe
+IDS_ERROR_MYSQL         =No se pudo iniciar MySQL : \n%s\n\n¿ Quieres iniciar Apache ?
+IDS_ANOTHER_APACHE_RUN  =Otro servidor Apache ya en ejecución.
+IDS_APACHE_ALREADY_RUN  =Apache ya en ejecución.
+IDS_APACHEMSG_UNEXPECTED_END=Inesperada terminación de Apache !
+IDS_PORT_OCCUPE         =Apache no puede ejecutar : Otro servidor Web esta usando el puerto.
+IDS_SERVER_RUN_ERROR    =No se pudo iniciar el servidor : %s
+IDS_EXPERT_MODE_WARNING =Atención ! Este modo permite modificar los archivos de la configuración, una mala configuración causa errores en el servidor.\n¿ Estás seguro ?
+IDS_SWITCH_SSL          =¿ Reiniciar Apache ?
+IDS_NEW_EASYPHP_VERSION =Una version nueva (%s) esta disponible. ¿ Ir la página de EasyPHP ?
+IDS_RESTART             =Reiniciar servidores
+IDS_MYSQLMSG_UNEXPECTED_END =Inesperada terminación de MySql !
+IDS_STATE_STARTED       =Iniciado
+IDS_STATE_STOPPED       =Detenido
+IDS_HELPCTX_IDC_SERVICE =Apache y MySql se ejecutan como servidores, y están disponible aunque ningún usario ha iniciado.\nEsta opción es disponible sólo en NT/2K y Windows XP si el usario es el administrador.
+IDS_HELPCTX_NOHELP      =Ninguna ayuda para este.
+IDS_ERROR_STOP_SERVER   =No se pudo detener el servidor  : %s
+IDS_HELPCTX_IDC_CHECK_EASYPHP_VERSION=Mostrar un cuadro de diálogo si está disponible una versión nueva de EasyPHP. Conexión a Internet necesaria.
+IDS_HELPCTX_IDC_CONFAUTORELOAD=Los servidores se reinician automáticamente cuando su archivo de configuración es modificado.
+IDS_HELPCTX_IDE_MYSQL_ARGUMENTS=Pon parámetros de ejecución para MySql.\nSi ejecuta MySql como un servicio, usa archivo de configuración entonces.
+IDS_HELPCTX_IDC_AUTOSERVEURSSTART=Este conmutador te permite ejecutar EasyPHP en Windows startup. si ejecutas los servidores como servicios, serán ejecutando automáticamente en Windows startup.
+IDS_ERROR_RESTART_SERVER=No se pudo reiniciar el servidor : %s
+IDS_ERROR_INSTALL_SERVICE=No se pudo instalar el servicio : %s
+IDS_HELPCTX_IDC_STATUS_APACHE=Estado de Apache
+IDS_HELPCTX_IDC_STATUS_MYSQL=Estado de MySql
+IDS_HELPCTX_ID_PIN      =Siempre mostrar este diálogo.
+IDS_HELPCTX_ID_HELP_CONTEXT=Mostrar ayudar
+IDS_HELPCTX_IDSL_VIEW   =Minimizar/maximizar la ventana
+IDS_LOG_RESTART_SERVERS =Los servidores estan reiniciando...
+IDS_ERROR_APACHE_CONF   =Error en Apache, archivo de configuración:\n\n""%s""\n\n¿ Editar ?
+IDS_LOG_CHANGE_CONF     =Archivo de configuración cambiado
+IDS_LOG_START_SERVERS   =Servidores iniciando
+IDS_NOT_ADMIN           =No eres el admin : algunas acciones no estarán disponibles.\n\n¿ Continuar ?
+IDS_ERROR_BROWSER       =No se pudo ejecutar el navegador : copia en tu navegador favorito esta dirección : ""%s"".\n(Para corregir este error define un navegador preferido)
+IDS_ERROR_REMOVE_SERVICE=No se pudo desinstalar el servicio : %s
+IDS_STARTPHP_URL		=http://www.php.net/
+
+#Menu server
+IDS_SERVER_RESTART		=&Reiniciar
+IDS_SERVER_KILL			=&Detener
+#dialog about
+IDS_ABOUT_TITLE			=Acerca de EasyPHP
+IDS_ABOUT_PRESENTATION	=EasyPHP, un fácil método para instalar Apache, MySql y PHP creado por :
+IDS_ABOUT_VISIT_SITE	=Para más información, visita la página inicial de EasyPHP :
+IDS_ABOUT_SEE_LICENCE	=&Ver licencia
+IDS_ABOUT_CHECK_VERSION	=&Revisar versión
+
+IDS_MAIN_STATUS      		=Estado
+IDS_MAIN_CHECK_WINDOWSTART	=&Iniciar al inicio de Windows.
+IDS_MAIN_SERVICE          	=&Iniciar Apache y MySql como servicios (sólo administrador)
+IDS_MAIN_AUTOSERVEURSSTART    =&Iniciar servidor cuando esta aplicación haya iniciado
+IDS_MAIN_CHECK_EASYPHP_VERSION_AT_STARTUP=&Comprobar versión al inicio del sistema
+IDS_MAIN_CONFAUTORELOAD		=&Uso automático de las modificaciónes al configurar el servidor
+IDS_MAIN_MYSQL_ARGUMENTS	=Argumentos MySql
+IDS_MAIN_APPLIQUER			=A&plicar
+IDS_MAIN_FERMER				=&Cerrar
+IDS_MAIN_ABOUT				=&Info...
+
+IDS_MENU_HELP				=&Ayuda
+IDS_MENU_LOGFILES      		=&Ficheros Log
+IDS_MENU_CONFIGURATION 		=&Configuración
+IDS_MENU_EXPLORE       		=&Explorar
+IDS_MENU_ADMINISTRATION		=&Administración
+IDS_MENU_WEBLOCAL      		=&Web Local
+IDS_MENU_QUIT				=&Salir
+
+IDS_MENU_HELP_INTRODUCTION	=&Introducción
+IDS_MENU_HELP_STARTPHP		=&Iniciarse en PHP
+IDS_MENU_HELP_FAQ			=&FAQ
+IDS_MENU_LOGFILES_APACHE_ERR=&Errores Apache
+IDS_MENU_LOGFILES_APACHE_ACCESS= A&cceso Apache
+IDS_MENU_LOGFILES_MYSQLERR	=&Errores MySql
+IDS_MENU_CONFIGURATION_EXTENSIONSPHP=&Extensiones PHP
+IDS_MYSQL_LANGUAGE			=spanish
+
+; EasyPHP 1.8
+IDS_LOG_STOP_SERVERS            =Parar servidores
+IDS_EXT_ERROR_DEPENDANCE        =Las extensiones en rojo no se pueden usar por problemas de dependencia\nVer la guia de instalación de las mismas.
+IDS_CONF_CHECK_SERVERS_PORT     =Comprobar puerto TCP antes de iniciar servidor
+IDS_CONF_LANGUAGE               =Idioma
+IDS_CONF_PREFERENCES            =Configuración
+IDS_TRANSLATED_BY               =Traducido por Roberto del Pino Mendoza
+IDS_UPDATE_FILE                 =Archivo
+IDS_UPDATE_CURRENT_VERSION      =Actual
+IDS_UPDATE_NEW_VERSION          =Nuevo
+IDS_UPDATE_FILE_SIZE            =Tamaño
+IDS_UPDATE_FILE_HASH            =Conversión
+IDS_UPDATE_WEB_FILE_ERROR       =ERROR : No se han actualizado datos desde la Web
+IDS_UPDATE_HASH_DATA_ERROR      =ERROR : No se han convertido datos desde la Web
+IDS_UPDATE_UP_TO_DATE           =Todos los archvos ya actualizados
+IDS_UPDATE_UPDATING             =Actualizando "%s"...
+IDS_UPDATE_BAD_HASH             =Mala Conversión:  "%s"\n%s\ndeberia ser\n%s
+IDS_UPDATE_FILE_ERROR           =¡Error en la actualización "%s" : %d !
+IDS_UPDATE_NEED_RESTART         =Reiniciar EasyPHP para terminar al actualización.
+IDS_REMOVABLE_DRIVE             =Has iniciado EasyPHP desde un disco portatil. ¿Quieres regenerar la configuración antes de iniciar los servidores ?
+IDS_PORT_OCCUPE_XP              =¡%s puerto (%d) ocupado por %s !
+IDS_FOLDER_CHANGED              =Mover EasyPHP desde carpeta "%s" a "%s".\n¿Regenerar configuración?
+IDS_PROMPT_QUIT					=¿Quieres realmente salir de EasyPHP?
+[/Spanish]
