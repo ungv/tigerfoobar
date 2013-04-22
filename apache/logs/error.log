@@ -50,3 +50,6 @@
 [Sun Apr 21 23:50:39.829426 2013] [core:notice] [pid 11124:tid 464] AH00094: Command line: 'C:\\Users\\Sean\\Desktop\\TIGERF~1\\Apache\\bin\\apache.exe -d C:/Users/Sean/Desktop/tigerfoobar/apache'
 [Sun Apr 21 23:50:39.845427 2013] [mpm_winnt:notice] [pid 11124:tid 464] AH00418: Parent: Created child process 10712
 [Sun Apr 21 23:50:40.621471 2013] [mpm_winnt:notice] [pid 10712:tid 472] AH00354: Child: Starting 64 worker threads.
+[Mon Apr 22 00:08:50.352800 2013] [mpm_winnt:notice] [pid 11124:tid 464] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Mon Apr 22 00:08:52.352914 2013] [mpm_winnt:notice] [pid 10712:tid 472] AH00364: Child: All worker threads have exited.
+[Mon Apr 22 00:08:52.373916 2013] [mpm_winnt:notice] [pid 11124:tid 464] AH00430: Parent: Child process exited successfully.

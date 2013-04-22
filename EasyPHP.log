@@ -40,3 +40,7 @@
 21/04 23:50:38 EasyPHP Apache CreateProcess "C:\Users\Sean\Desktop\TIGERF~1\Apache\bin\apache.exe"
 21/04 23:50:38 EasyPHP CreateProcess "C:\Users\Sean\Desktop\TIGERF~1\MySql\bin\mysqld.exe --defaults-file="C:\Users\Sean\Desktop\TIGERF~1\MySql\my.ini" --language=english"
 21/04 23:50:43 EasyPHP EasyPHP &Check version
+22/04 00:08:50 EasyPHP EasyPHP Stop the servers
+22/04 00:08:50 EasyPHP Apache stop event: ap11124_shutdown
+22/04 00:08:51 EasyPHP MySqlSutdown event = MySQLShutdown11760
+22/04 00:08:51 EasyPHP End EasyPHP...

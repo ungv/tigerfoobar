@@ -1,21 +1,19 @@
 
-===========================================
-==      EasyPHP 12.1 with PHP 5.4.6      ==
-==                  GOT                  ==
-===========================================
-==            www.easyphp.org            ==
-===========================================
-==   - php 5.4.6 VC9                     ==
-==   - apache 2.4.2 VC9                  ==
-==   - mysql 5.5.27                      ==
-==   - phpmyadmin 3.5.2.2                ==
-==   - xdebug 2.2.1                      ==
-===========================================
+---------TigerFooBar Capstone Project--------
+-------University of Washington iSchool------
 
-===========================================
-==                Authors                ==
-===========================================
-== Laurent Abbal (laurent@abbal.com)     ==
-== Thierry Murail (thierry@easyphp.org)  ==
-== Emmanuel Faivre (manu@manucorp.com)   ==
-===========================================
+----Using------------------------------------
+		EasyPHP 12.1
+			- php 5.4.6 VC9                     
+			- apache 2.4.2 VC9                  
+			- mysql 5.5.27                      
+			- phpmyadmin 3.5.2.2           
+			- xdebug 2.2.1  
+		CodeIgniter 2.1.3
+
+-----Team Members----------------------------
+		Brian Chan - bc28@uw.edu
+		Lauren Hanson - lehanson@uw.edu
+		Scott Kuehnert - squakmix@uw.edu
+		Sean Johnstone - johnss5@uw.edu
+		Victor Ung - ungv@uw.edu
