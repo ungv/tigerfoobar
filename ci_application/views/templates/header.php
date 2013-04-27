@@ -5,7 +5,6 @@
 	<?php 
 		/*Stylesheets*/
 		/*include url helper for this to work*/
-		echo base_url() . "css/index.css";
 	?>
 	<link href="<?= base_url() . "css/index.css" ?>" type="text/css" rel="stylesheet" />
 

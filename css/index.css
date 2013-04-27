@@ -1,72 +1,135 @@
 /*General-------------------------*/
 
-	*{
-		padding:0px;
-		margin:0px;
-	}
+*{
+	padding:0px;
+	margin:0px;
+}
 
-	body, html{
-		min-width:100%;
-		min-height:100%;
-	}
+body, html{
+	min-width:100%;
+	min-height:100%;
+}
 
-	body{
-		color:#444;
-		font-family: Arial, sans-serif;
-		font-size: 14px;
-	}
-	
-	a {
-		text-decoration: none;
-		color: black;
-	}	
+body{
+	color:#444;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+}
+
+a {
+	text-decoration: none;
+	color: green;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: black;	
+}
 
 /*Header---------------------------*/
 
-	header{
-		/*vertical, then horizontal*/
-		width:900px;
-		margin:0px auto;
-		
-		background-color: rgb(220, 220, 220); /*#c6fff1*/
+header{
+	/*vertical, then horizontal*/
+	width:900px;
+	margin:0px auto 15px;
+	
+	background-color: rgb(220, 220, 220); /*#c6fff1*/
 
-		position: absolute;
-		top: 0;
-		left: 0;
-		
-		width: 100%;
-		height: 50px;
-	}
+	/*position: absolute;*/
+	top: 0;
+	left: 0;
+	
+	width: 100%;
+	height: 50px;
+}
 
-	header * {
-		margin: 10px;
-	}
+header * {
+	margin: 10px;
+}
 
-	header input {
-		float:left;
-		width: 400px;
-	}
+header input {
+	float:left;
+	width: 400px;
+}
 
-	header a {
-		float: right;
-	}
+header a {
+	float: right;
+}
 
 /*Footer---------------------------*/
 
-	footer {
-		background-color: rgb(190, 190, 190);
-		
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		
-		height: 100px;
-		width: 100%;
-	}
+footer {
+	background-color: rgb(190, 190, 190);
+	
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	
+	height: 100px;
+	width: 100%;
+}
 	
 /*Main-----------------------------*/
 
-	#main{
-		width:900px;
-		margin:0px auto;
-	}
+#main{
+	width:915px;
+	margin:0px auto;
+	/* border: 1px solid; */
+}
+
+#main div {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+	
+/*Home-----------------------------*/
+
+.box {
+	width: 150px;
+	height: 150px;
+}
+
+.companies {
+	/* border: 1px solid green; */
+	float: left;
+}
+
+.products {
+	/* border: 1px solid red; */
+	float: left;
+}
+
+.claims {
+	/* border: 1px solid blue; */
+	float: left;
+}
+
+/*Claims-----------------------------*/
+
+.container > div {
+	border: 1px solid grey;
+	padding: 10px 10px 0px 10px;
+}
+
+#user {
+	padding: 10px;
+	text-align: right;
+	margin: 0 40px 0 -10px !important;
+	width: 889px;
+	border: 1px solid grey;
+	border-left: none;
+}
+
+#evidenceContent {
+	border-left: 5px solid blue;
+}
+
+#scoreContent {
+	border-left: 5px solid green;
+
+}
+
+#discussionContent {
+	border-left: 5px solid red;
+
+}
