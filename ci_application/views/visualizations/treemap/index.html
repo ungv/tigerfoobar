@@ -1,95 +1,130 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>
-		</title>
-		<style type = "text/css">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <script type="text/javascript" src="d3/d3.js"></script>
+    <script type="text/javascript" src="d3/d3.layout.js"></script>
+    <style type="text/css">
 
-		body {
-		  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		  margin: auto;
-		  position: relative;
-		  width: 960px;
-		}
+.chart {
+  display: block;
+  margin: auto;
+  margin-top: 40px;
+}
 
-		form {
-		  position: absolute;
-		  right: 10px;
-		  top: 10px;
-		}
+text {
+  font-size: 11px;
+}
 
-		.node {
-		  border: solid 1px white;
-		  font: 10px sans-serif;
-		  line-height: 12px;
-		  overflow: hidden;
-		  position: absolute;
-		  text-indent: 2px;
-		}
+rect {
+  fill: none;
+}
 
-		</style>
-	</head>
-	
-	<body>
-		<form>
-		  <label><input type="radio" name="mode" value="size" checked> Size</label>
-		  <label><input type="radio" name="mode" value="count"> Count</label>
-		</form>
-
-	</body>
-	
-	<script src="http://code.jquery.com/jquery.min.js"></script>
+    </style>
+  </head>
+  <body>
+    <div id="body">
+      <div id="footer">
+        d3.layout.treemap
+        <div class="hint">click or option-click to descend or ascend</div>
+        <div><select>
+          <option value="size">Size</option>
+          <option value="count">Count</option>
+        </select></div>
+      </div>
+    </div>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
-	<script type = "text/javascript">
-	$(document).ready(function() {
-		var margin = {top: 40, right: 10, bottom: 10, left: 10},
-			width = 960 - margin.left - margin.right,
-			height = 500 - margin.top - margin.bottom;
+    <script type="text/javascript">
 
-		var color = d3.scale.category20c();
+var w = 1280 - 80,
+    h = 800 - 180,
+    x = d3.scale.linear().range([0, w]),
+    y = d3.scale.linear().range([0, h]),
+    color = d3.scale.category20c(),
+    root,
+    node;
 
-		var treemap = d3.layout.treemap()
-			.size([width, height])
-			.sticky(true)
-			.value(function(d) { console.log("returning value"); return d.size; });
+var treemap = d3.layout.treemap()
+    .round(false)
+    .size([w, h])
+    .sticky(true)
+    .value(function(d) { return d.size; });
 
-		var div = d3.select("body").append("div")
-			.style("position", "relative")
-			.style("width", (width + margin.left + margin.right) + "px")
-			.style("height", (height + margin.top + margin.bottom) + "px")
-			.style("left", margin.left + "px")
-			.style("top", margin.top + "px");
+var svg = d3.select("#body").append("div")
+    .attr("class", "chart")
+    .style("width", w + "px")
+    .style("height", h + "px")
+  .append("svg:svg")
+    .attr("width", w)
+    .attr("height", h)
+  .append("svg:g")
+    .attr("transform", "translate(.5,.5)");
 
-		d3.json("flare.json", function(error, root) {
-			console.log("flare found!");
-		  var node = div.datum(root).selectAll(".node")
-			  .data(treemap.nodes)
-			.enter().append("div")
-			  .attr("class", "node")
-			  .call(position)
-			  .style("background", function(d) { return d.children ? color(d.name) : null; })
-			  .text(function(d) { return d.children ? null : d.name; });
+d3.json("flare.json", function(data) {
+  node = root = data;
 
-		  d3.selectAll("input").on("change", function change() {
-			var value = this.value === "count"
-				? function() { return 1; }
-				: function(d) { return d.size; };
+  var nodes = treemap.nodes(root)
+      .filter(function(d) { return !d.children; });
 
-			node
-				.data(treemap.value(value).nodes)
-			  .transition()
-				.duration(1500)
-				.call(position);
-		  });
-		});
+  var cell = svg.selectAll("g")
+      .data(nodes)
+    .enter().append("svg:g")
+      .attr("class", "cell")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+      .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
 
-		function position() {
-		  console.log("positioning!");
-		  this.style("left", function(d) { return d.x + "px"; })
-			  .style("top", function(d) { return d.y + "px"; })
-			  .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
-			  .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
-		}
-	});
-	</script>
+  cell.append("svg:rect")
+      .attr("width", function(d) { return d.dx - 1; })
+      .attr("height", function(d) { return d.dy - 1; })
+      .style("fill", function(d) { return color(d.parent.name); });
+
+  cell.append("svg:text")
+      .attr("x", function(d) { return d.dx / 2; })
+      .attr("y", function(d) { return d.dy / 2; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "middle")
+      .text(function(d) { return d.name; })
+      .style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; });
+
+  d3.select(window).on("click", function() { zoom(root); });
+
+  d3.select("select").on("change", function() {
+    treemap.value(this.value == "size" ? size : count).nodes(root);
+    zoom(node);
+  });
+});
+
+function size(d) {
+  return d.size;
+}
+
+function count(d) {
+  return 1;
+}
+
+function zoom(d) {
+  var kx = w / d.dx, ky = h / d.dy;
+  x.domain([d.x, d.x + d.dx]);
+  y.domain([d.y, d.y + d.dy]);
+
+  var t = svg.selectAll("g.cell").transition()
+      .duration(d3.event.altKey ? 7500 : 750)
+      .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+  t.select("rect")
+      .attr("width", function(d) { return kx * d.dx - 1; })
+      .attr("height", function(d) { return ky * d.dy - 1; })
+
+  t.select("text")
+      .attr("x", function(d) { return kx * d.dx / 2; })
+      .attr("y", function(d) { return ky * d.dy / 2; })
+      .style("opacity", function(d) { return kx * d.dx > d.w ? 1 : 0; });
+
+  node = d;
+  d3.event.stopPropagation();
+}
+
+    </script>
+  </body>
 </html>
