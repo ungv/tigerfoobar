@@ -33,22 +33,29 @@ header{
 	width:900px;
 	margin:0px auto 15px;
 	
-	background-color: rgb(220, 220, 220); /*#c6fff1*/
+	/*background-color: rgb(220, 220, 220); /*#c6fff1*/
+	background-color: lightgreen;
+
 
 	/*position: absolute;*/
 	top: 0;
 	left: 0;
 	
 	width: 100%;
-	height: 50px;
+	/*height: 50px;*/
 }
 
-header * {
-	margin: 10px;
+#topbar {
+	width: 915px;
+	padding: 10px;
+	margin: 0 auto;
+	background-color: #00C12B;
 }
+/*header * {
+	margin: 10px;
+}*/
 
 header input {
-	float:left;
 	width: 400px;
 }
 
@@ -65,7 +72,7 @@ footer {
 	bottom: 0;
 	left: 0;
 	
-	height: 100px;
+	/*height: 100px;*/
 	width: 100%;
 }
 	
@@ -132,4 +139,20 @@ footer {
 #discussionContent {
 	border-left: 5px solid red;
 
+}
+
+/*Score------------------------------*/
+
+.ui-state-default {
+	border: none !important;
+	/*background: */
+}
+
+/*#radio1 {
+	background: #7F7734 !important;
+}*/
+
+.ui-button .ui-button-text {
+	color: white;
+	font-weight: bold;
 }

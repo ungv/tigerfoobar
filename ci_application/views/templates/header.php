@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <head>
 	<title><?= $headerTitle ?></title>
 
@@ -10,18 +9,24 @@
 	<link href="<?= base_url() . "css/index.css" ?>" type="text/css" rel="stylesheet" />
 
 	<?php /*Scripts*/?>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+
 	<script type = "text/javascript" src = "js/scripts.js"></script>
 </head>
 <body>
 	<header>
-		<!--Search box-->
-		<input type="text" placeholder="Search for companies or products/services"/>
+		<SECTION id='topbar'>
+			<!--Search box-->
+			<input type="text" placeholder="Search for companies or products/services"/>
+			<!--Profile/login/register-->
+			<a href = "login.php">
+				Me
+			</a>
+		</SECTION>
 		
-		<!--Profile/login/register-->
-		<a href = "login.php">
-			Me
-		</a>
+		
+		
 	</header>
 	
