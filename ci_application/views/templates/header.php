@@ -18,10 +18,11 @@
 <body>
 	<header>
 		<SECTION id='topbar'>
+			<h1><a href="/">Tiger Foobar!</a></h1>
 			<!--Search box-->
 			<input type="text" placeholder="Search for companies or products/services"/>
 			<!--Profile/login/register-->
-			<a href = "login.php">
+			<a href = "profile">
 				Me
 			</a>
 		</SECTION>

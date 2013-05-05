@@ -12,7 +12,7 @@ body, html{
 
 body{
 	color:#444;
-	font-family: Arial, sans-serif;
+	font-family: Cambria;
 	font-size: 14px;
 }
 
@@ -24,6 +24,10 @@ a {
 a:hover {
 	text-decoration: underline;
 	color: black;	
+}
+
+h1, h2, h3 {
+	font-family: Rockwell;
 }
 
 /*Header---------------------------*/
@@ -55,6 +59,11 @@ header{
 	margin: 10px;
 }*/
 
+header h1 {
+	float: left;
+	margin-right: 20px;
+}
+
 header input {
 	width: 400px;
 }
@@ -84,8 +93,7 @@ footer {
 	/* border: 1px solid; */
 }
 
-#main div {
-	margin-top: 10px;
+#main > div {
 	margin-bottom: 20px;
 }
 	
@@ -109,50 +117,4 @@ footer {
 .claims {
 	/* border: 1px solid blue; */
 	float: left;
-}
-
-/*Claims-----------------------------*/
-
-.container > div {
-	border: 1px solid grey;
-	padding: 10px 10px 0px 10px;
-}
-
-#user {
-	padding: 10px;
-	text-align: right;
-	margin: 0 40px 0 -10px !important;
-	width: 889px;
-	border: 1px solid grey;
-	border-left: none;
-}
-
-#evidenceContent {
-	border-left: 5px solid blue;
-}
-
-#scoreContent {
-	border-left: 5px solid green;
-
-}
-
-#discussionContent {
-	border-left: 5px solid red;
-
-}
-
-/*Score------------------------------*/
-
-.ui-state-default {
-	border: none !important;
-	/*background: */
-}
-
-/*#radio1 {
-	background: #7F7734 !important;
-}*/
-
-.ui-button .ui-button-text {
-	color: white;
-	font-weight: bold;
 }
