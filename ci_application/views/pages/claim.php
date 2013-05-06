@@ -44,11 +44,24 @@
 .ui-button .ui-button-text {
 	color: white;
 	font-weight: bold;
+	width: 25px;
+	height: 20px;
 }
 
 .ui-state-hover {
 	opacity: 1 !important;
 }
+
+#scoreMap {
+	width: 384px;
+}
+
+#scoreDistrubution {
+	height: 50px;
+	overflow: hidden;
+}
+
+
 </style>
 
 <script type="text/javascript">
@@ -66,16 +79,16 @@ $(document).ready(function() {
 		});
 	});
 
-	$('#score').buttonset();
+	$('#scoreControl').buttonset();
 
 	// Kudos Colors       -3         -2         -1         0          +1         +2         +3
 	var kudosColors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
 
 	for (var i = 0; i <= 6; i++) {
-		$("#score label").eq(i).css("background-color", kudosColors[i]);
-		$("#score label").eq(i).css("background-image", "none");
-		$("#score label").eq(i).css("border-radius", 0);
-		$("#score label").eq(i).css("opacity", 0.8);
+		$("#scoreControl label").eq(i).css("background-color", kudosColors[i]);
+		$("#scoreControl label").eq(i).css("background-image", "none");
+		$("#scoreControl label").eq(i).css("border-radius", 0);
+		$("#scoreControl label").eq(i).css("opacity", 0.8);
 	}
 	
 	$('.container h2').mouseover(function() {
@@ -102,18 +115,23 @@ $(document).ready(function() {
 	<div class="container">
 		<h2>Score -</h2>
 		<div id="scoreContent" class="expanded">
-			
-			<!-- have to make form auto submit with js -->
-			<div id="score">
-				<input type='radio' id="radio1" name='score' value='0'><label for="radio1">-3</label>
-				<input type='radio' id="radio2" name='score' value='1'><label for="radio2">-2</label>
-				<input type='radio' id="radio3" name='score' value='2'><label for="radio3">-1</label>
-				<input type='radio' id="radio4" name='score' value='3'><label for="radio4">0</label>
-				<input type='radio' id="radio5" name='score' value='4'><label for="radio5">+1</label>
-				<input type='radio' id="radio6" name='score' value='5'><label for="radio6">+2</label>
-				<input type='radio' id="radio7" name='score' value='6'><label for="radio7">+3</label>
-			</div>
-			
+			<section id='scoreMap'>
+				<!-- have to make form auto submit with js -->
+				<div id="scoreControl">
+					<input type='radio' id="radio1" name='score' value='0'><label for="radio1">-</label>
+					<input type='radio' id="radio2" name='score' value='1'><label for="radio2"> </label>
+					<input type='radio' id="radio3" name='score' value='2'><label for="radio3"> </label>
+					<input type='radio' id="radio4" name='score' value='3'><label for="radio4">0</label>
+					<input type='radio' id="radio5" name='score' value='4'><label for="radio5"> </label>
+					<input type='radio' id="radio6" name='score' value='5'><label for="radio6"> </label>
+					<input type='radio' id="radio7" name='score' value='6'><label for="radio7">+</label>
+				</div>
+
+				<div id='scoreDistrubution'>
+
+				</div>
+			</section>
+
 			<div id="linkedTo">
 				
 			</div>
