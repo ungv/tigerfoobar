@@ -15,7 +15,7 @@ $(document).ready(function() {
 		url: 'http://webhost.ischool.uw.edu/~bc28/dbconnection.php',
 		data: {
 			sql: "SELECT * FROM Claim"
-		},		
+		},
 		contentType: 'jsonp',
 		dataType: 'jsonp',
 		success: function(json) {

@@ -27,7 +27,7 @@ $(document).ready(function() {
 		url: 'http://webhost.ischool.uw.edu/~bc28/dbconnection.php',
 		contentType: 'jsonp',
 		data: {
-			sql: "SELECT * FROM Claim"
+			sql: "SELECT *, cl.Score AS ClaimScore, co.Score AS CoScore FROM Claim cl JOIN Company co ON cl.CompanyID = co.CompanyID"
 		},
 		dataType: 'jsonp',
 		success: function(json) {
@@ -38,11 +38,15 @@ $(document).ready(function() {
 });
 
 function injectSubmissions(json) {
+	$.each(json, function(i, claim) {
+		$a = $('<a>').attr('href', 'claim').text(claim.Title); // temporary link to claim template page
+		$td = $('<td>').attr('class', claim.ClaimScore).attr('style', 'background-color:' + kudosColors[parseInt(claim.ClaimScore) + 3]);
+		$td.append($a);
+		$('table').find('tr').append($td);
+	});
 	$.each($('td'), function() {
 		var thisRating = parseInt($(this).attr('class'));
-		/* if (thisRating == 3) thisRating -= 1;
-		else if (thisRating == -3) thisRating += 1; */
-		$(this).css('background-color', kudosColors[thisRating + 3]);
+		$(this).attr('style', 'background-color:' + kudosColors[parseInt(claim.ClaimScore) + 3]);
 	});
 }
 
@@ -78,6 +82,8 @@ function ajaxError(jqxhr, type, error) {
 		<h3>Submissions:</h3>
 		<table>
 			<tr>
+			<!-- inject boxes here -->
+			<!-- placeholder boxes to see what it looks like with more
 				<td class="1"><a href="claim">Apple plans to build $5 billion new headquarters in Cupertino</a></td>
 				<td class="-3"></td>
 				<td class="3"></td>
@@ -109,6 +115,7 @@ function ajaxError(jqxhr, type, error) {
 				<td class="2"></td>
 				<td class="1"></td>
 				<td class="1"></td>
+			-->
 			</tr>
 		</table>
 	</div>
