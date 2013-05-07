@@ -1,24 +1,37 @@
-<?php
-	/* $con = mysqli_connect("bc28.netid.ischool.uw.edu","bc28","uDwr0A61d2","bc28_tiger");
-	if (mysqli_connect_errno($con)) {
-		echo "failed: " . mysqli_connect_error();
-	} else { 
-		echo "awesome!";
+<script type="text/javascript">
+$(document).ready(function() {
+	$.ajax('http://webhost.ischool.uw.edu/~bc28/dbconnection.php', {
+		success: function() {
+			alert('yay');
+		},
+		error: ajaxError
+	});
+});
+
+function ajaxError(jqxhr, type, error) {
+	var msg = "An Ajax error occurred!\n\n";
+	if (type == 'error') {
+		if (jqxhr.readyState == 0) {
+			// Request was never made - security block?
+			msg += "Looks like the browser security-blocked the request.";
+		} else {
+			// Probably an HTTP error.
+			msg += 'Error code: ' + jqxhr.status + "\n" + 
+						 'Error text: ' + error + "\n" + 
+						 'Full content of response: \n\n' + jqxhr.responseText;
+		}
+	} else {
+		msg += 'Error type: ' + type;
+		if (error != "") {
+			msg += "\nError text: " + error;
+		}
 	}
-	$sql = "SELECT *
-			FROM user";
-	$rows = mysql_query($sql); */
-?>
+	alert(msg);
+}
+</script>
 
 <div id="main">
 	Front Page
 	<ul>
-	<?php
-		/* foreach ($rows as $row) {
-		?>
-			<li> Name: <?= $row["Name"] ?> | Email:  <?= $row["Email"]  ?> | Password:  <?= $row["Password"]  ?></li>
-		<?php
-		} */		
-	?>
 	</ul>
 </div>

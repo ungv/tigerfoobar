@@ -1,6 +1,6 @@
 <style type="text/css">
 .container > div {
-	border: 1px solid grey;
+	border: 1px solid rgb(213, 213, 213);
 	padding: 10px;
 }
 
@@ -92,7 +92,7 @@ $(document).ready(function() {
 	}
 	
 	$('.container h2').mouseover(function() {
-		$(this).attr('style', 'background-color: #CCC');
+		$(this).attr('style', 'background-color: rgb(233, 233, 233)');
 	}).mouseout(function() {
 		$(this).attr('style', 'background-color: white');
 	});

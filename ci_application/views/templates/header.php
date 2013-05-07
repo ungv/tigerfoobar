@@ -18,7 +18,7 @@
 <body>
 	<header>
 		<SECTION id='topbar'>
-			<h1><a href="/">Tiger Foobar!</a></h1>
+			<h1><a href="/">Patchwork</a></h1>
 			<!--Search box-->
 			<input type="text" placeholder="Search for companies or products/services"/>
 			<!--Profile/login/register-->
