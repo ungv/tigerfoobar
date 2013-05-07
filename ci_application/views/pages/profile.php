@@ -19,16 +19,54 @@ td:hover {
 </style>
 
 <script type="text/javascript">
-// Kudos Colors       -3         -2         -1         0          +1         +2         +3
 var kudosColors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
 $(document).ready(function() {
+	// Kudos Colors       -3         -2         -1         0          +1         +2         +3
+	$.ajax({
+		type: 'GET',
+		url: 'http://webhost.ischool.uw.edu/~bc28/dbconnection.php',
+		contentType: 'jsonp',
+		data: {
+			sql: "SELECT * FROM Claim"
+		},
+		dataType: 'jsonp',
+		success: function(json) {
+			injectSubmissions(json);
+		},
+		error: ajaxError
+	});
+});
+
+function injectSubmissions(json) {
 	$.each($('td'), function() {
 		var thisRating = parseInt($(this).attr('class'));
 		/* if (thisRating == 3) thisRating -= 1;
 		else if (thisRating == -3) thisRating += 1; */
 		$(this).css('background-color', kudosColors[thisRating + 3]);
 	});
-});
+}
+
+function ajaxError(jqxhr, type, error) {
+	var msg = "An Ajax error occurred!\n\n";
+	if (type == 'error') {
+		if (jqxhr.readyState == 0) {
+			// Request was never made - security block?
+			msg += "Looks like the browser security-blocked the request.";
+		} else {
+			// Probably an HTTP error.
+			msg += 'Error code: ' + jqxhr.status + "\n" + 
+						 'Error text: ' + error + "\n" + 
+						 'Full content of response: \n\n' + jqxhr.responseText;
+		}
+	} else {
+		msg += 'Error type: ' + type;
+		if (error != "") {
+			msg += "\nError text: " + error;
+		}
+	}
+	alert(msg);
+}
+
 </script>
 
 <div id="main">

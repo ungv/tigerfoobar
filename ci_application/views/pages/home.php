@@ -1,8 +1,25 @@
+<?php
+	/* $db = new PDO("mysql:dbname=bc28_tiger;host=webhost.ischool.uw.edu", "bc28_admin", "tiger123");
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "SELECT * 
+			FROM Users";
+	$query = $db->prepare($sql);
+	$query->execute($params);
+	$rows = $query->fetchAll(PDO::FETCH_ASSOC); */
+?>
+
 <script type="text/javascript">
 $(document).ready(function() {
-	$.ajax('http://webhost.ischool.uw.edu/~bc28/dbconnection.php', {
-		success: function() {
-			alert('yay');
+	$.ajax({
+		type: 'GET',
+		url: 'http://webhost.ischool.uw.edu/~bc28/dbconnection.php',
+		data: {
+			sql: "SELECT * FROM Claim"
+		},		
+		contentType: 'jsonp',
+		dataType: 'jsonp',
+		success: function(json) {
+			
 		},
 		error: ajaxError
 	});
