@@ -32,35 +32,66 @@
 
 }
 
-.ui-state-default {
-	border: none !important;
-	/*background: */
-}
-
-/*#radio1 {
-	background: #7F7734 !important;
-}*/
-
-.ui-button .ui-button-text {
-	color: white;
-	font-weight: bold;
-	width: 25px;
-	height: 20px;
-}
-
-.ui-state-hover {
-	opacity: 1 !important;
-}
-
-#scoreMap {
-	width: 384px;
-}
-
-#scoreDistrubution {
-	height: 50px;
+#scoreMap, #scoreDistrubution{
 	overflow: hidden;
 }
 
+#scoreDistrubution{
+	width: 280px;
+	height: 80px;
+}
+
+#scoreDistrubution p{
+	width: 40px;
+	height: 80px;
+	float: left;
+	background-color: darkgrey;
+	background-image: url(img/kudosCircles.png);
+	background-size: cover;
+	position: relative;
+}
+
+#scoreControl label {
+	width: 40px;
+	height: 40px;
+	float: left;
+	opacity: .8;
+}
+
+#scoreControl label:hover {
+	opacity: 1;
+}
+
+#scoreControl input {
+	display: none;
+}
+
+.n3 {
+	background-color: #FF4900;
+} 
+.n2 {
+	background-color: #FF7640;
+}
+
+.n1 {
+	background-color: #FF9B73;
+}
+
+.zero {
+	background-color: #FEF5CA;
+}
+
+.p1 {
+	background-color: #61D7A4;
+}
+
+.p2 {
+	background-color: #36D792;
+}
+
+.p3 {
+	background-color: #00AF64;
+}
 
 </style>
 
@@ -79,17 +110,17 @@ $(document).ready(function() {
 		});
 	});
 
-	$('#scoreControl').buttonset();
+	// $('#scoreControl').buttonset();
 
-	// Kudos Colors       -3         -2         -1         0          +1         +2         +3
-	var kudosColors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
+	// // Kudos Colors       -3         -2         -1         0          +1         +2         +3
+	// var kudosColors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
 
-	for (var i = 0; i <= 6; i++) {
-		$("#scoreControl label").eq(i).css("background-color", kudosColors[i]);
-		$("#scoreControl label").eq(i).css("background-image", "none");
-		$("#scoreControl label").eq(i).css("border-radius", 0);
-		$("#scoreControl label").eq(i).css("opacity", 0.8);
-	}
+	// for (var i = 0; i <= 6; i++) {
+	// 	$("#scoreControl label").eq(i).css("background-color", kudosColors[i]);
+	// 	$("#scoreControl label").eq(i).css("background-image", "none");
+	// 	$("#scoreControl label").eq(i).css("border-radius", 0);
+	// 	$("#scoreControl label").eq(i).css("opacity", 0.8);
+	// }
 	
 	$('.container h2').mouseover(function() {
 		$(this).attr('style', 'background-color: rgb(233, 233, 233)');
@@ -117,19 +148,29 @@ $(document).ready(function() {
 		<div id="scoreContent" class="expanded">
 			<section id='scoreMap'>
 				<!-- have to make form auto submit with js -->
-				<div id="scoreControl">
-					<input type='radio' id="radio1" name='score' value='0'><label for="radio1">-</label>
-					<input type='radio' id="radio2" name='score' value='1'><label for="radio2"> </label>
-					<input type='radio' id="radio3" name='score' value='2'><label for="radio3"> </label>
-					<input type='radio' id="radio4" name='score' value='3'><label for="radio4">0</label>
-					<input type='radio' id="radio5" name='score' value='4'><label for="radio5"> </label>
-					<input type='radio' id="radio6" name='score' value='5'><label for="radio6"> </label>
-					<input type='radio' id="radio7" name='score' value='6'><label for="radio7">+</label>
-				</div>
-
 				<div id='scoreDistrubution'>
-
+<?php
+				for ($i=0; $i <=6 ; $i++) { 
+?>
+					<p style='top: <?=7	*$i?>px'></p>
+<?php
+				}
+?>	
 				</div>
+
+				<div id="scoreControl">
+<?php
+$kudosColors = array('n3', 'n2', 'n1', 'zero', 'p1', 'p2', 'p3');
+
+				for ($i=0; $i <=6 ; $i++) { 
+?>
+					<input type='radio' id="radio<?=$i?>" name='score' value='<?=$i?>'><label class="<?=$kudosColors[$i]?>" for="radio<?=$i?>"> </label>
+<?php
+				}
+?>					
+				</div>
+
+				
 			</section>
 
 			<div id="linkedTo">
