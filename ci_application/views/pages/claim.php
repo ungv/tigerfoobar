@@ -47,8 +47,9 @@
 	float: left;
 	background-color: darkgrey;
 	background-image: url(img/kudosCircles.png);
-	background-size: cover;
+	background-size: 101%;
 	position: relative;
+	background-position: -1px -1px;
 }
 
 #scoreControl label {
