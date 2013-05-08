@@ -38,15 +38,17 @@
 |
 */
 
-//routes calls on news/create to news/create
-//routes news/* (everything else) to news/view
-//'news' calls index news function
-$route['news/create'] = 'news/create';
-$route['news/(:any)'] = 'news/view/$1';
-$route['news'] = 'news';
+//routes user action requests
+$route['action/(:any)'] = 'action/$1';
+$route['action'] = 'action';
+
+//routes user data requests
+$route['data/(:any)'] = 'data/$1';
+$route['data'] = 'data';
 
 //all other queries routed to pages/view with parameters
 $route['(:any)'] = 'pages/view/$1';
+$route['pages'] = 'pages';
 
 //default query routed to pages controller, view method
 $route['default_controller'] = 'pages/view';

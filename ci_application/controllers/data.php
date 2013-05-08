@@ -1,6 +1,6 @@
 <?php
-
-class Pages extends CI_Controller {
+/*---Fetches Data for pages in the system---*/
+class Data extends CI_Controller {
 
 	/*
 		Constructor
@@ -21,14 +21,12 @@ class Pages extends CI_Controller {
 	*/
 	public function index() {
 		// Capitalize the first letter
-		$data['headTitle'] = 'Database Connect';
-		$data['pageTitle'] = 'track';
+		$data['headTitle'] = 'Testing DB Connection';
+		$data['pageTitle'] = '';
 
 		//query for all news stories (will pass to view)
-		$data['tag_types'] = $this->track_model->get_types();
+		$data['users'] = $this->data_model->testDB();
 
-		$this->load->view('templates/track_header', $data);
-		$this->load->view('track/form', $data);
-		$this->load->view('templates/track_footer');
+		$this->load->view('data/test', $data);
 	}
 }

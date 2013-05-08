@@ -45,13 +45,21 @@
 | the active record class
 */
 
+/* $db = new PDO("mysql:dbname=bc28_tiger;host=webhost.ischool.uw.edu", "bc28_admin", "tiger123");
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "SELECT * 
+			FROM Users";
+	$query = $db->prepare($sql);
+	$query->execute($params);
+	$rows = $query->fetchAll(PDO::FETCH_ASSOC); */
+
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'testing';
+$db['default']['hostname'] = 'seanjohnstone.me:3306';
+$db['default']['username'] = 'thoughtc_Admin';
+$db['default']['password'] = '11235DURAman';
+$db['default']['database'] = 'thoughtc_tiger';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
