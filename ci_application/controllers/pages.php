@@ -1,9 +1,6 @@
 <?php
-
 class Pages extends CI_Controller {
-
-	/*
-		Constructor
+	/*Constructor
 		-Loads Models and helpers
 		-Load Generic Data files
 	*/
@@ -15,20 +12,82 @@ class Pages extends CI_Controller {
 		$this->load->model('data_model');
 	}
 
+	//Default page Query, Redirect to home
+	public function index() {
+		$this->homepage();
+	}
+
+	//site homepage
+	public function homepage() {
+		$data['headerTitle'] = 'PatchWork - Make a Difference';
+		$data['pageTitle'] = 'Home';
+
+		//signed in logic goes here
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/home', $data);
+		$this->load->view('templates/footer');
+	}
+
+	//claim page
+	public function claim() {
+		$data['headerTitle'] = 'View Claim - PatchWork';
+		$data['pageTitle'] = 'Claim title goes here';
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/claim', $data);
+		$this->load->view('templates/footer');
+	}
+
+	//company page
+	public function company() {
+		$data['headerTitle'] = 'View Company - PatchWork';
+		$data['pageTitle'] = 'Company Name goes here';
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/company', $data);
+		$this->load->view('templates/footer');
+	}
+
+	//tag page
+	public function tag() {
+		$data['headerTitle'] = 'View Tag - PatchWork';
+		$data['pageTitle'] = 'Tag name goes here';
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/tag', $data);
+		$this->load->view('templates/footer');
+	}
+
+	//profile page
+	public function profile() {
+		$data['headerTitle'] = 'User Profile - Patchwork';
+		$data['pageTitle'] = 'User name';
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/profile', $data);
+		$this->load->view('templates/footer');
+	}
+
 
 	/*
-		Index Page
-	*/
-	public function index() {
+	public function view($page = 'home') {
+		if ( ! file_exists('ci_application/views/pages/'.$page.'.php')) {
+			// Whoops, we don't have a page for that!
+			show_404();
+		}
+		
+		//url helper
+		$this->load->helper('url');
+
 		// Capitalize the first letter
-		$data['headTitle'] = 'Database Connect';
-		$data['pageTitle'] = 'track';
-
-		//query for all news stories (will pass to view)
-		$data['tag_types'] = $this->track_model->get_types();
-
-		$this->load->view('templates/track_header', $data);
-		$this->load->view('track/form', $data);
-		$this->load->view('templates/track_footer');
+		$data['headerTitle'] = ucfirst($page) . ' - patchwork';
+		$data['pageTitle'] = ucfirst($page);
+		
+		//load views
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/'. $page, $data);
+		$this->load->view('templates/footer', $data);
 	}
+	*/
 }

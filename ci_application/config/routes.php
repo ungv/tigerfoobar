@@ -47,11 +47,11 @@ $route['data/(:any)'] = 'data/$1';
 $route['data'] = 'data';
 
 //all other queries routed to pages/view with parameters
-$route['(:any)'] = 'pages/view/$1';
+$route['(:any)'] = 'pages/$1';
 $route['pages'] = 'pages';
 
 //default query routed to pages controller, view method
-$route['default_controller'] = 'pages/view';
+$route['default_controller'] = 'pages';
 
 //404 error page not found
 $route['404_override'] = 'errors/page_missing';
