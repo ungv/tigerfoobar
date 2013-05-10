@@ -1,0 +1,94 @@
+.container > div {
+	border: 1px solid rgb(213, 213, 213);
+	padding: 10px;
+}
+
+.container h2 {
+	width: 140px;
+}
+
+#user {
+	float: right;
+	/*padding: 10px;
+	text-align: right;
+	margin: 0 40px 0 -10px !important;
+	width: 889px;
+	border: 1px solid grey;
+	border-left: none;*/
+}
+
+#evidenceContent {
+	border-left: 5px solid blue;
+}
+
+#scoreContent {
+	border-left: 5px solid green;
+
+}
+
+#discussionContent {
+	border-left: 5px solid red;
+
+}
+
+#scoreMap, #scoreDistrubution{
+	overflow: hidden;
+}
+
+#scoreDistrubution{
+	width: 280px;
+	height: 80px;
+}
+
+#scoreDistrubution p{
+	width: 40px;
+	height: 80px;
+	float: left;
+	background-color: darkgrey;
+	background-image: url(../img/kudosCircles.png);
+	background-size: 101%;
+	position: relative;
+	background-position: -1px -1px;
+}
+
+#scoreControl label {
+	width: 40px;
+	height: 40px;
+	float: left;
+	opacity: .8;
+}
+
+#scoreControl label:hover {
+	opacity: 1;
+}
+
+#scoreControl input {
+	display: none;
+}
+
+.n3 {
+	background-color: #FF4900;
+} 
+.n2 {
+	background-color: #FF7640;
+}
+
+.n1 {
+	background-color: #FF9B73;
+}
+
+.zero {
+	background-color: #FEF5CA;
+}
+
+.p1 {
+	background-color: #61D7A4;
+}
+
+.p2 {
+	background-color: #36D792;
+}
+
+.p3 {
+	background-color: #00AF64;
+}

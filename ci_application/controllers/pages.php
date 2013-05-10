@@ -10,6 +10,11 @@ class Pages extends CI_Controller {
 		$this->load->helper('url');
 		//Other Example Loads
 		$this->load->model('data_model');
+
+		//basic css and js
+		$data['csFiles'] = array();
+		$data['jsFiles'] = array();
+    	$this->load->vars($data);
 	}
 
 	//Default page Query, Redirect to home
@@ -22,6 +27,8 @@ class Pages extends CI_Controller {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
 
+		$data['csFiles'] = array('general','homepage');
+		$data['jsFiles'] = array('homepage');
 		//signed in logic goes here
 
 		$this->load->view('templates/header', $data);
@@ -33,6 +40,10 @@ class Pages extends CI_Controller {
 	public function claim() {
 		$data['headerTitle'] = 'View Claim - PatchWork';
 		$data['pageTitle'] = 'Claim title goes here';
+
+		//files needed
+		$data['csFiles'] = array('general','claim');
+		$data['jsFiles'] = array('claim');
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/claim', $data);
@@ -63,6 +74,10 @@ class Pages extends CI_Controller {
 	public function profile() {
 		$data['headerTitle'] = 'User Profile - Patchwork';
 		$data['pageTitle'] = 'User name';
+
+		//files needed
+		$data['csFiles'] = array('general','profile');
+		$data['jsFiles'] = array('profile');
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/profile', $data);

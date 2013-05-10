@@ -1,0 +1,32 @@
+	
+
+
+
+
+	ul {
+		float: left;
+		width: 960px;
+	}
+
+	li {
+		width: 150px;
+		height: 90px;
+		border: 1px
+		padding: 2px;
+		opacity: 0.8;
+		list-style-type: none;
+		float: left;
+	}
+
+	li:hover {
+		opacity: 1;
+	}
+
+	.rating {
+		float: left;
+		margin: 10px;
+	}
+
+	#submissions, #comments {
+		float: left;
+	}
