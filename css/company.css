@@ -1,0 +1,200 @@
+ul {
+	display: inline;
+}
+
+li {
+	list-style-type: none;
+	float: left;
+	padding-right: 20px;
+	margin-right: 5px;
+}
+
+#tags span, #industryTags li{
+	float: left;
+	margin-right: 5px;
+}
+
+#industryTags li {
+	list-style-type: none;
+	padding-right: 20px;
+	background-color: #CCC;
+}
+
+#claimPopTags li{
+	border: 2px solid rgb(102, 102, 102);
+	color: white;
+	font-size: 18pt;
+}
+
+.container > div {
+	border: 1px solid rgb(213, 213, 213);
+}
+
+.container h2 {
+	width: 140px;
+}
+
+#user {
+	float: right;
+	/*padding: 10px;
+	text-align: right;
+	margin: 0 40px 0 -10px !important;
+	width: 889px;
+	border: 1px solid grey;
+	border-left: none;*/
+}
+
+#evidenceContent {
+	border-left: 5px solid blue;
+	background-color: #F2F2F2;
+	padding: 10px;
+}
+
+#evidenceContent dt {
+	font-weight: bold;
+	float: left;
+	clear: left;
+}
+
+#evidenceContent dd {
+	margin-left: 75px;
+}
+
+#scoreContent {
+	overflow: hidden;
+}
+
+#averageScore {
+	font-size: 20pt;
+	color: #A0A340;
+}
+
+#scoreContent h3 {
+	padding: 10px;
+	border-bottom: 1px solid #CCCCCC;
+	color: green;
+	font-size: 20px;
+}
+
+#scoreContent h3 span{
+	color: darkgrey;
+	font-size: 15px;
+}
+
+#discussionContent {
+	border-left: 5px solid red;
+}
+
+#leftCol {
+	float: left;
+	width: 50%;
+}
+
+#leftCol, #scoreDistribution, #evidenceContent, #controlContainer, #relatedTagsContainer{
+	overflow: hidden;
+}
+
+#scoreHeader, #relatedTagsHeader {
+	padding: 10px;
+	border-bottom: 1px solid rgb(213, 213, 213);
+	height: 30px;
+}
+
+#relatedTagsContainer {
+	padding: 10px;
+}
+
+#relatedTagsHeader span {
+	font-size: 18pt;
+}
+
+#controlContainer {
+	padding: 10px;
+}
+
+#scoreDistribution{
+	overflow: hidden;
+	width: 280px;
+	height: 65px;
+}
+
+#scoreDistribution div {
+	width: 40px;
+	height: 65px;
+	float: left;
+	position: relative;
+}
+
+.circle {
+	width: 10px;
+	height: 10px;
+	background-color: darkgrey;
+	border-radius: 5px;
+	margin: 5px auto;
+}
+
+#scoreControl label {
+	width: 40px;
+	height: 40px;
+	float: left;
+	opacity: .8;
+}
+
+#scoreControl label:hover {
+	opacity: 1;
+}
+
+#scoreControl input {
+	display: none;
+}
+
+#rightCol {
+	float: left;
+	width: 49.8%;
+	border-left: 1px solid rgb(213, 213, 213);
+}
+
+#lowRatedClaims, #highRatedClaims {
+	width: 45%;
+}
+
+#lowRatedClaims {
+	float: left;
+}
+
+#highRatedClaims {
+	float: right;
+}
+
+.claimContainer {
+	border: 1px solid rgb(213, 213, 213);
+	float: left;
+}
+
+.leftContainer {
+	float: left;
+	width: 15%;
+	color: white;
+}
+
+.rightContainer {
+	float: left;
+	width: 84.7%;
+}
+
+.claimScore, .claimTitle {
+	border-bottom: 1px solid rgb(213, 213, 213);
+	height: 50px;
+}
+
+.claimScore, .claimVotes {
+	text-align: center;
+}
+
+.claimScore, .claimVotes, .claimTitle, .claimTags {
+	padding: 10px;
+}
+
+.claimScore {
+	font-size: 15pt;
+}

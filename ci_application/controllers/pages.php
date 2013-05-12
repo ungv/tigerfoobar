@@ -55,6 +55,9 @@ class Pages extends CI_Controller {
 		$data['headerTitle'] = 'View Company - PatchWork';
 		$data['pageTitle'] = 'Company Name goes here';
 
+		$data['csFiles'] = array('general','company');
+		$data['jsFiles'] = array('company');
+		
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/company', $data);
 		$this->load->view('templates/footer');
