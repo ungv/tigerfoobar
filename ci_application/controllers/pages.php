@@ -71,9 +71,15 @@ class Pages extends CI_Controller {
 	}
 
 	//profile page
-	public function profile() {
+	public function profile($userID) {
+		//test if user is in system
+
+		//grab basic data
+		$data['userInfo'] = $this->data_model->basicProfileInfo($userID);
+
 		$data['headerTitle'] = 'User Profile - Patchwork';
-		$data['pageTitle'] = 'User name';
+		$data['pageTitle'] = $data['userInfo'][0]['Name'];
+		//$data['pageTitle'] = $data['userInfo']['Name'];
 
 		//files needed
 		$data['csFiles'] = array('general','profile');

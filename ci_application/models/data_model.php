@@ -12,4 +12,10 @@ class Data_model extends CI_Model {
 		return $query->result_array();		
 	}
 
+	//get all tag types
+	public function basicProfileInfo($userID) {
+		$query = $this->db->get_where('User', array('UserID' => $userID));
+		return $query->result_array();
+	}
+
 }
