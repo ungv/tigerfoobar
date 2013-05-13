@@ -16,6 +16,13 @@ body{
 	font-size: 14px;
 }
 
+a, input, label, li, #urlButton {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;	
+}
+
 a {
 	text-decoration: none;
 	color: green;
@@ -23,11 +30,31 @@ a {
 
 a:hover {
 	text-decoration: underline;
-	color: black;	
+	color: black;
 }
 
 h1, h2, h3 {
 	font-family: Rockwell;
+}
+
+input {
+	padding: 5px;
+	outline: none;
+}
+
+input.outfocus {
+	border: 2px solid #CCC;
+	background-color: white;
+}
+
+input.hover {
+	border: 2px solid #DDD;
+	background-color: rgb(228, 228, 228);
+}
+
+input.infocus {
+	border: 2px solid #73A6FF;
+	background-color: #EFF5FF;
 }
 
 /*Header---------------------------*/
@@ -72,6 +99,12 @@ header span {
 	float: right;
 }
 
+#tags-label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 1em;
+}
+
 /*Footer---------------------------*/
 
 footer {
@@ -97,24 +130,48 @@ footer {
 	margin-bottom: 20px;
 }
 	
-/*Home-----------------------------*/
-
-.box {
-	width: 150px;
-	height: 150px;
+/*SignupPopup------------------------*/
+input[type=submit], input[type=button] {
+	opacity: 0.6;
 }
 
-.companies {
-	/* border: 1px solid green; */
-	float: left;
+input[type=submit]:hover, input[type=button]:hover {
+	opacity: 1;
 }
 
-.products {
-	/* border: 1px solid red; */
-	float: left;
+#signupPopup {
+	background-color: rgb(238, 238, 238);
+	width: 250px;
+	z-index: 1;
+	position: absolute;
+	right: 200px;
+	padding: 20px;
+	border: 1px solid rgb(214, 214, 214);
+	-moz-box-shadow: 3px 3px 3px #888;
+	-webkit-box-shadow: 3px 3px 3px #888;
+	box-shadow: 3px 3px 3px #888;
 }
 
-.claims {
-	/* border: 1px solid blue; */
-	float: left;
+#signupPopup input[type=text] {
+	width: 95%;
+	margin-top: 5px;
+}
+
+#signupPopup p {
+	margin: 10px 0 10px 0;
+}
+
+.submitButton {
+	margin-left: 10px;
+	padding: 10px;
+	background-color: #61D7A4;
+	float: right;
+	border: 1px solid #36D792;
+}
+
+.cancelButton {
+	padding: 5px;
+	background-color: #FF9B73;
+	float: right;
+	border: 1px solid #FF7640;
 }

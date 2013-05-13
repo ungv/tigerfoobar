@@ -5,7 +5,28 @@
 		<script src="<?= base_url() . 'js/' . $jsFile . '.js' ?>" type="text/javascript"></script>
 	<?php } ?>
 	<script type="text/javascript">
-	$(function() {
+	$(document).ready(function() {
+		$('#signup').click(function() {
+			$('#signupPopup').show(200);
+		});
+		
+		$('.cancelButton').click(function() {
+			$('#signupPopup').hide(200);
+		});
+		
+		$('input[type=text]').each(function() {
+			$(this).addClass('outfocus');
+		});
+		$('input[type=text]').focus(function() {
+			$(this).attr('class', 'infocus');
+		}).blur(function() {
+			$(this).attr('class', 'outfocus');
+		}).mouseenter(function() {
+			$(this).addClass('hover');
+		}).mouseleave(function() {
+			$(this).removeClass('hover');
+		});
+	
 		var projects = [
 			{
 				value: "jquery",

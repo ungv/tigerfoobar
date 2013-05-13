@@ -21,15 +21,15 @@ $(document).ready(function() {
 	});
 	
 	$('#urlButton').click(function() {
-		$('#urlButton').hide();
-		$('#urlContainer input').show();
+		$('#urlButton').hide('fade', 200);
+		$('#urlInput').show('fade', 600);
 	});
 	
 	$("#pasteURL").bind('paste', function() {
 		$('#urlSubmit').show(200);
 		$(this).animate({"width": "100%",}, "fast" );
 	});
-	$("#cancel").click(function() {
+	$(".cancelButton").click(function() {
 		$('#urlSubmit').hide(200);
 		$("#pasteURL").animate({"width": "180px",}, "fast" );
 		$("#pasteURL").val('');

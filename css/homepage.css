@@ -1,19 +1,20 @@
 #main ul {
 	float: left;
 	width: 960px;
+	margin-top: 50px;
 }
 
 #main li {
 	width: 150px;
 	height: 90px;
-	border: 1px
+	border: 1px;
 	padding: 2px;
 	opacity: 0.8;
 	list-style-type: none;
 	float: left;
 }
 
-li:hover {
+#main li:hover {
 	opacity: 1;
 }
 
@@ -26,8 +27,19 @@ li:hover {
 	float: left;
 }
 
+#urlButton, #urlInput {
+	position: absolute;
+	width: 180px;
+	height: 20px;
+	float: left;
+}
+
 #urlButton {
-	width: 125px;
+	opacity: 0.6;
+}
+
+#urlButton:hover {
+	opacity: 1;
 }
 
 #urlButton img {
@@ -36,9 +48,13 @@ li:hover {
 	margin-right: 5px;
 }
 
+#urlButton span {
+	font-size: 14pt;
+	vertical-align: middle;
+}
+
 #pasteURL {
-	width: 180px;
-	height: 20px;
+	width: 200px;
 }
 
 #urlSubmit {

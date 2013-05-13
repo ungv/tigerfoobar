@@ -97,7 +97,7 @@ foreach($companyClaims AS $claim) {
 			</div>
 			<div class="rightContainer">
 				<div class="claimTitle">
-					<?=$claim['Title']?>
+					<a href="/claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a>
 				</div>
 				<div class="claimTags">
 					Tags: PowermacG4, safety ...
