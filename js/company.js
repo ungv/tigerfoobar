@@ -40,6 +40,18 @@ $(document).ready(function() {
 			$(this).parent().css('background-color', colors[6]);
 		}
 	});
+	
+	$('.scoreBox').hover(
+		function() {
+			if ($(this).attr('value') == 0)
+				$(this).text('F');
+			else
+				$(this).text($(this).attr('value'));
+		},
+		function() {
+			$(this).text('');
+		}
+	);
 });
 
 function insertColor(color) {

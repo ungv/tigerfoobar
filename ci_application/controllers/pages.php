@@ -51,9 +51,15 @@ class Pages extends CI_Controller {
 	}
 
 	//company page
-	public function company() {
+	public function company($companyID) {
+		//grab basic data
+		$data['companyInfo'] = $this->data_model->getCompany($companyID);
+		$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
+		$data['companyTags'] = $this->data_model->getCompanyTags($companyID);
+		
 		$data['headerTitle'] = 'View Company - PatchWork';
-		$data['pageTitle'] = 'Company Name goes here';
+		$data['companyName'] = $data['companyInfo'][0]['Name'];
+		$data['companyScore'] = $data['companyInfo'][0]['Score'];
 
 		$data['csFiles'] = array('general','company');
 		$data['jsFiles'] = array('company');
@@ -66,7 +72,7 @@ class Pages extends CI_Controller {
 	//tag page
 	public function tag() {
 		$data['headerTitle'] = 'View Tag - PatchWork';
-		$data['pageTitle'] = 'Tag name goes here';
+		$data['tagTitle'] = 'Tag name goes here';
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/tag', $data);
@@ -81,7 +87,7 @@ class Pages extends CI_Controller {
 		$data['userInfo'] = $this->data_model->basicProfileInfo($userID);
 
 		$data['headerTitle'] = 'User Profile - Patchwork';
-		$data['pageTitle'] = $data['userInfo'][0]['Name'];
+		$data['userName'] = $data['userInfo'][0]['Name'];
 		//$data['pageTitle'] = $data['userInfo']['Name'];
 
 		//files needed

@@ -1,6 +1,9 @@
 <div id="main">
 	<div id="urlContainer">
-		<input style="" id="pasteURL" placeholder="Paste URL to a new article"/>
+		<div id="urlButton">
+			<img src="/img/newClaim.png" /><span>Add a new claim</span>
+		</div>
+		<input style="display: none;" id="pasteURL" placeholder="Paste URL to a new article"/>
 	</div>
 	
 	<div id="urlSubmit" style="display:none;">

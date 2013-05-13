@@ -1,9 +1,9 @@
-ul {
+#main ul {
 	float: left;
 	width: 960px;
 }
 
-li {
+#main li {
 	width: 150px;
 	height: 90px;
 	border: 1px
@@ -24,6 +24,16 @@ li:hover {
 
 #submissions, #comments {
 	float: left;
+}
+
+#urlButton {
+	width: 125px;
+}
+
+#urlButton img {
+	vertical-align: middle;
+	width: 20px;
+	margin-right: 5px;
 }
 
 #pasteURL {

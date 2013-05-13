@@ -11,13 +11,13 @@ li {
 
 #tags span, #industryTags li{
 	float: left;
-	margin-right: 5px;
+	padding: 5px 25px 5px 5px;
 }
 
 #industryTags li {
 	list-style-type: none;
-	padding-right: 20px;
-	background-color: #CCC;
+	background-color: #FEF5CA;
+	border: 1px solid rgb(168, 162, 130);
 }
 
 #claimPopTags li{
@@ -105,7 +105,7 @@ li {
 }
 
 #relatedTagsHeader span {
-	font-size: 18pt;
+	font-size: 15pt;
 }
 
 #controlContainer {
@@ -148,27 +148,34 @@ li {
 	display: none;
 }
 
+.scoreBox {
+	text-align: center;
+	font-size: 22pt;
+}
+
 #rightCol {
 	float: left;
 	width: 49.8%;
 	border-left: 1px solid rgb(213, 213, 213);
 }
 
-#lowRatedClaims, #highRatedClaims {
+.lowRatedClaims, .highRatedClaims {
 	width: 45%;
 }
 
-#lowRatedClaims {
+.lowRatedClaims {
 	float: left;
 }
 
-#highRatedClaims {
+.highRatedClaims {
 	float: right;
 }
 
 .claimContainer {
 	border: 1px solid rgb(213, 213, 213);
 	float: left;
+	min-width: 100%;
+	margin-bottom: 20px;
 }
 
 .leftContainer {
@@ -178,7 +185,7 @@ li {
 }
 
 .rightContainer {
-	float: left;
+	float: right;
 	width: 84.7%;
 }
 

@@ -1,6 +1,6 @@
 <div id="main">
 	<div id="user">
-		<h1><?=$pageTitle?></h1>
+		<h1><?=$userName?></h1>
 	</div>
 	
 	<div id="submissions">

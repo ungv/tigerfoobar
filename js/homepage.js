@@ -15,21 +15,16 @@ $(document).ready(function() {
 		},
 		error: ajaxError
 	});
+	
  	$.each($('li'), function() {
 		$(this).attr('style', 'background-color:' + kudosColors[Math.ceil(Math.random() * 6)]);
-	});	
-});
-
-function injectSubmissions(json) {
-	$.each(json, function(i, claim) {
-		$a = $('<a>').attr('href', 'claim').text(claim.Title); // temporary link to claim template page
-		$li = $('<li>').attr('class', claim.ClaimScore).attr('style', 'background-color:' + kudosColors[parseInt(claim.ClaimScore) + 3]);
-		$li.append($a);
-		$('ul').prepend($li);
 	});
-}
-
-$(function() {
+	
+	$('#urlButton').click(function() {
+		$('#urlButton').hide();
+		$('#urlContainer input').show();
+	});
+	
 	$("#pasteURL").bind('paste', function() {
 		$('#urlSubmit').show(200);
 		$(this).animate({"width": "100%",}, "fast" );
@@ -41,6 +36,15 @@ $(function() {
 		return false;
 	});
 });
+
+function injectSubmissions(json) {
+	$.each(json, function(i, claim) {
+		$a = $('<a>').attr('href', 'claim').text(claim.Title); // temporary link to claim template page
+		$li = $('<li>').attr('class', claim.ClaimScore).attr('style', 'background-color:' + kudosColors[parseInt(claim.ClaimScore) + 3]);
+		$li.append($a);
+		$('ul').prepend($li);
+	});
+}
 
 function ajaxError(jqxhr, type, error) {
 	var msg = "An Ajax error occurred!\n\n";
