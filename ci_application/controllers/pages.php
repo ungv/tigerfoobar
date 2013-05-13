@@ -53,13 +53,11 @@ class Pages extends CI_Controller {
 	//company page
 	public function company($companyID) {
 		//grab basic data
-		$data['companyInfo'] = $this->data_model->getCompany($companyID);
+		$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
 		$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
 		$data['companyTags'] = $this->data_model->getCompanyTags($companyID);
 		
 		$data['headerTitle'] = 'View Company - PatchWork';
-		$data['companyName'] = $data['companyInfo'][0]['Name'];
-		$data['companyScore'] = $data['companyInfo'][0]['Score'];
 
 		$data['csFiles'] = array('general','company');
 		$data['jsFiles'] = array('company');

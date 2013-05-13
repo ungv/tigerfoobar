@@ -1,12 +1,12 @@
 <div id="main">
-	<h1><?=$companyName?></h1>
+	<h1><?=$companyInfo['Name']?></h1>
 	<div id="tags">
 		<span>Industries:</span>
 		<ul id="industryTags">
 		<?php
 		foreach ($companyTags AS $tag) {
 			?>
-			<li><?=$tag['Name']?></li>
+			<li><?=$tag['Name']?> +<?=$tag['votes']?></li>
 			<?php
 		}
 		?>
@@ -18,7 +18,7 @@
 			<section id="leftCol">
 				<!-- have to make form auto submit with js -->
 				<div id="scoreHeader">
-					<span id="averageScore"><?=$companyScore?></span> <span id="scoreInfo">(30 claims, 976 opinions)</span>
+					<span id="averageScore"><?=$companyInfo['Score']?></span> <span id="scoreInfo">(30 claims, 976 opinions)</span>
 				</div>
 				<div id="controlContainer">
 					<div id='scoreDistribution'>
@@ -54,7 +54,7 @@
 
 			<section id="rightCol">
 				<div id="relatedTagsHeader">
-					<span>Related claim tags for <?=$companyName?></span>
+					<span>Related claim tags for <?=$companyInfo['Name']?></span>
 				</div>
 				<div id="relatedTagsContainer">
 					<ul id="claimPopTags">

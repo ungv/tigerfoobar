@@ -19,10 +19,9 @@ class Data_model extends CI_Model {
 	}
 
 	public function getCompany($companyID) {
-		$sql = "SELECT *
-				FROM Company
-				WHERE CompanyID = $companyID";
-		return $this->db->query($sql)->result_array();
+		$query = $this->db->get_where('Company', array('CompanyID' => $companyID));
+		//TODO: handle case where row isn't found
+		return $query->row();
 	}
 	
 	public function getCompanyClaims($companyID) {
@@ -35,12 +34,13 @@ class Data_model extends CI_Model {
 	}
 	
 	public function getCompanyTags($companyID) {
-		$sql = "SELECT DISTINCT Name
+		$sql = "SELECT DISTINCT t.Name, COUNT(c.Company_CompanyID) as votes
 				FROM Tags t
 				LEFT JOIN Company_has_Tags c
 				ON c.Tags_TagsID = t.TagsID
 				WHERE t.Type = 'Industry'
-				AND c.Company_CompanyID = $companyID";
+				AND c.Company_CompanyID = $companyID
+				GROUP BY t.Name";
 		return $this->db->query($sql)->result_array();
 	}
 }
