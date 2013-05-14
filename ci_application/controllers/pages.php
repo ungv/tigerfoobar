@@ -27,12 +27,16 @@ class Pages extends CI_Controller {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
 
-		$data['csFiles'] = array('general','homepage');
-		$data['jsFiles'] = array('homepage');
+		//$data['claimTags'] = $this->data_model->addClaim();
+		
+		$data['csFiles'] = array('general','homepage','ccStyles');
+		$data['jsFiles'] = array('homepage','ccScripts');
 		//signed in logic goes here
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/home', $data);
+		$this->load->view('pages/ccScore', $data);
+		$this->load->view('pages/homeBottom', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -50,7 +54,9 @@ class Pages extends CI_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/ccTop', $data);
+		$this->load->view('pages/ccScoreTop', $data);
 		$this->load->view('pages/ccScore', $data);
+		$this->load->view('pages/ccScoreBottom', $data);
 		$this->load->view('pages/ccBottom', $data);
 		$this->load->view('templates/footer');
 	}
@@ -70,7 +76,9 @@ class Pages extends CI_Controller {
 		
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/ccTop', $data);
+		$this->load->view('pages/ccScoreTop', $data);
 		$this->load->view('pages/ccScore', $data);
+		$this->load->view('pages/ccScoreBottom', $data);
 		$this->load->view('pages/highlowClaims', $data);
 		$this->load->view('pages/ccBottom', $data);
 		$this->load->view('templates/footer');

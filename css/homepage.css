@@ -55,17 +55,35 @@
 }
 
 #urlSubmit {
-	background-color: #D1D2D4;
 	width: 600px;
-	height: 450px;
-	z-index: 100;
-	position: absolute;
+	height: 260px;
 	margin-top: 40px;
-	padding: 10px;
 }
 
 #urlSubmit input, textarea {
 	margin-bottom: 5px;
+}
+
+#urlSubmit textarea {
+	width: 570px;
+}
+
+#urlSubmit p {
+	margin-left: 235px;
+}
+
+#controlContainer {
+	float: right;
+	margin-right: 7px;
+}
+
+#scoreDistribution {
+	display: none !important;
+}
+
+#assocCo {
+	width: 40%;
+	margin-top: 15px;
 }
 
 #submit, #cancel {

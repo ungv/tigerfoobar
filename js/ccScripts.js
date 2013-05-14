@@ -1,8 +1,23 @@
 var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
 
 $(document).ready(function() {
-	$.each($('.scoreBox'), function(i) {
-		$(this).css('background-color', colors[i]);
+	resetScale();
+	
+	$('.scoreBox').hover(
+		function() {
+			if ($(this).attr('value') == 0)
+				$(this).text('F');
+			else
+				$(this).text($(this).attr('value'));
+		},
+		function() {
+			$(this).text('');
+		}
+	);
+	
+	$('.scoreBox').click(function() {
+		resetScale();
+		$(this).addClass('selectedRating');
 	});
 	
 	var avg = parseFloat($('#averageScore').text());
@@ -40,22 +55,18 @@ $(document).ready(function() {
 			$(this).parent().css('background-color', colors[6]);
 		}
 	});
-	
-	$('.scoreBox').hover(
-		function() {
-			if ($(this).attr('value') == 0)
-				$(this).text('F');
-			else
-				$(this).text($(this).attr('value'));
-		},
-		function() {
-			$(this).text('');
-		}
-	);
 });
 
 function insertColor(color) {
 		$('#averageScore').css('color', color);
 		$('#scoreContent').css('border-left', '5px solid ' + color);
 		$('#claimPopTags li').css('background-color', color);
+}
+
+function resetScale() {
+	$.each($('.scoreBox'), function(i) {
+		$(this).css('background-color', colors[i]);
+		$(this).css('border', '2px solid ' + colors[i]);
+		$(this).removeClass('selectedRating');
+	});
 }

@@ -25,7 +25,7 @@
 			<span><a id="login" href = "/profile/1"> Log In</a> | <a id="signup">Sign Up</a></span>
 		</SECTION>
 	</header>
-	<div id="signupPopup" style="display: none;">
+	<div id="signupPopup" class="popup" style="display: none;">
 		<form action="" method="post">
 			<h3>Create a new account!</h3>
 			<input type="text" class="outfocus" name="username" placeholder="Your desired codename"/>

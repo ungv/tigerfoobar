@@ -8,13 +8,6 @@
 		</div>
 	</div>
 	
-	<div id="urlSubmit" style="display:none;">
-		<input class="full" type="text" placeholder="Title"/>
-		<textarea rows="4" cols="69%" placeholder="Your comments on this article"></textarea>
-		<input class="quarter" style="vertical-align: top;" type="text" placeholder="Associated Company"/>
-		<input class="full" type="text" placeholder="Tags"/>
-		<input type="submit" class="submitButton" value="Submit"/><input type="submit" class="cancelButton" value="cancel"  />
-	</div>
 	
 	<ul>
 		<li></li>
@@ -33,4 +26,11 @@
 		<li></li>
 		<li></li>
 	</ul>	
-</div>
+	
+	
+	<div id="urlSubmit" class="popup" style="display:none;">
+		<input class="full" type="text" placeholder="Title"/>
+		<textarea rows="4" placeholder="Your comments on this article"></textarea>		
+		<p>What does this article say about the associated company?</p>
+		<input id="assocCo" type="text" placeholder="Associated Company"/>
+

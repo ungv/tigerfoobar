@@ -10,7 +10,7 @@ body, html{
 	min-height:100%;
 }
 
-body{
+body, input, textarea{
 	color:#444;
 	font-family: Cambria;
 	font-size: 14px;
@@ -139,17 +139,20 @@ input[type=submit]:hover, input[type=button]:hover {
 	opacity: 1;
 }
 
-#signupPopup {
+.popup {
 	background-color: rgb(238, 238, 238);
-	width: 250px;
-	z-index: 1;
+	z-index: 100;
 	position: absolute;
-	right: 200px;
 	padding: 20px;
 	border: 1px solid rgb(214, 214, 214);
 	-moz-box-shadow: 3px 3px 3px #888;
 	-webkit-box-shadow: 3px 3px 3px #888;
 	box-shadow: 3px 3px 3px #888;
+}
+
+#signupPopup {
+	width: 250px;
+	right: 200px;
 }
 
 #signupPopup input[type=text] {

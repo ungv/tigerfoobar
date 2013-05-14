@@ -152,6 +152,11 @@ li {
 	text-align: center;
 	font-size: 22pt;
 }
+
+.selectedRating {
+	border: 2px solid black !important;
+}
+
 #rightCol {
 	float: left;
 	width: 49.8%;
