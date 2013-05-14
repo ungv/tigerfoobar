@@ -26,13 +26,15 @@ $(document).ready(function() {
 	});
 	
 	$("#pasteURL").bind('paste', function() {
+		$('#urlInput').removeClass('quarter').addClass('half');
 		$('#urlSubmit').show(200);
-		$(this).animate({"width": "100%",}, "fast" );
 	});
 	$(".cancelButton").click(function() {
+		$('#urlInput').removeClass('half').addClass('quarter');
 		$('#urlSubmit').hide(200);
-		$("#pasteURL").animate({"width": "180px",}, "fast" );
 		$("#pasteURL").val('');
+		$('#urlButton').show('fade', 600);
+		$('#urlInput').hide('fade', 200);
 		return false;
 	});
 });

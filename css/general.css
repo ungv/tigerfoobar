@@ -16,7 +16,7 @@ body{
 	font-size: 14px;
 }
 
-a, input, label, li, #urlButton {
+a, input, label, li, textarea, #urlButton {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -37,22 +37,22 @@ h1, h2, h3 {
 	font-family: Rockwell;
 }
 
-input {
+input, textarea {
 	padding: 5px;
 	outline: none;
 }
 
-input.outfocus {
+input.outfocus, textarea.outfocus {
 	border: 2px solid #CCC;
 	background-color: white;
 }
 
-input.hover {
+input.hover, textarea.hover {
 	border: 2px solid #DDD;
 	background-color: rgb(228, 228, 228);
 }
 
-input.infocus {
+input.infocus, textarea.infocus {
 	border: 2px solid #73A6FF;
 	background-color: #EFF5FF;
 }

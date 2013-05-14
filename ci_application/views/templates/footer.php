@@ -14,13 +14,14 @@
 			$('#signupPopup').hide(200);
 		});
 		
-		$('input[type=text]').each(function() {
+		$('input[type=text], textarea').each(function() {
 			$(this).addClass('outfocus');
 		});
-		$('input[type=text]').focus(function() {
-			$(this).attr('class', 'infocus');
+		$('input[type=text], textarea').focus(function() {
+			$(this).removeClass('outfocus').addClass('infocus');
+			console.log('hey');
 		}).blur(function() {
-			$(this).attr('class', 'outfocus');
+			$(this).removeClass('infocus').addClass('outfocus');
 		}).mouseenter(function() {
 			$(this).addClass('hover');
 		}).mouseleave(function() {

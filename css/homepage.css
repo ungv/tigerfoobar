@@ -29,9 +29,6 @@
 
 #urlButton, #urlInput {
 	position: absolute;
-	width: 180px;
-	height: 20px;
-	float: left;
 }
 
 #urlButton {
@@ -54,18 +51,16 @@
 }
 
 #pasteURL {
-	width: 200px;
+	width: 100%;
 }
 
 #urlSubmit {
-	/* background: url('http://webhost.ischool.uw.edu/~bc28/submittingClaim.png');
-	background-repeat: no-repeat; */
 	background-color: #D1D2D4;
-	width: 780px;
+	width: 600px;
 	height: 450px;
 	z-index: 100;
 	position: absolute;
-	margin-left: 70px;
+	margin-top: 40px;
 	padding: 10px;
 }
 
@@ -78,7 +73,7 @@
 }
 
 .full {
-	width: 100%;
+	width: 95%;
 }
 
 .half {
@@ -88,3 +83,4 @@
 .quarter {
 	width: 25%;
 }
+

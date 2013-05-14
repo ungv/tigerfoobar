@@ -3,7 +3,7 @@
 		<div id="urlButton">
 			<img src="/img/newClaim.png" /><span>Add a new claim</span>
 		</div>
-		<div id="urlInput" style="display: none;">
+		<div id="urlInput" class="quarter" style="display: none;">
 			<input type="text" id="pasteURL" placeholder="Paste URL to a new article"/>
 		</div>
 	</div>
