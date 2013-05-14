@@ -18,12 +18,40 @@ class Data_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	// ------------- METHODS FOR CLAIM VIEW -------------
+	public function getClaim($claimID) {
+		$sql = "SELECT *
+				FROM Claim cl
+				LEFT JOIN Company co
+				ON cl.CompanyID = co.CompanyID
+				WHERE cl.ClaimID = $claimID";
+		return $this->db->query($sql)->result_array();
+	
+		/* $query = $this->db->get_where('Claim', array('ClaimID' => $claimID));
+		//TODO: handle case where row isn't found
+		return $query->row(); */
+	}
+	
+	public function getClaimTags($claimID) {
+		$sql = "SELECT DISTINCT t.Name, COUNT(ct.Claim_ClaimID) as votes
+				FROM Tags t
+				LEFT JOIN Claim_has_Tags ct
+				ON t.TagsID = Tags_TagsID
+				LEFT JOIN Claim c
+				ON c.ClaimID = Claim_ClaimID
+				WHERE t.Type = 'Claim Tag'
+				AND c.ClaimID = $claimID
+				GROUP BY t.Name";
+		return $this->db->query($sql)->result_array();
+	}
+	
+	// ------------- METHODS FOR COMPANY VIEW -------------	
 	public function getCompany($companyID) {
 		$query = $this->db->get_where('Company', array('CompanyID' => $companyID));
 		//TODO: handle case where row isn't found
 		return $query->row();
 	}
-	
+
 	public function getCompanyClaims($companyID) {
 		$sql = "SELECT cl.*
 				FROM Claim cl
@@ -42,5 +70,12 @@ class Data_model extends CI_Model {
 				AND c.Company_CompanyID = $companyID
 				GROUP BY t.Name";
 		return $this->db->query($sql)->result_array();
+	}
+	
+	// ------------- METHODS FOR TAG VIEW -------------
+	public function getTags($tagID) {
+		$query = $this->db->get_where('Tags', array('TagsID' => $tagID));
+		//TODO: handle case where row isn't found
+		return $query->row();
 	}
 }

@@ -37,43 +37,58 @@ class Pages extends CI_Controller {
 	}
 
 	//claim page
-	public function claim() {
+	public function claim($claimID) {
 		$data['headerTitle'] = 'View Claim - PatchWork';
-		$data['pageTitle'] = 'Claim title goes here';
+		$data['pageType'] = 'claim';
 
+		$data['claimInfo'] = $this->data_model->getClaim($claimID);
+		$data['claimTags'] = $this->data_model->getClaimTags($claimID);
+		
 		//files needed
-		$data['csFiles'] = array('general','claim');
-		$data['jsFiles'] = array('claim');
+		$data['csFiles'] = array('general','ccStyles');
+		$data['jsFiles'] = array('ccScripts');
 
 		$this->load->view('templates/header', $data);
-		$this->load->view('pages/claim', $data);
+		$this->load->view('pages/ccTop', $data);
+		$this->load->view('pages/ccScore', $data);
+		$this->load->view('pages/ccBottom', $data);
 		$this->load->view('templates/footer');
 	}
 
 	//company page
 	public function company($companyID) {
+		$data['headerTitle'] = 'View Company - PatchWork';
+		$data['pageType'] = 'company';
+		
 		//grab basic data
 		$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
 		$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
 		$data['companyTags'] = $this->data_model->getCompanyTags($companyID);
 		
-		$data['headerTitle'] = 'View Company - PatchWork';
-
-		$data['csFiles'] = array('general','company');
-		$data['jsFiles'] = array('company');
+		$data['csFiles'] = array('general','ccStyles');
+		$data['jsFiles'] = array('ccScripts');
 		
 		$this->load->view('templates/header', $data);
-		$this->load->view('pages/company', $data);
+		$this->load->view('pages/ccTop', $data);
+		$this->load->view('pages/ccScore', $data);
+		$this->load->view('pages/highlowClaims', $data);
+		$this->load->view('pages/ccBottom', $data);
 		$this->load->view('templates/footer');
 	}
 
 	//tag page
-	public function tag() {
+	public function tag($tagID) {
 		$data['headerTitle'] = 'View Tag - PatchWork';
-		$data['tagTitle'] = 'Tag name goes here';
+		$data['pageType'] = 'tag';
+		
+		$data['tagInfo'] = get_object_vars($this->data_model->getTags($tagID));
+		
+		$data['csFiles'] = array('general');
+		$data['jsFiles'] = array('');
 
 		$this->load->view('templates/header', $data);
-		$this->load->view('pages/tag', $data);
+		$this->load->view('pages/ccTop', $data);
+		$this->load->view('pages/ccBottom', $data);
 		$this->load->view('templates/footer');
 	}
 
