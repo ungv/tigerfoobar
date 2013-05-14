@@ -22,12 +22,31 @@
 			<!--Search box-->
 			<input id="tags" type="text" placeholder="Search for companies or products/services"/>
 			<!--Profile/login/register-->
-			<span><a id="login" href = "/profile/1"> Log In</a> | <a id="signup">Sign Up</a></span>
+			<?php if($isLogged) { ?>
+				<span id="login_buttons" style="display: none;"><a id="login" href = "#"> Log In</a> | <a id="signup" href = "#">Sign Up</a></span>
+				<span id="logout"><a href="action/logout">logout</a></span>
+				<span id="login_status">Logged in as <?= $username ?></span>
+				
+			<?php }else { ?>
+				<span id="login_buttons"><a id="login" href = "#">Log In</a> | <a id="signup" href = "#">Sign Up</a></span>
+				<span id="logout" style="display: none;"><a href="action/logout">logout</a></span>
+				<span id="login_status" style="display: none;"></span>
+			<?php } ?>
 		</SECTION>
 	</header>
-	<div id="signupPopup" class="popup" style="display: none;">
+
+	<div id="loginPopup" style="display:none;">
+		<h3>Login to your Account</h3>
+		<p id="login_fail" style="display: none;">Login failed, Plese try again.</p>
+		<input id="login_username" type="text" placeholder="Username"/>
+		<input id="login_password" type="password" placeholder="Password"/>
+		<input id="login_submit" type="submit" value="Log in"/>
+		<input id="login_cancel" type="submit" value="Cancel"/>
+	</div>
+
+	<div id="signupPopup" style="display: none;">
 		<form action="" method="post">
-			<h3>Create a new account!</h3>
+			<h3>Create an account and start helping others!</h3>
 			<input type="text" class="outfocus" name="username" placeholder="Your desired codename"/>
 			<input type="text" class="outfocus" name="password1" placeholder="Super secret password"/>
 			<input type="text" class="outfocus" name="password2" placeholder="Password again for verification"/>

@@ -1,5 +1,6 @@
 <?php
-class Pages extends CI_Controller {
+include('root_controller.php');
+class Pages extends Root_Controller {
 	/*Constructor
 		-Loads Models and helpers
 		-Load Generic Data files
@@ -11,6 +12,12 @@ class Pages extends CI_Controller {
 		//Other Example Loads
 		$this->load->model('data_model');
 
+		//checking login
+		$data['userid'] = null;
+		$data['isLogged'] = $this->is_logged_in();
+		if($data['isLogged']) {
+			$data['username'] = $this->session->userdata('username');
+		}
 		//basic css and js
 		$data['csFiles'] = array();
 		$data['jsFiles'] = array();
@@ -27,16 +34,12 @@ class Pages extends CI_Controller {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
 
-		//$data['claimTags'] = $this->data_model->addClaim();
-		
-		$data['csFiles'] = array('general','homepage','ccStyles');
-		$data['jsFiles'] = array('homepage','ccScripts');
+		$data['csFiles'] = array('general','homepage');
+		$data['jsFiles'] = array('general','homepage');
 		//signed in logic goes here
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/home', $data);
-		$this->load->view('pages/ccScore', $data);
-		$this->load->view('pages/homeBottom', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -50,38 +53,38 @@ class Pages extends CI_Controller {
 		
 		//files needed
 		$data['csFiles'] = array('general','ccStyles');
-		$data['jsFiles'] = array('ccScripts');
+		$data['jsFiles'] = array('general','ccScripts');
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/ccTop', $data);
-		$this->load->view('pages/ccScoreTop', $data);
 		$this->load->view('pages/ccScore', $data);
-		$this->load->view('pages/ccScoreBottom', $data);
 		$this->load->view('pages/ccBottom', $data);
 		$this->load->view('templates/footer');
 	}
 
 	//company page
-	public function company($companyID) {
-		$data['headerTitle'] = 'View Company - PatchWork';
-		$data['pageType'] = 'company';
-		
-		//grab basic data
-		$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
-		$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
-		$data['companyTags'] = $this->data_model->getCompanyTags($companyID);
-		
-		$data['csFiles'] = array('general','ccStyles');
-		$data['jsFiles'] = array('ccScripts');
-		
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/ccTop', $data);
-		$this->load->view('pages/ccScoreTop', $data);
-		$this->load->view('pages/ccScore', $data);
-		$this->load->view('pages/ccScoreBottom', $data);
-		$this->load->view('pages/highlowClaims', $data);
-		$this->load->view('pages/ccBottom', $data);
-		$this->load->view('templates/footer');
+	public function company($companyID = -1) {
+		if($companyID == -1) {
+			$this->homepage(); //!! change to TreemapSearch later
+		}else {
+			//grab basic data
+			$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
+			$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
+			$data['companyTags'] = $this->data_model->getCompanyTags($companyID);
+			
+			$data['headerTitle'] = 'View Company - PatchWork';
+			$data['pageType'] = 'company';
+
+			$data['csFiles'] = array('general','ccStyles');
+			$data['jsFiles'] = array('general','ccScripts');
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/ccTop', $data);
+			$this->load->view('pages/ccScore', $data);
+			$this->load->view('pages/highlowClaims', $data);
+			$this->load->view('pages/ccBottom', $data);
+			$this->load->view('templates/footer');
+		}
 	}
 
 	//tag page
