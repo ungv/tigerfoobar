@@ -24,12 +24,12 @@
 			<!--Profile/login/register-->
 			<?php if($isLogged) { ?>
 				<span id="login_buttons" style="display: none;"><a id="login" href = "#"> Log In</a> | <a id="signup" href = "#">Sign Up</a></span>
-				<span id="logout"><a href="action/logout">logout</a></span>
+				<span id="logout"><a href="<?=base_url()?>/action/logout">logout</a></span>
 				<span id="login_status">Logged in as <?= $username ?></span>
 				
 			<?php }else { ?>
 				<span id="login_buttons"><a id="login" href = "#">Log In</a> | <a id="signup" href = "#">Sign Up</a></span>
-				<span id="logout" style="display: none;"><a href="action/logout">logout</a></span>
+				<span id="logout" style="display: none;"><a href="<?=base_url()?>/action/logout">logout</a></span>
 				<span id="login_status" style="display: none;"></span>
 			<?php } ?>
 		</SECTION>
