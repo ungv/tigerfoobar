@@ -57,7 +57,11 @@ class Pages extends Root_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/ccTop', $data);
-		$this->load->view('pages/ccScore', $data);
+		$this->load->view('pages/evidence', $data);
+		$this->load->view('pages/scoreTop', $data);
+		$this->load->view('pages/score', $data);
+		$this->load->view('pages/scoreBottom', $data);
+		$this->load->view('pages/discussion', $data);
 		$this->load->view('pages/ccBottom', $data);
 		$this->load->view('templates/footer');
 	}
@@ -80,7 +84,9 @@ class Pages extends Root_Controller {
 			
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/ccTop', $data);
-			$this->load->view('pages/ccScore', $data);
+			$this->load->view('pages/scoreTop', $data);
+			$this->load->view('pages/score', $data);
+			$this->load->view('pages/scoreBottom', $data);
 			$this->load->view('pages/highlowClaims', $data);
 			$this->load->view('pages/ccBottom', $data);
 			$this->load->view('templates/footer');
