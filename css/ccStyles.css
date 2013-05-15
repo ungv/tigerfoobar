@@ -78,17 +78,26 @@ li {
 }
 
 #discussionContent {
-	border-left: 5px solid red;
+	border: 1px solid lightgray;
 }
 
+#discussionContent li {
+	border-left: 5px solid;
+	padding: 10px;
+	position: relative;
+}
 
+.discussionOptions {
+	float: right;
+	
+}
 
 #leftCol {
 	float: left;
 	width: 50%;
 }
 
-#leftCol, #scoreDistribution, #evidenceContent, #controlContainer, #relatedTagsContainer{
+#leftCol, #scoreDistribution, #evidenceContent, #controlContainer, #relatedTagsContainer, #discussionContent{
 	overflow: hidden;
 }
 
