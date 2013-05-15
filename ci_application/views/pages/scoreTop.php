@@ -1,7 +1,7 @@
 	<!--Start ScoreTop content-->
-	<div class="scoreContainer">
+	<div id="scoreContainer" class="container">
 		<h2>Score</h2>
-		<div id="scoreContent">
+		<div id="scoreContent" class="content">
 			<section id="leftCol">
 				<!-- have to make form auto submit with js -->
 				<div id="scoreHeader">

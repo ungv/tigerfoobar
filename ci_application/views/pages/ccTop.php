@@ -5,7 +5,7 @@
 <?php
 if ($pageType != 'tag') {
 	?>
-	<div id="tags">
+	<div id="claimTags">
 	<?php
 	if ($pageType == 'company') {
 	?>

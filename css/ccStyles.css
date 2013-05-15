@@ -9,7 +9,7 @@ li {
 	margin-right: 5px;
 }
 
-#tags span, #industryTags li{
+#claimTags span, #industryTags li{
 	float: left;
 	padding: 5px 25px 5px 5px;
 }
@@ -26,22 +26,20 @@ li {
 	font-size: 18pt;
 }
 
-.scoreContainer > div {
-	border: 1px solid rgb(213, 213, 213);
+.container {
+	margin-top: 20px;
 }
 
-.scoreContainer h2 {
+.container h2 {
 	width: 140px;
 }
 
-#user {
-	float: right;
-	/*padding: 10px;
-	text-align: right;
-	margin: 0 40px 0 -10px !important;
-	width: 889px;
-	border: 1px solid grey;
-	border-left: none;*/
+#evidenceContainer {
+	margin-top: 40px;
+}
+
+.content {
+	border: 1px solid rgb(213, 213, 213);
 }
 
 #evidenceContent {
