@@ -1,6 +1,3 @@
-// Kudos Colors       -3         -2         -1         0          +1         +2         +3
-var kudosColors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
-
 $(document).ready(function() {
 	$.ajax({
 		type: 'GET',

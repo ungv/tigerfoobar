@@ -50,6 +50,7 @@ class Pages extends Root_Controller {
 
 		$data['claimInfo'] = $this->data_model->getClaim($claimID);
 		$data['claimTags'] = $this->data_model->getClaimTags($claimID);
+		$data['comments'] = $this->data_model->getDiscussion($claimID);
 		
 		//files needed
 		$data['csFiles'] = array('general','ccStyles');
@@ -114,15 +115,16 @@ class Pages extends Root_Controller {
 		//test if user is in system
 
 		//grab basic data
-		$data['userInfo'] = $this->data_model->basicProfileInfo($userID);
+		$data['userInfo'] = get_object_vars($this->data_model->getUser($userID));
+		$data['userClaims'] = $this->data_model->getUserClaims($userID);
+		$data['userComments'] = $this->data_model->getUserComments($userID);
+		$data['userVotes'] = $this->data_model->getUserVotes($userID);
 
 		$data['headerTitle'] = 'User Profile - Patchwork';
-		$data['userName'] = $data['userInfo'][0]['Name'];
-		//$data['pageTitle'] = $data['userInfo']['Name'];
 
 		//files needed
 		$data['csFiles'] = array('general','profile');
-		$data['jsFiles'] = array('profile');
+		$data['jsFiles'] = array('general','profile');
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/profile', $data);

@@ -1,6 +1,8 @@
 /*
 	Patchwork - General Front End Functionality
 */
+var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
+
 $(document).ready(function() {
 
 	
