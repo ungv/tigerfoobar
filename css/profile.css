@@ -1,29 +1,15 @@
+/* General Styles */
+#main a {
+	color: rgb(21, 0, 60);
+}
+
 ul {
 	float: left;
 	width: 960px;
 }
 
 li {
-	width: 110px;
-	height: 90px;
-	border: 1px;
-	padding: 2px;
-	opacity: 0.8;
 	list-style-type: none;
-	float: left;
-}
-
-li:hover {
-	opacity: 1;
-}
-
-#main a {
-	color: rgb(21, 0, 60);
-}
-
-.rating {
-	float: left;
-	margin: 10px;
 }
 
 .container {
@@ -32,6 +18,36 @@ li:hover {
 	margin-top: 10px;
 }
 
+/* Submissions section styles */
+#submissions li {
+	width: 110px;
+	height: 90px;
+	border: 1px;
+	padding: 2px;
+	opacity: 0.8;
+	float: left;
+}
+
+#submissions li:hover {
+	opacity: 1;
+}
+
+/* Votes section styles */
 .threadContainer {
-	margin-top: 10px;
+	margin: 10px 0 0 10px;
+}
+
+#votes li {
+	margin: 5px 0 10px 10px;
+}
+
+.votedComment {
+	font-size: 14pt;
+	margin-left: 10px;
+	background-color: rgb(245, 245, 245);
+	padding: 5px;
+}
+
+.coComment {
+	float: right;
 }

@@ -24,7 +24,7 @@
 		<div class="threadContainer">
 			<div class="thread">
 				<h3><a href="">"<?=$comment['Comment']?>"</a></h3>
-				<p><em><strong><?=$userInfo['Name']?></strong> rated <a href="/claim/<?=$comment['ClaimID']?>"><?=$comment['Title']?></a> a <strong><?=$comment['Value']?></strong></em></p>
+				<p><em><strong><?=$userInfo['Name']?></strong> rated <a href="/claim/<?=$comment['ClaimID']?>"><?=$comment['Title']?></a> a <strong class="theirRating"><?=$comment['Value']?></strong></em></p>
 			</div>
 		</div>
 		<?php
@@ -34,5 +34,22 @@
 	
 	<div id="votes" class="container">
 		<h3>Votes:</h3>
+		<ul>
+		<?php
+		foreach ($userVotes as $vote) {
+		?>
+			<li>
+				<p>
+					<strong>-<?=$vote['Name']?></strong> 
+					<?= $vote['Value'] == 0 ? '<span class="disliked">disliked</span>' : '<span class="liked">liked</span>' ?>
+				</p>
+				<p class="votedComment">
+					"<a href="/claim/<?=$vote['ClaimID']?>/#<?=$vote['CommentID']?>"><?=$vote['Comment']?></a>"
+				</p>
+				<p class="coComment">about <a href="/company/<?=$vote['CompanyID']?>"><?=$vote['CoName']?></a></p>
+			</li>
+		<?php
+		}
+		?>
 	</div>
 </div>

@@ -114,10 +114,16 @@ class Data_model extends CI_Model {
 	}	
 	
 	public function getUserVotes($userID) {
-		$sql = "SELECT *
+		$sql = "SELECT u.Name, v.Value, v.CommentID, d.Comment, v.Time, c.ClaimID, c.Title, co.CompanyID, co.Name AS CoName
 				FROM User u
 				LEFT JOIN Vote v
 				ON u.UserID = v.UserID
+				LEFT JOIN Discussion d
+				ON v.CommentID = d.CommentID
+				LEFT JOIN Claim c
+				ON c.ClaimID = d.ClaimID
+				LEFT JOIN Company co
+				ON co.CompanyID = c.CompanyID
 				WHERE u.UserID = $userID";
 		return $this->db->query($sql)->result_array();
 	}	
