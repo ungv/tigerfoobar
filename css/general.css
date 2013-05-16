@@ -40,6 +40,8 @@ h1, h2, h3 {
 input, textarea {
 	padding: 5px;
 	outline: none;
+	font-family: Cambria;
+	font-size: 12pt;
 }
 
 input.outfocus, textarea.outfocus {
@@ -55,6 +57,10 @@ input.hover, textarea.hover {
 input.infocus, textarea.infocus {
 	border: 2px solid #73A6FF;
 	background-color: #EFF5FF;
+}
+
+.error {
+	color: red;
 }
 
 /*Header---------------------------*/

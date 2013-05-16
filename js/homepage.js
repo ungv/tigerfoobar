@@ -1,4 +1,23 @@
 $(document).ready(function() {
+	$('#newClaimForm').validate({
+		rules: {
+			title: {
+				required: true
+			},
+			assocCo: {
+				required: true
+			}
+		},
+		messages: {
+			title: {
+				required: "^We'd very much like a title"
+			},
+			assocCo: {
+				required: "^Whom does this article mostly refer to?"
+			}
+		}
+	});
+
 	$('#urlButton').click(function() {
 		$('#urlButton').hide('fade', 200);
 		$('#urlInput').show('fade', 600);

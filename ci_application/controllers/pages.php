@@ -16,6 +16,7 @@ class Pages extends Root_Controller {
 		$data['userid'] = null;
 		$data['isLogged'] = $this->is_logged_in();
 		if($data['isLogged']) {
+			$data['userid'] = $this->session->userdata('userid');
 			$data['username'] = $this->session->userdata('username');
 		}
 		//basic css and js
