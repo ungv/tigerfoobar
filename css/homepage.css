@@ -55,8 +55,8 @@
 }
 
 #urlSubmit {
-	width: 600px;
-	height: 260px;
+	width: 590px;
+	height: 340px;
 	margin-top: 40px;
 }
 
@@ -65,7 +65,7 @@
 }
 
 #urlSubmit textarea {
-	width: 570px;
+	width: 561px;
 }
 
 #urlSubmit p {

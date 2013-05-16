@@ -67,13 +67,13 @@ $(document).ready(function() {
 	});
 
 	//Set focus behavior for input boxes
-	$('input[type=text]').each(function() {
+	$('input, textarea').each(function() {
 			$(this).addClass('outfocus');
 		});
-	$('input[type=text]').focus(function() {
-		$(this).attr('class', 'infocus');
+	$('input, textarea').focus(function() {
+		$(this).removeClass('outfocus').addClass('infocus');
 	}).blur(function() {
-		$(this).attr('class', 'outfocus');
+		$(this).removeClass('infocus').addClass('outfocus');
 	}).mouseenter(function() {
 		$(this).addClass('hover');
 	}).mouseleave(function() {

@@ -34,12 +34,14 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
 
-		$data['csFiles'] = array('general','homepage');
-		$data['jsFiles'] = array('general','homepage');
+		$data['csFiles'] = array('general','homepage','ccStyles');
+		$data['jsFiles'] = array('general','homepage','ccScripts');
 		//signed in logic goes here
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/home', $data);
+		$this->load->view('pages/score', $data);
+		$this->load->view('pages/homeBottom', $data);
 		$this->load->view('templates/footer');
 	}
 

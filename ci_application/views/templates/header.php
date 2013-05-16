@@ -35,25 +35,26 @@
 		</SECTION>
 	</header>
 
-	<div id="loginPopup" style="display:none;">
+	<div id="loginPopup" class="popup" style="display:none;">
 		<h3>Login to your Account</h3>
 		<p id="login_fail" style="display: none;">Login failed, Plese try again.</p>
 		<input id="login_username" type="text" placeholder="Username"/>
 		<input id="login_password" type="password" placeholder="Password"/>
-		<input id="login_submit" type="submit" value="Log in"/>
-		<input id="login_cancel" type="submit" value="Cancel"/>
+		<button id="login_submit" class="submitButton">Log in</button>
+		<button id="login_cancel" class="cancelButton">Cancel</button>
 	</div>
 
-	<div id="signupPopup" style="display: none;">
+	<div id="signupPopup" class="popup" style="display: none;">
 		<form action="" method="post">
 			<h3>Create an account and start helping others!</h3>
 			<input type="text" class="outfocus" name="username" placeholder="Your desired codename"/>
-			<input type="text" class="outfocus" name="password1" placeholder="Super secret password"/>
-			<input type="text" class="outfocus" name="password2" placeholder="Password again for verification"/>
+			<input type="password" class="outfocus" name="password1" placeholder="Super secret password"/>
+			<input type="password" class="outfocus" name="password2" placeholder="Password again for verification"/>
 			<input type="text" class="outfocus" name="email" placeholder="Email (*optional)"/>
 			<p>
 				*We only require an email to help you recover a lost username/password and will never spam you with anything, ever!
 			</p>
-			<input type="submit" class="submitButton" value="Log me in!"/><input type="button" class="cancelButton" value="Wait no..."/>
+			<button id="signup_submit" class="submitButton">Sign me up!</button>
+			<button id="signup_cancel" class="cancelButton">Wait, no...</button>
 		</form>
 	</div>

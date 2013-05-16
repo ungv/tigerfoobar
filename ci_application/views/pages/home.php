@@ -29,6 +29,7 @@
 	
 	
 	<div id="urlSubmit" class="popup" style="display:none;">
+		<h3>We need more info about this URL</h3>
 		<input class="full" type="text" placeholder="Title"/>
 		<textarea rows="4" placeholder="Your comments on this article"></textarea>		
 		<p>What does this article say about the associated company?</p>
