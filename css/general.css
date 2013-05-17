@@ -115,16 +115,34 @@ header span {
 /*Footer---------------------------*/
 
 footer {
-	background-color: rgb(190, 190, 190);
+	background-color: lightgrey;
 	
 	position: absolute;
-	bottom: 0;
 	left: 0;
 	
 	/*height: 100px;*/
 	width: 100%;
 }
-	
+
+#bottomBar {
+	width: 915px;
+	padding: 15px;
+	margin: 0 auto;
+	background-color: rgb(190,190,190);
+	text-align: center;
+}
+
+#bottomBar ul {
+	display: inline-block;
+	margin-right: 10px;
+	margin-left: 10px;
+
+}
+
+#bottomBar li {
+	float: none;
+}
+
 /*Main-----------------------------*/
 
 #main{
