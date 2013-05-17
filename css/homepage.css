@@ -18,6 +18,10 @@
 	opacity: 1;
 }
 
+#treemapCanvas {
+	margin-top: 60px;
+}
+
 .rating {
 	float: left;
 	margin: 10px;

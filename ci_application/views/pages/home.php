@@ -1,4 +1,4 @@
-<div id="main">
+<div class="main">
 	<div id="urlContainer">
 		<div id="urlButton">
 			<img src="/img/newClaim.png" /><span>Add a new claim</span>
@@ -9,7 +9,7 @@
 	</div>
 	
 	
-	<ul>
+	<!--ul>
 		<li></li>
 		<li></li>
 		<li></li>
@@ -25,7 +25,7 @@
 		<li></li>
 		<li></li>
 		<li></li>
-	</ul>	
+	</ul-->	
 	
 	
 	<div id="urlSubmit" class="popup" style="display:none;">
@@ -33,4 +33,6 @@
 		<textarea rows="4" placeholder="Your comments on this article"></textarea>		
 		<p>What does this article say about the associated company?</p>
 		<input id="assocCo" type="text" placeholder="Associated Company"/>
+	</div>
+</div>
 

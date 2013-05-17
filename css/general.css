@@ -121,13 +121,13 @@ footer {
 	
 /*Main-----------------------------*/
 
-#main{
+.main{
 	width:915px;
 	margin:0px auto;
 	/* border: 1px solid; */
 }
 
-#main > div {
+.main > div {
 	margin-bottom: 20px;
 }
 	

@@ -36,10 +36,14 @@ class Pages extends Root_Controller {
 
 		$data['csFiles'] = array('general','homepage');
 		$data['jsFiles'] = array('general','homepage');
+		$data['topClaims'] = $this->data_model->getTopClaims();
+		$data['topCompanies'] = $this->data_model->getTopCompaniesWithClaims();
+		
 		//signed in logic goes here
-
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/home', $data);
+		$this->load->view('pages/treemap', $data);
+		
 		$this->load->view('templates/footer');
 	}
 
