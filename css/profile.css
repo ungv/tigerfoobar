@@ -1,32 +1,53 @@
-	
+/* General Styles */
+#main a {
+	color: rgb(21, 0, 60);
+}
 
+ul {
+	float: left;
+	width: 960px;
+}
 
+li {
+	list-style-type: none;
+}
 
+.container {
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+}
 
-	ul {
-		float: left;
-		width: 960px;
-	}
+/* Submissions section styles */
+#submissions li {
+	width: 110px;
+	height: 90px;
+	border: 1px;
+	padding: 2px;
+	opacity: 0.8;
+	float: left;
+}
 
-	li {
-		width: 150px;
-		height: 90px;
-		border: 1px
-		padding: 2px;
-		opacity: 0.8;
-		list-style-type: none;
-		float: left;
-	}
+#submissions li:hover {
+	opacity: 1;
+}
 
-	li:hover {
-		opacity: 1;
-	}
+/* Votes section styles */
+.threadContainer {
+	margin: 10px 0 0 10px;
+}
 
-	.rating {
-		float: left;
-		margin: 10px;
-	}
+#votes li {
+	margin: 5px 0 10px 10px;
+}
 
-	#submissions, #comments {
-		float: left;
-	}
+.votedComment {
+	font-size: 14pt;
+	margin-left: 10px;
+	background-color: rgb(245, 245, 245);
+	padding: 5px;
+}
+
+.coComment {
+	float: right;
+}

@@ -16,6 +16,7 @@ class Pages extends Root_Controller {
 		$data['userid'] = null;
 		$data['isLogged'] = $this->is_logged_in();
 		if($data['isLogged']) {
+			$data['userid'] = $this->session->userdata('userid');
 			$data['username'] = $this->session->userdata('username');
 		}
 		//basic css and js
@@ -34,12 +35,14 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
 
-		$data['csFiles'] = array('general','homepage');
-		$data['jsFiles'] = array('general','homepage');
+		$data['csFiles'] = array('general','homepage','ccStyles');
+		$data['jsFiles'] = array('general','homepage','ccScripts');
 		//signed in logic goes here
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/home', $data);
+		$this->load->view('pages/score', $data);
+		$this->load->view('pages/homeBottom', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -50,6 +53,7 @@ class Pages extends Root_Controller {
 
 		$data['claimInfo'] = $this->data_model->getClaim($claimID);
 		$data['claimTags'] = $this->data_model->getClaimTags($claimID);
+		$data['comments'] = $this->data_model->getDiscussion($claimID);
 		
 		//files needed
 		$data['csFiles'] = array('general','ccStyles');
@@ -114,15 +118,16 @@ class Pages extends Root_Controller {
 		//test if user is in system
 
 		//grab basic data
-		$data['userInfo'] = $this->data_model->basicProfileInfo($userID);
+		$data['userInfo'] = get_object_vars($this->data_model->getUser($userID));
+		$data['userClaims'] = $this->data_model->getUserClaims($userID);
+		$data['userComments'] = $this->data_model->getUserComments($userID);
+		$data['userVotes'] = $this->data_model->getUserVotes($userID);
 
 		$data['headerTitle'] = 'User Profile - Patchwork';
-		$data['userName'] = $data['userInfo'][0]['Name'];
-		//$data['pageTitle'] = $data['userInfo']['Name'];
 
 		//files needed
 		$data['csFiles'] = array('general','profile');
-		$data['jsFiles'] = array('profile');
+		$data['jsFiles'] = array('general','profile');
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/profile', $data);

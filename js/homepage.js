@@ -1,25 +1,23 @@
-// Kudos Colors       -3         -2         -1         0          +1         +2         +3
-var kudosColors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
-
 $(document).ready(function() {
-	$.ajax({
-		type: 'GET',
-		url: 'http://webhost.ischool.uw.edu/~bc28/service.php',
-		data: {
-			sql: "SELECT *, cl.Score AS ClaimScore, co.Score AS CoScore FROM Claim cl JOIN Company co ON cl.CompanyID = co.CompanyID"
+	$('#newClaimForm').validate({
+		rules: {
+			title: {
+				required: true
+			},
+			assocCo: {
+				required: true
+			}
 		},
-		contentType: 'jsonp',
-		dataType: 'jsonp',
-		success: function(json) {
-			injectSubmissions(json);
-		},
-		error: ajaxError
+		messages: {
+			title: {
+				required: "^We'd very much like a title"
+			},
+			assocCo: {
+				required: "^Whom does this article mostly refer to?"
+			}
+		}
 	});
-	
- 	$.each($('li'), function() {
-		$(this).attr('style', 'background-color:' + kudosColors[Math.ceil(Math.random() * 6)]);
-	});
-	
+
 	$('#urlButton').click(function() {
 		$('#urlButton').hide('fade', 200);
 		$('#urlInput').show('fade', 600);
@@ -39,15 +37,8 @@ $(document).ready(function() {
 	});
 });
 
-function injectSubmissions(json) {
-	$.each(json, function(i, claim) {
-		$a = $('<a>').attr('href', 'claim').text(claim.Title); // temporary link to claim template page
-		$li = $('<li>').attr('class', claim.ClaimScore).attr('style', 'background-color:' + kudosColors[parseInt(claim.ClaimScore) + 3]);
-		$li.append($a);
-		$('ul').prepend($li);
-	});
-}
 
+//	Used for error-checking ajax calls
 function ajaxError(jqxhr, type, error) {
 	var msg = "An Ajax error occurred!\n\n";
 	if (type == 'error') {

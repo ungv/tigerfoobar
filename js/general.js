@@ -1,8 +1,32 @@
 /*
 	Patchwork - General Front End Functionality
 */
-$(document).ready(function() {
+var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
 
+$(document).ready(function() {
+	var passwordMsgs = ['^Hmm, no password seems kinda fishy', '^Wait, ya kinda need a password', '^Uh, without a password, anyone can have your account', '^Ah, huge security risk!'];
+	
+	$('#signupForm').validate({
+		rules: {
+			username: {
+				required: true
+			},
+			password: {
+				required: true
+			},
+			email: {
+				email: true
+			}
+		},
+		messages: {
+			username: {
+				required: "^We can't just call you nothing..."
+			},
+			password: {
+				required: passwordMsgs[Math.floor(Math.random() * passwordMsgs.length)]
+			}
+		}
+	});
 	
 	//Sends the passed login parameters to server onclick
 	function sendLogin(username, password) {
@@ -36,6 +60,7 @@ $(document).ready(function() {
 	//Show login popup onclick
 	$('#login').click(function() {
 		$('#loginPopup').show(200);
+		$('#signupPopup').hide(200);
 	});
 
 	//Ask server to login on click
@@ -57,6 +82,7 @@ $(document).ready(function() {
 	//Show signin box onclick
 	$('#signup').click(function() {
 		$('#signupPopup').show(200);
+		$('#loginPopup').hide(200);
 	});
 
 	//Hide Signinpopup
@@ -65,13 +91,13 @@ $(document).ready(function() {
 	});
 
 	//Set focus behavior for input boxes
-	$('input[type=text]').each(function() {
+	$('input, textarea').each(function() {
 			$(this).addClass('outfocus');
 		});
-	$('input[type=text]').focus(function() {
-		$(this).attr('class', 'infocus');
+	$('input, textarea').focus(function() {
+		$(this).removeClass('outfocus').addClass('infocus');
 	}).blur(function() {
-		$(this).attr('class', 'outfocus');
+		$(this).removeClass('infocus').addClass('outfocus');
 	}).mouseenter(function() {
 		$(this).addClass('hover');
 	}).mouseleave(function() {
