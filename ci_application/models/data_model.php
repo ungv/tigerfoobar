@@ -68,11 +68,18 @@ class Data_model extends CI_Model {
 	
 	// ------------- METHODS FOR TAG VIEW ---------------
 	public function getTags($tagID) {
-		$query = $this->db->get_where('Tags', array('TagsID' => $tagID));
-		//TODO: handle case where row isn't found
-		return $query->row();
-	}
-	
+		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID, c.Title, c.Score AS ClScore, co.CompanyID, co.Name AS CoName, co.Score AS CoScore
+				FROM Tags t
+				LEFT JOIN Claim_has_Tags ct
+				ON t.TagsID = ct.Tags_TagsID
+				LEFT JOIN Claim c
+				ON ct.Claim_ClaimID = c.ClaimID
+                LEFT JOIN Company co
+                ON c.CompanyID = co.CompanyID
+				WHERE t.tagsID = $tagID";
+		return $this->db->query($sql)->result_array();
+	}	
+
 	// ------------- METHODS FOR DISCUSSION VIEW --------
 	public function getDiscussion($claimID) {
 		$sql = "SELECT d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time
