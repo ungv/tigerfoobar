@@ -10,10 +10,16 @@ body, html{
 	min-height:100%;
 }
 
+html {
+position: relative;
+min-height: 100%;
+}
+
 body{
 	color:#444;
 	font-family: Cambria;
 	font-size: 14px;
+	margin: 0 0 110px;
 }
 
 a, input, label, li, textarea, #urlButton {
@@ -119,8 +125,8 @@ footer {
 	
 	position: absolute;
 	left: 0;
-	
-	/*height: 100px;*/
+	bottom: 0;
+	height: 110px;
 	width: 100%;
 }
 
@@ -148,6 +154,7 @@ footer {
 #main{
 	width:915px;
 	margin:0px auto;
+	overflow: hidden;
 	/* border: 1px solid; */
 }
 
