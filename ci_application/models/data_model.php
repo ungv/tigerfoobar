@@ -14,16 +14,14 @@ class Data_model extends CI_Model {
 
 	// ------------- METHODS FOR CLAIM VIEW -------------
 	public function getClaim($claimID) {
-		$sql = "SELECT *
+		$sql = "SELECT cl.ClaimID, cl.Link, cl.Title AS ClaimTitle, cl.Description, cl.Score AS ClaimScore, cl.UserID, cl.CompanyID, cl.Time AS ClaimTime, co.Name AS CoName, co.Score AS CoScore, u.Name AS UserName
 				FROM Claim cl
 				LEFT JOIN Company co
 				ON cl.CompanyID = co.CompanyID
+				LEFT JOIN User u
+				ON cl.UserID = u.UserID
 				WHERE cl.ClaimID = $claimID";
 		return $this->db->query($sql)->result_array();
-	
-		/* $query = $this->db->get_where('Claim', array('ClaimID' => $claimID));
-		//TODO: handle case where row isn't found
-		return $query->row(); */
 	}
 	
 	public function getClaimTags($claimID) {

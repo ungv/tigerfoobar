@@ -9,6 +9,11 @@ li {
 	margin-right: 5px;
 }
 
+hr {
+	color: #D5D5D5;
+	background-color: #D5D5D5;
+}
+
 #claimTags span, #industryTags li{
 	float: left;
 	padding: 5px 25px 5px 5px;
@@ -39,13 +44,16 @@ li {
 }
 
 .content {
-	border: 1px solid rgb(213, 213, 213);
+	border: 1px solid #D5D5D5;
 }
 
 #evidenceContent {
 	border-left: 5px solid blue;
 	background-color: #F2F2F2;
-	padding: 10px;
+}
+
+#evidenceContent dl {
+	padding: 5px;
 }
 
 #evidenceContent dt {
