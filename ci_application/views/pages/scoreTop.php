@@ -5,8 +5,7 @@
 			<section id="leftCol">
 				<!-- have to make form auto submit with js -->
 				<div id="scoreHeader">
-					<span id="averageScore"><?=$pageType == 'company' ? 
-						$companyInfo['ClaimScore'] : $claimInfo[0]['ClaimScore'] ?></span>
+					<span id="averageScore"><?=$companyInfo[0]['Score']?></span>
 					<span id="scoreInfo">(30 claims, 976 comments)</span>
 				</div>
 	<!--End ScoreTop content-->

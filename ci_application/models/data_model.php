@@ -39,9 +39,10 @@ class Data_model extends CI_Model {
 	
 	// ------------- METHODS FOR COMPANY VIEW -------------	
 	public function getCompany($companyID) {
-		$query = $this->db->get_where('Company', array('CompanyID' => $companyID));
-		//TODO: handle case where row isn't found
-		return $query->row();
+		$sql = "SELECT *
+				FROM Company
+				WHERE CompanyID = $companyID";
+		return $this->db->query($sql)->result_array();
 	}
 
 	public function getCompanyClaims($companyID) {

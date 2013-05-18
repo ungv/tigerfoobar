@@ -76,7 +76,7 @@ class Pages extends Root_Controller {
 			$this->homepage(); //!! change to TreemapSearch later
 		}else {
 			//grab basic data
-			$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
+			$data['companyInfo'] = $this->data_model->getCompany($companyID);
 			$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
 			$data['companyTags'] = $this->data_model->getCompanyTags($companyID);
 			
