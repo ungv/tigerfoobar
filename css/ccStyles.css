@@ -9,6 +9,11 @@ li {
 	margin-right: 5px;
 }
 
+hr {
+	color: #D5D5D5;
+	background-color: #D5D5D5;
+}
+
 #claimTags span, #industryTags li{
 	float: left;
 	padding: 5px 25px 5px 5px;
@@ -39,13 +44,16 @@ li {
 }
 
 .content {
-	border: 1px solid rgb(213, 213, 213);
+	border: 1px solid #D5D5D5;
 }
 
 #evidenceContent {
 	border-left: 5px solid blue;
 	background-color: #F2F2F2;
-	padding: 10px;
+}
+
+#evidenceContent dl {
+	padding: 5px;
 }
 
 #evidenceContent dt {
@@ -120,6 +128,7 @@ li {
 }
 
 #scoreDistribution{
+	position: relative;
 	overflow: hidden;
 	width: 308px;
 	height: 65px;
@@ -129,7 +138,7 @@ li {
 	width: 44px;
 	height: 65px;
 	float: left;
-	position: relative;
+	position: absolute;
 }
 
 .circle {
@@ -215,4 +224,51 @@ li {
 
 .claimScore {
 	font-size: 20pt;
+}
+
+#discussionContainer {
+	position: relative;
+}
+
+#newComment {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 2px;
+	background-color: #E0E0E0;
+	border: 1px solid #CCCCCC;
+}
+
+#newComment:hover {
+	background-color: #CCC;
+	border: 1px solid #777;
+}
+
+#newCommentPopup {
+	top: 0;
+	left: 50%;
+	width: 400px;
+	margin-left: -200px;
+}
+
+
+#newCommentPopup textarea {
+	width: 95%;
+	height: 200px;
+}
+
+.box1 {
+	left: 44px;
+}
+.box2 {
+	left: 88px;
+}
+.box4 {
+	left: 176px;
+}
+.box5 {
+	left: 220px;
+}
+.box6{
+	left: 264px;
 }

@@ -12,18 +12,29 @@ class Data_model extends CI_Model {
 		return $query->result_array();		
 	}
 
+	// ------------- METHODS FOR GETTING THE SCORE INFORMATION -------------
+	public function getClaimScores($claimID) {
+		$sql = "SELECT *, COUNT(ClaimID) AS noRatings, 
+					(SELECT COUNT(ClaimID) 
+					FROM Rating 
+					WHERE ClaimID = $claimID) as Total
+				FROM Rating
+				WHERE ClaimID = $claimID
+				GROUP BY Value
+				ORDER BY Value";
+		return $this->db->query($sql)->result_array();
+	}
+
 	// ------------- METHODS FOR CLAIM VIEW -------------
 	public function getClaim($claimID) {
-		$sql = "SELECT *
+		$sql = "SELECT cl.ClaimID, cl.Link, cl.Title AS ClaimTitle, cl.Description, cl.Score AS ClaimScore, cl.UserID, cl.CompanyID, cl.Time AS ClaimTime, co.Name AS CoName, co.Score AS CoScore, u.Name AS UserName
 				FROM Claim cl
 				LEFT JOIN Company co
 				ON cl.CompanyID = co.CompanyID
+				LEFT JOIN User u
+				ON cl.UserID = u.UserID
 				WHERE cl.ClaimID = $claimID";
 		return $this->db->query($sql)->result_array();
-	
-		/* $query = $this->db->get_where('Claim', array('ClaimID' => $claimID));
-		//TODO: handle case where row isn't found
-		return $query->row(); */
 	}
 	
 	public function getClaimTags($claimID) {
@@ -38,20 +49,27 @@ class Data_model extends CI_Model {
 				GROUP BY t.Name";
 		return $this->db->query($sql)->result_array();
 	}
+
+	// Need to get number of ratings for each claim
 	
 	// ------------- METHODS FOR COMPANY VIEW -------------	
 	public function getCompany($companyID) {
-		$query = $this->db->get_where('Company', array('CompanyID' => $companyID));
-		//TODO: handle case where row isn't found
-		return $query->row();
+		$sql = "SELECT *
+				FROM Company
+				WHERE CompanyID = $companyID";
+		return $this->db->query($sql)->result_array();
 	}
 
 	public function getCompanyClaims($companyID) {
-		$sql = "SELECT cl.*
+		$sql = "SELECT cl.*, COUNT(cl.Score) AS noRatings,
+					(SELECT COUNT(Score) 
+					FROM Claim 
+					WHERE CompanyID = $companyID) as Total
 				FROM Claim cl
 				LEFT JOIN Company co
 				ON co.CompanyID = cl.CompanyID
-				WHERE co.CompanyID = $companyID";
+				WHERE co.CompanyID = $companyID
+				GROUP BY cl.Score";
 		return $this->db->query($sql)->result_array();
 	}
 	
@@ -68,11 +86,18 @@ class Data_model extends CI_Model {
 	
 	// ------------- METHODS FOR TAG VIEW ---------------
 	public function getTags($tagID) {
-		$query = $this->db->get_where('Tags', array('TagsID' => $tagID));
-		//TODO: handle case where row isn't found
-		return $query->row();
-	}
-	
+		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID, c.Title, c.Score AS ClScore, co.CompanyID, co.Name AS CoName, co.Score AS CoScore
+				FROM Tags t
+				LEFT JOIN Claim_has_Tags ct
+				ON t.TagsID = ct.Tags_TagsID
+				LEFT JOIN Claim c
+				ON ct.Claim_ClaimID = c.ClaimID
+                LEFT JOIN Company co
+                ON c.CompanyID = co.CompanyID
+				WHERE t.tagsID = $tagID";
+		return $this->db->query($sql)->result_array();
+	}	
+
 	// ------------- METHODS FOR DISCUSSION VIEW --------
 	public function getDiscussion($claimID) {
 		$sql = "SELECT d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time

@@ -1,6 +1,10 @@
 $(document).ready(function() {
 	$('#newClaimForm').validate({
 		rules: {
+			pasteURL: {
+				required: true,
+				url: true
+			},
 			title: {
 				required: true
 			},
