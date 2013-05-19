@@ -4,6 +4,8 @@ class Action_model extends CI_Model {
 	//called when constructed
 	public function __construct() {
 		$this->load->database();
+
+        $this->load->library('session');
 	}
 
 	//sends a login request to the DB object
@@ -38,4 +40,32 @@ class Action_model extends CI_Model {
 		//return $query->result_array();		
 	}
 
+    //Upvotes the relationship between the passed tag and company using
+    //the user id who sent it, or deletes the vote the user previously made 
+    //depending on the boolean value post (voted)
+    //Returns: false if the tag id is corrupt or if the query failed, 
+    //true otherwise
+    public function upvoteIndustry($userid) {
+        $tagid = $this->security->xss_clean($this->input->post('industryID'));
+        $companyid = $this->security->xss_clean($this->input->post('companyID'));
+        $voted = $this->security->xss_clean($this->input->post('voted'));
+
+        //check tagid is for industry
+        $isIndustry = $this->db->get_where('Tags', array('TagsID' => $tagid , 'Type' => 'Industry'));
+        if(!$isIndustry) {  //if not, return flase
+            return false;
+        }else {             //else, execute query
+            $data = array(
+               'Company_CompanyID' => $companyid ,
+               'Tags_TagsID' => $tagid ,
+               'User_ID' => $userid
+            );
+            if(!$voted) {    //user hasnt voted, insert row
+                $result = $this->db->insert('Company_has_Tags', $data); 
+            }else {         //user has voted, remove row
+                $result = $this->db->delete('Company_has_Tags', $data);
+            }
+            return $result;
+        }
+    }
 }

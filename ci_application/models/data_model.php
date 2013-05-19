@@ -56,13 +56,13 @@ class Data_model extends CI_Model {
 	}
 	
 	public function getCompanyTags($companyID) {
-		$sql = "SELECT DISTINCT t.Name, COUNT(c.Company_CompanyID) as votes
+		$sql = "SELECT DISTINCT t.Name, t.TagsID, COUNT(c.Company_CompanyID) as votes
 				FROM Tags t
 				LEFT JOIN Company_has_Tags c
 				ON c.Tags_TagsID = t.TagsID
 				WHERE t.Type = 'Industry'
 				AND c.Company_CompanyID = $companyID
-				GROUP BY t.Name";
+				GROUP BY t.Name, t.TagsID";
 		return $this->db->query($sql)->result_array();
 	}
 	

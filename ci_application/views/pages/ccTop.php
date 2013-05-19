@@ -1,6 +1,6 @@
 <!--Start #main content-->
 <div id="main">
-	<h1><?=$pageType == 'company' ? $companyInfo['Name'] : 
+	<h1><?= $pageType == 'company' ? $companyInfo['Name'] : 
 		($pageType == 'claim' ? $claimInfo[0]['Title'] : $tagInfo['Name'])?></h1>
 <?php
 if ($pageType != 'tag') {
@@ -21,11 +21,16 @@ if ($pageType != 'tag') {
 	<?php
 	foreach (($pageType == 'company' ? $companyTags : $claimTags) AS $tag) {
 	?>
-			<li><?=$tag['Name']?> +<?=$tag['votes']?></li>
+			<li>
+				<span class="industryTotal"><?=$tag['votes']?></span>
+				<span class="industryName"><?=$tag['Name']?></span>
+				<span class="industryUpvote" tagid="<?=$tag['TagsID']?>" companyid="<?=$companyInfo['CompanyID']?>" voted="0">+</span>
+			</li>
 	<?php
 	}
 	?>
 		</ul>
+		<!-- add new tag and search box go here -->
 	</div>
 	<?php
 } else { // Currently viewing 'tag' pages
