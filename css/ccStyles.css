@@ -128,6 +128,7 @@ hr {
 }
 
 #scoreDistribution{
+	position: relative;
 	overflow: hidden;
 	width: 308px;
 	height: 65px;
@@ -137,7 +138,7 @@ hr {
 	width: 44px;
 	height: 65px;
 	float: left;
-	position: relative;
+	position: absolute;
 }
 
 .circle {
@@ -223,4 +224,51 @@ hr {
 
 .claimScore {
 	font-size: 20pt;
+}
+
+#discussionContainer {
+	position: relative;
+}
+
+#newComment {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 2px;
+	background-color: #E0E0E0;
+	border: 1px solid #CCCCCC;
+}
+
+#newComment:hover {
+	background-color: #CCC;
+	border: 1px solid #777;
+}
+
+#newCommentPopup {
+	top: 0;
+	left: 50%;
+	width: 400px;
+	margin-left: -200px;
+}
+
+
+#newCommentPopup textarea {
+	width: 95%;
+	height: 200px;
+}
+
+.box1 {
+	left: 44px;
+}
+.box2 {
+	left: 88px;
+}
+.box4 {
+	left: 176px;
+}
+.box5 {
+	left: 220px;
+}
+.box6{
+	left: 264px;
 }

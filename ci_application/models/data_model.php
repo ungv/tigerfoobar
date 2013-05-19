@@ -12,6 +12,19 @@ class Data_model extends CI_Model {
 		return $query->result_array();		
 	}
 
+	// ------------- METHODS FOR GETTING THE SCORE INFORMATION -------------
+	public function getClaimScores($claimID) {
+		$sql = "SELECT *, COUNT(ClaimID) AS noRatings, 
+					(SELECT COUNT(ClaimID) 
+					FROM Rating 
+					WHERE ClaimID = $claimID) as Total
+				FROM Rating
+				WHERE ClaimID = $claimID
+				GROUP BY Value
+				ORDER BY Value";
+		return $this->db->query($sql)->result_array();
+	}
+
 	// ------------- METHODS FOR CLAIM VIEW -------------
 	public function getClaim($claimID) {
 		$sql = "SELECT cl.ClaimID, cl.Link, cl.Title AS ClaimTitle, cl.Description, cl.Score AS ClaimScore, cl.UserID, cl.CompanyID, cl.Time AS ClaimTime, co.Name AS CoName, co.Score AS CoScore, u.Name AS UserName
@@ -36,6 +49,8 @@ class Data_model extends CI_Model {
 				GROUP BY t.Name";
 		return $this->db->query($sql)->result_array();
 	}
+
+	// Need to get number of ratings for each claim
 	
 	// ------------- METHODS FOR COMPANY VIEW -------------	
 	public function getCompany($companyID) {
@@ -46,11 +61,15 @@ class Data_model extends CI_Model {
 	}
 
 	public function getCompanyClaims($companyID) {
-		$sql = "SELECT cl.*
+		$sql = "SELECT cl.*, COUNT(cl.Score) AS noRatings,
+					(SELECT COUNT(Score) 
+					FROM Claim 
+					WHERE CompanyID = $companyID) as Total
 				FROM Claim cl
 				LEFT JOIN Company co
 				ON co.CompanyID = cl.CompanyID
-				WHERE co.CompanyID = $companyID";
+				WHERE co.CompanyID = $companyID
+				GROUP BY cl.Score";
 		return $this->db->query($sql)->result_array();
 	}
 	

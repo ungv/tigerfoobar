@@ -17,6 +17,17 @@ $(document).ready(function() {
 		resetScale();
 		$(this).addClass('selectedRating');
 	});
+
+	$('#newComment').click(function() {
+		$('#newCommentPopup').show(200);
+	});
+
+	$('.cancelButton').click(function() {
+		$('#newCommentPopup').hide(200);
+	});
+
+	$('.submitButton').click(function() {
+	});
 	
 	var avg = parseFloat($('#averageScore').text());
 	if (avg < -2) {

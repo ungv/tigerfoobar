@@ -22,7 +22,7 @@ body{
 	margin: 0 0 110px;
 }
 
-a, input, label, li, textarea, #urlButton {
+a, input, label, li, textarea, #urlButton, button {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -209,10 +209,20 @@ input[type=button], input[type=submit] {
 	border: 1px solid #36D792;
 }
 
+.submitButton:hover {
+	background-color: #2FB97D;
+	border: 1px solid #19583D;
+}
+
 .cancelButton {
 	margin: 10px 0 0 10px;
 	padding: 5px;
 	background-color: #FF9B73;
 	float: right;
 	border: 1px solid #FF7640;
+}
+
+.cancelButton:hover {
+	background-color: #DA764F;
+	color: #6D2E15;
 }
