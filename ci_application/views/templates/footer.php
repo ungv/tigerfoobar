@@ -9,14 +9,14 @@
 
 			<ul>
 				<li><h4>About</h4></li>
-				<li>about</li>
-				<li>team</li>
+				<li><a href='about'>about</a></li>
+				<li><a href="team">team</a></li>
 				<li><a href='//github.com/ungv/tigerfoobar'>source code</a></li>
 			</ul>
 
 			<ul>
 				<li><h4>Help</h4></li>
-				<li>FAQ</li>
+				<li><a href="faq">FAQ</a></li>
 				<li>rules</li>
 				<li>contact us</li>
 			</ul>

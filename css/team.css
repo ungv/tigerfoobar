@@ -1,0 +1,18 @@
+#team li {
+	clear: both;
+	float: none;
+}
+
+#team img {
+	float: left;
+	margin: 10px;
+}
+
+#team hr {
+	clear: both;
+}
+
+#team h2 {
+	padding-top: 10px;
+	margin-bottom: 10px;
+}
