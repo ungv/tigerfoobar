@@ -29,48 +29,18 @@ $(document).ready(function() {
 	$('.submitButton').click(function() {
 	});
 	
-	var avg = parseFloat($('#averageScore').text());
-	if (avg < -2) {
-		insertColor(colors[0]);
-	} else if (avg < -1) {
-		insertColor(colors[1]);
-	} else if (avg < 0) {
-		insertColor(colors[2]);
-	} else if (avg == 0) {
-		insertColor(colors[3]);
-	} else if (avg < 1) {
-		insertColor(colors[4]);
-	} else if (avg < 2) {
-		insertColor(colors[5]);
-	} else if (avg > 2) {
-		insertColor(colors[6]);
-	}
+	applyStyles(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
+	applyStyles(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
+	applyStyles(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
 	
 	$.each($('.claimScore'), function() {
-		var thisVal = parseFloat($(this).text());
-		if (thisVal < -2) {
-			$(this).parent().css('background-color', colors[0]);
-		} else if (thisVal < -1) {
-			$(this).parent().css('background-color', colors[1]);
-		} else if (thisVal < 0) {
-			$(this).parent().css('background-color', colors[2]);
-		} else if (thisVal == 0) {
-			$(this).parent().css('background-color', colors[3]);
-		} else if (thisVal < 1) {
-			$(this).parent().css('background-color', colors[4]);
-		} else if (thisVal < 2) {
-			$(this).parent().css('background-color', colors[5]);
-		} else if (thisVal > 2) {
-			$(this).parent().css('background-color', colors[6]);
-		}
+		applyStyles(parseFloat($(this).text()), $(this).parent(), 'background-color');
+	});
+
+	$.each($('#discussionContent li'), function() {
+		applyStyles(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
 	});
 });
-
-function insertColor(color) {
-		$('#averageScore').css('color', color);
-		$('#scoreContent').css('border-left', '5px solid ' + color);
-		$('#claimPopTags li').css('background-color', color);
-}
 
 function resetScale() {
 	$.each($('.scoreBox'), function(i) {
@@ -78,4 +48,22 @@ function resetScale() {
 		$(this).css('border', '2px solid ' + colors[i]);
 		$(this).removeClass('selectedRating');
 	});
+}
+
+function applyStyles(thisVal, $element, styling, stylewith) {
+	if (thisVal < -2) {
+		$element.css(styling, stylewith + colors[0]);
+	} else if (thisVal < -1) {
+		$element.css(styling, stylewith + colors[1]);
+	} else if (thisVal < 0) {
+		$element.css(styling, stylewith + colors[2]);
+	} else if (thisVal == 0) {
+		$element.css(styling, stylewith + colors[3]);
+	} else if (thisVal < 1) {
+		$element.css(styling, stylewith + colors[4]);
+	} else if (thisVal < 2) {
+		$element.css(styling, stylewith + colors[5]);
+	} else if (thisVal > 2) {
+		$element.css(styling, stylewith + colors[6]);
+	}
 }

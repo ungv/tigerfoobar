@@ -6,6 +6,18 @@
 				<!-- have to make form auto submit with js -->
 				<div id="scoreHeader">
 					<span id="averageScore"><?=$pageType == 'company' ? $companyInfo[0]['Score'] : $claimInfo[0]['ClaimScore']?></span>
-					<span id="scoreInfo">(<?=$pageType == 'company' ? $companyClaims[0]['numScores'] . ' claims, [some number of] comments' : '[some number of] ratings, [some number of] what?'?>)</span>
+					<span id="scoreInfo">(
+						<?php
+						if (!empty($scores) || !empty($companyClaims)) {
+						?>
+						<?=$pageType == 'company' ? $companyClaims[0]['numScores'] . ' claims, [some number of] comments' : $scores[0]['Total'] . ($scores[0]['Total'] == 1 ? ' rating, ' : ' ratings, ') . count($comments) . (count($comments) == 1 ? ' comment' : ' comments')?>
+						<?php
+						} else {
+						?>
+							This claim has not been rated by anyone yet. Submit a rating below!
+						<?php
+						}
+						?>
+					)</span>
 				</div>
 	<!--End ScoreTop content-->

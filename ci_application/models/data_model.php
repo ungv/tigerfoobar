@@ -100,10 +100,21 @@ class Data_model extends CI_Model {
 
 	// ------------- METHODS FOR DISCUSSION VIEW --------
 	public function getDiscussion($claimID) {
-		$sql = "SELECT d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time
+		$sql = "SELECT d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time, r.Value
 				FROM Discussion d
 				LEFT JOIN User u
 				ON u.UserID = d.UserID
+				LEFT JOIN Rating r
+				ON u.UserID = r.UserID
+				AND r.ClaimID = d.ClaimID
+				WHERE d.ClaimID = $claimID";
+		return $this->db->query($sql)->result_array();
+	}	
+
+	public function getUsersRating($claimID) {
+		$sql = "SELECT *
+				FROM Claim c
+
 				WHERE d.ClaimID = $claimID";
 		return $this->db->query($sql)->result_array();
 	}	
@@ -132,6 +143,7 @@ class Data_model extends CI_Model {
 				ON u.UserID = d.UserID
 				LEFT JOIN Rating r
 				ON r.ClaimID = d.ClaimID
+				AND r.userID = u.UserID				
 				LEFT JOIN Claim c
 				ON r.ClaimID = c.ClaimID
 				WHERE u.UserID = $userID";

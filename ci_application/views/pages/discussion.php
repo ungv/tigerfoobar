@@ -9,19 +9,21 @@
 			<button type="button" class="cancelButton">cancel</button>
 		</div>
 		<div id="discussionContent" class="content">
-			<!-- <div id="rating">+3</div> -->
 			<ul>
 			<?php 
-			// function printComments() {
-				foreach ($comments as $comment) {
+			if (empty($comments)) {
 				?>
-					<li style='border-color: #<?=mt_rand(100000, 999999)?>; left: <?=$comment['level'] * 20?>px;'>
-						<h4>By: <?=$comment['Name']?> On: <?=$comment['Time']?></h4>
-						<p><?=$comment['Comment']?></p>
-					</li>
+				No one has commented on this claim yet. Start a conversation with the button on the right!
 				<?php
-				}
-			// }
+			}
+			foreach ($comments as $comment) {
+			?>
+				<li value="<?=$comment['Value']?>" style='left: <?=$comment['level'] * 20?>px;'>
+					<h4>By: <?=$comment['Name']?> On: <?=$comment['Time']?></h4>
+					<p><?=$comment['Comment']?></p>
+				</li>
+			<?php
+			}
 			?>
 			</ul>
 		</div>
