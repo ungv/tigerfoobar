@@ -51,6 +51,7 @@ class Action_model extends CI_Model {
         $voted = $this->security->xss_clean($this->input->post('voted'));
 
         //check tagid is for industry
+        $this->db->query('SET FOREIGN_KEY_CHECKS = 0;');
         $isIndustry = $this->db->get_where('Tags', array('TagsID' => $tagid , 'Type' => 'Industry'));
         if(!$isIndustry) {  //if not, return flase
             return false;

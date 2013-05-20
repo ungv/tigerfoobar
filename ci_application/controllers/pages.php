@@ -7,22 +7,9 @@ class Pages extends Root_Controller {
 	*/
 	public function __construct() {
 		parent::__construct();
-		//url helper: for public urls
-		$this->load->helper('url');
-		//Other Example Loads
+		
+		//model loads
 		$this->load->model('data_model');
-
-		//checking login
-		$data['userid'] = null;
-		$data['isLogged'] = $this->is_logged_in();
-		if($data['isLogged']) {
-			$data['userid'] = $this->session->userdata('userid');
-			$data['username'] = $this->session->userdata('username');
-		}
-		//basic css and js
-		$data['csFiles'] = array();
-		$data['jsFiles'] = array();
-    	$this->load->vars($data);
 	}
 
 	//Default page Query, Redirect to home
@@ -51,8 +38,8 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'View Claim - PatchWork';
 		$data['pageType'] = 'claim';
 
-		$data['claimInfo'] = $this->data_model->getClaim($claimID);
-		$data['claimTags'] = $this->data_model->getClaimTags($claimID);
+		$data['claimInfo'] = get_object_vars($this->data_model->getClaim($claimID));
+		$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
 		$data['comments'] = $this->data_model->getDiscussion($claimID);
 		$data['scores'] = $this->data_model->getClaimScores($claimID);
 		
@@ -77,9 +64,9 @@ class Pages extends Root_Controller {
 			$this->homepage(); //!! change to TreemapSearch later
 		}else {
 			//grab basic data
-			$data['companyInfo'] = $this->data_model->getCompany($companyID);
+			$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
 			$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
-			$data['companyTags'] = $this->data_model->getCompanyTags($companyID);
+			$data['companyTags'] = $this->data_model->getCompanyTags($companyID, $this->userid);
 			
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';

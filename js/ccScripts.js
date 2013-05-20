@@ -10,38 +10,110 @@ $(document).ready(function() {
 	//Onclick, send vote to server
 	//switch value when clicked
 	$('.industryUpvote').click(function() {
-		var voted = parseInt($(this).attr('voted')); //0 if not voted, 1 if voted
+		sendIndustryUpvote($(this));
+	});
+
+	function sendIndustryUpvote(button) {
+		var voted = parseInt($(button).attr('voted')); //0 if not voted, 1 if voted
 		//alert($(this).attr('tagid'));
-		var clicked = $(this);
+		var clicked = $(button);
+		//Dom changes
+		var oldVotes = parseInt($(clicked.parent().children(".industryTotal")[0]).text());
+		if(!voted) {		//just voted, add vote
+			clicked.text('-');
+			clicked.attr('voted','1');
+			oldVotes ++;
+			clicked.parent().addClass('industryUserVoted');
+		}else {				//just unvoted, remove vote
+			clicked.text('+');
+			clicked.attr('voted','0');
+			oldVotes --;
+			clicked.parent().removeClass('industryUserVoted');
+		}
+		$(clicked.parent().children(".industryTotal")[0]).text(oldVotes);
 		$.ajax({
 			type: 'POST',
 			url: 'http://127.0.0.1/action/upvoteIndustry',
 			data: {
-				industryID: $(this).attr('tagid'),
-				companyID: $(this).attr('companyid'),
+				industryID: $(clicked).attr('tagid'),
+				companyID: $(clicked).attr('companyid'),
 				voted: voted
 			},
 			dataType: 'json',
 			success: function(json) {
-				var oldVotes = parseInt($(clicked.parent().children(".industryTotal")[0]).text());
-				if(!voted) {		//just voted, add vote
-					clicked.text('-');
-					clicked.attr('voted','1');
-					oldVotes ++;
-				}else {				//just unvoted, remove vote
-					clicked.text('+');
-					clicked.attr('voted','0');
-					oldVotes --;
-				}
-				$(clicked.parent().children(".industryTotal")[0]).text(oldVotes);
-				//TODO: add class to parent "industryUpvoted" to show you voted
+				//Dom changes processed pre-query
 			},
 			error: function(json) {
 				//alert error message for now
 				alert('Server Error');
 			}
 		});
+	}
+
+	//Displays textbox to add new industry tag
+	$('#addIndustry').click( function() {
+		$('#newIndustryPopup').show(200);
 	});
+
+	//Autocomplete for adding new industry
+	var projects = [
+		{
+			value: "jquery",
+			label: "jQuery",
+			desc: "the write less, do more, JavaScript library",
+			icon: "jquery_32x32.png"
+		}
+	];
+
+	//Called when typing into new industry text box
+	$( "#newindustry_name" ).autocomplete({
+		minLength: 0,
+		source: function (request, response) {
+	        $.ajax({
+	            url: "/data/industryList/" + $('#newindustry_name').val(),
+	            dataType: 'json',
+	            success: function (data) {
+	                response(data.map(function (value) {
+	                    return {
+	                        'label':  value.value ,
+	                        'value': value.label
+	                    };  
+	                }));
+	            }   
+	        }); 
+	    }, 
+	    select: function( event, ui ) {
+	    	/*
+			alert( ui.item ?
+			"Selected: " + ui.item.value :
+			"Nothing selected, input was " + this.value );
+			*/
+			sendNewIndustry(ui.item.label,ui.item.value);
+		}
+	});
+	
+	//Sends information about the newly created
+	//industry-company connection to the server
+	function sendNewIndustry(label, value) {
+		var newLink = $('<li>', {
+			"html": '	<span class="industryName">' + label + '</span>' +
+					'	<span>(</span> ' +
+					'		<span class="industryTotal">0</span>' +
+					'	<span>)</span>' +
+					'	<span class="industryUpvote" tagid="'+ value + '" companyid="'+ $('#industryTags').attr('companyid') +'" voted="0">' +
+					'		+  ' +
+					'	</span>'
+		});
+		$('#industryTags').append(newLink);
+		//call current vote method, triger click
+		$(newLink.children('.industryUpvote')[0]).click(function() {
+			sendIndustryUpvote($(this));
+		});
+		$(newLink.children('.industryUpvote')[0]).click();
+	}
+
+
+	/*-----------------Kudos Scale-----------------------*/
 
 
 	//Alert Kudos value on hover
