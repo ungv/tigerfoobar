@@ -134,6 +134,42 @@ class Pages extends Root_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function about() {
+		$data['headerTitle'] = 'About - PatchWork';
+		$data['pageType'] = 'About';
+
+		$data['csFiles'] = array('general','ccStyles');
+		$data['jsFiles'] = array('general','ccScripts');
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/about');
+		$this->load->view('templates/footer');
+	}
+
+	public function team() {
+		$data['headerTitle'] = 'Team - PatchWork';
+		$data['pageType'] = 'Team';
+
+		$data['csFiles'] = array('general','ccStyles', 'team');
+		$data['jsFiles'] = array('general','ccScripts');
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/team');
+		$this->load->view('templates/footer');
+	}
+
+	public function faq() {
+		$data['headerTitle'] = 'FAQ - PatchWork';
+		$data['pageType'] = 'FAQ';
+
+		$data['csFiles'] = array('general','ccStyles', 'faq');
+		$data['jsFiles'] = array('general','ccScripts');
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/faq');
+		$this->load->view('templates/footer');
+	}
+
 
 	/*
 	public function view($page = 'home') {
