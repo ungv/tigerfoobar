@@ -6,12 +6,6 @@ class Data_model extends CI_Model {
 		$this->load->database();
 	}
 
-	//get all tag types
-	public function testDB() {
-		$query = $this->db->get('User');
-		return $query->result_array();		
-	}
-
 	// ------------- METHODS FOR GETTING THE SCORE INFORMATION -------------
 	public function getClaimScores($claimID) {
 		$sql = "SELECT *, COUNT(ClaimID) AS noRatings, 
