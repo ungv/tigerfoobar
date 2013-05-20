@@ -7,6 +7,19 @@ class Root_Controller extends CI_Controller {
         //Helpers
 		$this->load->helper('url');
 		$this->load->library('session');
+        //checking login
+        $data['userid'] = null;
+        $this->userid = null;
+        $data['isLogged'] = $this->is_logged_in();
+        if($data['isLogged']) {
+            $data['userid'] = $this->session->userdata('userid');
+            $this->userid = $this->session->userdata('userid');
+            $data['username'] = $this->session->userdata('username');
+        }
+        //basic css and js
+        $data['csFiles'] = array();
+        $data['jsFiles'] = array();
+        $this->load->vars($data);
     }
 
     public function is_logged_in()

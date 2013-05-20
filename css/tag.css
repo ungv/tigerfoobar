@@ -1,4 +1,9 @@
+li {
+	list-style-type: none;
+}
+
 #claimsList li {
 	padding: 5px;
-	margin-bottom: 5px;
+	margin: 0 5px 5px 0;
+	float: left;
 }

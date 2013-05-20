@@ -13,7 +13,8 @@
 			<h3>We need more info about this URL</h3>
 			<h4><em>Only * are required</em></h4>
 			<input class="full" name="title" type="text" placeholder="Title*"/>
-			<textarea rows="4" placeholder="Your comments on this article"></textarea>		
-			<input id="assocCo" name="assocCo" class=" full" type="text" placeholder="Associated Company*"/>
-			<p>What does this article say about the associated company?</p>
-
+			<textarea rows="4" placeholder="Your comments on this article"></textarea>
+			<h4>The most associated company to this article:</h4>
+			<p><em>Please enter only one</em></p>
+			<ul id="assocCo" name="assocCo" class="outfocus"></ul>		
+			<h4>What does this article say about the associated company?</h4>

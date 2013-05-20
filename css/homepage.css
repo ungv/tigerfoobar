@@ -1,21 +1,5 @@
-#main ul {
-	float: left;
-	width: 960px;
-	margin-top: 50px;
-}
-
-#main li {
-	width: 150px;
-	height: 90px;
-	border: 1px;
-	padding: 2px;
-	opacity: 0.8;
-	list-style-type: none;
-	float: left;
-}
-
-#main li:hover {
-	opacity: 1;
+#treemapCanvas {
+	margin-top: 60px;
 }
 
 .rating {
