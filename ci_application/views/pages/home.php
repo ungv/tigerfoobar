@@ -1,4 +1,4 @@
-<div class="main">
+<div id="main">
 	<div id="urlContainer">
 		<div id="urlButton">
 			<img src="/img/newClaim.png" /><span>Add a new claim</span>
@@ -8,31 +8,14 @@
 		</div>
 	</div>
 	
-	
-	<!--ul>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-	</ul-->	
-	
-	
-	<div id="urlSubmit" class="popup" style="display:none;">
-		<input class="full" type="text" placeholder="Title"/>
-		<textarea rows="4" placeholder="Your comments on this article"></textarea>		
-		<p>What does this article say about the associated company?</p>
-		<input id="assocCo" type="text" placeholder="Associated Company"/>
+	<form id="newClaimForm">
+		<div id="urlSubmit" class="popup" style="display:none;">
+			<h3>We need more info about this URL</h3>
+			<h4><em>Only * are required</em></h4>
+			<input class="full" name="title" type="text" placeholder="Title*"/>
+			<textarea rows="4" placeholder="Your comments on this article"></textarea>		
+			<input id="assocCo" name="assocCo" class=" full" type="text" placeholder="Associated Company*"/>
+			<p>What does this article say about the associated company?</p>
 	</div>
 </div>
 

@@ -59,8 +59,8 @@
 }
 
 #urlSubmit {
-	width: 600px;
-	height: 260px;
+	width: 350px;
+	height: inherit;
 	margin-top: 40px;
 }
 
@@ -69,27 +69,27 @@
 }
 
 #urlSubmit textarea {
-	width: 570px;
+	width: 95%;
 }
 
-#urlSubmit p {
+/* #urlSubmit p {
 	margin-left: 235px;
-}
+} */
 
-#controlContainer {
+/* #controlContainer {
 	float: right;
 	margin-right: 7px;
-}
+} */
 
 #scoreDistribution {
 	display: none !important;
 }
 
-#assocCo {
+/* #assocCo {
 	width: 40%;
 	margin-top: 15px;
 }
-
+ */
 #submit, #cancel {
 	float: right;
 }
