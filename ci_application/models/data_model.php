@@ -300,30 +300,7 @@ class Data_model extends CI_Model {
 		
 		//return $this->db->query($sql)->result_array();
 	}
-	
-	//Return top n companies with all of their claims
-	public function getTopCompaniesWithClaims() {
-		$N = 10;
-		$M = 10;
-		$sql = "SELECT *
-				FROM Claim cl
-				INNER JOIN
-					(SELECT co.Name, topCompanyIDs.CompanyID, companyIDCount
-					FROM Company co
-					INNER JOIN 
-						(SELECT *
-						FROM 
-							(SELECT cl.CompanyID, COUNT(cl.CompanyID) AS companyIDCount
-							FROM Claim cl
-							GROUP BY cl.CompanyID
-							ORDER BY companyIDCount DESC) orderedClaims
-						LIMIT $N) topCompanyIDs
-					ON co.CompanyID = topCompanyIDs.CompanyId) topCompanysWithIDs
-				ON cl.CompanyID = topCompanysWithIDs.CompanyID";
-				
-		return $this->db->query($sql)->result_array();
-	}
-	
+		
 	//Return top n companies for given industry
 	public function getTopCompaniesForIndustry() {
 		$sql = "SELECT *
