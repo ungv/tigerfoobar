@@ -29,4 +29,6 @@ class Data extends CI_Controller {
 
 		$this->load->view('data/test', $data);
 	}
+	
+	
 }

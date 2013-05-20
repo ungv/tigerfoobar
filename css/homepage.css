@@ -94,6 +94,11 @@
 	float: right;
 }
 
+#treemapCanvas {
+	margin: auto;
+	margin-top: 50px;
+}
+
 .full {
 	width: 95%;
 }
