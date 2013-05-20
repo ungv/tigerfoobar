@@ -38,4 +38,9 @@ class Action_model extends CI_Model {
 		//return $query->result_array();		
 	}
 
+    //get all rows from any table passed as parameter
+    public function getAll() {
+        $query = $this->db->get('Company');
+        return $query->result_array();
+    }
 }

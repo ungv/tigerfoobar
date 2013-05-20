@@ -32,7 +32,7 @@ class Action extends CI_Controller {
         	$this->output->set_status_header('400'); //Triggers the jQuery error callback
         	$data['json'] = '{"error":"Incorrect username or password"}';
         }   
-        	$this->load->view('data/json_view', $data); 
+        $this->load->view('data/json_view', $data); 
 	}
 
 	public function logout() {
@@ -40,4 +40,10 @@ class Action extends CI_Controller {
 		redirect(base_url());
 	}
 		
+	public function getAll() {
+		$results = $this->action_model->getAll();
+		foreach ($results as $result) {
+			array_push($data['coList'], $result);
+		}
+	}
 }

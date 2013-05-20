@@ -50,19 +50,19 @@ input, textarea {
 	font-size: 12pt;
 }
 
-input.outfocus, textarea.outfocus {
-	border: 2px solid #CCC;
-	background-color: white;
+.outfocus {
+	border: 2px solid #CCC !important;
+	background-color: white !important;
 }
 
-input.hover, textarea.hover {
-	border: 2px solid #DDD;
-	background-color: rgb(228, 228, 228);
+.hover {
+	border: 2px solid #DDD !important;
+	background-color: rgb(228, 228, 228) !important;
 }
 
-input.infocus, textarea.infocus {
-	border: 2px solid #73A6FF;
-	background-color: #EFF5FF;
+.infocus {
+	border: 2px solid #73A6FF !important;
+	background-color: #EFF5FF !important;
 }
 
 .error {
@@ -151,14 +151,14 @@ footer {
 
 /*Main-----------------------------*/
 
-#main{
+.main{
 	width:915px;
 	margin:0px auto;
 	overflow: hidden;
 	/* border: 1px solid; */
 }
 
-#main > div {
+.main > div {
 	margin-bottom: 20px;
 }
 	

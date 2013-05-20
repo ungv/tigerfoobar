@@ -37,8 +37,10 @@ class Pages extends Root_Controller {
 
 		$data['csFiles'] = array('general','homepage','ccStyles');
 		$data['jsFiles'] = array('general','homepage','ccScripts');
+		$data['topClaims'] = $this->data_model->getTopClaims();
+		$data['topCompanies'] = $this->data_model->getTopCompaniesWithClaims();
+		
 		//signed in logic goes here
-
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/home', $data);
 		$this->load->view('pages/score', $data);
@@ -131,6 +133,42 @@ class Pages extends Root_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/profile', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function about() {
+		$data['headerTitle'] = 'About - PatchWork';
+		$data['pageType'] = 'About';
+
+		$data['csFiles'] = array('general','ccStyles');
+		$data['jsFiles'] = array('general','ccScripts');
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/about');
+		$this->load->view('templates/footer');
+	}
+
+	public function team() {
+		$data['headerTitle'] = 'Team - PatchWork';
+		$data['pageType'] = 'Team';
+
+		$data['csFiles'] = array('general','ccStyles', 'team');
+		$data['jsFiles'] = array('general','ccScripts');
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/team');
+		$this->load->view('templates/footer');
+	}
+
+	public function faq() {
+		$data['headerTitle'] = 'FAQ - PatchWork';
+		$data['pageType'] = 'FAQ';
+
+		$data['csFiles'] = array('general','ccStyles', 'faq');
+		$data['jsFiles'] = array('general','ccScripts');
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/faq');
 		$this->load->view('templates/footer');
 	}
 
