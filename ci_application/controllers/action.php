@@ -1,7 +1,7 @@
 <?php
 /*---Performs DB_Manipulation Actions in the system---*/
-
-class Action extends CI_Controller {
+include('root_controller.php');
+class Action extends Root_Controller {
 
 	/*
 		Constructor
@@ -38,6 +38,29 @@ class Action extends CI_Controller {
 	public function logout() {
 		$this->session->sess_destroy();
 		redirect(base_url());
+	}
+
+	/*
+		Upvote Industry tag on company page, or remove the current vote
+		for that user
+		NOTE: Send positive message even if user has already upvoted, unless
+				tag isnt found
+	*/
+	public function upvoteIndustry() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->upvoteIndustry($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			}else {			//didn't work, inform user why
+	        	$this->output->set_status_header('400');
+	        	$data['json'] = '{"message":"Cannot Process Upvote"}'; 
+			}
+		}
+		$this->load->view('data/json_view', $data);
 	}
 		
 	public function getAll() {
