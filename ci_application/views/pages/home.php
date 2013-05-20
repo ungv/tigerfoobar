@@ -18,5 +18,3 @@
 			<p><em>Please enter only one</em></p>
 			<ul id="assocCo" name="assocCo" class="outfocus"></ul>		
 			<h4>What does this article say about the associated company?</h4>
-	</div>
-</div>
