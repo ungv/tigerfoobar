@@ -34,20 +34,20 @@ $(document).ready(function() {
 	var companyList = []; // populated with all companies pulled from database as a source for autocompletion
 	var tagsList = []; // populated with all tags pulled from database as a source for autocompletion
 
-	$.ajax({
-		type: 'POST',
-		url: 'http://127.0.0.1/action/getAll',
-		dataType: 'json',
-		success: function(json) {
-			for (var i = 0; i < json.length; i++) {
-				companyList.push(i);
-			}
-		},
-		error: function() {
-			alert('Fail!');
-		}
-	});
-	console.log(companyList);
+	// $.ajax({
+	// 	type: 'POST',
+	// 	url: 'http://127.0.0.1/action/getAll',
+	// 	dataType: 'json',
+	// 	success: function(json) {
+	// 		for (var i = 0; i < json.length; i++) {
+	// 			companyList.push(i);
+	// 		}
+	// 	},
+	// 	error: function() {
+	// 		alert('Fail!');
+	// 	}
+	// });
+	// console.log(companyList);
 	
 	// Input field for entering an associated company from "Add new claim" form
 	$('#assocCo').tagit({
