@@ -40,7 +40,7 @@
 		?>
 			<li>
 				<p>
-					<strong>-<?=$vote['Name']?></strong> 
+					<strong><?=$vote['Name']?></strong> 
 					<?= $vote['Value'] == 0 ? '<span class="disliked">disliked</span>' : '<span class="liked">liked</span>' ?>
 				</p>
 				<p class="votedComment">

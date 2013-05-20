@@ -3,9 +3,9 @@
 	color: rgb(21, 0, 60);
 }
 
-ul {
+.container ul {
 	float: left;
-	width: 960px;
+	width: 915px;
 }
 
 li {
@@ -34,7 +34,9 @@ li {
 
 /* Votes section styles */
 .threadContainer {
-	margin: 10px 0 0 10px;
+	background-color: #E7E7E7;
+	padding: 10px;
+	margin-top: 10px;
 }
 
 #votes li {
@@ -44,7 +46,7 @@ li {
 .votedComment {
 	font-size: 14pt;
 	margin-left: 10px;
-	background-color: rgb(245, 245, 245);
+	background-color: #E7E7E7;
 	padding: 5px;
 }
 

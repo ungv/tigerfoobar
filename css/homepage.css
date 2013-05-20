@@ -31,6 +31,10 @@
 	float: left;
 }
 
+#urlContainer {
+	margin-bottom: 0px !important;
+}
+
 #urlButton, #urlInput {
 	position: absolute;
 }
@@ -61,7 +65,7 @@
 #urlSubmit {
 	width: 350px;
 	height: inherit;
-	margin-top: 40px;
+	margin-top: 50px;
 }
 
 #urlSubmit input, textarea {

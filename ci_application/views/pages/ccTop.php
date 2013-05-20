@@ -1,7 +1,6 @@
 <!--Start #main content-->
 <div id="main">
-	<h1><?=$pageType == 'company' ? $companyInfo['Name'] : 
-		($pageType == 'claim' ? $claimInfo[0]['Title'] : $tagInfo['Name'])?></h1>
+	<h1><?=$pageType == 'company' ? $companyInfo[0]['Name'] : $claimInfo[0]['ClaimTitle']?></h1>
 <?php
 if ($pageType != 'tag') {
 	?>
