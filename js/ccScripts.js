@@ -134,52 +134,78 @@ $(document).ready(function() {
 		$(this).addClass('selectedRating');
 	});
 
+	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
+	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
+	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
+	
+	$.each($('.claimScore'), function() {
+		applyColors(parseFloat($(this).text()), $(this).parent(), 'background-color');
+	});
+
+	$.each($('#discussionContent li'), function() {
+		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
+	});
+
+	//Resets and recolors the kudos scale to get rid of border color
+	function resetScale() {
+		$.each($('.scoreBox'), function(i) {
+			$(this).css('background-color', colors[i]);
+			$(this).css('border', '2px solid ' + colors[i]);
+			$(this).removeClass('selectedRating');
+		});
+	}
+
+	//Apply css coloring defined in global COLORS variable to element based on the element's value
+	function applyColors(thisVal, $element, styling, stylewith) {
+		if (thisVal < -2) {
+			$element.css(styling, stylewith + colors[0]);
+		} else if (thisVal < -1) {
+			$element.css(styling, stylewith + colors[1]);
+		} else if (thisVal < 0) {
+			$element.css(styling, stylewith + colors[2]);
+		} else if (thisVal == 0) {
+			$element.css(styling, stylewith + colors[3]);
+		} else if (thisVal < 1) {
+			$element.css(styling, stylewith + colors[4]);
+		} else if (thisVal < 2) {
+			$element.css(styling, stylewith + colors[5]);
+		} else if (thisVal > 2) {
+			$element.css(styling, stylewith + colors[6]);
+		}
+	}
+
+	/*-----------------Discussion-----------------------*/
+
 	$('#newComment').click(function() {
 		$('#newCommentPopup').show(200);
+		$('.lightsout').fadeIn();
 	});
 
 	$('.cancelButton').click(function() {
 		$('#newCommentPopup').hide(200);
+		$('.lightsout').fadeOut();
 	});
 
-	$('.submitButton').click(function() {
-	});
-	
-	applyStyles(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
-	applyStyles(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
-	applyStyles(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
-	
-	$.each($('.claimScore'), function() {
-		applyStyles(parseFloat($(this).text()), $(this).parent(), 'background-color');
+	$('.reply').click(function() {
+		$parentLi = $(this).parent().parent().attr('id');
+		$('#' + $parentLi + 'reply').show();
 	});
 
-	$.each($('#discussionContent li'), function() {
-		applyStyles(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
+	$('.submitReply').click(function() {
+		
+	});
+
+	$('.cancelReply').click(function() {
+		$('.replyBox').hide();		
+	});
+
+	$('.buttonsContainer').hover(function() {
+		$(this).css('opacity', '1');
+	}, function() {
+		$(this).css('opacity', '0.4');
+	});
+
+	$('#discussionContent li').click(function() {
+		console.log($(this).attr('level'));
 	});
 });
-
-function resetScale() {
-	$.each($('.scoreBox'), function(i) {
-		$(this).css('background-color', colors[i]);
-		$(this).css('border', '2px solid ' + colors[i]);
-		$(this).removeClass('selectedRating');
-	});
-}
-
-function applyStyles(thisVal, $element, styling, stylewith) {
-	if (thisVal < -2) {
-		$element.css(styling, stylewith + colors[0]);
-	} else if (thisVal < -1) {
-		$element.css(styling, stylewith + colors[1]);
-	} else if (thisVal < 0) {
-		$element.css(styling, stylewith + colors[2]);
-	} else if (thisVal == 0) {
-		$element.css(styling, stylewith + colors[3]);
-	} else if (thisVal < 1) {
-		$element.css(styling, stylewith + colors[4]);
-	} else if (thisVal < 2) {
-		$element.css(styling, stylewith + colors[5]);
-	} else if (thisVal > 2) {
-		$element.css(styling, stylewith + colors[6]);
-	}
-}

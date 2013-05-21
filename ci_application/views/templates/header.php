@@ -39,6 +39,10 @@
 		</SECTION>
 	</header>
 
+	<div class="lightsout">
+		
+	</div>
+
 	<div id="loginPopup" class="popup" style="display:none;">
 		<h3>Login to your Account</h3>
 		<p id="login_fail" style="display: none;">Login failed, Plese try again.</p>

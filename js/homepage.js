@@ -30,6 +30,7 @@ $(document).ready(function() {
 	$("#pasteURL").bind('paste', function() {
 		$('#urlInput').removeClass('quarter').addClass('half');
 		$('#urlSubmit').show(200);
+		$('.lightsout').fadeIn();
 	});
 	$(".cancelButton").click(function() {
 		$('#urlInput').removeClass('half').addClass('quarter');
@@ -37,6 +38,7 @@ $(document).ready(function() {
 		$("#pasteURL").val('');
 		$('#urlButton').show('fade', 600);
 		$('#urlInput').hide('fade', 200);
+		$('.lightsout').fadeOut();
 		return false;
 	});
 });

@@ -142,6 +142,21 @@ $(document).ready(function() {
 		$(this).removeClass('hover');
 	});
 
+	/*-----Lights out----*/
+
+	//Adjust height of overlay to fill screen when page loads
+	$('.lightsout').css('height', $(document).height());
+
+	//Adjust height of overlay to fill screen when browser gets resized  
+	$(window).bind("resize", function(){  
+		$(".lightsout").css("height", $(window).height());  
+	}); 
+
+	$('.lightsout').click(function () {
+		$('.lightsout').fadeOut();
+		$('.popup').hide(200);
+	});
+
 	/*-----Auto Complete Info----*/
 
 	var projects = [

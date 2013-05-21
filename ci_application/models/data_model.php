@@ -107,79 +107,7 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 		//AND Tags.Type like 'Industry'
 	}
-	
-	//------------- METHODS FOR TREEMAP VIEW ------------
-	
-	public function getTopCompaniesWithClaims() {
-		$N = 10;
-		$M = 10;
-		$sql = "SELECT *
-				FROM Claim cl
-				INNER JOIN
-					(SELECT co.Name, topCompanyIDs.CompanyID, claimID, topCompanyIDs.Score, companyIDCount
-					FROM Company co
-					INNER JOIN 
-						(SELECT *
-						FROM 
-							(SELECT cl.CompanyID, cl.ClaimID, cl.Score, COUNT(cl.CompanyID) AS companyIDCount
-							FROM Claim cl
-							GROUP BY cl.CompanyID
-							ORDER BY companyIDCount DESC) orderedClaims
-						LIMIT $N) topCompanyIDs
-					ON co.CompanyID = topCompanyIDs.CompanyId) topCompanysWithIDs
-				ON cl.CompanyID = topCompanysWithIDs.CompanyID";
-				
-		return $this->db->query($sql)->result_array();
 		
-		/*TODO: Make sure this is returning the correct data; something's funky with scores
-		*/
-	}
-	
-	public function getTopCompaniesWithClaimsJSON() {
-
-		$topCompanies = $this->getTopCompaniesWithClaims();
-		
-		$jsonDataObj = '{"name": "Top companies with claims", "children": [';
-		
-		//Builds JSON out of the data in the $data array
-		$companiesWithClaims = '';
-		$currCompany = "";
-		for ($i = 0; $i < count($topCompanies); $i++) {
-			//foreach($topClaims as $topClaim) {
-
-			if ($topCompanies[$i]["Name"] != $currCompany) {
-				$currCompany = $topCompanies[$i]["Name"];
-				$companiesWithClaims .= '{"name": "' . $topCompanies[$i]["Name"] . '", "children": [';
-			}
-			
-			$claims = '';
-			
-			while (($i < count($topCompanies)) && $topCompanies[$i]["Name"] == $currCompany) {
-				$name = str_replace("'","", $topCompanies[$i]["Title"]);
-				$size = str_replace("'","", $topCompanies[$i]["numScores"]);
-				$claimID = $topCompanies[$i]["claimID"];
-				$score = $topCompanies[$i]["Score"];
-				
-				$claims .= '{"name" : "' . $name . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
-				$i++;
-			} 
-			
-			$claims = rtrim($claims, ",");
-			$companiesWithClaims .= $claims;
-			$companiesWithClaims .= "]},";
-			
-			$i--;
-		}
-		
-		$companiesWithClaims = rtrim($companiesWithClaims, ",");
-		$jsonDataObj .= $companiesWithClaims . ']}';
-		
-		return $jsonDataObj;
-		
-		/* TODO: Clean up the ugly fencepost shit going on here
-		*/
-	}
-	
 	// ------------- METHODS FOR TAG VIEW ---------------
 	public function getTags($tagID) {
 		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID, c.Title, c.Score AS ClScore, co.CompanyID, co.Name AS CoName, co.Score AS CoScore
@@ -195,25 +123,23 @@ class Data_model extends CI_Model {
 	}	
 
 	// ------------- METHODS FOR DISCUSSION VIEW --------
-	public function getDiscussion($claimID) {
-		$sql = "SELECT d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time, r.Value
+	public function getDiscussion($claimID, $parentID, $level, $resultsArr) {
+		$sql = "SELECT d.CommentID, d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time, r.Value
 				FROM Discussion d
 				LEFT JOIN User u
 				ON u.UserID = d.UserID
 				LEFT JOIN Rating r
 				ON u.UserID = r.UserID
 				AND r.ClaimID = d.ClaimID
-				WHERE d.ClaimID = $claimID";
-		return $this->db->query($sql)->result_array();
-	}	
-
-	public function getUsersRating($claimID) {
-		$sql = "SELECT *
-				FROM Claim c
-
-				WHERE d.ClaimID = $claimID";
-		return $this->db->query($sql)->result_array();
-	}	
+				WHERE d.ClaimID = $claimID
+				AND d.ParentCommentID = $parentID";
+		$results = $this->db->query($sql)->result_array();
+		foreach ($results as $result) {
+			array_push($resultsArr, $result);
+			$resultsArr = $this->getDiscussion($claimID, $result['CommentID'], $level+1, $resultsArr);
+		}
+		return $resultsArr;
+	}
 	
 	// ------------- METHODS FOR USER VIEW ---------------
 	public function getUser($userID) {
@@ -297,7 +223,6 @@ class Data_model extends CI_Model {
 					ORDER BY companyIDCount DESC) orderedClaims
 					LIMIT $N) topCompanyIDs
 				ON co.CompanyID = topCompanyIDs.CompanyId";
-		
 		//return $this->db->query($sql)->result_array();
 	}
 		
@@ -308,4 +233,74 @@ class Data_model extends CI_Model {
 		
 		//return $this->db->query($sql)->result_array();
 	}
+	
+	public function getTopCompaniesWithClaims() {
+		$N = 10;
+		$M = 10;
+		$sql = "SELECT *
+				FROM Claim cl
+				INNER JOIN
+					(SELECT co.Name, topCompanyIDs.CompanyID, claimID, topCompanyIDs.Score, companyIDCount
+					FROM Company co
+					INNER JOIN 
+						(SELECT *
+						FROM 
+							(SELECT cl.CompanyID, cl.ClaimID, cl.Score, COUNT(cl.CompanyID) AS companyIDCount
+							FROM Claim cl
+							GROUP BY cl.CompanyID
+							ORDER BY companyIDCount DESC) orderedClaims
+						LIMIT $N) topCompanyIDs
+					ON co.CompanyID = topCompanyIDs.CompanyId) topCompanysWithIDs
+				ON cl.CompanyID = topCompanysWithIDs.CompanyID";
+				
+		return $this->db->query($sql)->result_array();
+		
+		/*TODO: Make sure this is returning the correct data; something's funky with scores
+		*/
+	}
+	
+	public function getTopCompaniesWithClaimsJSON() {
+
+		$topCompanies = $this->getTopCompaniesWithClaims();
+		
+		$jsonDataObj = '{"name": "Top companies with claims", "children": [';
+		
+		//Builds JSON out of the data in the $data array
+		$companiesWithClaims = '';
+		$currCompany = "";
+		for ($i = 0; $i < count($topCompanies); $i++) {
+			//foreach($topClaims as $topClaim) {
+
+			if ($topCompanies[$i]["Name"] != $currCompany) {
+				$currCompany = $topCompanies[$i]["Name"];
+				$companiesWithClaims .= '{"name": "' . $topCompanies[$i]["Name"] . '", "children": [';
+			}
+			
+			$claims = '';
+			
+			while (($i < count($topCompanies)) && $topCompanies[$i]["Name"] == $currCompany) {
+				$name = str_replace("'","", $topCompanies[$i]["Title"]);
+				$size = str_replace("'","", $topCompanies[$i]["numScores"]);
+				$claimID = $topCompanies[$i]["claimID"];
+				$score = $topCompanies[$i]["Score"];
+				
+				$claims .= '{"name" : "' . $name . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
+				$i++;
+			} 
+			
+			$claims = rtrim($claims, ",");
+			$companiesWithClaims .= $claims;
+			$companiesWithClaims .= "]},";
+			
+			$i--;
+		}
+		
+		$companiesWithClaims = rtrim($companiesWithClaims, ",");
+		$jsonDataObj .= $companiesWithClaims . ']}';
+		
+		return $jsonDataObj;
+		
+		/* TODO: Clean up the ugly fencepost shit going on here
+		*/
+	}	
 }

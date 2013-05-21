@@ -43,7 +43,9 @@ class Pages extends Root_Controller {
 
 		$data['claimInfo'] = get_object_vars($this->data_model->getClaim($claimID));
 		$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
-		$data['comments'] = $this->data_model->getDiscussion($claimID);
+
+		$resultsArr = [];
+		$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr);
 		$data['scores'] = $this->data_model->getClaimScores($claimID);
 		
 		//files needed

@@ -12,15 +12,25 @@
 			<ul>
 			<?php 
 			if (empty($comments)) {
-				?>
+			?>
 				No one has commented on this claim yet. Start a conversation with the button on the right!
-				<?php
+			<?php
 			}
 			foreach ($comments as $comment) {
 			?>
-				<li value="<?=$comment['Value']?>" style='left: <?=$comment['level'] * 20?>px;'>
+				<li id="comment<?=$comment['CommentID']?>" value="<?=$comment['Value']?>" style="left: <?=$comment['level'] * 15?>px; width: <?=900-$comment['level'] * 15?>px;">
 					<h4>By: <?=$comment['Name']?> On: <?=$comment['Time']?></h4>
 					<p><?=$comment['Comment']?></p>
+					<div class="buttonsContainer" style="opacity: 0.4;">
+						<button class="buttons cancelButton downVote" value="0">Down</button>
+						<button class="buttons submitButton upVote" value="1">Up</button>
+						<button class="buttons reply" value="">Reply</button>
+					</div>
+				</li>
+				<li id="comment<?=$comment['CommentID']?>reply" class="replyBox" style="display: none; left: <?=($comment['level']+1) * 15?>px; margin-right: <?=($comment['level']+1) * 15?>px">
+					<textarea cols="100%" placeholder="Reply to this comment"></textarea>
+					<button class="submitButton submitReply" value="">Submit</button>
+					<button class="cancelButton cancelReply" value="">cancel</button>
 				</li>
 			<?php
 			}
