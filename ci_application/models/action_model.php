@@ -40,12 +40,6 @@ class Action_model extends CI_Model {
 		//return $query->result_array();		
 	}
 
-    //get all rows from any table passed as parameter
-    public function getAll() {
-        $query = $this->db->get('Company');
-        return $query->result_array();
-    }
-
     //Upvotes the relationship between the passed tag and company using
     //the user id who sent it, or deletes the vote the user previously made 
     //depending on the boolean value post (voted)
@@ -59,7 +53,7 @@ class Action_model extends CI_Model {
         //check tagid is for industry
         $this->db->query('SET FOREIGN_KEY_CHECKS = 0;');
         $isIndustry = $this->db->get_where('Tags', array('TagsID' => $tagid , 'Type' => 'Industry'));
-        if(!$isIndustry) {  //if not, return flase
+        if(!$isIndustry) {  //if not, return false
             return false;
         }else {             //else, execute query
             $data = array(
@@ -74,5 +68,48 @@ class Action_model extends CI_Model {
             }
             return $result;
         }
+    }
+
+    //Updates the user profile with new information
+    public function updateProfile($userid) {
+        $col = $this->security->xss_clean($this->input->post('col'));
+        $newInfo = $this->security->xss_clean($this->input->post('newInfo'));
+
+        //2. Check for user in db
+        $query = $this->db->get_where('User', array('UserID' => $userid));
+        //3. Verify row exists
+        if($query->num_rows() == 1)
+        {
+            // If user exists, then update
+            $data = array(
+                    $col => $newInfo
+                    );
+            $where = "UserID = " . $userid;
+            $result = $this->db->update('User', $data, $where);
+            return true;
+        }
+        // else return false, no user found or pw incorrect
+        return false;
+    }
+
+    //Drops the user profile from database
+    public function dropAccount($userid) {
+        $password = $this->security->xss_clean($this->input->post('password'));
+
+        //2. Check for user in db and for correct password
+        $query = $this->db->get_where('User', array('UserID' => $userid, 'Password' => $password));
+        //3. Verify row exists
+        if($query->num_rows() == 1)
+        {
+            // If user exists, then delete
+            $data = array(
+                    'UserID' => $userid,
+                    'Password' => $password
+                    );
+            $result = $this->db->delete('User', $data);
+            return true;
+        }
+        // else return false, no user found or pw incorrect
+        return false;
     }
 }

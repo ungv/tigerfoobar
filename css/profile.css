@@ -18,6 +18,31 @@ li {
 	margin-top: 10px;
 }
 
+#user {
+	position: relative;
+}
+
+#user h1 {
+	float: left;
+}
+
+#user p {
+	float: right;
+}
+
+#user div {
+	right: 0;
+	top: 20px;
+}
+
+#deleteAccount:hover {
+	background-color: red;
+}
+
+#message {
+	font-size: 16pt;
+}
+
 /* Submissions section styles */
 #submissions li {
 	width: 110px;

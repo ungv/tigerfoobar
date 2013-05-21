@@ -105,6 +105,7 @@ header{
 	padding: 10px;
 	margin: 0 auto;
 	background-color: #00C12B;
+	position: relative;
 }
 /*header * {
 	margin: 10px;
@@ -204,8 +205,8 @@ input {
 }
 
 #signupPopup, #loginPopup {
-	top: 50px;
-	right: 90px;
+	top: 35px;
+	right: 0px;
 }
 
 input[type=button], input[type=submit] {

@@ -1,6 +1,6 @@
 	<!--Start Evidence Content-->
 	<div id="evidenceContainer" class="container">
-		<h2>Evidence</h2>
+		<h2>About the URL</h2>
 		<div id='evidenceContent' class="content">
 			<dl>
 				<dt>URL: </dt>
@@ -10,10 +10,10 @@
 			</dl>
 			<hr>
 			<dl>
+				<dt>Submitted: </dt>
+					<dd><?=date("F j, Y g:i a", strtotime($claimInfo['ClaimTime']))?></dd>
 				<dt>By: </dt>
 					<dd><a href="/profile/<?=$claimInfo['UserID']?>"><?=$claimInfo['UserName']?></a></dd>
-				<dt>Submitted: </dt>
-					<dd><?=$claimInfo['ClaimTime']?></dd>
 			</dl>
 		</div>
 	</div>

@@ -43,8 +43,7 @@ class Action extends Root_Controller {
 	/*
 		Upvote Industry tag on company page, or remove the current vote
 		for that user
-		NOTE: Send positive message even if user has already upvoted, unless
-				tag isnt found
+		NOTE: Send positive message even if user has already upvoted, unless tag isnt found
 	*/
 	public function upvoteIndustry() {
 		if(!$this->is_logged_in()) {
@@ -62,11 +61,46 @@ class Action extends Root_Controller {
 		}
 		$this->load->view('data/json_view', $data);
 	}
-		
-	public function getAll() {
-		$results = $this->action_model->getAll();
-		foreach ($results as $result) {
-			array_push($data['coList'], $result);
+
+	/*
+		Updates the user profile with new information
+	*/
+	public function updateProfile() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->updateProfile($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			}else {			//didn't work, inform user why
+	        	$this->output->set_status_header('400');
+	        	$data['json'] = '{"message":"Cannot Process Update"}'; 
+			}
 		}
+		$this->load->view('data/json_view', $data);
 	}
+
+	/*
+		Drops the user profile from database
+	*/
+	public function dropAccount() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->dropAccount($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			}else {			//didn't work, inform user why
+	        	$this->output->set_status_header('400');
+	        	$data['json'] = '{"message":"Cannot Process Update"}'; 
+			}
+		}
+		$this->load->view('data/json_view', $data);
+	}
+		
+
 }

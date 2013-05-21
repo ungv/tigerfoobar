@@ -38,6 +38,10 @@
 	vertical-align: middle;
 }
 
+#urlInput {
+
+	z-index: 200;
+}
 #pasteURL {
 	width: 100%;
 }

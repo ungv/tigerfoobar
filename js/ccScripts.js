@@ -53,6 +53,7 @@ $(document).ready(function() {
 	//Displays textbox to add new industry tag
 	$('#addTag').click( function() {
 		$('#newTagPopup').show(200);
+		$('#newclaimtag_name').focus();
 	});
 
 	//Autocomplete for adding new industry
@@ -134,6 +135,7 @@ $(document).ready(function() {
 		$(this).addClass('selectedRating');
 	});
 
+	//Method found in general.js
 	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
 	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
 	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
@@ -155,29 +157,11 @@ $(document).ready(function() {
 		});
 	}
 
-	//Apply css coloring defined in global COLORS variable to element based on the element's value
-	function applyColors(thisVal, $element, styling, stylewith) {
-		if (thisVal < -2) {
-			$element.css(styling, stylewith + colors[0]);
-		} else if (thisVal < -1) {
-			$element.css(styling, stylewith + colors[1]);
-		} else if (thisVal < 0) {
-			$element.css(styling, stylewith + colors[2]);
-		} else if (thisVal == 0) {
-			$element.css(styling, stylewith + colors[3]);
-		} else if (thisVal < 1) {
-			$element.css(styling, stylewith + colors[4]);
-		} else if (thisVal < 2) {
-			$element.css(styling, stylewith + colors[5]);
-		} else if (thisVal > 2) {
-			$element.css(styling, stylewith + colors[6]);
-		}
-	}
-
 	/*-----------------Discussion-----------------------*/
 
 	$('#newComment').click(function() {
 		$('#newCommentPopup').show(200);
+		$('#newCommentPopup textarea').focus();
 		$('.lightsout').fadeIn();
 	});
 
@@ -189,6 +173,7 @@ $(document).ready(function() {
 	$('.reply').click(function() {
 		$parentLi = $(this).parent().parent().attr('id');
 		$('#' + $parentLi + 'reply').show();
+		$('#' + $parentLi + 'reply textarea').focus();
 	});
 
 	$('.submitReply').click(function() {
@@ -206,6 +191,6 @@ $(document).ready(function() {
 	});
 
 	$('#discussionContent li').click(function() {
-		console.log($(this).attr('level'));
+		console.log('collapse all children of this');
 	});
 });

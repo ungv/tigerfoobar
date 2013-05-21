@@ -33,21 +33,6 @@ $(document).ready(function() {
 
 	var companyList = []; // populated with all companies pulled from database as a source for autocompletion
 	var tagsList = []; // populated with all tags pulled from database as a source for autocompletion
-
-	// $.ajax({
-	// 	type: 'POST',
-	// 	url: 'http://127.0.0.1/action/getAll',
-	// 	dataType: 'json',
-	// 	success: function(json) {
-	// 		for (var i = 0; i < json.length; i++) {
-	// 			companyList.push(i);
-	// 		}
-	// 	},
-	// 	error: function() {
-	// 		alert('Fail!');
-	// 	}
-	// });
-	// console.log(companyList);
 	
 	// Input field for entering an associated company from "Add new claim" form
 	$('#assocCo').tagit({
@@ -83,9 +68,10 @@ $(document).ready(function() {
 				$('#login_username').val('');
 				$('#login_password').val('');
 				$('#login_buttons').hide(200);
-				$('#login_status').html('Logged in as ' + json.username);
+				$('#login_status').html('Logged in as <a href="/profile/' + json.userid + '">' + json.username + '</a>');
 				$('#login_status').show(200);
 				$('#logout').show(200);
+				window.location.reload();
 			},
 			error: function() {
 				alert('Fail!');
@@ -97,8 +83,8 @@ $(document).ready(function() {
 	
 	//Show login popup onclick
 	$('#login').click(function() {
+		hidePopups();
 		$('#loginPopup').show(200);
-		$('#signupPopup').hide(200);
 	});
 
 	//Ask server to login on click
@@ -109,23 +95,20 @@ $(document).ready(function() {
 
 	//Ask server to login on click
 	$('#login_cancel').click(function() {
-		$('#loginPopup').hide(200);
-		$('#login_fail').hide(200);
-		$('#login_username').val('');
-		$('#login_password').val('');
+		hidePopups();
 	});
 
 	/*------Sigining Up------*/
 
 	//Show signin box onclick
 	$('#signup').click(function() {
+		hidePopups();
 		$('#signupPopup').show(200);
-		$('#loginPopup').hide(200);
 	});
 
 	//Hide Signinpopup
 	$('.cancelButton').click(function() {
-		$('#signupPopup').hide(200);
+		hidePopups();
 	});
 
 	//Set focus behavior for input boxes
@@ -154,7 +137,7 @@ $(document).ready(function() {
 
 	$('.lightsout').click(function () {
 		$('.lightsout').fadeOut();
-		$('.popup').hide(200);
+		hidePopups();
 	});
 
 	/*-----Auto Complete Info----*/
@@ -196,5 +179,31 @@ $(document).ready(function() {
 		return $( "<li>" )
 		.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
 		.appendTo( ul );
-	};	
+	};
 });
+
+function hidePopups() {
+	$('.popup').hide(200);
+	$.each($('.popup'), function() {
+		$('input').val('');
+	});
+}
+
+//Apply css coloring defined in global COLORS variable to element based on the element's value
+function applyColors(thisVal, $element, styling, stylewith) {
+	if (thisVal < -2) {
+		$element.css(styling, stylewith + colors[0]);
+	} else if (thisVal < -1) {
+		$element.css(styling, stylewith + colors[1]);
+	} else if (thisVal < 0) {
+		$element.css(styling, stylewith + colors[2]);
+	} else if (thisVal == 0) {
+		$element.css(styling, stylewith + colors[3]);
+	} else if (thisVal < 1) {
+		$element.css(styling, stylewith + colors[4]);
+	} else if (thisVal < 2) {
+		$element.css(styling, stylewith + colors[5]);
+	} else if (thisVal > 2) {
+		$element.css(styling, stylewith + colors[6]);
+	}
+}

@@ -17,6 +17,10 @@ class Pages extends Root_Controller {
 		$this->homepage();
 	}
 
+	public function missingPage() {
+		$this->load->view('pages/404');
+	}
+
 	//site homepage
 	public function homepage() {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
@@ -106,8 +110,14 @@ class Pages extends Root_Controller {
 	}
 
 	//profile page
-	public function profile($userID) {
-		//test if user is in system
+	public function profile($userID = -1) {
+		//TODO: test if user is in system
+		if ($userID == -1) {
+			$this->missingPage();
+		}
+
+		//get userdata to check if user is logged in
+		$data['userdata'] = $this->session->all_userdata();
 
 		//grab basic data
 		$data['userInfo'] = get_object_vars($this->data_model->getUser($userID));

@@ -1,6 +1,5 @@
 <!--Start #main content-->
 <div id="main">
-	<h1><?=$pageType == 'company' ? $companyInfo['Name'] : $claimInfo['ClaimTitle']?></h1>
 <?php
 if ($pageType != 'tag') {
 
@@ -10,6 +9,7 @@ if ($pageType != 'tag') {
 	<?php
 	if ($pageType == 'company') {
 	?>
+		<h1><?=$companyInfo['Name']?></h1>
 		<span>Industries:</span>
 		<ul id="industryTags" companyid="<?=$companyInfo['CompanyID']?>">
 			<?php
@@ -34,9 +34,11 @@ if ($pageType != 'tag') {
 		<div id="newTagPopup" style="display:none;">
 			<input id="newindustry_name" type="text" placeholder="Type an Industry name"/>
 		</div>	
+
 	<?php
 	} else {
 	?>
+		<h1><a href="<?=$claimInfo['Link']?>" target="_blank"><?=$claimInfo['ClaimTitle']?></a></h1>
 		<span>Tags:</span>
 		<ul id="claimTags" claimid="<?=$claimInfo['ClaimID']?>">
 			<?php

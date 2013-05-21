@@ -25,15 +25,16 @@ $(document).ready(function() {
 	$('#urlButton').click(function() {
 		$('#urlButton').hide('fade', 200);
 		$('#urlInput').show('fade', 600);
+		$('#pasteURL').focus();
 	});
 	
 	$("#pasteURL").bind('paste', function() {
-		$('#urlInput').removeClass('quarter').addClass('half');
+		$('#urlInput').removeClass('quarter').addClass('full');
 		$('#urlSubmit').show(200);
 		$('.lightsout').fadeIn();
 	});
 	$(".cancelButton").click(function() {
-		$('#urlInput').removeClass('half').addClass('quarter');
+		$('#urlInput').removeClass('full').addClass('quarter');
 		$('#urlSubmit').hide(200);
 		$("#pasteURL").val('');
 		$('#urlButton').show('fade', 600);
