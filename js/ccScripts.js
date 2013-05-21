@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 	//Onclick, send vote to server
 	//switch value when clicked
-	$('.industryUpvote').click(function() {
+	$('.tagUpvote').click(function() {
 		sendIndustryUpvote($(this));
 	});
 
@@ -18,19 +18,19 @@ $(document).ready(function() {
 		//alert($(this).attr('tagid'));
 		var clicked = $(button);
 		//Dom changes
-		var oldVotes = parseInt($(clicked.parent().children(".industryTotal")[0]).text());
+		var oldVotes = parseInt($(clicked.parent().children(".tagTotal")[0]).text());
 		if(!voted) {		//just voted, add vote
 			clicked.text('-');
 			clicked.attr('voted','1');
 			oldVotes ++;
-			clicked.parent().addClass('industryUserVoted');
+			clicked.parent().addClass('userVoted');
 		}else {				//just unvoted, remove vote
 			clicked.text('+');
 			clicked.attr('voted','0');
 			oldVotes --;
-			clicked.parent().removeClass('industryUserVoted');
+			clicked.parent().removeClass('userVoted');
 		}
-		$(clicked.parent().children(".industryTotal")[0]).text(oldVotes);
+		$(clicked.parent().children(".tagTotal")[0]).text(oldVotes);
 		$.ajax({
 			type: 'POST',
 			url: 'http://127.0.0.1/action/upvoteIndustry',
@@ -51,8 +51,8 @@ $(document).ready(function() {
 	}
 
 	//Displays textbox to add new industry tag
-	$('#addIndustry').click( function() {
-		$('#newIndustryPopup').show(200);
+	$('#addTag').click( function() {
+		$('#newTagPopup').show(200);
 	});
 
 	//Autocomplete for adding new industry

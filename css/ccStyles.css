@@ -12,29 +12,29 @@ hr {
 
 /*-----------------------Claim and Industry Tags-------------------*/
 
-	#tagList span, #industryTags li{
+	#tagList span, #tagList li {
 		float: left;
 		padding: 2px 2px 2px 2px;
 	}
 
-	#industryTags li {
+	#tagList li {
 		list-style-type: none;
 		background-color: #FEF5CA;
 		border: 1px solid rgb(168, 162, 130);
 	}
 
-	#industryTags .industryUpvote {
+	#tagList .tagUpvote {
 		padding-left:6px;
 		padding-right:6px;
 	}
 
-	#industryTags li.industryUserVoted {
+	#tagList li.userVoted {
 		background-color:#DDD;
 	}
 
 /*-----------------------Add New Industry-------------------*/
 
-	#addIndustry {
+	#addTag {
 		background-color: #FEF5CA;
 		border: 0;
 		font-weight: bold;
