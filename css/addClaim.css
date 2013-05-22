@@ -1,16 +1,3 @@
-#treemapCanvas {
-	margin-top: 60px;
-}
-
-.rating {
-	float: left;
-	margin: 10px;
-}
-
-#submissions, #comments {
-	float: left;
-}
-
 #urlContainer {
 	margin-bottom: 0px !important;
 }
@@ -39,9 +26,9 @@
 }
 
 #urlInput {
-
 	z-index: 200;
 }
+
 #pasteURL {
 	width: 100%;
 }
@@ -60,31 +47,12 @@
 	width: 95%;
 }
 
-/* #urlSubmit p {
-	margin-left: 235px;
-} */
-
-/* #controlContainer {
-	float: right;
-	margin-right: 7px;
-} */
-
 #scoreDistribution {
 	display: none !important;
 }
 
-/* #assocCo {
-	width: 40%;
-	margin-top: 15px;
-}
- */
 #submit, #cancel {
 	float: right;
-}
-
-#treemapCanvas {
-	margin: auto;
-	margin-top: 50px;
 }
 
 .full {
@@ -98,4 +66,3 @@
 .quarter {
 	width: 25%;
 }
-

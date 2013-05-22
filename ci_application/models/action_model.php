@@ -33,13 +33,6 @@ class Action_model extends CI_Model {
         return false;
 	}
 
-
-	//adds user to the system
-	public function addUser() {
-		//$query = $this->db->get('User');
-		//return $query->result_array();		
-	}
-
     //Upvotes the relationship between the passed tag and company using
     //the user id who sent it, or deletes the vote the user previously made 
     //depending on the boolean value post (voted)
@@ -68,6 +61,28 @@ class Action_model extends CI_Model {
             }
             return $result;
         }
+    }
+
+    //adds user to the system
+    public function addUser() {
+        $username = $this->security->xss_clean($this->input->post('username'));
+        $password = $this->security->xss_clean($this->input->post('password'));
+        $email = $this->security->xss_clean($this->input->post('email'));
+
+        // Check to see if username already exists
+        $query = $this->db->get_where('User', array('Name' => $username));
+        // If username is not already taken, add user
+        if ($query->num_rows() == 0) {
+            $data = array(
+                'Name' => $username,
+                'Password' => $password,
+                'Email' => $email
+                );
+            $result = $this->db->insert('User', $data);
+            return true;
+        }
+        // else return false, username already exists
+        return false;
     }
 
     //Updates the user profile with new information

@@ -17,54 +17,53 @@ class Pages extends Root_Controller {
 		$this->homepage();
 	}
 
-	public function missingPage() {
-		$this->load->view('pages/404');
-	}
-
 	//site homepage
 	public function homepage() {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
 
-		$data['csFiles'] = array('general','homepage','ccStyles');
-		$data['jsFiles'] = array('general','homepage','ccScripts');
+		$data['csFiles'] = array('general','addClaim','treemap');
+		$data['jsFiles'] = array('general','addClaim');
 		$data['topCompaniesWithClaimsJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
 		$data['topClaims'] = $this->data_model->getTopClaims();
 		$data['topCompanies'] = $this->data_model->getTopCompaniesWithClaims();
 		
 		//signed in logic goes here
 		$this->load->view('templates/header', $data);
-		$this->load->view('pages/home', $data);
-		$this->load->view('pages/homeBottom', $data);
+		$this->load->view('pages/addClaim', $data);
 		$this->load->view('pages/treemap', $data);
 		$this->load->view('templates/footer');
 	}
 
 	//claim page
-	public function claim($claimID) {
-		$data['headerTitle'] = 'View Claim - PatchWork';
-		$data['pageType'] = 'claim';
+	public function claim($claimID = -1) {
+		if($claimID == -1) {
+			$this->homepage(); //!! change to TreemapSearch later
+		}else {
 
-		$data['claimInfo'] = get_object_vars($this->data_model->getClaim($claimID));
-		$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
+			$data['headerTitle'] = 'View Claim - PatchWork';
+			$data['pageType'] = 'claim';
 
-		$resultsArr = [];
-		$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr);
-		$data['scores'] = $this->data_model->getClaimScores($claimID);
-		
-		//files needed
-		$data['csFiles'] = array('general','ccStyles');
-		$data['jsFiles'] = array('general','ccScripts');
+			$data['claimInfo'] = get_object_vars($this->data_model->getClaim($claimID));
+			$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/ccTop', $data);
-		$this->load->view('pages/evidence', $data);
-		$this->load->view('pages/scoreTop', $data);
-		$this->load->view('pages/score', $data);
-		$this->load->view('pages/scoreBottom', $data);
-		$this->load->view('pages/discussion', $data);
-		$this->load->view('pages/ccBottom', $data);
-		$this->load->view('templates/footer');
+			$resultsArr = [];
+			$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr);
+			$data['scores'] = $this->data_model->getClaimScores($claimID);
+			
+			//files needed
+			$data['csFiles'] = array('general','ccStyles');
+			$data['jsFiles'] = array('general','ccScripts');
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/ccTop', $data);
+			$this->load->view('pages/evidence', $data);
+			$this->load->view('pages/scoreTop', $data);
+			$this->load->view('pages/score', $data);
+			$this->load->view('pages/scoreBottom', $data);
+			$this->load->view('pages/discussion', $data);
+			$this->load->view('templates/footer');
+		}
 	}
 
 	//company page
@@ -89,35 +88,46 @@ class Pages extends Root_Controller {
 			$this->load->view('pages/score', $data);
 			$this->load->view('pages/scoreBottom', $data);
 			$this->load->view('pages/highlowClaims', $data);
-			$this->load->view('pages/ccBottom', $data);
 			$this->load->view('templates/footer');
 		}
 	}
 
 	//tag page
-	public function tag($tagID) {
-		$data['headerTitle'] = 'View Tag - PatchWork';
-		$data['pageType'] = 'tag';
-		
-		$data['tagInfo'] = $this->data_model->getTags($tagID);
-		
-		$data['csFiles'] = array('general','tag');
-		$data['jsFiles'] = array('general','tag');
+	public function tag($tagID = -1) {
+		if($tagID == -1) {
+			$this->homepage(); //!! change to TreemapSearch later
+		}else {
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/tag', $data);
-		$this->load->view('templates/footer');
+			$data['headerTitle'] = 'View Tag - PatchWork';
+			$data['pageType'] = 'tag';
+			
+			$data['tagInfo'] = $this->data_model->getTags($tagID);
+			
+			$data['csFiles'] = array('general','tag');
+			$data['jsFiles'] = array('general','tag');
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/tag', $data);
+			$this->load->view('templates/footer');
+		}
 	}
 
 	//profile page
 	public function profile($userID = -1) {
-		//TODO: test if user is in system
-		if ($userID == -1) {
-			$this->missingPage();
-		}
-
 		//get userdata to check if user is logged in
 		$data['userdata'] = $this->session->all_userdata();
+
+		//handle case when no parameter is passed
+		if ($userID == -1) {
+			if (!isset($data['userdata']['userid'])) {
+				//if user is not logged in, redirect
+				$this->homepage();
+				return;
+			} else {
+				//user is logged in, set variable as the userid in session and continue as normal
+				$userID = $data['userdata']['userid'];
+			}
+		}
 
 		//grab basic data
 		$data['userInfo'] = get_object_vars($this->data_model->getUser($userID));
@@ -133,7 +143,7 @@ class Pages extends Root_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/profile', $data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer');		
 	}
 
 	public function about() {
@@ -171,7 +181,6 @@ class Pages extends Root_Controller {
 		$this->load->view('pages/faq');
 		$this->load->view('templates/footer');
 	}
-
 
 	/*
 	public function view($page = 'home') {

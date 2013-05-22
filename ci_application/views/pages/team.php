@@ -1,4 +1,3 @@
-<div id="main">
 	<h1>Team Tiger Foobar</h1>
 	<ul id='team'>
 		<li>
@@ -49,4 +48,3 @@
 			<p>Email: <a href="mailto:squakmix@uw.edu">squakmix@uw.edu</a></p>
 		</li>
 	</ul>
-</div>

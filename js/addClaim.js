@@ -22,12 +22,14 @@ $(document).ready(function() {
 		}
 	});
 
+	//Click on button with text to convert to input
 	$('#urlButton').click(function() {
 		$('#urlButton').hide('fade', 200);
 		$('#urlInput').show('fade', 600);
 		$('#pasteURL').focus();
 	});
 	
+	//Listen for paste event to popup add new claim form
 	$("#pasteURL").bind('paste', function() {
 		$('#urlInput').removeClass('quarter').addClass('full');
 		$('#urlSubmit').show(200);
@@ -43,26 +45,3 @@ $(document).ready(function() {
 		return false;
 	});
 });
-
-
-//	Used for error-checking ajax calls
-function ajaxError(jqxhr, type, error) {
-	var msg = "An Ajax error occurred!\n\n";
-	if (type == 'error') {
-		if (jqxhr.readyState == 0) {
-			// Request was never made - security block?
-			msg += "Looks like the browser security-blocked the request.";
-		} else {
-			// Probably an HTTP error.
-			msg += 'Error code: ' + jqxhr.status + "\n" + 
-						 'Error text: ' + error + "\n" + 
-						 'Full content of response: \n\n' + jqxhr.responseText;
-		}
-	} else {
-		msg += 'Error type: ' + type;
-		if (error != "") {
-			msg += "\nError text: " + error;
-		}
-	}
-	alert(msg);
-}

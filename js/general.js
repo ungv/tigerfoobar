@@ -64,17 +64,10 @@ $(document).ready(function() {
 			},
 			dataType: 'json',
 			success: function(json) {
-				$('#loginPopup').hide(200);
-				$('#login_username').val('');
-				$('#login_password').val('');
-				$('#login_buttons').hide(200);
-				$('#login_status').html('Logged in as <a href="/profile/' + json.userid + '">' + json.username + '</a>');
-				$('#login_status').show(200);
-				$('#logout').show(200);
+				hidePopups();
 				window.location.reload();
 			},
 			error: function() {
-				alert('Fail!');
 				$('#login_fail').show(200);
 				$('#login_password').val('');
 			}
@@ -124,6 +117,32 @@ $(document).ready(function() {
 	}).mouseleave(function() {
 		$(this).removeClass('hover');
 	});
+
+	$('#signup_submit').click(function() {
+		addUser($('#signupPopup input[name="username"]').val(), $('#signupPopup input[name="password"]').val(), $('#signupPopup input[name="email"]').val());
+		console.log($('#signupPopup input[name="username"]').val(), $('#signupPopup input[name="password"]').val(), $('#signupPopup input[name="email"]').val());
+	});
+
+	//Adds a new user to the database
+	function addUser(username, password, email) {
+		$.ajax({
+			type: 'POST',
+			url: 'http://127.0.0.1/action/addUser',
+			data: {
+				username: username,
+				password: password,
+				email: email
+			},
+			dataType: 'json',
+			success: function(json) {
+				sendLogin(username, password);
+			},
+			error: function() {
+				$('#username_exists').show(200);
+			}
+		});
+	}
+
 
 	/*-----Lights out----*/
 

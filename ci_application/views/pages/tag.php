@@ -1,4 +1,3 @@
-<div id='main'>
 	<div><h1>#<?=$tagInfo[0]['Name']?></h1></div>
 
 	<div>
@@ -32,4 +31,3 @@
 		?>
 		</ul>
 	</div>
-</div>

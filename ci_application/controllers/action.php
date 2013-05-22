@@ -63,6 +63,20 @@ class Action extends Root_Controller {
 	}
 
 	/*
+		Adds a new user to the database, username/password required, email optional
+	*/
+	public function addUser() {
+		$result = $this->action_model->addUser();
+		if($result) {	//database updated db, send success method
+			$data['json'] = '{"message":"Successfully contacted server method!"}';
+		}else {			//didn't work, inform user why
+        	$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Cannot Process Update"}'; 
+		}
+		$this->load->view('data/json_view', $data);
+	}
+
+	/*
 		Updates the user profile with new information
 	*/
 	public function updateProfile() {

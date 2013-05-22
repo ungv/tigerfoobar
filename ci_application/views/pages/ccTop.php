@@ -1,5 +1,3 @@
-<!--Start #main content-->
-<div id="main">
 <?php
 if ($pageType != 'tag') {
 
