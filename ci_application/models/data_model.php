@@ -30,7 +30,7 @@ class Data_model extends CI_Model {
 	//Returns all the relavent information about the claim and it's company,
 	//as well as the user who created it.
 	public function getClaim($claimID) {
-		$sql = "SELECT cl.ClaimID, cl.Link, cl.Title AS ClaimTitle, cl.Description, cl.Score AS ClaimScore, cl.UserID, cl.CompanyID, cl.Time AS ClaimTime, co.Name AS CoName, co.Score AS CoScore, u.Name AS UserName
+		$sql = "SELECT cl.ClaimID, cl.Link, cl.Title AS ClaimTitle, cl.Description, cl.Score AS ClaimScore, cl.UserID, cl.CompanyID, cl.Time AS ClaimTime, co.Name AS CoName, u.Name AS UserName
 				FROM Claim cl
 				LEFT JOIN Company co
 				ON cl.CompanyID = co.CompanyID

@@ -5,7 +5,7 @@
 			<section id="leftCol">
 				<!-- have to make form auto submit with js -->
 				<div id="scoreHeader">
-					<span id="averageScore"><?=$pageType == 'company' ? $companyInfo['Score'] : $claimInfo['ClaimScore']?></span>
+					<span id="averageScore"><?=$pageType == 'company' ? $companyInfo['Rating'] : $claimInfo['ClaimScore']?></span>
 					<span id="scoreInfo">(
 						<?php
 						if (!empty($scores) || !empty($companyClaims)) {
