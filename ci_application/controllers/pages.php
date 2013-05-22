@@ -75,12 +75,13 @@ class Pages extends Root_Controller {
 	//company page
 	public function company($companyID = -1) {
 		if($companyID == -1) {
-			$this->homepage(); //!! change to TreemapSearch later
+			$this->homepage();
 		}else {
 			//grab basic data
 			$data['companyInfo'] = $this->data_model->getCompany($companyID);
 			$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
 			$data['companyTags'] = $this->data_model->getCompanyTags($companyID);
+			$data['topClaimsForCompanyJSON'] = $this->data_model->getClaimsForCompanyJSON($companyID);
 			
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
@@ -89,12 +90,19 @@ class Pages extends Root_Controller {
 			$data['jsFiles'] = array('general','ccScripts');
 			
 			$this->load->view('templates/header', $data);
-			$this->load->view('pages/ccTop', $data);
-			$this->load->view('pages/scoreTop', $data);
-			$this->load->view('pages/score', $data);
-			$this->load->view('pages/scoreBottom', $data);
-			$this->load->view('pages/highlowClaims', $data);
-			$this->load->view('pages/ccBottom', $data);
+			
+			if (isset($data["companyInfo"][0])) {
+				$this->load->view('pages/ccTop', $data);
+				$this->load->view('pages/scoreTop', $data);
+				$this->load->view('pages/score', $data);
+				$this->load->view('pages/scoreBottom', $data);
+				$this->load->view('pages/highlowClaims', $data);
+				$this->load->view('pages/treemap', $data);
+				$this->load->view('pages/ccBottom', $data);
+			} else {
+				//Display error message
+			}
+			
 			$this->load->view('templates/footer');
 		}
 	}
