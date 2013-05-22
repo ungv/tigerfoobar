@@ -89,8 +89,8 @@ class Data_model extends CI_Model {
 	public function getTopCompaniesWithClaims() {
 		$N = 10;
 		$M = 10;
-		$sql = "SELECT *
-				FROM Claim cl
+		/*$sql = "SELECT *
+				FROM Claim cl2
 				INNER JOIN
 					(SELECT co.Name, topCompanyIDs.CompanyID, claimID, topCompanyIDs.Score, companyIDCount
 					FROM Company co
@@ -103,10 +103,20 @@ class Data_model extends CI_Model {
 							ORDER BY companyIDCount DESC) orderedClaims
 						LIMIT $N) topCompanyIDs
 					ON co.CompanyID = topCompanyIDs.CompanyId) topCompanysWithIDs
-				ON cl.CompanyID = topCompanysWithIDs.CompanyID";
+				ON cl2.CompanyID = topCompanysWithIDs.CompanyID";
 				
-		return $this->db->query($sql)->result_array();
+		*/
 		
+		$sql = "Select cl.ClaimID as ClaimID, cl.Title, cl.Score, cl.numScores, topCompanies.numClaims, topCompanies.Name 
+			From Claim cl
+			Join
+				(Select * 
+				from Company co
+				GROUP BY co.CompanyID
+				Order by co.numClaims DESC
+				Limit 0, $N) topCompanies
+			On cl.companyID = topCompanies.companyID";
+		return $this->db->query($sql)->result_array();
 		/*TODO: Make sure this is returning the correct data; something's funky with scores
 		*/
 	}
@@ -120,7 +130,10 @@ class Data_model extends CI_Model {
 		//Builds JSON out of the data in the $data array
 		$companiesWithClaims = '';
 		$currCompany = "";
+		
 		for ($i = 0; $i < count($topCompanies); $i++) {
+		
+			
 			//foreach($topClaims as $topClaim) {
 
 			if ($topCompanies[$i]["Name"] != $currCompany) {
@@ -131,12 +144,12 @@ class Data_model extends CI_Model {
 			$claims = '';
 			
 			while (($i < count($topCompanies)) && $topCompanies[$i]["Name"] == $currCompany) {
-				$name = str_replace("'","", $topCompanies[$i]["Title"]);
+				$title = str_replace("'","", $topCompanies[$i]["Title"]);
 				$size = str_replace("'","", $topCompanies[$i]["numScores"]);
-				$claimID = $topCompanies[$i]["claimID"];
 				$score = $topCompanies[$i]["Score"];
+				$claimID = $topCompanies[$i]["ClaimID"];
 				
-				$claims .= '{"name" : "' . $name . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
+				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
 				$i++;
 			} 
 			
