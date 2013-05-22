@@ -4,9 +4,8 @@
 var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
 
 $(document).ready(function() {
-	/*--------FORM VALIDATION (DOCUMENTATION http://docs.jquery.com/Plugins/Validation)--------*/
-
-	// Call jQuery validate plugin that injects messages for required fields on form submit
+	var passwordMsgs = ['^Hmm, no password seems kinda fishy', '^Wait, ya kinda need a password', '^Uh, without a password, anyone can have your account', '^Ah, huge security risk!'];
+	
 	$('#signupForm').validate({
 		rules: {
 			username: {
@@ -24,50 +23,11 @@ $(document).ready(function() {
 				required: "^We can't just call you nothing..."
 			},
 			password: {
-				required: "^Hmm, no password seems kinda fishy"
+				required: passwordMsgs[Math.floor(Math.random() * passwordMsgs.length)]
 			}
 		}
 	});
-
-	/*-----------TagIt Plugin (DOCUMENTATION: http://webspirited.com/tagit/docs.html)-------------------*/
-
-	var companyList = []; // populated with all companies pulled from database as a source for autocompletion
-	var tagsList = []; // populated with all tags pulled from database as a source for autocompletion
-
-	// $.ajax({
-	// 	type: 'POST',
-	// 	url: 'http://127.0.0.1/action/getAll',
-	// 	dataType: 'json',
-	// 	success: function(json) {
-	// 		for (var i = 0; i < json.length; i++) {
-	// 			companyList.push(i);
-	// 		}
-	// 	},
-	// 	error: function() {
-	// 		alert('Fail!');
-	// 	}
-	// });
-	// console.log(companyList);
 	
-	// Input field for entering an associated company from "Add new claim" form
-	$('#assocCo').tagit({
-		tagSource: companyList,
-		maxTags: 1,
-		select: true,
-		triggerKeys: ['enter', 'comma'],
-		highlightOnExistColor: '#000'
-	});
-
-	// Input field for entering tags from "Add new claim" form
-	$('#tagsSearch').tagit({
-		tagSource: tagsList,
-		select: true,
-		triggerKeys: ['enter', 'comma'],
-		highlightOnExistColor: '#000'
-	});
-	
- 	/*------Logging In------*/
-
 	//Sends the passed login parameters to server onclick
 	function sendLogin(username, password) {
 		$.ajax({
@@ -94,6 +54,8 @@ $(document).ready(function() {
 			}
 		});
 	}
+	
+ 	/*------Logging In------*/
 	
 	//Show login popup onclick
 	$('#login').click(function() {

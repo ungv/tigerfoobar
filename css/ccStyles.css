@@ -1,3 +1,7 @@
+ul {
+	display: inline;
+}
+
 li {
 	list-style-type: none;
 	float: left;
@@ -10,39 +14,16 @@ hr {
 	background-color: #D5D5D5;
 }
 
-/*-----------------------Claim and Industry Tags-------------------*/
+#claimTags span, #industryTags li{
+	float: left;
+	padding: 5px 25px 5px 5px;
+}
 
-	#tagList span, #industryTags li{
-		float: left;
-		padding: 2px 2px 2px 2px;
-	}
-
-	#industryTags li {
-		list-style-type: none;
-		background-color: #FEF5CA;
-		border: 1px solid rgb(168, 162, 130);
-	}
-
-	#industryTags .industryUpvote {
-		padding-left:6px;
-		padding-right:6px;
-	}
-
-	#industryTags li.industryUserVoted {
-		background-color:#DDD;
-	}
-
-/*-----------------------Add New Industry-------------------*/
-
-	#addIndustry {
-		background-color: #FEF5CA;
-		border: 0;
-		font-weight: bold;
-		display: inline;
-		float: left;
-		padding: 5px 24px 5px 24px;
-		font-size: 14px;
-	}
+#industryTags li {
+	list-style-type: none;
+	background-color: #FEF5CA;
+	border: 1px solid rgb(168, 162, 130);
+}
 
 #claimPopTags li{
 	border: 2px solid rgb(102, 102, 102);
@@ -122,13 +103,6 @@ hr {
 #leftCol {
 	float: left;
 	width: 50%;
-	border-right: 1px solid rgb(213, 213, 213);
-}
-
-
-#rightCol {
-	float: left;
-	width: 49.8%;
 }
 
 #leftCol, #scoreDistribution, #evidenceContent, #controlContainer, #relatedTagsContainer, #discussionContent{
@@ -197,6 +171,12 @@ hr {
 
 .selectedRating {
 	border: 2px solid black !important;
+}
+
+#rightCol {
+	float: left;
+	width: 49.8%;
+	border-left: 1px solid rgb(213, 213, 213);
 }
 
 .lowRatedClaims, .highRatedClaims {

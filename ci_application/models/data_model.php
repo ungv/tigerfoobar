@@ -9,7 +9,7 @@ class Data_model extends CI_Model {
 	//get all tag types
 	public function testDB() {
 		$query = $this->db->get('User');
-		return $query->result_array();
+		return $query->result_array();		
 	}
 
 	// ------------- METHODS FOR GETTING THE SCORE INFORMATION -------------
@@ -26,9 +26,6 @@ class Data_model extends CI_Model {
 	}
 
 	// ------------- METHODS FOR CLAIM VIEW -------------
-
-	//Returns all the relavent information about the claim and it's company,
-	//as well as the user who created it.
 	public function getClaim($claimID) {
 		$sql = "SELECT cl.ClaimID, cl.Link, cl.Title AS ClaimTitle, cl.Description, cl.Score AS ClaimScore, cl.UserID, cl.CompanyID, cl.Time AS ClaimTime, co.Name AS CoName, co.Score AS CoScore, u.Name AS UserName
 				FROM Claim cl
@@ -37,36 +34,32 @@ class Data_model extends CI_Model {
 				LEFT JOIN User u
 				ON cl.UserID = u.UserID
 				WHERE cl.ClaimID = $claimID";
-		return $this->db->query($sql)->row();
+		return $this->db->query($sql)->result_array();
 	}
 	
-	public function getClaimTags($claimID, $userID) {
-		if(!isset($userID)) {
-			$userID = -1;
-		}
-		$sql = "SELECT DISTINCT t.Name, t.TagsID, COUNT(c.Claim_ClaimID) as votes, 
-				sum(case when c.User_ID = $userID then 1 else 0 end) as uservoted
+	public function getClaimTags($claimID) {
+		$sql = "SELECT DISTINCT t.Name, COUNT(ct.Claim_ClaimID) as votes
 				FROM Tags t
-				JOIN Claim_has_Tags c
-				ON c.Tags_TagsID = t.TagsID
-				WHERE c.Claim_ClaimID = $claimID
-				GROUP BY t.Name, t.TagsID
-				ORDER BY COUNT(c.Claim_ClaimID) DESC";
+				LEFT JOIN Claim_has_Tags ct
+				ON t.TagsID = Tags_TagsID
+				LEFT JOIN Claim c
+				ON c.ClaimID = Claim_ClaimID
+				WHERE t.Type = 'Claim Tag'
+				AND c.ClaimID = $claimID
+				GROUP BY t.Name";
 		return $this->db->query($sql)->result_array();
 	}
 
 	// Need to get number of ratings for each claim
 	
 	// ------------- METHODS FOR COMPANY VIEW -------------	
-	//Retreives the basic data for a company
 	public function getCompany($companyID) {
 		$sql = "SELECT *
 				FROM Company
 				WHERE CompanyID = $companyID";
-		return $this->db->query($sql)->row();
+		return $this->db->query($sql)->result_array();
 	}
 
-	//Retreives the top claims for a given company
 	public function getCompanyClaims($companyID) {
 		$sql = "SELECT cl.*, COUNT(cl.Score) AS noRatings,
 					(SELECT COUNT(Score) 
@@ -80,32 +73,15 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 	
-	//Retreives the industry tags associated with
-	//a given $companyID , as well as if the current users
-	//have voted on a given industry-tag combination
-	public function getCompanyTags($companyID, $userID) {
-		if(!isset($userID)) {
-			$userID = -1;
-		}
-		$sql = "SELECT DISTINCT t.Name, t.TagsID, COUNT(c.Company_CompanyID) as votes , 
-				sum(case when c.User_id = $userID then 1 else 0 end) as uservoted
+	public function getCompanyTags($companyID) {
+		$sql = "SELECT DISTINCT t.Name, COUNT(c.Company_CompanyID) as votes
 				FROM Tags t
-				JOIN Company_has_Tags c
+				LEFT JOIN Company_has_Tags c
 				ON c.Tags_TagsID = t.TagsID
-				WHERE c.Company_CompanyID = $companyID
-				GROUP BY t.Name, t.TagsID
-				ORDER BY COUNT(c.Company_CompanyID) DESC";
+				WHERE t.Type = 'Industry'
+				AND c.Company_CompanyID = $companyID
+				GROUP BY t.Name";
 		return $this->db->query($sql)->result_array();
-	}
-
-	//Returns SQL from the Tags table 
-	public function industryList($root) {
-		$sql = "SELECT * from Tags
-				WHERE Tags.Name like '$root%'
-				AND Tags.Type like 'Industry'
-				LIMIT 10";
-		return $this->db->query($sql)->result_array();
-		//AND Tags.Type like 'Industry'
 	}
 	
 	//------------- METHODS FOR TREEMAP VIEW ------------
@@ -196,21 +172,10 @@ class Data_model extends CI_Model {
 
 	// ------------- METHODS FOR DISCUSSION VIEW --------
 	public function getDiscussion($claimID) {
-		$sql = "SELECT d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time, r.Value
+		$sql = "SELECT d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time
 				FROM Discussion d
 				LEFT JOIN User u
 				ON u.UserID = d.UserID
-				LEFT JOIN Rating r
-				ON u.UserID = r.UserID
-				AND r.ClaimID = d.ClaimID
-				WHERE d.ClaimID = $claimID";
-		return $this->db->query($sql)->result_array();
-	}	
-
-	public function getUsersRating($claimID) {
-		$sql = "SELECT *
-				FROM Claim c
-
 				WHERE d.ClaimID = $claimID";
 		return $this->db->query($sql)->result_array();
 	}	
@@ -239,7 +204,6 @@ class Data_model extends CI_Model {
 				ON u.UserID = d.UserID
 				LEFT JOIN Rating r
 				ON r.ClaimID = d.ClaimID
-				AND r.userID = u.UserID				
 				LEFT JOIN Claim c
 				ON r.ClaimID = c.ClaimID
 				WHERE u.UserID = $userID";
@@ -259,53 +223,5 @@ class Data_model extends CI_Model {
 				ON co.CompanyID = c.CompanyID
 				WHERE u.UserID = $userID";
 		return $this->db->query($sql)->result_array();
-	}
-	
-	// ------------- METHODS FOR TREEMAP -------------
-	//Return top n claims
-	public function getTopClaims() {
-		$N = 100;
-		$sql = "SELECT *
-				FROM 
-				(SELECT *
-				FROM Claim cl
-				ORDER BY cl.numScores) orderedClaims
-				LIMIT $N";
-				
-		return $this->db->query($sql)->result_array();
-	}
-	
-	//Return top n claims for given tag
-	public function getTopClaimsForTag() {
-		$sql = "SELECT *
-				FROM claims cl";
-		
-		//return $this->db->query($sql)->result_array();
-	}
-	
-	//Return top n companies
-	public function getTopCompanies() {
-		$N = 10;
-		$sql = "SELECT co.Name, topCompanyIDs.CompanyID
-				FROM Company co
-				INNER JOIN 
-					(SELECT *
-					FROM 
-					(SELECT cl.CompanyID, COUNT(cl.CompanyID) AS companyIDCount
-					FROM Claim cl
-					GROUP BY cl.CompanyID
-					ORDER BY companyIDCount DESC) orderedClaims
-					LIMIT $N) topCompanyIDs
-				ON co.CompanyID = topCompanyIDs.CompanyId";
-		
-		//return $this->db->query($sql)->result_array();
-	}
-		
-	//Return top n companies for given industry
-	public function getTopCompaniesForIndustry() {
-		$sql = "SELECT *
-				FROM Company co";
-		
-		//return $this->db->query($sql)->result_array();
-	}
+	}	
 }
