@@ -10,10 +10,12 @@ $(document).ready(function() {
 	//Onclick, send vote to server
 	//switch value when clicked
 	$('.tagUpvote').click(function() {
-		sendIndustryUpvote($(this));
+		sendTagUpvote($(this));
 	});
 
-	function sendIndustryUpvote(button) {
+	//Sends the upvote or downvote to the server using the type of tag
+	//(industry or claim tag) and other specific tag information
+	function sendTagUpvote(button) {
 		var voted = parseInt($(button).attr('voted')); //0 if not voted, 1 if voted
 		//alert($(this).attr('tagid'));
 		var clicked = $(button);
@@ -36,7 +38,8 @@ $(document).ready(function() {
 			url: 'http://127.0.0.1/action/upvoteIndustry',
 			data: {
 				industryID: $(clicked).attr('tagid'),
-				companyID: $(clicked).attr('companyid'),
+				objectID: $(clicked).attr('objectid'), //the objet (claim or company) being affected
+				tagType: $(clicked).attr('tagtype'),
 				voted: voted
 			},
 			dataType: 'json',
@@ -66,12 +69,14 @@ $(document).ready(function() {
 		}
 	];
 
-	//Called when typing into new industry text box
-	$( "#newindustry_name" ).autocomplete({
+	//Called when typing into new industry/new tag text box
+	$( "#newtag_name" ).autocomplete({
 		minLength: 0,
 		source: function (request, response) {
 	        $.ajax({
-	            url: "/data/industryList/" + $('#newindustry_name').val(),
+
+	            url: "/data/industryList/" + $('#newtag_name').val(),
+	            data: {tagtype: $("#newtag_name").attr('tagtype')},
 	            dataType: 'json',
 	            success: function (data) {
 	                response(data.map(function (value) {
@@ -89,26 +94,28 @@ $(document).ready(function() {
 			"Selected: " + ui.item.value :
 			"Nothing selected, input was " + this.value );
 			*/
-			sendNewIndustry(ui.item.label,ui.item.value);
+			sendNewTag(ui.item.label,ui.item.value);
 		}
 	});
 	
 	//Sends information about the newly created
 	//industry-company connection to the server
-	function sendNewIndustry(label, value) {
+
+	//TODO: 
+	function sendNewTag(label, value) {
 		var newLink = $('<li>', {
-			"html": '	<span class="industryName">' + label + '</span>' +
+			"html": '	<span class="tagName">' + label + '</span>' +
 					'	<span>(</span> ' +
 					'		<span class="industryTotal">0</span>' +
 					'	<span>)</span>' +
-					'	<span class="industryUpvote" tagid="'+ value + '" companyid="'+ $('#industryTags').attr('companyid') +'" voted="0">' +
+					'	<span class="industryUpvote" tagid="'+ value + '" objectid="'+ $('#industryTags').attr('objectid') +'" voted="0">' +
 					'		+  ' +
 					'	</span>'
 		});
 		$('#industryTags').append(newLink);
 		//call current vote method, triger click
 		$(newLink.children('.industryUpvote')[0]).click(function() {
-			sendIndustryUpvote($(this));
+			sendTagUpvote($(this));
 		});
 		$(newLink.children('.industryUpvote')[0]).click();
 	}

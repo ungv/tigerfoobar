@@ -9,16 +9,16 @@ if ($pageType != 'tag') {
 	?>
 		<h1><?=$companyInfo['Name']?></h1>
 		<span>Industries:</span>
-		<ul id="industryTags" companyid="<?=$companyInfo['CompanyID']?>">
+		<ul id="industryTags" objectid="<?=$companyInfo['CompanyID']?>">
 			<?php
 			foreach ($companyTags AS $tag) {
 			?>
-					<li<?php if($tag['uservoted']) { ?> class="uservoted" <?php } ?>>
+					<li<?php if($tag['uservoted']) { ?> class="userVoted" <?php } ?>>
 						<span class="tagName"><?=$tag['Name']?></span>
 						<span>(</span>
 							<span class="tagTotal"><?=$tag['votes']?></span>
 						<span>)</span>
-						<span class="tagUpvote" tagid="<?=$tag['TagsID']?>" companyid="<?=$companyInfo['CompanyID']?>" voted="<?=$tag['uservoted']?>">
+						<span class="tagUpvote" tagtype="Industry" tagid="<?=$tag['TagsID']?>" objectid="<?=$companyInfo['CompanyID']?>" voted="<?=$tag['uservoted']?>">
 							<?php if($tag['uservoted']) { ?>
 									-
 							<?php }else { ?>
@@ -30,7 +30,7 @@ if ($pageType != 'tag') {
 		</ul>
 		<a id="addTag" href="#">add industry</a>
 		<div id="newTagPopup" style="display:none;">
-			<input id="newindustry_name" type="text" placeholder="Type an Industry name"/>
+			<input id="newtag_name" tagtype="Industry" type="text" placeholder="Type an Industry name"/>
 		</div>	
 
 	<?php
@@ -38,16 +38,16 @@ if ($pageType != 'tag') {
 	?>
 		<h1><a href="<?=$claimInfo['Link']?>" target="_blank"><?=$claimInfo['ClaimTitle']?></a></h1>
 		<span>Tags:</span>
-		<ul id="claimTags" claimid="<?=$claimInfo['ClaimID']?>">
+		<ul id="claimTags" objectid="<?=$claimInfo['ClaimID']?>">
 			<?php
 			foreach ($claimTags AS $tag) {
 			?>
-				<li <?php if($tag['uservoted']) { ?> class="uservoted" <?php } ?> >
+				<li <?php if($tag['uservoted']) { ?> class="userVoted" <?php } ?> >
 					<span class="tagName"><?=$tag['Name']?></span>
 					<span>(</span>
 						<span class="tagTotal"><?=$tag['votes']?></span>
 					<span>)</span>
-					<span class="tagUpvote" tagid="<?=$tag['TagsID']?>" companyid="<?=$claimInfo['CompanyID']?>" voted="<?=$tag['uservoted']?>">
+					<span class="tagUpvote" tagtype="Claim" tagid="<?=$tag['TagsID']?>" objectid="<?=$claimInfo['ClaimID']?>" voted="<?=$tag['uservoted']?>">
 						<?php if($tag['uservoted']) { ?>
 								-
 						<?php }else { ?>
@@ -59,7 +59,7 @@ if ($pageType != 'tag') {
 		</ul>
 		<a id="addTag" href="#">add claim tag</a>
 		<div id="newTagPopup" style="display:none;">
-			<input id="newclaimtag_name" type="text" placeholder="Type a tag for this claim"/>
+			<input id="newtag_name" tagtype="Claim Tag" type="text" placeholder="Type a tag for this claim"/>
 		</div>
 	<?php
 	}

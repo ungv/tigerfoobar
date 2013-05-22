@@ -98,14 +98,14 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 
-	//Returns SQL from the Tags table 
+	//Returns SQL from the Tags table, used for fetching autocomplete data
 	public function industryList($root) {
+		$tagtype = $this->security->xss_clean($this->input->get('tagtype'));
 		$sql = "SELECT * from Tags
 				WHERE Tags.Name like '$root%'
-				AND Tags.Type like 'Industry'
+				AND Tags.Type like '$tagtype' 
 				LIMIT 10";
 		return $this->db->query($sql)->result_array();
-		//AND Tags.Type like 'Industry'
 	}
 		
 	// ------------- METHODS FOR TAG VIEW ---------------
