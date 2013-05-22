@@ -242,3 +242,15 @@ input[type=button], input[type=submit] {
 	background-color: #DA764F;
 	color: #6D2E15;
 }
+
+.full {
+	width: 95%;
+}
+
+.half {
+	width: 50%;
+}
+
+.quarter {
+	width: 25%;
+}

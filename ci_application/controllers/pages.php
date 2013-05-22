@@ -22,8 +22,8 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
 
-		$data['csFiles'] = array('general','addClaim','treemap');
-		$data['jsFiles'] = array('general','addClaim');
+		$data['csFiles'] = array('general','ccStyles','addClaim','treemap');
+		$data['jsFiles'] = array('general','ccScripts','addClaim');
 		$data['topCompaniesWithClaimsJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
 		$data['topClaims'] = $this->data_model->getTopClaims();
 		$data['topCompanies'] = $this->data_model->getTopCompaniesWithClaims();

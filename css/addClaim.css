@@ -54,15 +54,3 @@
 #submit, #cancel {
 	float: right;
 }
-
-.full {
-	width: 95%;
-}
-
-.half {
-	width: 50%;
-}
-
-.quarter {
-	width: 25%;
-}
