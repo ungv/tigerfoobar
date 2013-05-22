@@ -1,7 +1,7 @@
 	<div id="user" class="container">
 		<h1><?=$userInfo['Name']?></h1>
 		<?php
-		if (isset($userdata['userid'])) {
+		if (isset($userdata['userid']) && $userdata['userid'] == $curProfile) {
 		?>
 		<p><a id="changeUser" href="">Change username</a> | <a id="changePass" href="">Change password</a> | <a id="changeEmail" href="">Change email</a> | <a id="deleteAccount" href="">delete account</a></p><br/>
 		<p id="message"></p>
@@ -26,6 +26,7 @@
 				<input type="password" name="verifyDeletion" placeholder="Enter password to delete" />
 				<button class="submitButton" type="submit">Yes</button>
 				<button class="cancelButton" type="button">no</button>
+				<div><em>*This will not delete content you have already submitted to this website. You will not be able to access your account after this.</em></div>
 			</div>
 		<!-- </form> -->
 		<?php
@@ -69,7 +70,8 @@
 		<div class="threadContainer">
 			<div class="thread">
 				<h3><a href="">"<?=$comment['Comment']?>"</a></h3>
-				<p><em><strong><?=$userInfo['Name']?></strong> rated <a href="/claim/<?=$comment['ClaimID']?>"><?=$comment['Title']?></a> a <strong class="theirRating"><?=$comment['Value']?></strong></em></p>
+				<p><em>About <a href="/company/<?=$comment['CompanyID']?>"><?=$comment['CoName']?></a>, from '<a href="/claim/<?=$comment['ClaimID']?>"><?=$comment['Title']?></a>,' of which they <?=$comment['Value'] == NULL ? 'have not rated yet' : 'gave a score of <strong class="theirRating">' . $comment["Value"] .'</strong>'?></em>
+				</p>
 			</div>
 		</div>
 			<?php

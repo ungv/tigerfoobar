@@ -130,6 +130,7 @@ class Pages extends Root_Controller {
 		}
 
 		//grab basic data
+		$data['curProfile'] = $userID;
 		$data['userInfo'] = get_object_vars($this->data_model->getUser($userID));
 		$data['userClaims'] = $this->data_model->getUserClaims($userID);
 		$data['userComments'] = $this->data_model->getUserComments($userID);

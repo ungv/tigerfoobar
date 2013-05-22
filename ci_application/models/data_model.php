@@ -141,7 +141,7 @@ class Data_model extends CI_Model {
 		return $resultsArr;
 	}
 	
-	// ------------- METHODS FOR USER VIEW ---------------
+	// ------------- METHODS FOR PROFILE VIEW ---------------
 	public function getUser($userID) {
 		$query = $this->db->get_where('User', array('UserID' => $userID));
 		return $query->row();
@@ -159,15 +159,17 @@ class Data_model extends CI_Model {
 	}	
 	
 	public function getUserComments($userID) {
-		$sql = "SELECT d.ClaimID, d.Comment, d.votes, d.Time, r.Value, c.Title
+		$sql = "SELECT u.Name, c.ClaimID, d.CommentID, d.Comment, c.Title, c.CompanyID, co.Name AS CoName, r.Value
 				FROM User u
 				LEFT JOIN Discussion d
 				ON u.UserID = d.UserID
-				LEFT JOIN Rating r
-				ON r.ClaimID = d.ClaimID
-				AND r.userID = u.UserID				
 				LEFT JOIN Claim c
-				ON r.ClaimID = c.ClaimID
+				ON d.ClaimID = c.ClaimID
+				LEFT JOIN Rating r
+				ON u.UserID = r.UserID
+				AND d.ClaimID = r.ClaimID
+				LEFT JOIN Company co
+				ON co.CompanyID = c.CompanyID
 				WHERE u.UserID = $userID";
 		return $this->db->query($sql)->result_array();
 	}	

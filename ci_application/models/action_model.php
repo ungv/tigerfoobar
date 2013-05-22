@@ -90,6 +90,11 @@ class Action_model extends CI_Model {
         $col = $this->security->xss_clean($this->input->post('col'));
         $newInfo = $this->security->xss_clean($this->input->post('newInfo'));
 
+        if ($col == 'Name')
+            $this->session->set_userdata(array('username' => $newInfo));
+        else if ($col == 'Email')
+            $this->session->set_userdata(array('email' => $newInfo));
+
         //2. Check for user in db
         $query = $this->db->get_where('User', array('UserID' => $userid));
         //3. Verify row exists

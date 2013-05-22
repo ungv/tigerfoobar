@@ -77,12 +77,12 @@ function updateProfile(col, newInfo) {
 		},
 		dataType: 'json',
 		success: function(json) {
+			window.location.reload();
 			hidePopups();
 			$('#message').text('successfully updated!');
 			$('#message').css('color', 'green');
 			$('#message').fadeIn();
 			$('#message').fadeOut(2000);
-			window.location.reload();
 		},
 		error: function() {
 			hidePopups();
