@@ -112,13 +112,17 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'View Tag - PatchWork';
 		$data['pageType'] = 'tag';
 		
-		$data['tagInfo'] = $this->data_model->getTags($tagID);
+		$data['tagInfo'] = $this->data_model->getClaimsWithTag($tagID);
+		$data['topClaimsWithTagJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
 		
 		$data['csFiles'] = array('general','tag');
 		$data['jsFiles'] = array('general','tag');
 
 		$this->load->view('templates/header', $data);
+		$this->load->view('pages/ccTop', $data);
 		$this->load->view('pages/tag', $data);
+		$this->load->view('pages/treemap', $data);
+		$this->load->view('pages/ccBottom', $data);
 		$this->load->view('templates/footer');
 	}
 

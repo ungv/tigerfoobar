@@ -105,7 +105,7 @@ class Data_model extends CI_Model {
 	public function getTopCompaniesWithClaimsJSON() {
 
 		$topCompanies = $this->getTopCompaniesWithClaims();
-		$jsonDataObj = '{"name": "Top companies with claims", "children": [';
+		$jsonDataObj = '"name": "Top companies with claims", "children": [';
 		
 		//Builds JSON out of the data in the $data array
 		$companiesWithClaims = '';
@@ -142,7 +142,7 @@ class Data_model extends CI_Model {
 		}
 		
 		$companiesWithClaims = rtrim($companiesWithClaims, ",");
-		$jsonDataObj .= $companiesWithClaims . ']}';
+		$jsonDataObj .= $companiesWithClaims . ']';
 		
 		return $jsonDataObj;
 		
@@ -150,11 +150,11 @@ class Data_model extends CI_Model {
 		*/
 	}
 	
-	//Gets data for the top companies that have the given tag
+	//Gets claims for the given company
 	public function getClaimsForCompanyJSON($companyID) {
 		$topClaimsForCompany = $this->getCompanyClaims($companyID);
 		$companyName = $topClaimsForCompany[0]["Name"];
-		$jsonDataObj = '{"name": "Top claims for $companyName", "children": [';
+		$jsonDataObj = '"name": "Top claims for '.$companyName.'", "children": [';
 		
 		//Builds JSON out of the data in the $data array
 		$companiesWithClaims = '';
@@ -171,14 +171,40 @@ class Data_model extends CI_Model {
 		}
 		
 		$claims = rtrim($claims, ",");
-		$jsonDataObj .= $claims. ']}';
+		$jsonDataObj .= $claims. ']';
+		
+		return $jsonDataObj;
+	}
+	
+	//Gets claims for the given tag
+	public function getTopClaimsWithTagJSON($tagID) {
+		$topClaimsWithTag = $this->getClaimsWithTag($tagID);
+		$tagName = $topClaimsWithTag[0]["Name"];
+		$jsonDataObj = '"name": "Top claims for '.$tagName.'", "children": [';
+		
+		//Builds JSON out of the data in the $data array
+		$companiesWithClaims = '';
+		$claims = "";
+		
+		for ($i = 0; $i < count($topClaimsWithTag); $i++) {
+				$title = str_replace("'","", $topClaimsWithTag[$i]["Title"]);
+				$claimID = $topClaimsWithTag[$i]["Claim_ClaimID"];
+				$score = $topClaimsWithTag[$i]["ClScore"];
+				$size = str_replace("'","", $topClaimsWithTag[$i]["numScores"]);	
+				
+				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
+
+		}
+		
+		$claims = rtrim($claims, ",");
+		$jsonDataObj .= $claims. ']';
 		
 		return $jsonDataObj;
 	}
 	
 	// ------------- METHODS FOR TAG VIEW ---------------
-	public function getTags($tagID) {
-		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID, c.Title, c.Score AS ClScore, co.CompanyID, co.Name AS CoName, co.Rating AS CoScore
+	public function getClaimsWithTag($tagID) {
+		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID, c.Title, c.Score AS ClScore, c.numScores, co.CompanyID, co.Name AS CoName, co.Rating AS CoScore
 				FROM Tags t
 				LEFT JOIN Claim_has_Tags ct
 				ON t.TagsID = ct.Tags_TagsID

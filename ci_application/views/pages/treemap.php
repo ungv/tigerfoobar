@@ -20,7 +20,7 @@
 				var treemapWidth = $(window).width() - 60;
 			<?php
 				$class = "chart full";
-			} else if (isset($topClaimsForCompanyJSON)) {
+			} else if (isset($topClaimsForCompanyJSON) || isset($topClaimsWithTagJSON)) {
 			?>
 				var treemapHeight = $(window).height() - $("#treemapCanvas").offset().top - $("footer").height() - 40;
 				var treemapWidth = $("#main").width();
@@ -57,13 +57,15 @@
 			.attr("height", h)
 		  .append("svg:g")
 			.attr("transform", "translate(.5,.5)");
-		var jsonDataObj = <?php
+		var jsonDataObj = {<?php
 			if (isset($topCompaniesWithClaimsJSON)) {
 				echo($topCompaniesWithClaimsJSON);
 			} else if (isset($topClaimsForCompanyJSON)) {
 				echo($topClaimsForCompanyJSON);
+			} else if (isset($topClaimsWithTagJSON)) {
+				echo($topClaimsWithTagJSON);
 			}
-		?>;
+		?>};
 		console.log("jsonDataObj is: " + jsonDataObj);
 
 		var data = jsonDataObj;

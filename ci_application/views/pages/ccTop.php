@@ -1,6 +1,18 @@
 <!--Start #main content-->
 <div id="main">
-	<h1><?=$pageType == 'company' ? $companyInfo[0]['Name'] : $claimInfo[0]['ClaimTitle']?></h1>
+	<h1>
+	<?php
+	
+	if ($pageType == 'company') {
+		echo ($companyInfo[0]['Name']);
+	} else if (isset($claimInfo[0]['ClaimTitle'])) {
+		echo ($claimInfo[0]['ClaimTitle']);
+	} else if (isset($tagInfo[0]['Name'])) {
+		echo ('"' . $tagInfo[0]['Name'] . '"');
+	}
+	
+	?>
+	</h1>
 <?php
 if ($pageType != 'tag') {
 	?>
