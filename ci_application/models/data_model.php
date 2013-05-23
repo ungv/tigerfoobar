@@ -27,7 +27,7 @@ class Data_model extends CI_Model {
 
 	// ------------- METHODS FOR CLAIM VIEW -------------
 	public function getClaim($claimID) {
-		$sql = "SELECT cl.ClaimID, cl.Link, cl.Title AS ClaimTitle, cl.Description, cl.Score AS ClaimScore, cl.UserID, cl.CompanyID, cl.Time AS ClaimTime, co.Name AS CoName, co.Rating AS CoScore, u.Name AS UserName
+		$sql = "SELECT cl.ClaimID, cl.Link, cl.Title AS ClaimTitle, cl.Description, cl.Score AS ClaimScore, cl.UserID, cl.CompanyID, cl.Time AS ClaimTime, co.Name AS CoName, co.Score AS CoScore, u.Name AS UserName
 				FROM Claim cl
 				LEFT JOIN Company co
 				ON cl.CompanyID = co.CompanyID
@@ -87,7 +87,7 @@ class Data_model extends CI_Model {
 		$N = 10;
 		$M = 10;
 		
-		$sql = "Select cl.ClaimID as ClaimID, cl.Title, cl.Score, cl.numScores, topCompanies.numClaims, topCompanies.Name, topCompanies.Rating 
+		$sql = "Select cl.ClaimID as ClaimID, cl.Title, cl.Score as claimScore, cl.numScores, topCompanies.numClaims, topCompanies.Name, topCompanies.Score as companyScore
 			From Claim cl
 			Join
 				(Select * 
@@ -122,11 +122,11 @@ class Data_model extends CI_Model {
 			}
 			
 			$claims = '';
-			$rating = $topCompanies[$i]["Rating"];			
+			$rating = $topCompanies[$i]["companyScore"];			
 			while (($i < count($topCompanies)) && $topCompanies[$i]["Name"] == $currCompany) {
 				$title = str_replace("'","", $topCompanies[$i]["Title"]);
 				$size = str_replace("'","", $topCompanies[$i]["numScores"]);
-				$score = $topCompanies[$i]["Score"];
+				$score = $topCompanies[$i]["claimScore"];
 				$claimID = $topCompanies[$i]["ClaimID"];
 				
 				
@@ -204,7 +204,7 @@ class Data_model extends CI_Model {
 	
 	// ------------- METHODS FOR TAG VIEW ---------------
 	public function getClaimsWithTag($tagID) {
-		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID, c.Title, c.Score AS ClScore, c.numScores, co.CompanyID, co.Name AS CoName, co.Rating AS CoScore
+		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID, c.Title, c.Score AS ClScore, c.numScores, co.CompanyID, co.Name AS CoName, co.Score AS CoScore
 				FROM Tags t
 				LEFT JOIN Claim_has_Tags ct
 				ON t.TagsID = ct.Tags_TagsID
