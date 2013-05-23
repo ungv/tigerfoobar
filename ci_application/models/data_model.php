@@ -140,6 +140,14 @@ class Data_model extends CI_Model {
 		}
 		return $resultsArr;
 	}
+
+	public function getCommentVotes($claimID) {
+		$sql = "SELECT CommentID, COUNT(Value) 
+				FROM Vote 
+				WHERE ClaimID = $claimID
+				GROUP BY CommentID";
+		return $this->db->query($sql)->row();
+	}
 	
 	// ------------- METHODS FOR PROFILE VIEW ---------------
 	public function getUser($userID) {

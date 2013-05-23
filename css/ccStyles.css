@@ -6,8 +6,8 @@ li {
 }
 
 hr {
-	color: #D5D5D5;
-	background-color: #D5D5D5;
+	color: lightgray;
+	background-color: lightgray;
 }
 
 /*-----------------------Claim and Industry Tags-------------------*/
@@ -125,8 +125,13 @@ hr {
 	float: right;
 }
 
+.buttonsContainer > p {
+	float: left;
+	margin: 8px 5px 0 0;
+}
+
 .buttonsContainer .buttons {
-	margin: 2px 10px 0 0;
+	margin: 2px 7px 0 0;
 	padding: 2px;
 	font-size: 10pt;
 }
@@ -134,7 +139,7 @@ hr {
 #discussionContent textarea {
 	float: left;
 	margin-right: 10px;
-	width: 100%;
+	width: 98%;
 }
 
 .discussionOptions {
@@ -272,10 +277,21 @@ hr {
 	position: relative;
 }
 
+#discussionContent > div {
+	position: relative;
+	height: 25px;
+	border-bottom: 1px solid lightgray;
+	padding: 5px;
+}
+
+#discussionContent span {
+	color: gray;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
 #newComment {
-	position: absolute;
-	top: 0;
-	right: 0;
+	float: right;
 	padding: 2px;
 	background-color: #E0E0E0;
 	border: 1px solid #CCCCCC;

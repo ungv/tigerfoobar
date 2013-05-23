@@ -160,16 +160,13 @@ $(document).ready(function() {
 	/*-----------------Discussion-----------------------*/
 
 	$('#newComment').click(function() {
-		$('#newCommentPopup').show(200);
-		$('#newCommentPopup textarea').focus();
-		$('.lightsout').fadeIn();
+		// $('#newCommentPopup').show(200);
+		// $('#newCommentPopup textarea').focus();
+		// $('.lightsout').fadeIn();
+		$('#newCommentBox').show(200);
+		$('#newCommentBox textarea').focus();
 	});
-
-	$('.cancelButton').click(function() {
-		$('#newCommentPopup').hide(200);
-		$('.lightsout').fadeOut();
-	});
-
+	
 	$('.reply').click(function() {
 		$parentLi = $(this).parent().parent().attr('id');
 		$('#' + $parentLi + 'reply').show();
@@ -180,8 +177,10 @@ $(document).ready(function() {
 		
 	});
 
-	$('.cancelReply').click(function() {
+	$('.cancelButton').click(function() {
+		// $('.lightsout').fadeOut();
 		$('.replyBox').hide();		
+		$('#newCommentBox').hide(200);
 	});
 
 	$('.buttonsContainer').hover(function() {
