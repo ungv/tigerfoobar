@@ -63,9 +63,7 @@ class Action extends Root_Controller {
 	}
 
 	/*
-		Upvote Industry tag on company page, or remove the current vote
-		for that user
-		NOTE: Send positive message even if user has already upvoted, unless tag isnt found
+		Checks if user is logged in and sends comment vote to server
 	*/
 	public function voteComment() {
 		if(!$this->is_logged_in()) {

@@ -35,7 +35,7 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
 
-		$data['csFiles'] = array('general','ccStyles','addClaim','treemap');
+		$data['csFiles'] = array('general','ccStyles','addClaim');
 		$data['jsFiles'] = array('general','ccScripts','addClaim');
 		$data['topCompaniesWithClaimsJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
 		//signed in logic goes here
@@ -94,7 +94,7 @@ class Pages extends Root_Controller {
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
 
-			$data['csFiles'] = array('general','ccStyles','treemap');
+			$data['csFiles'] = array('general','ccStyles');
 			$data['jsFiles'] = array('general','ccScripts');
 			
 			$this->load->view('templates/header', $data);

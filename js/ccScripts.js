@@ -3,6 +3,7 @@ $(document).ready(function() {
 	
 	/*------Voting On Comments-------*/
 
+	//Keep track of comments that has either up/down vote already submitted
 	$.each($('.buttonsContainer'), function() {
 		if ($(this).find('.upVote').attr('voted') == '1' || $(this).find('.downVote').attr('voted') == '1') {
 			$(this).addClass('beenVoted');
@@ -10,46 +11,16 @@ $(document).ready(function() {
 	});
 
 	//Onclick, send vote to server
-	//switch value when clicked
 	$('.upVote, .downVote').click(function() {
-		$(this).parent().find('.buttons').removeClass('selectedVote');
+		$(this).parent().find('.buttons').removeClass('selectedVote');		//Reset selection loaded from server
 		sendCommentVote($(this));
 	});
 
+	//Send vote to server
 	function sendCommentVote(button) {
 		var voted = parseInt($(button).attr('voted')); //0 if not voted, 1 if voted
 		var clicked = $(button);
 		var value = $(button).attr('value');
-		var oldUpVotes = parseInt($(clicked.parent().find(".upNum")).text());
-		var oldDownVotes = parseInt($(clicked.parent().find(".downNum")).text());
-		if(!voted)  {		
-			if (clicked.hasClass('upVote')) {
-				oldUpVotes++;
-				if (clicked.parent().hasClass('beenVoted')) {
-					oldDownVotes--;					
-				}
-			} else if (clicked.hasClass('downVote')) {
-				oldDownVotes++;
-				if (clicked.parent().hasClass('beenVoted')) {
-					oldUpVotes--;
-				}
-			}
-			clicked.parent().addClass('beenVoted');
-			clicked.parent().find('.buttons').attr('voted','0');
-			clicked.attr('voted','1');
-			clicked.addClass('selectedVote');
-		} else if (voted) {
-			if (clicked.hasClass('upVote')) {
-				oldUpVotes--;
-			} else if (clicked.hasClass('downVote')) {
-				oldDownVotes--;
-			}
-			clicked.parent().removeClass('beenVoted');
-			clicked.attr('voted','0');
-			clicked.removeClass('selectedVote');
-		}
-		$(clicked.parent().find(".upNum")).text(oldUpVotes);
-		$(clicked.parent().find(".downNum")).text(oldDownVotes);
 		$.ajax({
 			type: 'POST',
 			url: 'http://127.0.0.1/action/voteComment',
@@ -60,12 +31,50 @@ $(document).ready(function() {
 				value: value
 			},
 			dataType: 'json',
-			success: function(json) {
-				//Dom changes processed pre-query
+			success: function(json) {	//Update vount counts to reflect changes
+				//Get current vote count
+				var oldUpVotes = parseInt($(clicked.parent().find(".upNum")).text());
+				var oldDownVotes = parseInt($(clicked.parent().find(".downNum")).text());
+
+				if(!voted)  {		//If clicked on non-selected arrow
+					if (clicked.hasClass('upVote')) {		//Clicked on up arrow
+						oldUpVotes++;
+						if (clicked.parent().hasClass('beenVoted')) {		//If either arrow has already been selected
+							oldDownVotes--;					
+						}
+					} else if (clicked.hasClass('downVote')) {		//Clicked on down arrow
+						oldDownVotes++;
+						if (clicked.parent().hasClass('beenVoted')) {		//If either arrow has already been selected
+							oldUpVotes--;
+						}
+					}
+					clicked.parent().addClass('beenVoted');		//This comment has been voted on
+
+					//Update which arrow has been selected
+					clicked.parent().find('.buttons').attr('voted','0');
+					clicked.attr('voted','1');
+					clicked.addClass('selectedVote');
+
+				} else if (voted) {		//else user wants to unvote selection
+					if (clicked.hasClass('upVote')) {		//Clicked on up arrow
+						oldUpVotes--;
+					} else if (clicked.hasClass('downVote')) {		//Clicked on down arrow
+						oldDownVotes--;
+					}
+					//This comment now does not have any votes selected
+					clicked.parent().removeClass('beenVoted');
+					clicked.attr('voted','0');
+					clicked.removeClass('selectedVote');
+				}
+				//Inject new vote counts
+				$(clicked.parent().find(".upNum")).text(oldUpVotes);
+				$(clicked.parent().find(".downNum")).text(oldDownVotes);
 			},
 			error: function(json) {
-				//alert error message for now
-				alert('Server Error');
+				//Must be logged in to cast vote
+				alert('You must be logged in to vote');
+				$('#loginPopup').show(200);
+				window.scrollTo(0, 0);
 			}
 		});
 	}
@@ -225,6 +234,7 @@ $(document).ready(function() {
 
 	/*-----------------Discussion-----------------------*/
 
+	//Injects a new textbox to start a thread
 	$('#newComment').click(function() {
 		// $('#newCommentPopup').show(200);
 		// $('#newCommentPopup textarea').focus();
@@ -233,28 +243,33 @@ $(document).ready(function() {
 		$('#newCommentBox textarea').focus();
 	});
 	
+	//Injects a new textbox to reply to the above comment
 	$('.reply').click(function() {
 		$parentLi = $(this).parent().parent().attr('id');
 		$('#' + $parentLi + 'reply').show();
 		$('#' + $parentLi + 'reply textarea').focus();
 	});
 
+	//Submit reply to database
 	$('.submitReply').click(function() {
 	
 	});
 
+	//Cancel reply
 	$('.cancelButton').click(function() {
 		// $('.lightsout').fadeOut();
 		$('.replyBox').hide();		
 		$('#newCommentBox').hide(200);
 	});
 
+	//Semi-hide controls until hover over
 	$('.buttonsContainer').hover(function() {
 		$(this).css('opacity', '1');
 	}, function() {
 		$(this).css('opacity', '0.4');
 	});
 
+	//Collapse all children of this
 	$('#discussionContent li').click(function() {
 		console.log('collapse all children of this');
 	});
