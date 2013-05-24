@@ -37,8 +37,5 @@ if ($pageType == 'company') {
 		</div>
 		<?php
 	}
-	?>
-	</div>
-	<?php
 }
 ?>

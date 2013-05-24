@@ -1,9 +1,6 @@
-
-
 $(document).ready(function() {
 	resetScale();
 	
-
 	/*------Voting On Comments-------*/
 
 	$.each($('.buttonsContainer'), function() {
@@ -25,50 +22,31 @@ $(document).ready(function() {
 		var value = $(button).attr('value');
 		var oldUpVotes = parseInt($(clicked.parent().find(".upNum")).text());
 		var oldDownVotes = parseInt($(clicked.parent().find(".downNum")).text());
-		if (clicked.parent().hasClass('beenVoted')) {
-			if(!voted)  {		//just voted, add vote
-				if (clicked.hasClass('upVote')) {
-					oldUpVotes++;
-					oldDownVotes--;
-				} else if (clicked.hasClass('downVote')) {
-					oldDownVotes++;
+		if(!voted)  {		
+			if (clicked.hasClass('upVote')) {
+				oldUpVotes++;
+				if (clicked.parent().hasClass('beenVoted')) {
+					oldDownVotes--;					
+				}
+			} else if (clicked.hasClass('downVote')) {
+				oldDownVotes++;
+				if (clicked.parent().hasClass('beenVoted')) {
 					oldUpVotes--;
 				}
-				clicked.parent().addClass('beenVoted');
-				clicked.parent().find('.buttons').attr('voted','0');
-				clicked.attr('voted','1');
-				clicked.addClass('selectedVote');
-			} else if (voted) {
-				if (clicked.hasClass('upVote')) {
-					oldUpVotes--;
-				} else if (clicked.hasClass('downVote')) {
-					oldDownVotes--;
-				}
-				clicked.parent().removeClass('beenVoted');
-				clicked.attr('voted','0');
-				clicked.removeClass('selectedVote');
 			}
-		} else {
-			if(!voted)  {		//just voted, add vote
-				if (clicked.hasClass('upVote')) {
-					oldUpVotes++;
-				} else if (clicked.hasClass('downVote')) {
-					oldDownVotes++;
-				}
-				clicked.parent().addClass('beenVoted');
-				clicked.parent().find('.buttons').attr('voted','0');
-				clicked.attr('voted','1');
-				clicked.addClass('selectedVote');
-			} else if (voted) {
-				if (clicked.hasClass('upVote')) {
-					oldUpVotes--;
-				} else if (clicked.hasClass('downVote')) {
-					oldDownVotes--;
-				}
-				clicked.parent().removeClass('beenVoted');
-				clicked.attr('voted','0');
-				clicked.removeClass('selectedVote');
-			}			
+			clicked.parent().addClass('beenVoted');
+			clicked.parent().find('.buttons').attr('voted','0');
+			clicked.attr('voted','1');
+			clicked.addClass('selectedVote');
+		} else if (voted) {
+			if (clicked.hasClass('upVote')) {
+				oldUpVotes--;
+			} else if (clicked.hasClass('downVote')) {
+				oldDownVotes--;
+			}
+			clicked.parent().removeClass('beenVoted');
+			clicked.attr('voted','0');
+			clicked.removeClass('selectedVote');
 		}
 		$(clicked.parent().find(".upNum")).text(oldUpVotes);
 		$(clicked.parent().find(".downNum")).text(oldDownVotes);
@@ -92,8 +70,8 @@ $(document).ready(function() {
 		});
 	}
 
-	/*------Upvoting Industry Tags-------*/
 
+	/*------Upvoting Industry Tags-------*/
 
 	//Onclick, send vote to server
 	//switch value when clicked
@@ -255,6 +233,7 @@ $(document).ready(function() {
 		$('#newCommentBox textarea').focus();
 	});
 	
+<<<<<<< HEAD
 	$('.reply').click(function() {
 		$parentLi = $(this).parent().parent().attr('id');
 		$('#' + $parentLi + 'reply').show();
@@ -263,8 +242,45 @@ $(document).ready(function() {
 
 	$('.submitReply').click(function() {
 		
+=======
+	var avg = parseFloat($('#averageScore').text());
+	if (avg < -2) {
+		insertColor(colors[0]);
+	} else if (avg < -1) {
+		insertColor(colors[1]);
+	} else if (avg < 0) {
+		insertColor(colors[2]);
+	} else if (avg == 0) {
+		insertColor(colors[3]);
+	} else if (avg < 1) {
+		insertColor(colors[4]);
+	} else if (avg < 2) {
+		insertColor(colors[5]);
+	} else if (avg > 2) {
+		insertColor(colors[6]);
+	}
+	
+	$.each($('.claimScore'), function() {
+		var thisVal = parseFloat($(this).text());
+		if (thisVal < -2) {
+			$(this).parent().css('background-color', colors[0]);
+		} else if (thisVal < -1) {
+			$(this).parent().css('background-color', colors[1]);
+		} else if (thisVal < 0) {
+			$(this).parent().css('background-color', colors[2]);
+		} else if (thisVal == 0) {
+			$(this).parent().css('background-color', colors[3]);
+		} else if (thisVal < 1) {
+			$(this).parent().css('background-color', colors[4]);
+		} else if (thisVal < 2) {
+			$(this).parent().css('background-color', colors[5]);
+		} else if (thisVal > 2) {
+			$(this).parent().css('background-color', colors[6]);
+		}
+>>>>>>> origin/treemapWork2
 	});
 
+<<<<<<< HEAD
 	$('.cancelButton').click(function() {
 		// $('.lightsout').fadeOut();
 		$('.replyBox').hide();		
@@ -281,3 +297,18 @@ $(document).ready(function() {
 		console.log('collapse all children of this');
 	});
 });
+=======
+function insertColor(color) {
+		$('#averageScore').css('color', color);
+		$('#scoreContent').css('border-left', '5px solid ' + color);
+		$('#claimPopTags li').css('background-color', color);
+}
+
+function resetScale() {
+	$.each($('.scoreBox'), function(i) {
+		$(this).css('background-color', colors[i]);
+		$(this).css('border', '2px solid ' + colors[i]);
+		$(this).removeClass('selectedRating');
+	});
+}
+>>>>>>> origin/treemapWork2
