@@ -3,7 +3,7 @@ if ($pageType != 'tag') {
 
 	// Victor (5-20-13): I made the id and class names uniform across 'claim' and 'company' pages to give it the same css styling. I also made those changes in the JS so the scripts are still working.
 	?>
-	<div id="claimTags">
+	<div id="tagList">
 	<?php
 	if ($pageType == 'company') {
 	?>
@@ -11,7 +11,6 @@ if ($pageType != 'tag') {
 		<span>Industries:</span>
 		<ul id="industryTags" companyid="<?=$companyInfo['CompanyID']?>">
 			<?php
-			print_r($companyClaims);
 			foreach ($companyTags AS $tag) {
 			?>
 					<li<?php if($tag['uservoted']) { ?> class="userVoted" <?php } ?>>

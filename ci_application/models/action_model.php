@@ -4,6 +4,7 @@ class Action_model extends CI_Model {
 	//called when constructed
 	public function __construct() {
 		$this->load->database();
+        $this->load->library('session');        
 	}
 
 	//sends a login request to the DB object

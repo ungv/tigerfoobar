@@ -66,6 +66,3 @@
 	</header>
 
 	<div class="lightsout"></div>
-
-	<!-- Start 'main' content -->
-	<div id="main">

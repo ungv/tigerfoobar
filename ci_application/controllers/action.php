@@ -1,7 +1,7 @@
 <?php
 /*---Performs DB_Manipulation Actions in the system---*/
-
-class Action extends CI_Controller {
+include('root_controller.php');
+class Action extends Root_Controller {
 
 	/*
 		Constructor
@@ -32,7 +32,7 @@ class Action extends CI_Controller {
         	$this->output->set_status_header('400'); //Triggers the jQuery error callback
         	$data['json'] = '{"error":"Incorrect username or password"}';
         }   
-        	$this->load->view('data/json_view', $data); 
+        $this->load->view('data/json_view', $data); 
 	}
 
 	public function logout() {

@@ -41,7 +41,9 @@ class Pages extends Root_Controller {
 		//signed in logic goes here
 
 		$this->load->view('templates/header', $data);
+		$this->load->view('pages/mainTop', $data);
 		$this->load->view('pages/addClaim', $data);
+		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('pages/treemap', $data);
 		$this->load->view('templates/footer');
 	}
@@ -66,12 +68,14 @@ class Pages extends Root_Controller {
 			$data['jsFiles'] = array('general','ccScripts');
 
 			$this->load->view('templates/header', $data);
+			$this->load->view('pages/mainTop', $data);
 			$this->load->view('pages/ccTop', $data);
 			$this->load->view('pages/evidence', $data);
 			$this->load->view('pages/scoreTop', $data);
 			$this->load->view('pages/score', $data);
 			$this->load->view('pages/scoreBottom', $data);
 			$this->load->view('pages/discussion', $data);
+			$this->load->view('pages/mainBottom', $data);
 			$this->load->view('templates/footer');
 		}
 	}
@@ -94,12 +98,14 @@ class Pages extends Root_Controller {
 			$data['jsFiles'] = array('general','ccScripts');
 			
 			$this->load->view('templates/header', $data);
+			$this->load->view('pages/mainTop', $data);
 			$this->load->view('pages/ccTop', $data);
 			$this->load->view('pages/scoreTop', $data);
 			$this->load->view('pages/score', $data);
 			$this->load->view('pages/scoreBottom', $data);
 			$this->load->view('pages/highlowClaims', $data);
 			$this->load->view('pages/treemap', $data);
+			$this->load->view('pages/mainBottom', $data);
 			$this->load->view('templates/footer');
 		}
 	}
@@ -113,17 +119,19 @@ class Pages extends Root_Controller {
 			$data['headerTitle'] = 'View Tag - PatchWork';
 			$data['pageType'] = 'tag';
 			
-			$data['tagInfo'] = $this->data_model->getTags($tagID);
+			$data['tagInfo'] = $this->data_model->getClaimsWithTag($tagID);
 			$data['topClaimsWithTagJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
 			
 			$data['csFiles'] = array('general','tag');
 			$data['jsFiles'] = array('general','tag');
 
 			$this->load->view('templates/header', $data);
+			$this->load->view('pages/mainTop', $data);
 			$this->load->view('pages/ccTop', $data);
 			$this->load->view('pages/tag', $data);
 			$this->load->view('pages/treemap', $data);
 			$this->load->view('pages/ccBottom', $data);
+			$this->load->view('pages/mainBottom', $data);
 			$this->load->view('templates/footer');
 		}
 	}
@@ -159,7 +167,9 @@ class Pages extends Root_Controller {
 		$data['jsFiles'] = array('general','profile');
 
 		$this->load->view('templates/header', $data);
+		$this->load->view('pages/mainTop', $data);
 		$this->load->view('pages/profile', $data);
+		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');		
 	}
 
@@ -171,7 +181,9 @@ class Pages extends Root_Controller {
 		$data['jsFiles'] = array('general','ccScripts');
 
 		$this->load->view('templates/header', $data);
+		$this->load->view('pages/mainTop', $data);
 		$this->load->view('pages/about');
+		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -183,7 +195,9 @@ class Pages extends Root_Controller {
 		$data['jsFiles'] = array('general','ccScripts');
 
 		$this->load->view('templates/header', $data);
+		$this->load->view('pages/mainTop', $data);
 		$this->load->view('pages/team');
+		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -195,7 +209,9 @@ class Pages extends Root_Controller {
 		$data['jsFiles'] = array('general','ccScripts');
 
 		$this->load->view('templates/header', $data);
+		$this->load->view('pages/mainTop', $data);
 		$this->load->view('pages/faq');
+		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');
 	}
 

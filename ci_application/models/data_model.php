@@ -109,8 +109,8 @@ class Data_model extends CI_Model {
 	}
 		
 	// ------------- METHODS FOR TAG VIEW ---------------
-	public function getTags($tagID) {
-		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID, c.Title, c.Score AS ClScore, co.CompanyID, co.Name AS CoName, co.Score AS CoScore
+	public function getClaimsWithTag($tagID) {
+		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID, c.Title, c.Score AS ClScore, c.numScores, co.CompanyID, co.Name AS CoName, co.Score AS CoScore
 				FROM Tags t
 				LEFT JOIN Claim_has_Tags ct
 				ON t.TagsID = ct.Tags_TagsID
@@ -120,7 +120,7 @@ class Data_model extends CI_Model {
                 ON c.CompanyID = co.CompanyID
 				WHERE t.tagsID = $tagID";
 		return $this->db->query($sql)->result_array();
-	}	
+	}
 
 	// ------------- METHODS FOR DISCUSSION VIEW --------
 	public function getDiscussion($claimID, $parentID, $level, $resultsArr, $userID) {
