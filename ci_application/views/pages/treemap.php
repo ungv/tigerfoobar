@@ -19,13 +19,11 @@
 				var treemapHeight = $(window).height()+100 - $("#treemapCanvas").offset().top - $("footer").height() - 40;
 				var treemapWidth = $(window).width() - 60;
 			<?php
-				$class = "chart full";
 			} else if (isset($topClaimsForCompanyJSON) || isset($topClaimsWithTagJSON)) {
 			?>
 				var treemapHeight = $(window).height() - $("#treemapCanvas").offset().top - $("footer").height() - 40;
 				var treemapWidth = $("#main").width();
 			<?php
-				$class = "chart";
 			}
 		?>
 		var w = treemapWidth,
@@ -33,13 +31,15 @@
 			x = d3.scale.linear().range([0, w]),
 			y = d3.scale.linear().range([0, h]),
 			bgColor = d3.scale.quantile()
-				.domain([-3, -2, -1, 0, 1, 2, 3])
+			   .domain([-3, -2, -1, 0, 1, 2, 3])
 			   .range(['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64']),
 			/*borderColor = d3.scale.linear()
 				.domain([-3, 3])
 			   .range(['#000', '#FFF']),*/
-			borderColor = d3.scale.category20c(),
+			borderColor = d3.scale.category10(),
+			borderWidth = 5,
 			domain = document.domain,
+			padding = 20,
 			root,
 			node;
 		
@@ -50,14 +50,13 @@
 			.value(function(d) { return d.size; });
 
 		var svg = d3.select("#treemapCanvas")
-			.attr("class", "<?=$class?>")
+			.attr("class", "chart")
 			.style("width", w + "px")
 			.style("height", h + "px")
 		  .append("svg:svg")
 			.attr("width", w)
 			.attr("height", h)
-		  .append("svg:g")
-			.attr("transform", "translate(.5,.5)");
+		  .append("svg:g");
 		var jsonDataObj = {<?php
 			if (isset($topCompaniesWithClaimsJSON)) {
 				echo($topCompaniesWithClaimsJSON);
@@ -66,6 +65,8 @@
 			} else if (isset($topClaimsWithTagJSON)) {
 				echo($topClaimsWithTagJSON);
 			}
+			
+		//TODO: Fix this mess
 		?>};
 		console.log("jsonDataObj is: " + jsonDataObj);
 
@@ -80,26 +81,32 @@
 		  .enter().append("svg:g")
 		  .attr("class", "cell")
 		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-		  .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
-
-		/*cell.append("svg:rect")
-		.attr("width", function(d) { return d.dx; })
-		.attr("height", function(d) { return d.dy; })
-		.style("fill", function(d) { return borderColor(d.parent.name); });*/
+		  .attr("stroke", function (d) {return borderColor(d.parent.name);})
+		  .attr("stroke-width", function (d) {return borderWidth;})
+		  .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); })
+		  .on("mouseover", function (d) {d3.select(this).attr("fill", "red");});
 		
 		cell.append("svg:rect")
-		  .attr("width", function(d) { return d.dx - 1; })
-		  .attr("height", function(d) { return d.dy - 1; })
-		  .style("fill", function(d) { return bgColor(d.score); });
+		  .attr("width", function(d) { return d.dx - borderWidth; })
+		  .attr("height", function(d) { return d.dy - borderWidth; })
+		  .style("fill", function(d) { return bgColor(d.score);});
 
-		cell.append("svg:text")
-		  .attr("x", function(d) { return d.dx / 2; })
-		  .attr("y", function(d) { return d.dy / 2; })
-		  .attr("dy", ".35em")
-		  .attr("text-anchor", "middle")
-		  .text(function(d) { return d.name; })
+		//Text labels for treemap
+		cell.append("foreignObject")
+		  .attr("x", function(d) { return padding - 5;})
+		  .attr("y", function(d) { return padding})
 		  .on("click", function(d) {window.location.href = "http://" + domain + "/claim/" + d.claimID;})
-		  .style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; });
+		  .attr("width", function(d) {return d.dx - padding})
+		  .attr("height", function(d) {return d.dy - padding})
+		  .append("xhtml:div")
+			  .attr("dy", ".35em")
+			  .html(function(d) {return d.name})
+			  .style("font-size", function(d) {return (d.dx*d.dy)/10000 + "px";})
+			  //.style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; })
+			  .style("width", function(d) {return d.dx - padding})
+			  .style("height", function(d) {return d.dy - padding});
+		 
+		//add as many text elements as required to display the full, wrapped text. 
 
 		d3.select(window).on("click", function() { zoom(root); });
 
@@ -130,8 +137,8 @@
 			  .attr("height", function(d) { return ky * d.dy - 1; })
 
 		  t.select("text")
-			  .attr("x", function(d) { return kx * d.dx / 2; })
-			  .attr("y", function(d) { return ky * d.dy / 2; })
+			  .attr("x", function(d) { return kx * padding;})
+			  .attr("y", function(d) { return ky * padding;})
 			  .style("opacity", function(d) { return kx * d.dx > d.w ? 1 : 0; });
 
 		  node = d;
