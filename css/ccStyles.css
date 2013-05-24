@@ -1,3 +1,7 @@
+ul {
+	display: inline;
+}
+
 li {
 	list-style-type: none;
 	float: left;
@@ -153,13 +157,6 @@ hr {
 #leftCol {
 	float: left;
 	width: 50%;
-	border-right: 1px solid rgb(213, 213, 213);
-}
-
-
-#rightCol {
-	float: left;
-	width: 49.8%;
 }
 
 #leftCol, #scoreDistribution, #evidenceContent, #controlContainer, #relatedTagsContainer, #discussionContent{
@@ -228,6 +225,12 @@ hr {
 
 .selectedRating {
 	border: 2px solid black !important;
+}
+
+#rightCol {
+	float: left;
+	width: 49.8%;
+	border-left: 1px solid rgb(213, 213, 213);
 }
 
 .lowRatedClaims, .highRatedClaims {

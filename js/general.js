@@ -4,9 +4,8 @@
 var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
 
 $(document).ready(function() {
-	/*--------FORM VALIDATION (DOCUMENTATION http://docs.jquery.com/Plugins/Validation)--------*/
-
-	// Call jQuery validate plugin that injects messages for required fields on form submit
+	var passwordMsgs = ['^Hmm, no password seems kinda fishy', '^Wait, ya kinda need a password', '^Uh, without a password, anyone can have your account', '^Ah, huge security risk!'];
+	
 	$('#signupForm').validate({
 		rules: {
 			username: {
@@ -24,7 +23,7 @@ $(document).ready(function() {
 				required: "^We can't just call you nothing..."
 			},
 			password: {
-				required: "^Hmm, no password seems kinda fishy"
+				required: passwordMsgs[Math.floor(Math.random() * passwordMsgs.length)]
 			}
 		}
 	});
@@ -51,6 +50,7 @@ $(document).ready(function() {
 		highlightOnExistColor: '#000'
 	});
 	
+
  	/*------Logging In------*/
 	
 	//Show login popup onclick

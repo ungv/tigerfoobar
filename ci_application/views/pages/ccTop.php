@@ -3,7 +3,7 @@ if ($pageType != 'tag') {
 
 	// Victor (5-20-13): I made the id and class names uniform across 'claim' and 'company' pages to give it the same css styling. I also made those changes in the JS so the scripts are still working.
 	?>
-	<div id="tagList">
+	<div id="claimTags">
 	<?php
 	if ($pageType == 'company') {
 	?>
@@ -61,13 +61,11 @@ if ($pageType != 'tag') {
 		<div id="newTagPopup" style="display:none;">
 			<input id="newclaimtag_name" type="text" placeholder="Type a tag for this claim"/>
 		</div>
-	<?php
+		<?php
 	}
 	?>
 	</div>
 	<?php
-} else { // Currently viewing 'tag' pages
-
 }
 ?>
 <!--End of Top-->
