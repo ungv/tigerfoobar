@@ -16,7 +16,7 @@
 		<?php
 			if (isset($topCompaniesWithClaimsJSON)) {
 			?>
-				var treemapHeight = $(window).height() - $("#treemapCanvas").offset().top - $("footer").height() - 40;
+				var treemapHeight = $(window).height()+100 - $("#treemapCanvas").offset().top - $("footer").height() - 40;
 				var treemapWidth = $(window).width() - 60;
 			<?php
 				$class = "chart full";
