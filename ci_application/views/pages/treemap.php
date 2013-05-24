@@ -7,23 +7,12 @@
 	*/
 ?>
 <!-- Start treemap -->
->>>>>>> origin/treemapWork2
 <div id = "treemapCanvas" class = "full">
 </div>
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script type="text/javascript">
 	$(function () {
-<<<<<<< HEAD
-		var treemapHeight = $(window).height() - $("#treemapCanvas").offset().top - $("footer").height() -40;
-		var w = $(window).width() - 60,
-			h = treemapHeight,
-			x = d3.scale.linear().range([0, w]),
-			y = d3.scale.linear().range([0, h]),
-			color = d3.scale.quantile()
-				.domain([-3, -2, -1, 0, 1, 2, 3])
-			   .range(['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64']),
-=======
 		<?php
 			if (isset($topCompaniesWithClaimsJSON)) {
 			?>
@@ -50,26 +39,17 @@
 				.domain([-3, 3])
 			   .range(['#000', '#FFF']),*/
 			borderColor = d3.scale.category20c(),
->>>>>>> origin/treemapWork2
 			root,
 			node;
 		
 		var treemap = d3.layout.treemap()
-<<<<<<< HEAD
-			.round(false)
-=======
 			.round(true)
->>>>>>> origin/treemapWork2
 			.size([w, h])
 			.sticky(true)
 			.value(function(d) { return d.size; });
 
 		var svg = d3.select("#treemapCanvas")
-<<<<<<< HEAD
-			.attr("class", "chart full")
-=======
 			.attr("class", "<?=$class?>")
->>>>>>> origin/treemapWork2
 			.style("width", w + "px")
 			.style("height", h + "px")
 		  .append("svg:svg")
@@ -77,9 +57,6 @@
 			.attr("height", h)
 		  .append("svg:g")
 			.attr("transform", "translate(.5,.5)");
-<<<<<<< HEAD
-		var jsonDataObj = <?=$topCompaniesWithClaimsJSON?>;
-=======
 		var jsonDataObj = {<?php
 			if (isset($topCompaniesWithClaimsJSON)) {
 				echo($topCompaniesWithClaimsJSON);
@@ -89,7 +66,6 @@
 				echo($topClaimsWithTagJSON);
 			}
 		?>};
->>>>>>> origin/treemapWork2
 		console.log("jsonDataObj is: " + jsonDataObj);
 
 		var data = jsonDataObj;
@@ -100,21 +76,11 @@
 
 		var cell = svg.selectAll("g")
 		  .data(nodes)
-<<<<<<< HEAD
-		.enter().append("svg:g")
-=======
 		  .enter().append("svg:g")
->>>>>>> origin/treemapWork2
 		  .attr("class", "cell")
 		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		  .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
 
-<<<<<<< HEAD
-		cell.append("svg:rect")
-		  .attr("width", function(d) { return d.dx - 1; })
-		  .attr("height", function(d) { return d.dy - 1; })
-		  .style("fill", function(d) { return color(d.score); });
-=======
 		/*cell.append("svg:rect")
 		.attr("width", function(d) { return d.dx; })
 		.attr("height", function(d) { return d.dy; })
@@ -124,7 +90,6 @@
 		  .attr("width", function(d) { return d.dx - 1; })
 		  .attr("height", function(d) { return d.dy - 1; })
 		  .style("fill", function(d) { return bgColor(d.score); });
->>>>>>> origin/treemapWork2
 
 		cell.append("svg:text")
 		  .attr("x", function(d) { return d.dx / 2; })
