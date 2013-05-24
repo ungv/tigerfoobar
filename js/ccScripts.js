@@ -25,50 +25,31 @@ $(document).ready(function() {
 		var value = $(button).attr('value');
 		var oldUpVotes = parseInt($(clicked.parent().find(".upNum")).text());
 		var oldDownVotes = parseInt($(clicked.parent().find(".downNum")).text());
-		if (clicked.parent().hasClass('beenVoted')) {
-			if(!voted)  {		//just voted, add vote
-				if (clicked.hasClass('upVote')) {
-					oldUpVotes++;
-					oldDownVotes--;
-				} else if (clicked.hasClass('downVote')) {
-					oldDownVotes++;
+		if(!voted)  {		
+			if (clicked.hasClass('upVote')) {
+				oldUpVotes++;
+				if (clicked.parent().hasClass('beenVoted')) {
+					oldDownVotes--;					
+				}
+			} else if (clicked.hasClass('downVote')) {
+				oldDownVotes++;
+				if (clicked.parent().hasClass('beenVoted')) {
 					oldUpVotes--;
 				}
-				clicked.parent().addClass('beenVoted');
-				clicked.parent().find('.buttons').attr('voted','0');
-				clicked.attr('voted','1');
-				clicked.addClass('selectedVote');
-			} else if (voted) {
-				if (clicked.hasClass('upVote')) {
-					oldUpVotes--;
-				} else if (clicked.hasClass('downVote')) {
-					oldDownVotes--;
-				}
-				clicked.parent().removeClass('beenVoted');
-				clicked.attr('voted','0');
-				clicked.removeClass('selectedVote');
 			}
-		} else {
-			if(!voted)  {		//just voted, add vote
-				if (clicked.hasClass('upVote')) {
-					oldUpVotes++;
-				} else if (clicked.hasClass('downVote')) {
-					oldDownVotes++;
-				}
-				clicked.parent().addClass('beenVoted');
-				clicked.parent().find('.buttons').attr('voted','0');
-				clicked.attr('voted','1');
-				clicked.addClass('selectedVote');
-			} else if (voted) {
-				if (clicked.hasClass('upVote')) {
-					oldUpVotes--;
-				} else if (clicked.hasClass('downVote')) {
-					oldDownVotes--;
-				}
-				clicked.parent().removeClass('beenVoted');
-				clicked.attr('voted','0');
-				clicked.removeClass('selectedVote');
-			}			
+			clicked.parent().addClass('beenVoted');
+			clicked.parent().find('.buttons').attr('voted','0');
+			clicked.attr('voted','1');
+			clicked.addClass('selectedVote');
+		} else if (voted) {
+			if (clicked.hasClass('upVote')) {
+				oldUpVotes--;
+			} else if (clicked.hasClass('downVote')) {
+				oldDownVotes--;
+			}
+			clicked.parent().removeClass('beenVoted');
+			clicked.attr('voted','0');
+			clicked.removeClass('selectedVote');
 		}
 		$(clicked.parent().find(".upNum")).text(oldUpVotes);
 		$(clicked.parent().find(".downNum")).text(oldDownVotes);
@@ -92,8 +73,8 @@ $(document).ready(function() {
 		});
 	}
 
-	/*------Upvoting Industry Tags-------*/
 
+	/*------Upvoting Industry Tags-------*/
 
 	//Onclick, send vote to server
 	//switch value when clicked

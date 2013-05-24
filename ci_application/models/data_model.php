@@ -130,6 +130,7 @@ class Data_model extends CI_Model {
 		$sql = "SELECT d.ClaimID, d.CommentID, d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time, r.Value, 		
 					COUNT(IF(v.Value = 1, 1, NULL)) AS Ups, 
 					COUNT(IF(v.Value = 0, 1, NULL)) AS Downs,
+					COUNT(IF(v.Value = 1, 1, NULL)) - COUNT(IF(v.Value = 0, 1, NULL)) as Diff,
 					sum(case when v.UserID = $userID and v.Value = 1 then 1 else 0 end) as userVotedUp, 
 					sum(case when v.UserID = $userID and v.Value = 0 then 1 else 0 end) as userVotedDown
 				FROM Discussion d
@@ -140,7 +141,8 @@ class Data_model extends CI_Model {
 				ON v.CommentID = d.CommentID
 				WHERE d.ClaimID = $claimID
 				AND d.ParentCommentID = $parentID
-				GROUP BY d.CommentID";
+				GROUP BY d.CommentID
+				ORDER BY Diff DESC";
 		$results = $this->db->query($sql)->result_array();
 		foreach ($results as $result) {
 			array_push($resultsArr, $result);
