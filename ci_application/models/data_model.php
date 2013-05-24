@@ -12,6 +12,38 @@ class Data_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	// ------------- SEARCH METHODS -------------
+
+	public function companiesByName($root) {
+		$sql = "SELECT * from Company
+				WHERE Company.Name like '%$root%'
+				ORDER BY Score DESC
+				LIMIT 5";
+		return $this->db->query($sql)->result_array();
+		//$this->rowsByName($root,"Company");
+	}
+
+	public function claimsByName($root) {
+		$sql = "SELECT * from Claim
+				WHERE Claim.Title like '%$root%'
+				ORDER BY Score DESC
+				LIMIT 5";
+		return $this->db->query($sql)->result_array();
+		$this->rowsByName($root , "Claim");
+	}
+
+	//Returns the rows containing the root term in the given table.
+	//Orders results by votes
+	public function rowsByName($root, $table) {
+		/*
+		$sql = "SELECT * from ".$table."
+				WHERE Name like '%$root%'
+				ORDER BY Score DESC
+				LIMIT 5";
+		return $this->db->query($sql)->result_array();
+		*/
+	}
+
 	// ------------- METHODS FOR GETTING THE SCORE INFORMATION -------------
 	public function getClaimScores($claimID) {
 		$sql = "SELECT *, COUNT(ClaimID) AS noRatings, 
@@ -99,7 +131,7 @@ class Data_model extends CI_Model {
 	}
 
 	//Returns SQL from the Tags table, used for fetching autocomplete data
-	public function industryList($root) {
+	public function tagList($root) {
 		$tagtype = $this->security->xss_clean($this->input->get('tagtype'));
 		$sql = "SELECT * from Tags
 				WHERE Tags.Name like '$root%'

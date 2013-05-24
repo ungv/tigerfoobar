@@ -45,7 +45,7 @@ class Action extends Root_Controller {
 		for that user
 		NOTE: Send positive message even if user has already upvoted, unless tag isnt found
 	*/
-	public function upvoteIndustry() {
+	public function upvoteTag() {
 		if(!$this->is_logged_in()) {
 			$this->output->set_status_header('400');
         	$data['json'] = '{"message":"Not Logged In"}'; 

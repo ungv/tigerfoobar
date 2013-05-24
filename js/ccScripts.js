@@ -35,7 +35,7 @@ $(document).ready(function() {
 		$(clicked.parent().children(".tagTotal")[0]).text(oldVotes);
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/upvoteIndustry',
+			url: 'http://127.0.0.1/action/upvoteTag',
 			data: {
 				industryID: $(clicked).attr('tagid'),
 				objectID: $(clicked).attr('objectid'), //the objet (claim or company) being affected
@@ -70,15 +70,23 @@ $(document).ready(function() {
 	];
 
 	//Called when typing into new industry/new tag text box
+	//Feteches list of claim tags or industries from server
 	$( "#newtag_name" ).autocomplete({
 		minLength: 0,
 		source: function (request, response) {
 	        $.ajax({
-
-	            url: "/data/industryList/" + $('#newtag_name').val(),
+	            url: "/data/tagList/" + $('#newtag_name').val(),
 	            data: {tagtype: $("#newtag_name").attr('tagtype')},
 	            dataType: 'json',
 	            success: function (data) {
+	            	if (data.length == 0) {
+	            		data.push(
+			          		{
+		                        'label':  'No tags found.' ,
+		                        'value':  -1
+		                    }
+		                );
+		            }
 	                response(data.map(function (value) {
 	                    return {
 	                        'label':  value.value ,
@@ -87,37 +95,33 @@ $(document).ready(function() {
 	                }));
 	            }   
 	        }); 
-	    }, 
+	    },
 	    select: function( event, ui ) {
-	    	/*
-			alert( ui.item ?
-			"Selected: " + ui.item.value :
-			"Nothing selected, input was " + this.value );
-			*/
 			sendNewTag(ui.item.label,ui.item.value);
+			$(this).val(''); 
+			return false;
 		}
 	});
 	
 	//Sends information about the newly created
 	//industry-company connection to the server
-
-	//TODO: 
 	function sendNewTag(label, value) {
 		var newLink = $('<li>', {
 			"html": '	<span class="tagName">' + label + '</span>' +
 					'	<span>(</span> ' +
-					'		<span class="industryTotal">0</span>' +
+					'		<span class="tagTotal">0</span>' +
 					'	<span>)</span>' +
-					'	<span class="industryUpvote" tagid="'+ value + '" objectid="'+ $('#industryTags').attr('objectid') +'" voted="0">' +
+					'	<span class="tagUpvote" tagid="'+ value + '" objectid="'+ $('#taglist').attr('objectid') +'" voted="0">' +
 					'		+  ' +
 					'	</span>'
 		});
-		$('#industryTags').append(newLink);
+		$('#taglist').append(newLink);
+		$("#newtag_name").val(""); //clear textbox
 		//call current vote method, triger click
-		$(newLink.children('.industryUpvote')[0]).click(function() {
+		$(newLink.children('.tagUpvote')[0]).click(function() {
 			sendTagUpvote($(this));
 		});
-		$(newLink.children('.industryUpvote')[0]).click();
+		$(newLink.children('.tagUpvote')[0]).click();
 	}
 
 

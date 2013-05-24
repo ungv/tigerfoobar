@@ -182,7 +182,38 @@ $(document).ready(function() {
 			}
 		];
 
-	$( "#tags" ).autocomplete({
+	//Grabs a list of companies, cliams, and tags relavent to
+	//the text the user has typed in the search box
+	$("#searchInput").autocomplete({
+		minLength: 0,
+		source: function (request, response) {
+	        $.ajax({
+	            url: "/data/searchAutocomplete/" + $('#searchInput').val(),
+	            dataType: 'json',
+	            success: function (data) {
+	            	if (data.length == 0) {
+	            		data.push(
+			          		{
+		                        'label':  'No tags found.' ,
+		                        'value':  -1
+		                    }
+		                );
+		            }
+	                response(data.map(function (value) {
+	                    return {
+	                        'label':  value.value ,
+	                        'value': value.label
+	                    };  
+	                }));
+	            }   
+	        }); 
+	    },
+	    select: function( event, ui ) {
+			//search for that company/claim/tag combination
+		}
+	});
+	/*
+	$( "#searchInput" ).autocomplete({
 		minLength: 0,
 		source: projects,
 		focus: function( event, ui ) {
@@ -194,11 +225,13 @@ $(document).ready(function() {
 			return false;
 		}
 	})
+	
 	.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 		return $( "<li>" )
 		.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
 		.appendTo( ul );
 	};
+	*/
 });
 
 function hidePopups() {

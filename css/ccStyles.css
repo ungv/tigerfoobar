@@ -12,23 +12,23 @@ hr {
 
 /*-----------------------Claim and Industry Tags-------------------*/
 
-	#tagList span, #tagList li {
+	#tagSection span, #tagSection li {
 		float: left;
 		padding: 2px 2px 2px 2px;
 	}
 
-	#tagList li {
+	#tagSection li {
 		list-style-type: none;
 		background-color: #FEF5CA;
 		border: 1px solid rgb(168, 162, 130);
 	}
 
-	#tagList .tagUpvote {
+	#tagSection .tagUpvote {
 		padding-left:6px;
 		padding-right:6px;
 	}
 
-	#tagList li.userVoted {
+	#tagSection li.userVoted {
 		background-color:#DDD;
 	}
 

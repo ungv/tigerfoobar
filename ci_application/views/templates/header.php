@@ -22,7 +22,7 @@
 		<SECTION id='topbar'>
 			<h1><a href="/">Patchwork</a></h1>
 			<!--Search box-->
-			<input id="tags" type="text" placeholder="Search for companies or products/services"/>
+			<input id="searchInput" type="text" placeholder="Search for companies or products/services"/>
 			<!--Profile/login/register-->
 			<?php if($isLogged) { ?>
 				<span id="login_buttons" style="display: none;">
