@@ -1,6 +1,7 @@
 <?php
 /*---Performs DB_Manipulation Actions in the system---*/
 
+include('root_controller.php');
 class Action extends CI_Controller {
 
 	/*
