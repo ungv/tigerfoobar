@@ -39,6 +39,7 @@
 				.domain([-3, 3])
 			   .range(['#000', '#FFF']),*/
 			borderColor = d3.scale.category20c(),
+			domain = document.domain,
 			root,
 			node;
 		
@@ -97,7 +98,7 @@
 		  .attr("dy", ".35em")
 		  .attr("text-anchor", "middle")
 		  .text(function(d) { return d.name; })
-		  .on("click", function(d) {window.location.href = "claim/" + d.claimID;})
+		  .on("click", function(d) {window.location.href = "http://" + domain + "/claim/" + d.claimID;})
 		  .style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; });
 
 		d3.select(window).on("click", function() { zoom(root); });
