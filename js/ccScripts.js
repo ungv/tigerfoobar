@@ -233,7 +233,6 @@ $(document).ready(function() {
 		$('#newCommentBox textarea').focus();
 	});
 	
-<<<<<<< HEAD
 	$('.reply').click(function() {
 		$parentLi = $(this).parent().parent().attr('id');
 		$('#' + $parentLi + 'reply').show();
@@ -241,46 +240,9 @@ $(document).ready(function() {
 	});
 
 	$('.submitReply').click(function() {
-		
-=======
-	var avg = parseFloat($('#averageScore').text());
-	if (avg < -2) {
-		insertColor(colors[0]);
-	} else if (avg < -1) {
-		insertColor(colors[1]);
-	} else if (avg < 0) {
-		insertColor(colors[2]);
-	} else if (avg == 0) {
-		insertColor(colors[3]);
-	} else if (avg < 1) {
-		insertColor(colors[4]);
-	} else if (avg < 2) {
-		insertColor(colors[5]);
-	} else if (avg > 2) {
-		insertColor(colors[6]);
-	}
 	
-	$.each($('.claimScore'), function() {
-		var thisVal = parseFloat($(this).text());
-		if (thisVal < -2) {
-			$(this).parent().css('background-color', colors[0]);
-		} else if (thisVal < -1) {
-			$(this).parent().css('background-color', colors[1]);
-		} else if (thisVal < 0) {
-			$(this).parent().css('background-color', colors[2]);
-		} else if (thisVal == 0) {
-			$(this).parent().css('background-color', colors[3]);
-		} else if (thisVal < 1) {
-			$(this).parent().css('background-color', colors[4]);
-		} else if (thisVal < 2) {
-			$(this).parent().css('background-color', colors[5]);
-		} else if (thisVal > 2) {
-			$(this).parent().css('background-color', colors[6]);
-		}
->>>>>>> origin/treemapWork2
 	});
 
-<<<<<<< HEAD
 	$('.cancelButton').click(function() {
 		// $('.lightsout').fadeOut();
 		$('.replyBox').hide();		
@@ -297,18 +259,3 @@ $(document).ready(function() {
 		console.log('collapse all children of this');
 	});
 });
-=======
-function insertColor(color) {
-		$('#averageScore').css('color', color);
-		$('#scoreContent').css('border-left', '5px solid ' + color);
-		$('#claimPopTags li').css('background-color', color);
-}
-
-function resetScale() {
-	$.each($('.scoreBox'), function(i) {
-		$(this).css('background-color', colors[i]);
-		$(this).css('border', '2px solid ' + colors[i]);
-		$(this).removeClass('selectedRating');
-	});
-}
->>>>>>> origin/treemapWork2

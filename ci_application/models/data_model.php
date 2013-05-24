@@ -37,16 +37,18 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->row();
 	}
 	
-	public function getClaimTags($claimID) {
-		$sql = "SELECT DISTINCT t.Name, COUNT(ct.Claim_ClaimID) as votes
+	public function getClaimTags($claimID, $userID) {
+		if(!isset($userID)) {
+			$userID = -1;
+		}
+		$sql = "SELECT DISTINCT t.Name, t.TagsID, COUNT(c.Claim_ClaimID) as votes, 
+				sum(case when c.User_ID = $userID then 1 else 0 end) as uservoted
 				FROM Tags t
-				LEFT JOIN Claim_has_Tags ct
-				ON t.TagsID = Tags_TagsID
-				LEFT JOIN Claim c
-				ON c.ClaimID = Claim_ClaimID
-				WHERE t.Type = 'Claim Tag'
-				AND c.ClaimID = $claimID
-				GROUP BY t.Name";
+				JOIN Claim_has_Tags c
+				ON c.Tags_TagsID = t.TagsID
+				WHERE c.Claim_ClaimID = $claimID
+				GROUP BY t.Name, t.TagsID
+				ORDER BY COUNT(c.Claim_ClaimID) DESC";
 		return $this->db->query($sql)->result_array();
 	}
 
