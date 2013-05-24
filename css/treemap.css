@@ -1,5 +1,5 @@
 #treemapCanvas {
-	margin: auto;
-	margin-top: 50px;
+	margin-top: 50px !important;
+	margin-bottom: 0px !important;
 	width: 100% !important;
 }
