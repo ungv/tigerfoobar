@@ -11,6 +11,7 @@ if ($pageType != 'tag') {
 		<span>Industries:</span>
 		<ul id="industryTags" companyid="<?=$companyInfo['CompanyID']?>">
 			<?php
+			print_r($companyClaims);
 			foreach ($companyTags AS $tag) {
 			?>
 					<li<?php if($tag['uservoted']) { ?> class="userVoted" <?php } ?>>

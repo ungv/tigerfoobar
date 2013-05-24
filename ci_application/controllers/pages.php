@@ -82,19 +82,18 @@ class Pages extends Root_Controller {
 			$this->homepage();
 		}else {
 			//grab basic data
-			$data['companyInfo'] = $this->data_model->getCompany($companyID);
+			$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
 			$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
-			$data['companyTags'] = $this->data_model->getCompanyTags($companyID);
+			$data['companyTags'] = $this->data_model->getCompanyTags($companyID, $this->userid);
 			$data['topClaimsForCompanyJSON'] = $this->data_model->getClaimsForCompanyJSON($companyID);
 			
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
 
-			$data['csFiles'] = array('general','ccStyles');
+			$data['csFiles'] = array('general','ccStyles','treemap');
 			$data['jsFiles'] = array('general','ccScripts');
 			
 			$this->load->view('templates/header', $data);
-
 			$this->load->view('pages/ccTop', $data);
 			$this->load->view('pages/scoreTop', $data);
 			$this->load->view('pages/score', $data);
