@@ -13,7 +13,7 @@ if ($pageType != 'tag') {
 			<?php
 			foreach ($companyTags AS $tag) {
 			?>
-					<li<?php if($tag['uservoted']) { ?> class="uservoted" <?php } ?>>
+					<li<?php if($tag['uservoted']) { ?> class="userVoted" <?php } ?>>
 						<span class="tagName"><?=$tag['Name']?></span>
 						<span>(</span>
 							<span class="tagTotal"><?=$tag['votes']?></span>
@@ -42,7 +42,7 @@ if ($pageType != 'tag') {
 			<?php
 			foreach ($claimTags AS $tag) {
 			?>
-				<li <?php if($tag['uservoted']) { ?> class="uservoted" <?php } ?> >
+				<li <?php if($tag['uservoted']) { ?> class="userVoted" <?php } ?> >
 					<span class="tagName"><?=$tag['Name']?></span>
 					<span>(</span>
 						<span class="tagTotal"><?=$tag['votes']?></span>

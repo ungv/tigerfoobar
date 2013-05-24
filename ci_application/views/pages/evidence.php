@@ -1,6 +1,5 @@
 	<!--Start Evidence Content-->
 	<div id="evidenceContainer" class="container">
-		<h2>About the URL</h2>
 		<div id='evidenceContent' class="content">
 			<dl>
 				<dt>URL: </dt>

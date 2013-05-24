@@ -123,30 +123,30 @@ class Data_model extends CI_Model {
 	}	
 
 	// ------------- METHODS FOR DISCUSSION VIEW --------
-	public function getDiscussion($claimID, $parentID, $level, $resultsArr) {
-		$sql = "SELECT d.CommentID, d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time, r.Value
+	public function getDiscussion($claimID, $parentID, $level, $resultsArr, $userID) {
+		if(!isset($userID)) {
+			$userID = -1;
+		}
+		$sql = "SELECT d.ClaimID, d.CommentID, d.Comment, d.UserID, u.Name, d.votes, d.level, d.Time, r.Value, 		
+					COUNT(IF(v.Value = 1, 1, NULL)) AS Ups, 
+					COUNT(IF(v.Value = 0, 1, NULL)) AS Downs,
+					sum(case when v.UserID = $userID and v.Value = 1 then 1 else 0 end) as userVotedUp, 
+					sum(case when v.UserID = $userID and v.Value = 0 then 1 else 0 end) as userVotedDown
 				FROM Discussion d
-				LEFT JOIN User u
-				ON u.UserID = d.UserID
-				LEFT JOIN Rating r
-				ON u.UserID = r.UserID
+				LEFT JOIN User u ON u.UserID = d.UserID
+				LEFT JOIN Rating r ON u.UserID = r.UserID
 				AND r.ClaimID = d.ClaimID
+				LEFT JOIN Vote v 
+				ON v.CommentID = d.CommentID
 				WHERE d.ClaimID = $claimID
-				AND d.ParentCommentID = $parentID";
+				AND d.ParentCommentID = $parentID
+				GROUP BY d.CommentID";
 		$results = $this->db->query($sql)->result_array();
 		foreach ($results as $result) {
 			array_push($resultsArr, $result);
-			$resultsArr = $this->getDiscussion($claimID, $result['CommentID'], $level+1, $resultsArr);
+			$resultsArr = $this->getDiscussion($claimID, $result['CommentID'], $level+1, $resultsArr, $userID);
 		}
 		return $resultsArr;
-	}
-
-	public function getCommentVotes($claimID) {
-		$sql = "SELECT CommentID, COUNT(Value) 
-				FROM Vote 
-				WHERE ClaimID = $claimID
-				GROUP BY CommentID";
-		return $this->db->query($sql)->row();
 	}
 	
 	// ------------- METHODS FOR PROFILE VIEW ---------------

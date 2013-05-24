@@ -4,6 +4,94 @@ $(document).ready(function() {
 	resetScale();
 	
 
+	/*------Voting On Comments-------*/
+
+	$.each($('.buttonsContainer'), function() {
+		if ($(this).find('.upVote').attr('voted') == '1' || $(this).find('.downVote').attr('voted') == '1') {
+			$(this).addClass('beenVoted');
+		}
+	});
+
+	//Onclick, send vote to server
+	//switch value when clicked
+	$('.upVote, .downVote').click(function() {
+		$(this).parent().find('.buttons').removeClass('selectedVote');
+		sendCommentVote($(this));
+	});
+
+	function sendCommentVote(button) {
+		var voted = parseInt($(button).attr('voted')); //0 if not voted, 1 if voted
+		var clicked = $(button);
+		var value = $(button).attr('value');
+		var oldUpVotes = parseInt($(clicked.parent().find(".upNum")).text());
+		var oldDownVotes = parseInt($(clicked.parent().find(".downNum")).text());
+		if (clicked.parent().hasClass('beenVoted')) {
+			if(!voted)  {		//just voted, add vote
+				if (clicked.hasClass('upVote')) {
+					oldUpVotes++;
+					oldDownVotes--;
+				} else if (clicked.hasClass('downVote')) {
+					oldDownVotes++;
+					oldUpVotes--;
+				}
+				clicked.parent().addClass('beenVoted');
+				clicked.parent().find('.buttons').attr('voted','0');
+				clicked.attr('voted','1');
+				clicked.addClass('selectedVote');
+			} else if (voted) {
+				if (clicked.hasClass('upVote')) {
+					oldUpVotes--;
+				} else if (clicked.hasClass('downVote')) {
+					oldDownVotes--;
+				}
+				clicked.parent().removeClass('beenVoted');
+				clicked.attr('voted','0');
+				clicked.removeClass('selectedVote');
+			}
+		} else {
+			if(!voted)  {		//just voted, add vote
+				if (clicked.hasClass('upVote')) {
+					oldUpVotes++;
+				} else if (clicked.hasClass('downVote')) {
+					oldDownVotes++;
+				}
+				clicked.parent().addClass('beenVoted');
+				clicked.parent().find('.buttons').attr('voted','0');
+				clicked.attr('voted','1');
+				clicked.addClass('selectedVote');
+			} else if (voted) {
+				if (clicked.hasClass('upVote')) {
+					oldUpVotes--;
+				} else if (clicked.hasClass('downVote')) {
+					oldDownVotes--;
+				}
+				clicked.parent().removeClass('beenVoted');
+				clicked.attr('voted','0');
+				clicked.removeClass('selectedVote');
+			}			
+		}
+		$(clicked.parent().find(".upNum")).text(oldUpVotes);
+		$(clicked.parent().find(".downNum")).text(oldDownVotes);
+		$.ajax({
+			type: 'POST',
+			url: 'http://127.0.0.1/action/voteComment',
+			data: {
+				ClaimID: $(clicked).attr('ClaimID'),
+				CommentID: parseInt($(clicked).attr('for')),
+				voted: voted,
+				value: value
+			},
+			dataType: 'json',
+			success: function(json) {
+				//Dom changes processed pre-query
+			},
+			error: function(json) {
+				//alert error message for now
+				alert('Server Error');
+			}
+		});
+	}
+
 	/*------Upvoting Industry Tags-------*/
 
 

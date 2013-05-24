@@ -28,8 +28,10 @@ hr {
 		padding-right:6px;
 	}
 
-	#tagList li.userVoted {
-		background-color:#DDD;
+	.userVoted {
+		background-color:#929292 !important;
+		border: 1px solid darkgrey;
+		padding: 2px;
 	}
 
 /*-----------------------Add New Industry-------------------*/
@@ -104,6 +106,23 @@ hr {
 	font-size: 15px;
 }
 
+#discussionContainer {
+	position: relative;
+}
+
+#discussionContent > div {
+	position: relative;
+	height: 25px;
+	border-bottom: 1px solid lightgray;
+	padding: 5px;
+}
+
+#discussionContent span {
+	color: gray;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
 #discussionContent {
 	border: 1px solid lightgray;
 }
@@ -116,26 +135,6 @@ hr {
 	margin-bottom: 20px;
 }
 
-.thread {
-	border-left: 1px solid black;
-	overflow: hidden;
-}
-
-.buttonsContainer {
-	float: right;
-}
-
-.buttonsContainer > p {
-	float: left;
-	margin: 8px 5px 0 0;
-}
-
-.buttonsContainer .buttons {
-	margin: 2px 7px 0 0;
-	padding: 2px;
-	font-size: 10pt;
-}
-
 #discussionContent textarea {
 	float: left;
 	margin-right: 10px;
@@ -144,6 +143,11 @@ hr {
 
 .discussionOptions {
 	float: right;
+}
+
+.thread {
+	border-left: 1px solid black;
+	overflow: hidden;
 }
 
 #leftCol {
@@ -273,23 +277,6 @@ hr {
 	font-size: 20pt;
 }
 
-#discussionContainer {
-	position: relative;
-}
-
-#discussionContent > div {
-	position: relative;
-	height: 25px;
-	border-bottom: 1px solid lightgray;
-	padding: 5px;
-}
-
-#discussionContent span {
-	color: gray;
-	font-size: 14pt;
-	font-weight: bold;
-}
-
 #newComment {
 	float: right;
 	padding: 2px;
@@ -314,6 +301,41 @@ hr {
 #newCommentPopup textarea {
 	width: 95%;
 	height: 200px;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+.buttonsContainer {
+	float: right;
+}
+
+.buttonsContainer > p {
+	float: left;
+	/*margin: 8px 5px 0 0;*/
+}
+
+.buttonsContainer .buttons {
+	margin: 2px 7px 0 0;
+	padding: 2px;
+	font-size: 10pt;
+}
+
+.buttonsContainer label {
+	color: grey;
+}
+
+.buttonsContainer label:hover {
+	color: lightgrey;
+}
+
+.selectedVote {
+	color: #0087C7 !important;
+}
+
+.upVote, .downVote {
+	font-size: 16pt !important;
 }
 
 .box1 {

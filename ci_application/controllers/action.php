@@ -63,6 +63,28 @@ class Action extends Root_Controller {
 	}
 
 	/*
+		Upvote Industry tag on company page, or remove the current vote
+		for that user
+		NOTE: Send positive message even if user has already upvoted, unless tag isnt found
+	*/
+	public function voteComment() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->voteComment($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			}else {			//didn't work, inform user why
+	        	$this->output->set_status_header('400');
+	        	$data['json'] = '{"message":"Cannot Process Upvote"}'; 
+			}
+		}
+		$this->load->view('data/json_view', $data);
+	}
+
+	/*
 		Adds a new user to the database, username/password required, email optional
 	*/
 	public function addUser() {
