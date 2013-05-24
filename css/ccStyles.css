@@ -157,10 +157,16 @@ hr {
 #leftCol {
 	float: left;
 	width: 50%;
+	border-right: 1px solid rgb(213, 213, 213);
 }
 
 #leftCol, #scoreDistribution, #evidenceContent, #controlContainer, #relatedTagsContainer, #discussionContent{
 	overflow: hidden;
+}
+
+#rightCol {
+	float: left;
+	width: 49.8%;
 }
 
 #scoreHeader, #relatedTagsHeader {
@@ -225,12 +231,6 @@ hr {
 
 .selectedRating {
 	border: 2px solid black !important;
-}
-
-#rightCol {
-	float: left;
-	width: 49.8%;
-	border-left: 1px solid rgb(213, 213, 213);
 }
 
 .lowRatedClaims, .highRatedClaims {

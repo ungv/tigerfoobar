@@ -68,10 +68,7 @@ class Data_model extends CI_Model {
 
 	//Retreives the top claims for a given company
 	public function getCompanyClaims($companyID) {
-		$sql = "SELECT cl.*, COUNT(cl.Score) AS noRatings,
-					(SELECT COUNT(Score) 
-					FROM Claim 
-					WHERE CompanyID = $companyID) as Total
+		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
 				FROM Claim cl
 				LEFT JOIN Company co
 				ON co.CompanyID = cl.CompanyID
