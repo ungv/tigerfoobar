@@ -76,7 +76,10 @@ class Action_model extends CI_Model {
         }
     }
 
-    // Vote on comments
+    //Sends comment vote to server, 
+    //adds a new row if casting new vote, 
+    //update row if already exists,
+    //delete row if unvoting
     public function voteComment($userid) {
         $ClaimID = $this->security->xss_clean($this->input->post('ClaimID'));
         $CommentID = $this->security->xss_clean($this->input->post('CommentID'));
