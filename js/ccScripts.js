@@ -106,12 +106,13 @@ $(document).ready(function() {
 	//Sends information about the newly created
 	//industry-company connection to the server
 	function sendNewTag(label, value) {
+		var tagtype = $('#taglist').attr('tagtype');
 		var newLink = $('<li>', {
 			"html": '	<span class="tagName">' + label + '</span>' +
 					'	<span>(</span> ' +
 					'		<span class="tagTotal">0</span>' +
 					'	<span>)</span>' +
-					'	<span class="tagUpvote" tagid="'+ value + '" objectid="'+ $('#taglist').attr('objectid') +'" voted="0">' +
+					'	<span class="tagUpvote" tagtype="'+tagtype+'" tagid="'+ value + '" objectid="'+ $('#taglist').attr('objectid') +'" voted="0">' +
 					'		+  ' +
 					'	</span>'
 		});

@@ -41,7 +41,7 @@ class Action_model extends CI_Model {
     public function upvoteIndustry($userid) {
         $tagid = $this->security->xss_clean($this->input->post('industryID'));
         $objectid = $this->security->xss_clean($this->input->post('objectID'));
-        $tagtype = $this->security->xss_clean($this->input->post('tagtype'));
+        $tagtype = $this->security->xss_clean($this->input->post('tagType'));
         $voted = $this->security->xss_clean($this->input->post('voted'));
 
         //check tagid is for industry

@@ -23,7 +23,7 @@ if ($pageType != 'tag') {
 	<?php
 	}
 	?>
-		<ul id="taglist" objectid="<?=$objectid?>">
+		<ul id="taglist" tagtype="<?=$tagtype?>" objectid="<?=$objectid?>">
 			<?php
 			foreach ($list AS $tag) {
 			?>
@@ -32,7 +32,7 @@ if ($pageType != 'tag') {
 						<span>(</span>
 							<span class="tagTotal"><?=$tag['votes']?></span>
 						<span>)</span>
-						<span class="tagUpvote" tagtype="Industry" tagid="<?=$tag['TagsID']?>" objectid="<?=$objectid?>" voted="<?=$tag['uservoted']?>">
+						<span class="tagUpvote" tagtype="<?=$tagtype?>" tagid="<?=$tag['TagsID']?>" objectid="<?=$objectid?>" voted="<?=$tag['uservoted']?>">
 							<?php if($tag['uservoted']) { ?>
 									-
 							<?php }else { ?>
