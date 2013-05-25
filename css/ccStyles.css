@@ -1,3 +1,7 @@
+ul {
+	display: inline;
+}
+
 li {
 	list-style-type: none;
 	float: left;
@@ -6,8 +10,8 @@ li {
 }
 
 hr {
-	color: #D5D5D5;
-	background-color: #D5D5D5;
+	color: lightgray;
+	background-color: lightgray;
 }
 
 /*-----------------------Claim and Industry Tags-------------------*/
@@ -104,6 +108,23 @@ hr {
 	font-size: 15px;
 }
 
+#discussionContainer {
+	position: relative;
+}
+
+#discussionContent > div {
+	position: relative;
+	height: 25px;
+	border-bottom: 1px solid lightgray;
+	padding: 5px;
+}
+
+#discussionContent span {
+	color: gray;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
 #discussionContent {
 	border: 1px solid lightgray;
 }
@@ -116,29 +137,19 @@ hr {
 	margin-bottom: 20px;
 }
 
-.thread {
-	border-left: 1px solid black;
-	overflow: hidden;
-}
-
-.buttonsContainer {
-	float: right;
-}
-
-.buttonsContainer .buttons {
-	margin: 2px 10px 0 0;
-	padding: 2px;
-	font-size: 10pt;
-}
-
 #discussionContent textarea {
 	float: left;
 	margin-right: 10px;
-	width: 100%;
+	width: 98%;
 }
 
 .discussionOptions {
 	float: right;
+}
+
+.thread {
+	border-left: 1px solid black;
+	overflow: hidden;
 }
 
 #leftCol {
@@ -147,14 +158,13 @@ hr {
 	border-right: 1px solid rgb(213, 213, 213);
 }
 
+#leftCol, #scoreDistribution, #evidenceContent, #controlContainer, #relatedTagsContainer, #discussionContent{
+	overflow: hidden;
+}
 
 #rightCol {
 	float: left;
 	width: 49.8%;
-}
-
-#leftCol, #scoreDistribution, #evidenceContent, #controlContainer, #relatedTagsContainer, #discussionContent{
-	overflow: hidden;
 }
 
 #scoreHeader, #relatedTagsHeader {
@@ -268,14 +278,8 @@ hr {
 	font-size: 20pt;
 }
 
-#discussionContainer {
-	position: relative;
-}
-
 #newComment {
-	position: absolute;
-	top: 0;
-	right: 0;
+	float: right;
 	padding: 2px;
 	background-color: #E0E0E0;
 	border: 1px solid #CCCCCC;
@@ -298,6 +302,41 @@ hr {
 #newCommentPopup textarea {
 	width: 95%;
 	height: 200px;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+.buttonsContainer {
+	float: right;
+}
+
+.buttonsContainer > p {
+	float: left;
+	/*margin: 8px 5px 0 0;*/
+}
+
+.buttonsContainer .buttons {
+	margin: 2px 7px 0 0;
+	padding: 2px;
+	font-size: 10pt;
+}
+
+.buttonsContainer label {
+	color: grey;
+}
+
+.buttonsContainer label:hover {
+	color: lightgrey;
+}
+
+.selectedVote {
+	color: #0087C7 !important;
+}
+
+.upVote, .downVote {
+	font-size: 16pt !important;
 }
 
 .box1 {

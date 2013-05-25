@@ -45,11 +45,9 @@ if ($pageType != 'tag') {
 		<a id="addTag" href="#">+</a>
 		<div id="newTagPopup" style="display:none;">
 			<input id="newtag_name" tagtype="Industry" type="text" placeholder="Type an Industry name"/>
-		</div>	
+		</div>
 	</div>
 	<?php
-} else { // Currently viewing 'tag' pages
-
 }
 ?>
 <!--End of Top-->

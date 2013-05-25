@@ -16,8 +16,9 @@ class Data extends CI_Controller {
 	}
 
 
-	//Simple Method for testing db, returns all users
-	//TODO: involve in basic treemap get
+	/*
+		Index Page
+	*/
 	public function index() {
 		// Capitalize the first letter
 		$data['headTitle'] = 'Testing DB Connection';
@@ -28,7 +29,6 @@ class Data extends CI_Controller {
 
 		$this->load->view('data/test', $data);
 	}
-
 	//Returns a list of all industries that are similar to the passed
 	//name
 	public function tagList($root) {

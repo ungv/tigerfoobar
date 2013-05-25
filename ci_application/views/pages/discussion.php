@@ -1,14 +1,22 @@
 	<!--Start Discussion content-->
 	<div id="discussionContainer" class="container">
 		<h2>Discussion</h2>
-		<button type="button" id="newComment">Start a new thread</button>
-		<div id="newCommentPopup" class="popup" style="display: none;">
-			<h4>Add a new comment!</h4>
-			<textarea placeholder="Your comments on this article"></textarea>
-			<button type="submit" class="submitButton">Submit</button>
-			<button type="button" class="cancelButton">cancel</button>
-		</div>
 		<div id="discussionContent" class="content">
+			<div>
+				<span><?=count($comments) . (count($comments) == 1 ? ' comment, ' : ' comments, ') . '[number of unique users]'?></span>
+				<button type="button" id="newComment">Start a new thread</button>
+				<!-- <div id="newCommentPopup" class="popup" style="display: none;">
+					<h4>Add a new comment!</h4>
+					<textarea placeholder="Your comments on this article"></textarea>
+					<button type="submit" class="submitButton">Submit</button>
+					<button type="button" class="cancelButton">cancel</button>
+				</div> -->
+			</div>
+			<div id="newCommentBox" style="display: none;">
+				<textarea cols="100%" placeholder="Your comments on this article"></textarea>
+				<button class="submitButton submitReply" value="">Submit</button>
+				<button class="cancelButton cancelReply" value="">cancel</button>				
+			</div>
 			<ul>
 			<?php 
 			if (empty($comments)) {
@@ -22,8 +30,11 @@
 					<h4>By: <?=$comment['Name']?> On: <?=$comment['Time']?></h4>
 					<p><?=$comment['Comment']?></p>
 					<div class="buttonsContainer" style="opacity: 0.4;">
-						<button class="buttons cancelButton downVote" value="0">Down</button>
-						<button class="buttons submitButton upVote" value="1">Up</button>
+						<p>(+<span class="upNum"><?=$comment['Ups']?></span> | -<span class="downNum"><?=$comment['Downs']?></span>)</p>
+						<input type="radio" id="<?=$comment['CommentID']?>upvote" name="commentVoting" >
+						<label for="<?=$comment['CommentID']?>upvote" class="buttons upVote <?= $comment['userVotedUp'] ? 'selectedVote' : '' ?>" voted="<?=$comment['userVotedUp']?>" claimID="<?=$comment['ClaimID']?>" value="1">&#9650;</label>
+						<input type="radio" id="<?=$comment['CommentID']?>downvote" name="commentVoting">
+						<label for="<?=$comment['CommentID']?>downvote" class="buttons downVote <?= $comment['userVotedDown'] ? 'selectedVote' : '' ?>" voted="<?=$comment['userVotedDown']?>" claimID="<?=$comment['ClaimID']?>" value="0">&#9660;</label>
 						<button class="buttons reply" value="">Reply</button>
 					</div>
 				</li>

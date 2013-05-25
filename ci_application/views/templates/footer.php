@@ -1,5 +1,3 @@
-	</div>
-	<!-- End 'main' content -->
 
 	<footer>
 		<div id='bottomBar'>

@@ -52,27 +52,6 @@ $(document).ready(function() {
 	});
 	
  	/*------Logging In------*/
-
-	//Sends the passed login parameters to server onclick
-	function sendLogin(username, password) {
-		$.ajax({
-			type: 'POST',
-			url: 'http://127.0.0.1/action/login',
-			data: {
-				username: username,
-				password: password
-			},
-			dataType: 'json',
-			success: function(json) {
-				hidePopups();
-				window.location.reload();
-			},
-			error: function() {
-				$('#login_fail').show(200);
-				$('#login_password').val('');
-			}
-		});
-	}
 	
 	//Show login popup onclick
 	$('#login').click(function() {
@@ -258,4 +237,25 @@ function applyColors(thisVal, $element, styling, stylewith) {
 	} else if (thisVal > 2) {
 		$element.css(styling, stylewith + colors[6]);
 	}
+}
+
+//Sends the passed login parameters to server onclick
+function sendLogin(username, password) {
+	$.ajax({
+		type: 'POST',
+		url: 'http://127.0.0.1/action/login',
+		data: {
+			username: username,
+			password: password
+		},
+		dataType: 'json',
+		success: function(json) {
+			hidePopups();
+			window.location.reload();
+		},
+		error: function() {
+			$('#login_fail').show(200);
+			$('#login_password').val('');
+		}
+	});
 }

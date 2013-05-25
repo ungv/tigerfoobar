@@ -4,8 +4,7 @@ class Action_model extends CI_Model {
 	//called when constructed
 	public function __construct() {
 		$this->load->database();
-
-        $this->load->library('session');
+        $this->load->library('session');        
 	}
 
 	//sends a login request to the DB object
@@ -77,6 +76,41 @@ class Action_model extends CI_Model {
         }
     }
 
+    // Vote on comments
+    public function voteComment($userid) {
+        $ClaimID = $this->security->xss_clean($this->input->post('ClaimID'));
+        $CommentID = $this->security->xss_clean($this->input->post('CommentID'));
+        $voted = $this->security->xss_clean($this->input->post('voted'));
+        $value = $this->security->xss_clean($this->input->post('value'));
+
+        // check if user already voted on this comment
+        $hasVoted = $this->db->get_where('Vote', array('UserID' => $userid , 'CommentID' => $CommentID));
+            $data = array(
+               'ClaimID' => $ClaimID,
+               'Value' => $value,
+               'CommentID' => $CommentID,
+               'UserID' => $userid,
+            );
+            if (!$voted) {    //user hasnt voted, insert or update row
+                if ($hasVoted->num_rows == 0) {    //user has not voted on this comment, insert new row
+                    $result = $this->db->insert('Vote', $data); 
+                } else {    //user has voted on something, update their vote value
+                    $data = array(
+                       'Value' => $value,
+                    );
+                    $where = array(
+                        'UserID' => $userid,
+                        'ClaimID' => $ClaimID,
+                        'CommentID' => $CommentID
+                        );
+                    $result = $this->db->update('Vote', $data, $where);                     
+                }
+            } else {         //user is unvoting their current vote
+                $result = $this->db->delete('Vote', $data);
+            }
+        return $result;
+    }
+
     //adds user to the system
     public function addUser() {
         $username = $this->security->xss_clean($this->input->post('username'));
@@ -103,6 +137,11 @@ class Action_model extends CI_Model {
     public function updateProfile($userid) {
         $col = $this->security->xss_clean($this->input->post('col'));
         $newInfo = $this->security->xss_clean($this->input->post('newInfo'));
+
+        if ($col == 'Name')
+            $this->session->set_userdata(array('username' => $newInfo));
+        else if ($col == 'Email')
+            $this->session->set_userdata(array('email' => $newInfo));
 
         //2. Check for user in db
         $query = $this->db->get_where('User', array('UserID' => $userid));
