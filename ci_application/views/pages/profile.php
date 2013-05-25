@@ -35,7 +35,7 @@
 		?>
 	</div>
 	
-	// User submissions
+	<!-- User submissions -->
 	<div id="submissions">
 		<h3>Submissions:</h3>
 		<?php
@@ -58,7 +58,7 @@
 		</ul>
 	</div>
 	
-	// User comments
+	<!-- User comments -->
 	<div id="comments" class="container">
 		<h3>Comments:</h3>
 		<?php
@@ -72,7 +72,7 @@
 			?>
 		<div class="threadContainer">
 			<div class="thread">
-				<h3><a href="">"<?=$comment['Comment']?>"</a></h3>
+				<h3><a href="/claim/<?=$comment['ClaimID']?>/#comment<?=$comment['CommentID']?>">"<?=$comment['Comment']?>"</a></h3>
 				<p><em>About <a href="/company/<?=$comment['CompanyID']?>"><?=$comment['CoName']?></a>, from '<a href="/claim/<?=$comment['ClaimID']?>"><?=$comment['Title']?></a>,' of which they <?=$comment['Value'] == NULL ? 'have not rated yet' : 'gave a score of <strong class="theirRating">' . $comment["Value"] .'</strong>'?></em>
 				</p>
 			</div>
@@ -83,7 +83,7 @@
 		?>
 	</div>
 	
-	// User votes on comments
+	<!-- User votes on comments -->
 	<div id="votes" class="container">
 		<h3>Votes:</h3>
 		<?php
