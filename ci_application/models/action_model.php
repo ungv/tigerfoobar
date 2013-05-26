@@ -74,8 +74,8 @@ class Action_model extends CI_Model {
             'target_type' => $targetType,
             'flag_type' => $flagType,
         );
-        $result = $this->db->insert('Flags', $data); 
-        return $result;
+        $this->db->insert('Flags', $data); 
+        return true;
     }
 
     // Vote on comments

@@ -1,5 +1,5 @@
 	<!--Start Evidence Content-->
-	<img id='flagButton' src="/img/flag.png">
+	<img id='flagButton' src="/img/flag.png" claimID="<?=$claimInfo['ClaimID']?>">
 	
 	<div id="evidenceContainer" class="container">
 		<div id='evidenceContent' class="content">

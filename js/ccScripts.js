@@ -73,17 +73,11 @@ $(document).ready(function() {
 	// vote zero - trivial
 	//Onclick, send 0 vote to server
 	$('#flagButton').click(function() {
-		//sendIndustryUpvote($(this));
 		// alert('flag');
-		flagContent($(this));
-	});
 
-	function flagContent (button) {
-		var clicked = $(button);
-		var targetID = $(clicked).attr('ClaimID');
+		var targetID = $(this).attr('claimID');
 		var targetType = 'claim';
 		var flagType = 'noncredible';
-
 
 		$.ajax({
 			type: 'POST',
@@ -92,20 +86,21 @@ $(document).ready(function() {
 				targetID: targetID,
 				targetType: targetType,
 				flagType: flagType
-				// industryID: $(clicked).attr('tagid'),
-				// companyID: $(clicked).attr('companyid'),
+				// industryID: $(this).attr('tagid'),
+				// companyID: $(this).attr('companyid'),
 				// voted: voted
 			},
 			dataType: 'json',
 			success: function(json) {
 				//Dom changes processed pre-query
+				alert('Flagged');
 			},
 			error: function(json) {
 				//alert error message for now
-				alert('Server Error');
+				alert(json.responseJSON.message);
 			}
 		});
-	}
+	});
 
 
 
