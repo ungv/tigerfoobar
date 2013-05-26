@@ -183,4 +183,88 @@ class Action_model extends CI_Model {
         // else return false, no user found or pw incorrect
         return false;
     }
+
+    // Adds a claim to the database
+    // Clean input values for security
+    public function addClaim($userid) {
+        $url = $this->security->xss_clean($this->input->post('url'));
+        $title = $this->security->xss_clean($this->input->post('title'));
+        $desc = $this->security->xss_clean($this->input->post('desc'));
+        $company = $this->security->xss_clean($this->input->post('company'));
+        $rating = $this->security->xss_clean($this->input->post('rating'));
+        $tags = $this->security->xss_clean($this->input->post('tags'));
+
+        // Submit the claim without tags first
+        $data = array(
+            'Title' => $title,
+            'Link' => $url,
+            'Description' => $desc,
+            'Score' => $rating,
+            'UserID' => $userid,
+            'CompanyID' => $company
+                );
+        $this->db->insert('Claim', $data);
+
+        // Get claimID of their new claim
+        $getClaim = $this->db->get_where(
+            'Claim', array(
+                'Title' => $title, 
+                'Link' => $url, 
+                'Description' => $desc, 
+                'Score' => $rating,
+                'UserID' => $userid
+                )
+            );
+        $claimID = $getClaim->row()->ClaimID;
+
+        // Submit rating
+        $score = array(
+            'Value' => $rating,
+            'UserID' => $userid,
+            'ClaimID' => $claimID
+            );
+        $this->db->insert('Rating', $score);
+
+        // Insert each new tag as a new row
+        foreach ($tags as $tag) {
+            //Check if this tag already exists in database
+            $existingTags = $this->db->get_where('Tags', array('Name' => $tag));
+            //Insert if no results found
+            if($existingTags->num_rows() == 0) {
+                $newTag = array(
+                    'Name' => $tag,
+                    'Type' => 'Claim Tag',
+                    'is_Seed' => 0
+                    );
+                $this->db->insert('Tags', $newTag);
+            }
+
+            // Get tagsID of tags entered
+            $getTags = $this->db->get_where(
+                'Tags', array(
+                    'Name' => $tag
+                    )
+                );
+            $tagsID = $getTags->row()->TagsID;
+
+            // Check if user has already submitting this tag with this claim
+            $checkTag = $this->db->get_where(
+                'Claim_has_Tags', array(
+                    'Claim_ClaimID' => $claimID, 
+                    'Tags_TagsID' => $tagsID, 
+                    'User_ID' => $userid
+                    )
+                );
+            if($checkTag->num_rows() == 0) {
+                // Finally link tags to the claim if not already there
+                $claimTags = array(
+                   'Claim_ClaimID' => $claimID,
+                   'Tags_TagsID' => $tagsID,
+                   'User_ID' => $userid
+                    );
+                $this->db->insert('Claim_has_Tags', $claimTags);
+            }
+        }
+        return true;
+    }
 }
