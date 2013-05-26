@@ -127,7 +127,6 @@ class Pages extends Root_Controller {
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/mainTop', $data);
-			$this->load->view('pages/ccTop', $data);
 			$this->load->view('pages/tag', $data);
 			$this->load->view('pages/treemap', $data);
 			$this->load->view('pages/mainBottom', $data);

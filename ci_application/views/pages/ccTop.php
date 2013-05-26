@@ -1,8 +1,3 @@
-<?php
-if ($pageType != 'tag') {
-
-	// Victor (5-20-13): I made the id and class names uniform across 'claim' and 'company' pages to give it the same css styling. I also made those changes in the JS so the scripts are still working.
-	?>
 	<div id="tagSection">
 	<?php
 	if ($pageType == 'company') {	//loading industries
@@ -28,7 +23,7 @@ if ($pageType != 'tag') {
 			foreach ($list AS $tag) {
 			?>
 					<li<?php if($tag['uservoted']) { ?> class="userVoted" <?php } ?>>
-						<span class="tagName"><?=$tag['Name']?></span>
+						<span class="tagName"><a href="/tag/<?=$tag['TagsID']?>"><?=$tag['Name']?></a></span>
 						<span>(</span>
 							<span class="tagTotal"><?=$tag['votes']?></span>
 						<span>)</span>
@@ -47,7 +42,4 @@ if ($pageType != 'tag') {
 			<input id="newtag_name" tagtype="Industry" type="text" placeholder="Type an Industry name"/>
 		</div>
 	</div>
-	<?php
-}
-?>
 <!--End of Top-->

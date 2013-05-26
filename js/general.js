@@ -70,6 +70,28 @@ $(document).ready(function() {
 		hidePopups();
 	});
 
+	//Sends the passed login parameters to server onclick
+	function sendLogin(username, password) {
+		$.ajax({
+			type: 'POST',
+			url: 'http://127.0.0.1/action/login',
+			data: {
+				username: username,
+				password: password
+			},
+			dataType: 'json',
+			success: function(json) {
+				hidePopups();
+				window.location.reload();
+			},
+			error: function() {
+				$('#login_fail').show(200);
+				$('#login_password').val('');
+			}
+		});
+	}
+	
+
 	/*------Sigining Up------*/
 
 	//Show signin box onclick
@@ -213,6 +235,9 @@ $(document).ready(function() {
 	*/
 });
 
+/*--------Public functions that need to be accessed by other JS files----------*/
+
+// Hide all popups currently showing
 function hidePopups() {
 	$('.popup').hide(200);
 	$.each($('.popup'), function() {
@@ -237,25 +262,4 @@ function applyColors(thisVal, $element, styling, stylewith) {
 	} else if (thisVal > 2) {
 		$element.css(styling, stylewith + colors[6]);
 	}
-}
-
-//Sends the passed login parameters to server onclick
-function sendLogin(username, password) {
-	$.ajax({
-		type: 'POST',
-		url: 'http://127.0.0.1/action/login',
-		data: {
-			username: username,
-			password: password
-		},
-		dataType: 'json',
-		success: function(json) {
-			hidePopups();
-			window.location.reload();
-		},
-		error: function() {
-			$('#login_fail').show(200);
-			$('#login_password').val('');
-		}
-	});
 }
