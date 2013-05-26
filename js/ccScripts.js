@@ -70,6 +70,44 @@ $(document).ready(function() {
 		});
 	}
 
+	// vote zero - trivial
+	//Onclick, send 0 vote to server
+	$('#flagButton').click(function() {
+		//sendIndustryUpvote($(this));
+		// alert('flag');
+		flagContent($(this));
+	});
+
+	function flagContent (button) {
+		var clicked = $(button);
+		$targetID = $(clicked).attr('ClaimID');
+		$targetType = 'claim';
+		$flagType = 'noncredible';
+
+
+		$.ajax({
+			type: 'POST',
+			url: 'http://127.0.0.1/action/flagContent',
+			data: {
+				targetID: $targetID,
+				targetType: $targetType,
+				flagType: $flagType
+				// industryID: $(clicked).attr('tagid'),
+				// companyID: $(clicked).attr('companyid'),
+				// voted: voted
+			},
+			dataType: 'json',
+			success: function(json) {
+				//Dom changes processed pre-query
+			},
+			error: function(json) {
+				//alert error message for now
+				alert('Server Error');
+			}
+		});
+	}
+
+
 
 	/*------Upvoting Industry Tags-------*/
 

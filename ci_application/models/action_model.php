@@ -62,6 +62,22 @@ class Action_model extends CI_Model {
         }
     }
 
+    // flag
+    public function flagContent($userid) {
+        $targetID = $this->security->xss_clean($this->input->post('targetID'));
+        $targetType = $this->security->xss_clean($this->input->post('targetType'));
+        $flagType = $this->security->xss_clean($this->input->post('flagType'));
+
+        $data = array(
+            'userID' => $userid, 
+            'target_id' => $targetID,
+            'target_type' => $targetType,
+            'flag_type' => $flagType,
+        );
+        $result = $this->db->insert('Flags', $data); 
+        return $result;
+    }
+
     // Vote on comments
     public function voteComment($userid) {
         $ClaimID = $this->security->xss_clean($this->input->post('ClaimID'));

@@ -1,4 +1,6 @@
 	<!--Start Evidence Content-->
+	<img id='flagButton' src="/img/flag.png">
+	
 	<div id="evidenceContainer" class="container">
 		<div id='evidenceContent' class="content">
 			<dl>

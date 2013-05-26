@@ -356,3 +356,9 @@ input[type="radio"] {
 .box6{
 	left: 264px;
 }
+
+
+/*flag*/
+#flagButton {
+	float: right;
+}
