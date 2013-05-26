@@ -80,18 +80,18 @@ $(document).ready(function() {
 
 	function flagContent (button) {
 		var clicked = $(button);
-		$targetID = $(clicked).attr('ClaimID');
-		$targetType = 'claim';
-		$flagType = 'noncredible';
+		var targetID = $(clicked).attr('ClaimID');
+		var targetType = 'claim';
+		var flagType = 'noncredible';
 
 
 		$.ajax({
 			type: 'POST',
 			url: 'http://127.0.0.1/action/flagContent',
 			data: {
-				targetID: $targetID,
-				targetType: $targetType,
-				flagType: $flagType
+				targetID: targetID,
+				targetType: targetType,
+				flagType: flagType
 				// industryID: $(clicked).attr('tagid'),
 				// companyID: $(clicked).attr('companyid'),
 				// voted: voted
