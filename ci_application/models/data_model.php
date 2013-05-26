@@ -300,6 +300,7 @@ class Data_model extends CI_Model {
 	//Gets claims for the given company
 	public function getClaimsForCompanyJSON($companyID) {
 		$topClaimsForCompany = $this->getCompanyClaims($companyID);
+		//TODO: handle the case where no claims on company
 		$companyName = $topClaimsForCompany[0]["Title"];
 		$jsonDataObj = '"name": "Top claims for '.$companyName.'", "children": [';
 		
