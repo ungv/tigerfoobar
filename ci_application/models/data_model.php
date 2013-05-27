@@ -55,8 +55,23 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 
+<<<<<<< HEAD
 	// Need to get number of ratings for each claim
 	
+=======
+	// Get user's rating on a specific claim
+	public function getRatingOnClaim($claimID, $userid) {
+		if(!isset($userID)) {
+			$userID = -1;
+		}
+		$sql = "SELECT Value
+				FROM Rating
+				WHERE ClaimID = $claimID
+				AND UserID = $userid";
+		return $this->db->query($sql)->row();
+	}
+		
+>>>>>>> origin/victor
 	// ------------- METHODS FOR COMPANY VIEW -------------	
 	//Retreives the basic data for a company
 	public function getCompany($companyID) {
@@ -146,6 +161,13 @@ class Data_model extends CI_Model {
 			$resultsArr = $this->getDiscussion($claimID, $result['CommentID'], $level+1, $resultsArr, $userID);
 		}
 		return $resultsArr;
+	}
+
+	public function getUniqueUsers($claimID) {
+		$sql = "SELECT DISTINCT UserID
+				FROM Discussion
+				WHERE ClaimID = $claimID";
+		return $this->db->query($sql)->num_rows();
 	}
 	
 	// ------------- METHODS FOR PROFILE VIEW ---------------

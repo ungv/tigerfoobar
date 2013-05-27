@@ -70,6 +70,31 @@ $(document).ready(function() {
 		hidePopups();
 	});
 
+<<<<<<< HEAD
+=======
+	//Sends the passed login parameters to server onclick
+	function sendLogin(username, password) {
+		$.ajax({
+			type: 'POST',
+			url: '/action/login',
+			data: {
+				username: username,
+				password: password
+			},
+			dataType: 'json',
+			success: function(json) {
+				hidePopups();
+				window.location.reload();
+			},
+			error: function() {
+				$('#login_fail').show(200);
+				$('#login_password').val('');
+			}
+		});
+	}
+	
+
+>>>>>>> origin/victor
 	/*------Sigining Up------*/
 
 	//Show signin box onclick
@@ -106,7 +131,7 @@ $(document).ready(function() {
 	function addUser(username, password, email) {
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/addUser',
+			url: '/action/addUser',
 			data: {
 				username: username,
 				password: password,
@@ -181,6 +206,7 @@ $(document).ready(function() {
 });
 
 function hidePopups() {
+	$('.lightsout').fadeOut();
 	$('.popup').hide(200);
 	$.each($('.popup'), function() {
 		$('input').val('');
@@ -206,6 +232,7 @@ function applyColors(thisVal, $element, styling, stylewith) {
 	}
 }
 
+<<<<<<< HEAD
 //Sends the passed login parameters to server onclick
 function sendLogin(username, password) {
 	$.ajax({
@@ -224,5 +251,13 @@ function sendLogin(username, password) {
 			$('#login_fail').show(200);
 			$('#login_password').val('');
 		}
+=======
+//Resets and recolors the kudos scale to get rid of border color
+function resetScale() {
+	$.each($('.scoreBox'), function(i) {
+		$(this).css('background-color', colors[i]);
+		$(this).css('border', '2px solid ' + colors[i]);
+		$(this).removeClass('selectedRating');
+>>>>>>> origin/victor
 	});
 }

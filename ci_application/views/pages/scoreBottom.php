@@ -10,7 +10,8 @@
 				<?php
 				} else {
 				?>
-					<span>Other claims related to <a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></span>
+					<span><a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></span><br/>
+					<span style="font-size: 10pt;">related claims:</span>
 				<?php
 				}
 				?>

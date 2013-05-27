@@ -15,7 +15,7 @@
 			<hr>
 			<dl>
 				<dt>Submitted: </dt>
-					<dd><?=date("F j, Y g:i a", strtotime($claimInfo['ClaimTime']))?></dd>
+					<dd><?=date("F j, Y", strtotime($claimInfo['ClaimTime']))?></dd>
 				<dt>By: </dt>
 					<dd><a href="/profile/<?=$claimInfo['UserID']?>"><?=$claimInfo['UserName']?></a></dd>
 			</dl>

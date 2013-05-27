@@ -34,9 +34,15 @@ class Pages extends Root_Controller {
 	public function homepage() {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
+		$data['pageType'] = 'home';
 
+<<<<<<< HEAD
 		$data['csFiles'] = array('general','ccStyles','addClaim','treemap');
 		$data['jsFiles'] = array('general','ccScripts','addClaim');
+=======
+		$data['csFiles'] = array('general','ccStyles','addClaim');
+		$data['jsFiles'] = array('general','score','addClaim');
+>>>>>>> origin/victor
 		$data['topCompaniesWithClaimsJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
 		//signed in logic goes here
 
@@ -61,11 +67,20 @@ class Pages extends Root_Controller {
 
 			$resultsArr = [];
 			$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr, $this->userid);
+			$data['uniqueUsers'] = $this->data_model->getUniqueUsers($claimID);
 			$data['scores'] = $this->data_model->getClaimScores($claimID);
+<<<<<<< HEAD
 			
 			//files needed
 			$data['csFiles'] = array('general','ccStyles', 'tooltipster');
 			$data['jsFiles'] = array('general','ccScripts');
+=======
+			$data['userRating'] = $this->data_model->getRatingOnClaim($claimID, $this->userid);
+			
+			//files needed
+			$data['csFiles'] = array('general','ccStyles');
+			$data['jsFiles'] = array('general','ccScripts','score');
+>>>>>>> origin/victor
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/mainTop', $data);
@@ -94,8 +109,13 @@ class Pages extends Root_Controller {
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
 
+<<<<<<< HEAD
 			$data['csFiles'] = array('general','ccStyles','treemap');
 			$data['jsFiles'] = array('general','ccScripts');
+=======
+			$data['csFiles'] = array('general','ccStyles');
+			$data['jsFiles'] = array('general','ccScripts','score');
+>>>>>>> origin/victor
 			
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/mainTop', $data);
