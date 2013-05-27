@@ -56,6 +56,7 @@ class Pages extends Root_Controller {
 			$data['headerTitle'] = 'View Claim - PatchWork';
 			$data['pageType'] = 'claim';
 
+			$data['claimID'] = $claimID;
 			$data['claimInfo'] = get_object_vars($this->data_model->getClaim($claimID));
 			$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
 

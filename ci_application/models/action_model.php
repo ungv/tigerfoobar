@@ -267,4 +267,33 @@ class Action_model extends CI_Model {
         }
         return true;
     }
+
+    // Update database with users' rating for claims
+    public function sendRating($userid) {
+        $rating = $this->security->xss_clean($this->input->post('rating'));
+        $claimID = $this->security->xss_clean($this->input->post('claimID'));
+
+        $hasRating = $this->db->get_where('Rating', array('UserID' => $userid, 'ClaimID' => $claimID));
+        // Insert new rating if no results found
+        if($hasRating->num_rows() == 0) {
+            $score = array(
+                'Value' => $rating,
+                'UserID' => $userid,
+                'ClaimID' => $claimID
+                );
+            $this->db->insert('Rating', $score);
+        } else {
+            // Update if they've already submitted a rating for this claim
+            $score = array(
+                'Value' => $rating
+                );
+            $where = array(
+                'UserID' => $userid,
+                'ClaimID' => $claimID
+                );
+            $this->db->update('Rating', $score, $where);
+        }
+
+        return true;
+    }
 }

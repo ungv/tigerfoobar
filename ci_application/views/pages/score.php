@@ -58,7 +58,7 @@
 		<?php
 		for ($i=0; $i <=6 ; $i++) { 
 			?>
-			<input type='radio' id="radio<?=$i?>" name='score' value='<?=$i-3?>'>
+			<input type='radio' id="radio<?=$i?>" name='score' value='<?=$i-3?>' ccID='<?=$claimID?>'>
 			<label class="scoreBox" for="radio<?=$i?>" value="<?=$i-3?>"></label>
 			<?php
 		}

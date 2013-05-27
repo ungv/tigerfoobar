@@ -1,6 +1,27 @@
 $(document).ready(function() {
 	resetScale();
 	
+	/*------Rating the claim-------*/
+	// Add or update user's rating on this claim
+	$('input[name=score]').click(function() {
+		$.ajax({
+			type: 'POST',
+			url: 'http://127.0.0.1/action/sendRating',
+			data: {
+				rating: $(this).attr('value'),
+				claimID: $(this).attr('ccID')
+			},
+			dataType: 'json',
+			success: function(json) {
+				alert('Rating submitted!');
+			},
+			error: function() {
+				alert('Oops, are you logged in?');
+			}
+		});
+	});
+
+
 	/*------Voting On Comments-------*/
 
 	//Keep track of comments that has either up/down vote already submitted
