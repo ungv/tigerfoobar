@@ -86,18 +86,23 @@ $(document).ready(function() {
 		}
 	});
 
-	// vote zero - trivial
-	//Onclick, send 0 vote to server
-	
+	$('img.flagComment').click(function() {
+		flagContent($(this), 'comment', 'badcomment');
+	});
 
 	function flagContent (button, targettype, flagetype) {
-		
 		var clicked = $(button);
+		var targetID;
 
-		var targetID = $(clicked).attr('claimID');
+		if (targettype == 'claim') {
+			targetID = $(clicked).attr('claimID');
+		} else {
+			targetID = $(clicked).attr('commentID');
+		};
+		
 		var targetType = targettype;
 		var flagType = flagetype;
-// alert('targetID');
+	
 		$.ajax({
 			type: 'POST',
 			url: 'http://127.0.0.1/action/flagContent',

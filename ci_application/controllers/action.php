@@ -83,7 +83,7 @@ class Action extends Root_Controller {
 		}
 		$this->load->view('data/json_view', $data);
 	}
-
+/////////////////////////////////////////////
 	/*
 		flag stuff
 	*/
@@ -98,12 +98,12 @@ class Action extends Root_Controller {
 				$data['json'] = '{"message":"Successfully contacted server method!"}';
 			}else {			//didn't work, inform user why
 	        	$this->output->set_status_header('400');
-	        	$data['json'] = '{"message":"Cannot Process Upvote"}'; 
+	        	$data['json'] = '{"message":"Cannot Process Flag"}'; 
 			}
 		}
 		$this->load->view('data/json_view', $data);
 	}
-
+///////////////////////////////////
 	/*
 		Adds a new user to the database, username/password required, email optional
 	*/

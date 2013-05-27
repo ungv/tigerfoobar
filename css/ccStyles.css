@@ -359,6 +359,6 @@ input[type="radio"] {
 
 
 /*flag*/
-#flagButton {
-	float: right;
+img.flagComment {
+	height: 20px;
 }
