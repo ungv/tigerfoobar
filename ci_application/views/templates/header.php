@@ -8,13 +8,15 @@
 		<link href="<?= base_url() . 'css/' . $csFile . '.css' ?>" type="text/css" rel="stylesheet" />
 	<?php } ?>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="/css/tagit-awesome-blue.css">
+	<link rel="stylesheet" href="/css/tipsy.css">
 
 	<?php /*jQuery Scripts*/?>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
 	<script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="/js/additional-methods.min.js" type="text/javascript"></script>
-	<script src="/js/jquery.tooltipster.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.tipsy.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -22,7 +24,7 @@
 		<SECTION id='topbar'>
 			<h1><a href="/">Patchwork</a></h1>
 			<!--Search box-->
-			<input id="tags" type="text" placeholder="Search for companies or products/services"/>
+			<input id="searchInput" type="text" placeholder="Search for companies or products/services"/>
 			<!--Profile/login/register-->
 			<?php if($isLogged) { ?>
 				<span id="login_buttons" style="display: none;">
