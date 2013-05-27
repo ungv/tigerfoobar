@@ -104,6 +104,12 @@ header{
 	/*height: 50px;*/
 }
 
+#logo {
+	float: left;
+	width: 50px;
+	margin-right: 10px;
+}
+
 #topbar {
 	width: 915px;
 	padding: 10px;
@@ -241,6 +247,10 @@ input[type=button], input[type=submit] {
 
 .full {
 	width: 95%;
+}
+
+.threeQuarters {
+	width: 75%;
 }
 
 .half {

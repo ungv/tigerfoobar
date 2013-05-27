@@ -31,14 +31,14 @@ $(document).ready(function() {
 	
 	//Listen for paste event to popup add new claim form
 	$("#pasteURL").bind('paste', function() {
-		$('#urlInput').removeClass('quarter').addClass('full');
+		$('#urlInput').removeClass('quarter').addClass('threeQuarters');
 		$('#urlSubmit').show(200);
 		$('.lightsout').fadeIn();
 	});
 
 	// Hide form and revert back to page refresh state
 	$(".cancelButton").click(function() {
-		$('#urlInput').removeClass('full').addClass('quarter');
+		$('#urlInput').removeClass('threeQuarters').addClass('quarter');
 		$('#urlSubmit').hide(200);
 		$("#pasteURL").val('');
 		$('#urlButton').show('fade', 600);

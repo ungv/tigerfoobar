@@ -1,14 +1,11 @@
 $(document).ready(function() {
 	// Color the scale
-	resetScale();	
+	resetScale();
 
 	//Alert Kudos value on hover
 	$('.scoreBox').hover(
 		function() {
-			if ($(this).attr('value') == 0)
-				$(this).text('F');
-			else
-				$(this).text($(this).attr('value'));
+			$(this).text($(this).attr('value'));
 		},
 		function() {
 			$(this).text('');

@@ -37,7 +37,7 @@ class Pages extends Root_Controller {
 		$data['pageType'] = 'home';
 		
 		$data['csFiles'] = array('general','ccStyles','addClaim');
-		$data['jsFiles'] = array('general','ccScripts','addClaim');
+		$data['jsFiles'] = array('general','score','addClaim');
 		$data['treemapJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
 
 		$this->load->view('templates/header', $data);

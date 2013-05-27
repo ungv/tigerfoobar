@@ -10,7 +10,7 @@ $(document).ready(function() {
 			url: '/action/sendRating',
 			data: {
 				rating: $(this).attr('value'),
-				claimID: $(this).attr('ccID')
+				claimID: $(this).attr('claimid')
 			},
 			dataType: 'json',
 			success: function(json) {
@@ -119,6 +119,10 @@ $(document).ready(function() {
 		}
 	});
 
+	$('label[for="radio3"]').click(function() {
+		flagContent($(this), 'claim', 'trivial');
+	});
+
 	$('img.flagComment').click(function() {
 		flagContent($(this), 'comment', 'badcomment');
 	});
@@ -128,7 +132,7 @@ $(document).ready(function() {
 		var targetID;
 
 		if (targettype == 'claim') {
-			targetID = $(clicked).attr('claimID');
+			targetID = $('#discussionContainer').attr('claimid');
 		} else {
 			targetID = $(clicked).attr('commentID');
 		};
@@ -138,7 +142,7 @@ $(document).ready(function() {
 	
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/flagContent',
+			url: '/action/flagContent',
 			data: {
 				targetID: targetID,
 				targetType: targetType,
@@ -278,41 +282,6 @@ $(document).ready(function() {
 			sendTagUpvote($(this));
 		});
 	}
-
-
-	/*-----------------Kudos Scale-----------------------*/
-
-
-	//Alert Kudos value on hover
-	$('.scoreBox').hover(
-		function() {
-			if ($(this).attr('value') == 0)
-				$(this).text('F');
-			else
-				$(this).text($(this).attr('value'));
-		},
-		function() {
-			$(this).text('');
-		}
-	);
-	
-	$('.scoreBox').click(function() {
-		resetScale();
-		$(this).addClass('selectedRating');
-	});
-
-	//Method found in general.js
-	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
-	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
-	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
-	
-	$.each($('.claimScore'), function() {
-		applyColors(parseFloat($(this).text()), $(this).parent(), 'background-color');
-	});
-
-	$.each($('#discussionContent li'), function() {
-		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
-	});
 
 
 	/*-----------------Discussion-----------------------*/

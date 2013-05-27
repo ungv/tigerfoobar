@@ -27,6 +27,7 @@
 <body>
 	<header>
 		<SECTION id='topbar'>
+			<img id="logo" src="/img/logo.png" />
 			<h1><a href="/">Patchwork</a></h1>
 			<!--Search box-->
 			<input id="searchInput" type="text" placeholder="Search for companies or products/services"/>
