@@ -35,7 +35,7 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
 
-		$data['csFiles'] = array('general','ccStyles','addClaim');
+		$data['csFiles'] = array('general','ccStyles','addClaim','treemap');
 		$data['jsFiles'] = array('general','ccScripts','addClaim');
 		$data['topCompaniesWithClaimsJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
 		//signed in logic goes here
@@ -56,17 +56,15 @@ class Pages extends Root_Controller {
 			$data['headerTitle'] = 'View Claim - PatchWork';
 			$data['pageType'] = 'claim';
 
-			$data['claimID'] = $claimID;
 			$data['claimInfo'] = get_object_vars($this->data_model->getClaim($claimID));
 			$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
 
 			$resultsArr = [];
 			$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr, $this->userid);
 			$data['scores'] = $this->data_model->getClaimScores($claimID);
-			$data['userRating'] = get_object_vars($this->data_model->getRatingOnClaim($claimID, $this->userid));
 			
 			//files needed
-			$data['csFiles'] = array('general','ccStyles');
+			$data['csFiles'] = array('general','ccStyles', 'tooltipster');
 			$data['jsFiles'] = array('general','ccScripts');
 
 			$this->load->view('templates/header', $data);
@@ -96,7 +94,7 @@ class Pages extends Root_Controller {
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
 
-			$data['csFiles'] = array('general','ccStyles');
+			$data['csFiles'] = array('general','ccStyles','treemap');
 			$data['jsFiles'] = array('general','ccScripts');
 			
 			$this->load->view('templates/header', $data);
@@ -129,6 +127,7 @@ class Pages extends Root_Controller {
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/mainTop', $data);
+			$this->load->view('pages/ccTop', $data);
 			$this->load->view('pages/tag', $data);
 			$this->load->view('pages/treemap', $data);
 			$this->load->view('pages/mainBottom', $data);

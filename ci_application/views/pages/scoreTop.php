@@ -10,25 +10,7 @@
 						<?php
 						if (!empty($scores) || !empty($companyClaims)) {
 						?>
-						<?= //if on company page
-							$pageType == 'company' ?
-							//then print number of company's claims
-							$companyClaims[0]['numScores'] . ' claims, [some number of] comments' : 
-							//else on claim page, print number of claim's ratings
-							$scores[0]['Total'] . 
-								//if claim only has one rating
-								($scores[0]['Total'] == 1 ? 
-								//then non-plural
-								' rating, ' : 
-								//else plural
-								' ratings, ') . 
-							count($comments) . 
-								//if claim only has one comment
-								(count($comments) == 1 ? 
-								//then non-plural
-								' comment' : 
-								//else plural
-								' comments')?>
+						<?=$pageType == 'company' ? $companyClaims[0]['numScores'] . ' claims, [some number of] comments' : $scores[0]['Total'] . ($scores[0]['Total'] == 1 ? ' rating, ' : ' ratings, ') . count($comments) . (count($comments) == 1 ? ' comment' : ' comments')?>
 						<?php
 						} else {
 						?>

@@ -1,31 +1,8 @@
 $(document).ready(function() {
 	resetScale();
 	
-	/*------Rating the claim-------*/
-	// Add or update user's rating on this claim
-	$('input[name=score]').click(function() {
-		$.ajax({
-			type: 'POST',
-			url: 'http://127.0.0.1/action/sendRating',
-			data: {
-				rating: $(this).attr('value'),
-				claimID: $(this).attr('ccID')
-			},
-			dataType: 'json',
-			success: function(json) {
-				alert('[Could direct them to add a comment now?]');
-				window.location.reload();
-			},
-			error: function() {
-				alert('Oops, are you logged in?');
-			}
-		});
-	});
-
-
 	/*------Voting On Comments-------*/
 
-	//Keep track of comments that has either up/down vote already submitted
 	$.each($('.buttonsContainer'), function() {
 		if ($(this).find('.upVote').attr('voted') == '1' || $(this).find('.downVote').attr('voted') == '1') {
 			$(this).addClass('beenVoted');
@@ -33,16 +10,46 @@ $(document).ready(function() {
 	});
 
 	//Onclick, send vote to server
+	//switch value when clicked
 	$('.upVote, .downVote').click(function() {
-		$(this).parent().find('.buttons').removeClass('selectedVote');		//Reset selection loaded from server
+		$(this).parent().find('.buttons').removeClass('selectedVote');
 		sendCommentVote($(this));
 	});
 
-	//Send vote to server
 	function sendCommentVote(button) {
 		var voted = parseInt($(button).attr('voted')); //0 if not voted, 1 if voted
 		var clicked = $(button);
 		var value = $(button).attr('value');
+		var oldUpVotes = parseInt($(clicked.parent().find(".upNum")).text());
+		var oldDownVotes = parseInt($(clicked.parent().find(".downNum")).text());
+		if(!voted)  {		
+			if (clicked.hasClass('upVote')) {
+				oldUpVotes++;
+				if (clicked.parent().hasClass('beenVoted')) {
+					oldDownVotes--;					
+				}
+			} else if (clicked.hasClass('downVote')) {
+				oldDownVotes++;
+				if (clicked.parent().hasClass('beenVoted')) {
+					oldUpVotes--;
+				}
+			}
+			clicked.parent().addClass('beenVoted');
+			clicked.parent().find('.buttons').attr('voted','0');
+			clicked.attr('voted','1');
+			clicked.addClass('selectedVote');
+		} else if (voted) {
+			if (clicked.hasClass('upVote')) {
+				oldUpVotes--;
+			} else if (clicked.hasClass('downVote')) {
+				oldDownVotes--;
+			}
+			clicked.parent().removeClass('beenVoted');
+			clicked.attr('voted','0');
+			clicked.removeClass('selectedVote');
+		}
+		$(clicked.parent().find(".upNum")).text(oldUpVotes);
+		$(clicked.parent().find(".downNum")).text(oldDownVotes);
 		$.ajax({
 			type: 'POST',
 			url: 'http://127.0.0.1/action/voteComment',
@@ -53,53 +60,72 @@ $(document).ready(function() {
 				value: value
 			},
 			dataType: 'json',
-			success: function(json) {	//Update vount counts to reflect changes
-				//Get current vote count
-				var oldUpVotes = parseInt($(clicked.parent().find(".upNum")).text());
-				var oldDownVotes = parseInt($(clicked.parent().find(".downNum")).text());
-
-				if(!voted)  {		//If clicked on non-selected arrow
-					if (clicked.hasClass('upVote')) {		//Clicked on up arrow
-						oldUpVotes++;
-						if (clicked.parent().hasClass('beenVoted')) {		//If either arrow has already been selected
-							oldDownVotes--;					
-						}
-					} else if (clicked.hasClass('downVote')) {		//Clicked on down arrow
-						oldDownVotes++;
-						if (clicked.parent().hasClass('beenVoted')) {		//If either arrow has already been selected
-							oldUpVotes--;
-						}
-					}
-					clicked.parent().addClass('beenVoted');		//This comment has been voted on
-
-					//Update which arrow has been selected
-					clicked.parent().find('.buttons').attr('voted','0');
-					clicked.attr('voted','1');
-					clicked.addClass('selectedVote');
-
-				} else if (voted) {		//else user wants to unvote selection
-					if (clicked.hasClass('upVote')) {		//Clicked on up arrow
-						oldUpVotes--;
-					} else if (clicked.hasClass('downVote')) {		//Clicked on down arrow
-						oldDownVotes--;
-					}
-					//This comment now does not have any votes selected
-					clicked.parent().removeClass('beenVoted');
-					clicked.attr('voted','0');
-					clicked.removeClass('selectedVote');
-				}
-				//Inject new vote counts
-				$(clicked.parent().find(".upNum")).text(oldUpVotes);
-				$(clicked.parent().find(".downNum")).text(oldDownVotes);
+			success: function(json) {
+				//Dom changes processed pre-query
 			},
 			error: function(json) {
-				//Must be logged in to cast vote
-				alert('You must be logged in to vote');
-				$('#loginPopup').show(200);
-				window.scrollTo(0, 0);
+				//alert error message for now
+				alert('Server Error');
+			}
+		});
+	};
+
+	$('#flagButton').tooltipster({
+		trigger: 'click',
+		interactive: true,
+		interactiveTolerance: 5000,
+		position: 'bottom',
+		functionReady: function(origin, tooltip) {
+			$('#flagNoncredible').click(function() {
+				flagContent($(this), 'claim', 'noncredible');
+			});
+
+			$('#flagWrong').click(function() {
+				flagContent($(this), 'claim', 'wrongcompany');
+			});
+		}
+	});
+
+	$('img.flagComment').click(function() {
+		flagContent($(this), 'comment', 'badcomment');
+	});
+
+	function flagContent (button, targettype, flagetype) {
+		var clicked = $(button);
+		var targetID;
+
+		if (targettype == 'claim') {
+			targetID = $(clicked).attr('claimID');
+		} else {
+			targetID = $(clicked).attr('commentID');
+		};
+		
+		var targetType = targettype;
+		var flagType = flagetype;
+	
+		$.ajax({
+			type: 'POST',
+			url: 'http://127.0.0.1/action/flagContent',
+			data: {
+				targetID: targetID,
+				targetType: targetType,
+				flagType: flagType
+				// industryID: $(this).attr('tagid'),
+				// companyID: $(this).attr('companyid'),
+				// voted: voted
+			},
+			dataType: 'json',
+			success: function(json) {
+				//Dom changes processed pre-query
+				alert('Flagged');
+			},
+			error: function(json) {
+				//alert error message for now
+				alert(json.responseJSON.message);
 			}
 		});
 	}
+
 
 
 	/*------Upvoting Industry Tags-------*/
@@ -107,12 +133,10 @@ $(document).ready(function() {
 	//Onclick, send vote to server
 	//switch value when clicked
 	$('.tagUpvote').click(function() {
-		sendTagUpvote($(this));
+		sendIndustryUpvote($(this));
 	});
 
-	//Sends the upvote or downvote to the server using the type of tag
-	//(industry or claim tag) and other specific tag information
-	function sendTagUpvote(button) {
+	function sendIndustryUpvote(button) {
 		var voted = parseInt($(button).attr('voted')); //0 if not voted, 1 if voted
 		//alert($(this).attr('tagid'));
 		var clicked = $(button);
@@ -132,11 +156,10 @@ $(document).ready(function() {
 		$(clicked.parent().children(".tagTotal")[0]).text(oldVotes);
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/upvoteTag',
+			url: 'http://127.0.0.1/action/upvoteIndustry',
 			data: {
 				industryID: $(clicked).attr('tagid'),
-				objectID: $(clicked).attr('objectid'), //the objet (claim or company) being affected
-				tagType: $(clicked).attr('tagtype'),
+				companyID: $(clicked).attr('companyid'),
 				voted: voted
 			},
 			dataType: 'json',
@@ -166,24 +189,14 @@ $(document).ready(function() {
 		}
 	];
 
-	//Called when typing into new industry/new tag text box
-	//Feteches list of claim tags or industries from server
-	$( "#newtag_name" ).autocomplete({
+	//Called when typing into new industry text box
+	$( "#newindustry_name" ).autocomplete({
 		minLength: 0,
 		source: function (request, response) {
 	        $.ajax({
-	            url: "/data/tagList/" + $('#newtag_name').val(),
-	            data: {tagtype: $("#newtag_name").attr('tagtype')},
+	            url: "/data/industryList/" + $('#newindustry_name').val(),
 	            dataType: 'json',
 	            success: function (data) {
-	            	if (data.length == 0) {
-	            		data.push(
-			          		{
-		                        'label':  'No tags found.' ,
-		                        'value':  -1
-		                    }
-		                );
-		            }
 	                response(data.map(function (value) {
 	                    return {
 	                        'label':  value.value ,
@@ -192,38 +205,40 @@ $(document).ready(function() {
 	                }));
 	            }   
 	        }); 
-	    },
+	    }, 
 	    select: function( event, ui ) {
-			sendNewTag(ui.item.label,ui.item.value);
-			$(this).val(''); 
-			return false;
+	    	/*
+			alert( ui.item ?
+			"Selected: " + ui.item.value :
+			"Nothing selected, input was " + this.value );
+			*/
+			sendNewIndustry(ui.item.label,ui.item.value);
 		}
 	});
 	
 	//Sends information about the newly created
 	//industry-company connection to the server
-	function sendNewTag(label, value) {
-		var tagtype = $('#taglist').attr('tagtype');
+	function sendNewIndustry(label, value) {
 		var newLink = $('<li>', {
-			"html": '	<span class="tagName">' + label + '</span>' +
+			"html": '	<span class="industryName">' + label + '</span>' +
 					'	<span>(</span> ' +
-					'		<span class="tagTotal">0</span>' +
+					'		<span class="industryTotal">0</span>' +
 					'	<span>)</span>' +
-					'	<span class="tagUpvote" tagtype="'+tagtype+'" tagid="'+ value + '" objectid="'+ $('#taglist').attr('objectid') +'" voted="0">' +
+					'	<span class="industryUpvote" tagid="'+ value + '" companyid="'+ $('#industryTags').attr('companyid') +'" voted="0">' +
 					'		+  ' +
 					'	</span>'
 		});
-		$('#taglist').append(newLink);
-		$("#newtag_name").val(""); //clear textbox
+		$('#industryTags').append(newLink);
 		//call current vote method, triger click
-		$(newLink.children('.tagUpvote')[0]).click(function() {
-			sendTagUpvote($(this));
+		$(newLink.children('.industryUpvote')[0]).click(function() {
+			sendIndustryUpvote($(this));
 		});
-		$(newLink.children('.tagUpvote')[0]).click();
+		$(newLink.children('.industryUpvote')[0]).click();
 	}
 
 
 	/*-----------------Kudos Scale-----------------------*/
+
 
 	//Alert Kudos value on hover
 	$('.scoreBox').hover(
@@ -238,14 +253,6 @@ $(document).ready(function() {
 		}
 	);
 	
-	// Show which box was selected by this user
-	$.each($('.scoreBox'), function() {
-		if ($(this).attr('hasRatedThis') == 1) {
-			$(this).addClass('selectedRating');
-		}
-	});
-
-	// Clear out all other selections and show clicked box as selected
 	$('.scoreBox').click(function() {
 		resetScale();
 		$(this).addClass('selectedRating');
@@ -275,7 +282,6 @@ $(document).ready(function() {
 
 	/*-----------------Discussion-----------------------*/
 
-	//Injects a new textbox to start a thread
 	$('#newComment').click(function() {
 		// $('#newCommentPopup').show(200);
 		// $('#newCommentPopup textarea').focus();
@@ -284,33 +290,28 @@ $(document).ready(function() {
 		$('#newCommentBox textarea').focus();
 	});
 	
-	//Injects a new textbox to reply to the above comment
 	$('.reply').click(function() {
 		$parentLi = $(this).parent().parent().attr('id');
 		$('#' + $parentLi + 'reply').show();
 		$('#' + $parentLi + 'reply textarea').focus();
 	});
 
-	//Submit reply to database
 	$('.submitReply').click(function() {
 	
 	});
 
-	//Cancel reply
 	$('.cancelButton').click(function() {
 		// $('.lightsout').fadeOut();
 		$('.replyBox').hide();		
 		$('#newCommentBox').hide(200);
 	});
 
-	//Semi-hide controls until hover over
 	$('.buttonsContainer').hover(function() {
 		$(this).css('opacity', '1');
 	}, function() {
 		$(this).css('opacity', '0.4');
 	});
 
-	//Collapse all children of this
 	$('#discussionContent li').click(function() {
 		console.log('collapse all children of this');
 	});

@@ -70,28 +70,6 @@ $(document).ready(function() {
 		hidePopups();
 	});
 
-	//Sends the passed login parameters to server onclick
-	function sendLogin(username, password) {
-		$.ajax({
-			type: 'POST',
-			url: 'http://127.0.0.1/action/login',
-			data: {
-				username: username,
-				password: password
-			},
-			dataType: 'json',
-			success: function(json) {
-				hidePopups();
-				window.location.reload();
-			},
-			error: function() {
-				$('#login_fail').show(200);
-				$('#login_password').val('');
-			}
-		});
-	}
-	
-
 	/*------Sigining Up------*/
 
 	//Show signin box onclick
@@ -183,38 +161,7 @@ $(document).ready(function() {
 			}
 		];
 
-	//Grabs a list of companies, cliams, and tags relavent to
-	//the text the user has typed in the search box
-	$("#searchInput").autocomplete({
-		minLength: 0,
-		source: function (request, response) {
-	        $.ajax({
-	            url: "/data/searchAutocomplete/" + $('#searchInput').val(),
-	            dataType: 'json',
-	            success: function (data) {
-	            	if (data.length == 0) {
-	            		data.push(
-			          		{
-		                        'label':  'No tags found.' ,
-		                        'value':  -1
-		                    }
-		                );
-		            }
-	                response(data.map(function (value) {
-	                    return {
-	                        'label':  value.value ,
-	                        'value': value.label
-	                    };  
-	                }));
-	            }   
-	        }); 
-	    },
-	    select: function( event, ui ) {
-			//search for that company/claim/tag combination
-		}
-	});
-	/*
-	$( "#searchInput" ).autocomplete({
+	$( "#tags" ).autocomplete({
 		minLength: 0,
 		source: projects,
 		focus: function( event, ui ) {
@@ -226,18 +173,13 @@ $(document).ready(function() {
 			return false;
 		}
 	})
-	
 	.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 		return $( "<li>" )
 		.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
 		.appendTo( ul );
 	};
-	*/
 });
 
-/*--------Public functions that need to be accessed by other JS files----------*/
-
-// Hide all popups currently showing
 function hidePopups() {
 	$('.popup').hide(200);
 	$.each($('.popup'), function() {
@@ -257,9 +199,30 @@ function applyColors(thisVal, $element, styling, stylewith) {
 		$element.css(styling, stylewith + colors[3]);
 	} else if (thisVal < 1) {
 		$element.css(styling, stylewith + colors[4]);
-	} else if (thisVal <= 2) {
+	} else if (thisVal < 2) {
 		$element.css(styling, stylewith + colors[5]);
 	} else if (thisVal > 2) {
 		$element.css(styling, stylewith + colors[6]);
 	}
+}
+
+//Sends the passed login parameters to server onclick
+function sendLogin(username, password) {
+	$.ajax({
+		type: 'POST',
+		url: 'http://127.0.0.1/action/login',
+		data: {
+			username: username,
+			password: password
+		},
+		dataType: 'json',
+		success: function(json) {
+			hidePopups();
+			window.location.reload();
+		},
+		error: function() {
+			$('#login_fail').show(200);
+			$('#login_password').val('');
+		}
+	});
 }

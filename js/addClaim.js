@@ -35,8 +35,6 @@ $(document).ready(function() {
 		$('#urlSubmit').show(200);
 		$('.lightsout').fadeIn();
 	});
-
-	// Hide form and revert back to page refresh state
 	$(".cancelButton").click(function() {
 		$('#urlInput').removeClass('full').addClass('quarter');
 		$('#urlSubmit').hide(200);
@@ -47,44 +45,3 @@ $(document).ready(function() {
 		return false;
 	});
 });
-
-// Send request to add new claim to database on submit click
-function addClaim() {
-	$url = $('#pasteURL').val();
-	$title = $('input[name=title]').val();
-	$desc = $('textarea').val();
-	$company = $('#assocCo').tagit('tags');
-	if ($company == '') {
-		$('#coNote').css('color', 'red');
-		$('#coNote').text('*All claims needs to refer to a company')
-		return;
-	}
-	$rating = $('input[name=score]:checked').val();
-	$tags = $('#tagsSearch').tagit('tags');
-	var tagsObj = new Object();
-	for (var i in $tags) {
-		tagsObj[i] = $tags[i].value;
-	}
-	console.log(tagsObj);
-	$.ajax({
-		type: 'POST',
-		url: 'http://127.0.0.1/action/addClaim',
-		data: {
-			url: $url,
-			title: $title,
-			desc: $desc,
-			company: '206',
-			rating: $rating,
-			tags: tagsObj
-		},
-		dataType: 'json',
-		success: function(json) {
-			alert('Your claim has been submitted!');
-			hidePopups();
-			window.location.reload();
-		},
-		error: function() {
-			alert('Oops, are you logged in?');
-		}
-	});
-}

@@ -180,6 +180,10 @@ footer {
 	
 /*SignupPopup------------------------*/
 input {
+	opacity: 0.6;
+}
+
+input {
 	opacity: 1;
 }
 

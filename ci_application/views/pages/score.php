@@ -3,9 +3,6 @@
 		<div id='scoreDistribution'>
 			<?php
 			$topPos = 0;
-
-			// TODO: Do all calculations with ajax so that it dynamically 
-			// loads on change and won't need page refresh to update
 			if ($pageType == 'claim') {
 				foreach ($scores as $score) {
 					$scoreValue = $score['Value'];
@@ -60,13 +57,9 @@
 		<div id="scoreControl">
 		<?php
 		for ($i=0; $i <=6 ; $i++) { 
-			$hasRatedThis = 0;
-			if ($pageType == 'claim' && $userRating['Value'] == $i-3) {
-				$hasRatedThis = 1;
-			}
 			?>
-			<input type='radio' id="radio<?=$i?>" name='score' value='<?=$i-3?>' ccID='<?=$claimID?>'>
-			<label class="scoreBox" for="radio<?=$i?>" value="<?=$i-3?>" hasRatedThis="<?=$hasRatedThis?>"></label>
+			<input type='radio' id="radio<?=$i?>" name='score' value='<?=$i-3?>'>
+			<label class="scoreBox" for="radio<?=$i?>" value="<?=$i-3?>"></label>
 			<?php
 		}
 		?>
