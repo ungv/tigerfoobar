@@ -32,7 +32,7 @@
 			y = d3.scale.linear().range([0, h]),
 			bgColor = d3.scale.quantile()
 			   .domain([-3, -2, -1, 0, 1, 2, 3])
-			   .range(['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64']),
+			   .range([colors[0], colors[1], colors[2], colors[3], colors[4], colors[5], colors[6]]),
 			/*borderColor = d3.scale.linear()
 				.domain([-3, 3])
 			   .range(['#000', '#FFF']),*/

@@ -35,6 +35,7 @@ $(document).ready(function() {
 		$('#urlSubmit').show(200);
 		$('.lightsout').fadeIn();
 	});
+	// Hide form and revert back to page refresh state
 	$(".cancelButton").click(function() {
 		$('#urlInput').removeClass('full').addClass('quarter');
 		$('#urlSubmit').hide(200);
@@ -86,4 +87,3 @@ function addClaim() {
 		}
 	});
 }
->>>>>>> origin/victor
