@@ -1,5 +1,8 @@
 	<!--Start Evidence Content-->
-	<img id='flagButton' src="/img/flag.png" claimID="<?=$claimInfo['ClaimID']?>">
+	<img id='flagButton' class='tooltip' src="/img/flag.png" 
+		title='This claim is 
+			<a id="flagNoncredible" claimID="<?=$claimInfo['ClaimID']?>">Noncredible</a> or 
+				<a id="flagWrong" claimID="<?=$claimInfo['ClaimID']?>">Wrong Company</a>'>
 	
 	<div id="evidenceContainer" class="container">
 		<div id='evidenceContent' class="content">

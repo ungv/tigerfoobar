@@ -62,19 +62,46 @@ class Action_model extends CI_Model {
         }
     }
 
-    // flag
+    // flag stuff
     public function flagContent($userid) {
         $targetID = $this->security->xss_clean($this->input->post('targetID'));
         $targetType = $this->security->xss_clean($this->input->post('targetType'));
         $flagType = $this->security->xss_clean($this->input->post('flagType'));
-
+        
+        // check if user already voted on this comment
+        $hasVoted = $this->db->get_where('Flags', array('userID' => $userid , 'target_id' => $targetID, 'target_type' => $targetType));
+        
         $data = array(
             'userID' => $userid, 
             'target_id' => $targetID,
             'target_type' => $targetType,
             'flag_type' => $flagType,
         );
-        $this->db->insert('Flags', $data); 
+        
+        //user hasnt voted, insert or update row
+        if ($hasVoted->num_rows == 0) { 
+            $this->db->insert('Flags', $data); 
+        } else {
+            $row = $hasVoted->row();
+
+            // if the same row, delete
+            if (strcmp($row->flag_type, $flagType) == 0) { 
+                $this->db->delete('Flags', $data);
+            
+            // else update row
+            } else { 
+                $data = array(
+                    'flag_type' => $flagType
+                );
+                $where = array(
+                    'userID' => $userid, 
+                    'target_id' => $targetID,
+                    'target_type' => $targetType
+                );
+                $this->db->update('Flags', $data, $where);     
+            }            
+        }
+
         return true;
     }
 

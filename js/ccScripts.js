@@ -68,17 +68,36 @@ $(document).ready(function() {
 				alert('Server Error');
 			}
 		});
-	}
+	};
+
+	$('#flagButton').tooltipster({
+		trigger: 'click',
+		interactive: true,
+		interactiveTolerance: 5000,
+		position: 'bottom',
+		functionReady: function(origin, tooltip) {
+			$('#flagNoncredible').click(function() {
+				flagContent($(this), 'claim', 'noncredible');
+			});
+
+			$('#flagWrong').click(function() {
+				flagContent($(this), 'claim', 'wrongcompany');
+			});
+		}
+	});
 
 	// vote zero - trivial
 	//Onclick, send 0 vote to server
-	$('#flagButton').click(function() {
-		// alert('flag');
+	
 
-		var targetID = $(this).attr('claimID');
-		var targetType = 'claim';
-		var flagType = 'noncredible';
+	function flagContent (button, targettype, flagetype) {
+		
+		var clicked = $(button);
 
+		var targetID = $(clicked).attr('claimID');
+		var targetType = targettype;
+		var flagType = flagetype;
+// alert('targetID');
 		$.ajax({
 			type: 'POST',
 			url: 'http://127.0.0.1/action/flagContent',
@@ -100,7 +119,7 @@ $(document).ready(function() {
 				alert(json.responseJSON.message);
 			}
 		});
-	});
+	}
 
 
 

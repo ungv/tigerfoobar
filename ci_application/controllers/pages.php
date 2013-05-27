@@ -64,7 +64,7 @@ class Pages extends Root_Controller {
 			$data['scores'] = $this->data_model->getClaimScores($claimID);
 			
 			//files needed
-			$data['csFiles'] = array('general','ccStyles');
+			$data['csFiles'] = array('general','ccStyles', 'tooltipster');
 			$data['jsFiles'] = array('general','ccScripts');
 
 			$this->load->view('templates/header', $data);

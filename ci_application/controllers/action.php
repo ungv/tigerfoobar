@@ -83,7 +83,7 @@ class Action extends Root_Controller {
 		}
 		$this->load->view('data/json_view', $data);
 	}
-/////////////////////////////////////////////
+
 	/*
 		flag stuff
 	*/
@@ -103,7 +103,7 @@ class Action extends Root_Controller {
 		}
 		$this->load->view('data/json_view', $data);
 	}
-///////////////////////////////////
+
 	/*
 		Adds a new user to the database, username/password required, email optional
 	*/
