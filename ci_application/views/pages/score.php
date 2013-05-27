@@ -61,7 +61,7 @@
 		<?php
 		for ($i=0; $i <=6 ; $i++) { 
 			$hasRatedThis = 0;
-			if ($userRating['Value'] == $i-3) {
+			if ($pageType == 'claim' && $userRating['Value'] == $i-3) {
 				$hasRatedThis = 1;
 			}
 			?>
