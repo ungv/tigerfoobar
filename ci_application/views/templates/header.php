@@ -21,6 +21,7 @@
 	<script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="/js/additional-methods.min.js" type="text/javascript"></script>
 	<script src="/js/jquery.tipsy.js" type="text/javascript"></script>
+	<script src="/js/jquery.tooltipster.min.js" type="text/javascript"></script>
 </head>
 
 <body>

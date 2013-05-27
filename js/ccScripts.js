@@ -102,6 +102,63 @@ $(document).ready(function() {
 		});
 	}
 
+	/*--------Flags------------*/
+	$('#flagButton').tooltipster({
+		trigger: 'click',
+		interactive: true,
+		interactiveTolerance: 5000,
+		position: 'bottom',
+		functionReady: function(origin, tooltip) {
+			$('#flagNoncredible').click(function() {
+				flagContent($(this), 'claim', 'noncredible');
+			});
+
+			$('#flagWrong').click(function() {
+				flagContent($(this), 'claim', 'wrongcompany');
+			});
+		}
+	});
+
+	$('img.flagComment').click(function() {
+		flagContent($(this), 'comment', 'badcomment');
+	});
+
+	function flagContent (button, targettype, flagetype) {
+		var clicked = $(button);
+		var targetID;
+
+		if (targettype == 'claim') {
+			targetID = $(clicked).attr('claimID');
+		} else {
+			targetID = $(clicked).attr('commentID');
+		};
+		
+		var targetType = targettype;
+		var flagType = flagetype;
+	
+		$.ajax({
+			type: 'POST',
+			url: 'http://127.0.0.1/action/flagContent',
+			data: {
+				targetID: targetID,
+				targetType: targetType,
+				flagType: flagType
+				// industryID: $(this).attr('tagid'),
+				// companyID: $(this).attr('companyid'),
+				// voted: voted
+			},
+			dataType: 'json',
+			success: function(json) {
+				//Dom changes processed pre-query
+				alert('Flagged');
+			},
+			error: function(json) {
+				//alert error message for now
+				alert(json.responseJSON.message);
+			}
+		});
+	}
+
 
 	/*------Upvoting Industry Tags-------*/
 
