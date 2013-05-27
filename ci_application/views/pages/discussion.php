@@ -26,10 +26,6 @@
 			}
 			foreach ($comments as $comment) {
 			?>
-<<<<<<< HEAD
-				<li id="comment<?=$comment['CommentID']?>" value="<?=$comment['Value']?>" style="left: <?=$comment['level'] * 15?>px; width: <?=900-$comment['level'] * 15?>px;">
-					<h4>By: <?=$comment['Name']?> On: <?=$comment['Time']?></h4>
-=======
 				<li id="<?=$comment['CommentID']?>comment" value="<?=$comment['Value']?>" style="left: <?=$comment['level'] * 15?>px; width: <?=900-$comment['level'] * 15?>px;" level="<?=$comment['level']?>">
 					<?php
 						// Calculate time past since comment posted
@@ -59,19 +55,14 @@
 						}
 					?>
 					<h4>By: <?=$comment['Name']?> <em style="font-size: 9pt; color: darkgray;">(<?=floor($timesince) . ' ' . $identifier?>)</em></h4>
->>>>>>> origin/victor
 					<p><?=$comment['Comment']?></p>
 					<div class="buttonsContainer" style="opacity: 0.4;">
 						<p>(+<span class="upNum"><?=$comment['Ups']?></span> | -<span class="downNum"><?=$comment['Downs']?></span>)</p>
 						<input type="radio" id="<?=$comment['CommentID']?>upvote" name="commentVoting" >
 						<label for="<?=$comment['CommentID']?>upvote" class="buttons upVote <?= $comment['userVotedUp'] ? 'selectedVote' : '' ?>" voted="<?=$comment['userVotedUp']?>" value="1">&#9650;</label>
 						<input type="radio" id="<?=$comment['CommentID']?>downvote" name="commentVoting">
-<<<<<<< HEAD
-						<label for="<?=$comment['CommentID']?>downvote" class="buttons downVote <?= $comment['userVotedDown'] ? 'selectedVote' : '' ?>" voted="<?=$comment['userVotedDown']?>" claimID="<?=$comment['ClaimID']?>" value="0">&#9660;</label>
-						<img class='flagComment' commentID="<?=$comment['CommentID']?>" src="/img/flag.png" >
-=======
 						<label for="<?=$comment['CommentID']?>downvote" class="buttons downVote <?= $comment['userVotedDown'] ? 'selectedVote' : '' ?>" voted="<?=$comment['userVotedDown']?>" value="0">&#9660;</label>
->>>>>>> origin/victor
+						<img class='flagComment' commentID="<?=$comment['CommentID']?>" src="/img/flag.png" >
 						<button class="buttons reply" value="">Reply</button>
 					</div>
 				</li>

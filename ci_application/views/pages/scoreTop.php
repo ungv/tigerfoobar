@@ -10,9 +10,6 @@
 						<?php
 						if (!empty($scores) || !empty($companyClaims)) {
 						?>
-<<<<<<< HEAD
-						<?=$pageType == 'company' ? $companyClaims[0]['numScores'] . ' claims, [some number of] comments' : $scores[0]['Total'] . ($scores[0]['Total'] == 1 ? ' rating, ' : ' ratings, ') . count($comments) . (count($comments) == 1 ? ' comment' : ' comments')?>
-=======
 						<?= //if on company page
 							$pageType == 'company' ?
 							//then print number of company's claims
@@ -32,7 +29,6 @@
 								' comment' : 
 								//else plural
 								' comments')?>
->>>>>>> origin/victor
 						<?php
 						} else {
 						?>

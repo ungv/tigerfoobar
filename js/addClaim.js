@@ -44,9 +44,6 @@ $(document).ready(function() {
 		$('.lightsout').fadeOut();
 		return false;
 	});
-<<<<<<< HEAD
-});
-=======
 });
 
 // Send request to add new claim to database on submit click

@@ -2,8 +2,6 @@ $(document).ready(function() {
 	// Color the scale
 	resetScale();
 	
-<<<<<<< HEAD
-=======
 	/*------Rating the claim-------*/
 	// Add or update user's rating on this claim
 	$('input[name=claimscore]').click(function() {
@@ -26,7 +24,6 @@ $(document).ready(function() {
 	});
 
 
->>>>>>> origin/victor
 	/*------Voting On Comments-------*/
 
 	$.each($('.buttonsContainer'), function() {
@@ -96,6 +93,8 @@ $(document).ready(function() {
 		});
 	};
 
+
+	/*------------Flagging stuff-----------------------*/
 	$('#flagButton').tooltipster({
 		trigger: 'click',
 		interactive: true,
@@ -121,7 +120,7 @@ $(document).ready(function() {
 		var targetID;
 
 		if (targettype == 'claim') {
-			targetID = $(clicked).attr('claimID');
+			targetID = $('#discussionContainer').attr('claimid');
 		} else {
 			targetID = $(clicked).attr('commentID');
 		};
@@ -182,11 +181,7 @@ $(document).ready(function() {
 		$(clicked.parent().children(".tagTotal")[0]).text(oldVotes);
 		$.ajax({
 			type: 'POST',
-<<<<<<< HEAD
-			url: 'http://127.0.0.1/action/upvoteIndustry',
-=======
 			url: '/action/upvoteTag',
->>>>>>> origin/victor
 			data: {
 				industryID: $(clicked).attr('tagid'),
 				companyID: $(clicked).attr('companyid'),
@@ -266,58 +261,9 @@ $(document).ready(function() {
 		$(newLink.children('.industryUpvote')[0]).click();
 	}
 
-<<<<<<< HEAD
-
-	/*-----------------Kudos Scale-----------------------*/
-
-
-	//Alert Kudos value on hover
-	$('.scoreBox').hover(
-		function() {
-			if ($(this).attr('value') == 0)
-				$(this).text('F');
-			else
-				$(this).text($(this).attr('value'));
-		},
-		function() {
-			$(this).text('');
-		}
-	);
-	
-	$('.scoreBox').click(function() {
-		resetScale();
-		$(this).addClass('selectedRating');
-	});
-
-	//Method found in general.js
-	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
-	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
-	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
-	
-	$.each($('.claimScore'), function() {
-		applyColors(parseFloat($(this).text()), $(this).parent(), 'background-color');
-	});
-
-	$.each($('#discussionContent li'), function() {
-		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
-	});
-
-	//Resets and recolors the kudos scale to get rid of border color
-	function resetScale() {
-		$.each($('.scoreBox'), function(i) {
-			$(this).css('background-color', colors[i]);
-			$(this).css('border', '2px solid ' + colors[i]);
-			$(this).removeClass('selectedRating');
-		});
-	}
-
-	/*-----------------Discussion-----------------------*/
-
-=======
 	/*-----------------Discussion-----------------------*/
 
 	// Injects a new textbox to start a thread
->>>>>>> origin/victor
 	$('#newComment').click(function() {
 		// $('#newCommentPopup').show(200);
 		// $('#newCommentPopup textarea').focus();
@@ -325,22 +271,15 @@ $(document).ready(function() {
 		$('#newCommentBox').show(200);
 		$('#newCommentBox textarea').focus();
 	});
-<<<<<<< HEAD
-	
-=======
 
 	// Injects a new textbox to reply to the above comment
->>>>>>> origin/victor
 	$('.reply').click(function() {
 		$parentLi = $(this).parent().parent().attr('id');
 		$('#' + $parentLi + 'reply').show();
 		$('#' + $parentLi + 'reply textarea').focus();
 	});
 
-<<<<<<< HEAD
-=======
 	// Submit a new thread or reply to database
->>>>>>> origin/victor
 	$('.submitReply').click(function() {
 		if ($(this).attr('id') == 'newThread') {
 			$parentCommentID = 0;
@@ -369,12 +308,8 @@ $(document).ready(function() {
 			}
 		});
 	});
-<<<<<<< HEAD
 
-=======
-	
 	//Cancel reply
->>>>>>> origin/victor
 	$('.cancelButton').click(function() {
 		// $('.lightsout').fadeOut();
 		$('.replyBox').hide();		

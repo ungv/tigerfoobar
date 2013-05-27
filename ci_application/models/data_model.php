@@ -12,11 +12,43 @@ class Data_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	// ------------- SEARCH METHODS -------------
+
+	public function companiesByName($root) {
+		$sql = "SELECT * from Company
+				WHERE Company.Name like '%$root%'
+				ORDER BY Score DESC
+				LIMIT 5";
+		return $this->db->query($sql)->result_array();
+		//$this->rowsByName($root,"Company");
+	}
+
+	public function claimsByName($root) {
+		$sql = "SELECT * from Claim
+				WHERE Claim.Title like '%$root%'
+				ORDER BY Score DESC
+				LIMIT 5";
+		return $this->db->query($sql)->result_array();
+		$this->rowsByName($root , "Claim");
+	}
+
+	//Returns the rows containing the root term in the given table.
+	//Orders results by votes
+	public function rowsByName($root, $table) {
+		/*
+		$sql = "SELECT * from ".$table."
+				WHERE Name like '%$root%'
+				ORDER BY Score DESC
+				LIMIT 5";
+		return $this->db->query($sql)->result_array();
+		*/
+	}
+
 	// ------------- METHODS FOR GETTING THE SCORE INFORMATION -------------
 	public function getClaimScores($claimID) {
 		$sql = "SELECT *, COUNT(ClaimID) AS noRatings, 
 					(SELECT COUNT(ClaimID) 
-					FROM Rating 
+					FROM Rating
 					WHERE ClaimID = $claimID) as Total
 				FROM Rating
 				WHERE ClaimID = $claimID
@@ -40,6 +72,7 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->row();
 	}
 	
+	// Get all tags assocated with a specific claim
 	public function getClaimTags($claimID, $userID) {
 		if(!isset($userID)) {
 			$userID = -1;
@@ -55,10 +88,6 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 
-<<<<<<< HEAD
-	// Need to get number of ratings for each claim
-	
-=======
 	// Get user's rating on a specific claim
 	public function getRatingOnClaim($claimID, $userid) {
 		if(!isset($userID)) {
@@ -71,9 +100,8 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->row();
 	}
 		
->>>>>>> origin/victor
 	// ------------- METHODS FOR COMPANY VIEW -------------	
-	//Retreives the basic data for a company
+	//Retrieves the basic data for a company
 	public function getCompany($companyID) {
 		$sql = "SELECT *
 				FROM Company
@@ -81,7 +109,7 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->row();
 	}
 
-	//Retreives the top claims for a given company
+	//Retrieves the top claims for a given company
 	public function getCompanyClaims($companyID) {
 		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
 				FROM Claim cl
@@ -92,7 +120,7 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 	
-	//Retreives the industry tags associated with
+	//Retrieves the industry tags associated with
 	//a given $companyID , as well as if the current users
 	//have voted on a given industry-tag combination
 	public function getCompanyTags($companyID, $userID) {
@@ -110,17 +138,19 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 
-	//Returns SQL from the Tags table 
-	public function industryList($root) {
+	//Returns SQL from the Tags table, used for fetching autocomplete data
+	public function tagList($root) {
+		$tagtype = $this->security->xss_clean($this->input->get('tagtype'));
 		$sql = "SELECT * from Tags
 				WHERE Tags.Name like '$root%'
-				AND Tags.Type like 'Industry'
+				AND Tags.Type like '$tagtype' 
 				LIMIT 10";
 		return $this->db->query($sql)->result_array();
-		//AND Tags.Type like 'Industry'
 	}
 		
 	// ------------- METHODS FOR TAG VIEW ---------------
+
+	// Get all claims associated with a specific tag
 	public function getClaimsWithTag($tagID) {
 		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID, c.Title, c.Score AS ClScore, c.numScores, co.CompanyID, co.Name AS CoName, co.Score AS CoScore
 				FROM Tags t
@@ -135,6 +165,8 @@ class Data_model extends CI_Model {
 	}
 
 	// ------------- METHODS FOR DISCUSSION VIEW --------
+
+	// Get all comments and their children associated with a specific claim and rank them based on voting ratio
 	public function getDiscussion($claimID, $parentID, $level, $resultsArr, $userID) {
 		if(!isset($userID)) {
 			$userID = -1;
@@ -171,11 +203,14 @@ class Data_model extends CI_Model {
 	}
 	
 	// ------------- METHODS FOR PROFILE VIEW ---------------
+	
+	// Get user information
 	public function getUser($userID) {
 		$query = $this->db->get_where('User', array('UserID' => $userID));
 		return $query->row();
 	}
 	
+	// Get user's submitted claims
 	public function getUserClaims($userID) {
 		$sql = "SELECT c.ClaimID, c.Title, r.Value
 				FROM User u
@@ -187,6 +222,7 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}	
 	
+	// Get user's submitted comments
 	public function getUserComments($userID) {
 		$sql = "SELECT u.Name, c.ClaimID, d.CommentID, d.Comment, c.Title, c.CompanyID, co.Name AS CoName, r.Value
 				FROM User u
@@ -203,6 +239,7 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}	
 	
+	// Get user's votes on comments
 	public function getUserVotes($userID) {
 		$sql = "SELECT u.Name, v.Value, v.CommentID, d.Comment, v.Time, c.ClaimID, c.Title, co.CompanyID, co.Name AS CoName
 				FROM User u
@@ -290,6 +327,7 @@ class Data_model extends CI_Model {
 	//Gets claims for the given company
 	public function getClaimsForCompanyJSON($companyID) {
 		$topClaimsForCompany = $this->getCompanyClaims($companyID);
+		//TODO: handle the case where no claims on company
 		$companyName = $topClaimsForCompany[0]["Title"];
 		$jsonDataObj = '"name": "Top claims for '.$companyName.'", "children": [';
 		

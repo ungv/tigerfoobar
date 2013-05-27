@@ -39,24 +39,38 @@ class Action_model extends CI_Model {
     //true otherwise
     public function upvoteIndustry($userid) {
         $tagid = $this->security->xss_clean($this->input->post('industryID'));
-        $companyid = $this->security->xss_clean($this->input->post('companyID'));
+        $objectid = $this->security->xss_clean($this->input->post('objectID'));
+        $tagtype = $this->security->xss_clean($this->input->post('tagType'));
         $voted = $this->security->xss_clean($this->input->post('voted'));
 
         //check tagid is for industry
         $this->db->query('SET FOREIGN_KEY_CHECKS = 0;');
-        $isIndustry = $this->db->get_where('Tags', array('TagsID' => $tagid , 'Type' => 'Industry'));
-        if(!$isIndustry) {  //if not, return false
+        $isVotable = $this->db->get_where('Tags', array('TagsID' => $tagid , 'Type' => $tagtype));
+        if(!$isVotable) {  //if not, return false
             return false;
         }else {             //else, execute query
-            $data = array(
-               'Company_CompanyID' => $companyid ,
-               'Tags_TagsID' => $tagid ,
-               'User_ID' => $userid
-            );
+            //choose tags or industries
+            $data;
+            $table;
+            if($tagtype == 'Industry') {
+                $table = 'Company_has_Tags';
+                $data = array(
+                   'Company_CompanyID' => $objectid ,
+                   'Tags_TagsID' => $tagid ,
+                   'User_ID' => $userid
+                );
+            }else {
+                $table = 'Claim_has_Tags';
+                $data = array(
+                   'Claim_ClaimID' => $objectid ,
+                   'Tags_TagsID' => $tagid ,
+                   'User_ID' => $userid
+                );
+            }
             if(!$voted) {    //user hasnt voted, insert row
-                $result = $this->db->insert('Company_has_Tags', $data); 
+                $result = $this->db->insert($table, $data); 
             }else {         //user has voted, remove row
-                $result = $this->db->delete('Company_has_Tags', $data);
+                $result = $this->db->delete($table, $data);
             }
             return $result;
         }
@@ -105,7 +119,10 @@ class Action_model extends CI_Model {
         return true;
     }
 
-    // Vote on comments
+    //Sends comment vote to server, 
+    //adds a new row if casting new vote, 
+    //update row if already exists,
+    //delete row if unvoting
     public function voteComment($userid) {
         $ClaimID = $this->security->xss_clean($this->input->post('ClaimID'));
         $CommentID = $this->security->xss_clean($this->input->post('CommentID'));
@@ -223,8 +240,6 @@ class Action_model extends CI_Model {
         // else return false, no user found or pw incorrect
         return false;
     }
-<<<<<<< HEAD
-=======
 
     // Adds a claim to the database
     // Clean input values for security
@@ -441,8 +456,4 @@ class Action_model extends CI_Model {
         $this->db->insert('Discussion', $commentData);
         return true;
     }
-
-    private function recalculate() {   
-    }
->>>>>>> origin/victor
 }
