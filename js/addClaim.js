@@ -68,7 +68,7 @@ function addClaim() {
 	console.log(tagsObj);
 	$.ajax({
 		type: 'POST',
-		url: 'http://127.0.0.1/action/addClaim',
+		url: '/action/addClaim',
 		data: {
 			url: $url,
 			title: $title,

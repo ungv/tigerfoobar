@@ -6,14 +6,14 @@ $(document).ready(function() {
 	$('input[name=score]').click(function() {
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/sendRating',
+			url: '/action/sendRating',
 			data: {
 				rating: $(this).attr('value'),
 				claimID: $(this).attr('ccID')
 			},
 			dataType: 'json',
 			success: function(json) {
-				alert('[Could direct them to add a comment now?]');
+				alert('Thanks for rating this claim! Go ahead and add a comment below!');
 				window.location.reload();
 			},
 			error: function() {
@@ -45,9 +45,9 @@ $(document).ready(function() {
 		var value = $(button).attr('value');
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/voteComment',
+			url: '/action/voteComment',
 			data: {
-				ClaimID: $(clicked).attr('ClaimID'),
+				ClaimID: $('#discussionContainer').attr('claimid'),
 				CommentID: parseInt($(clicked).attr('for')),
 				voted: voted,
 				value: value
@@ -132,7 +132,7 @@ $(document).ready(function() {
 		$(clicked.parent().children(".tagTotal")[0]).text(oldVotes);
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/upvoteTag',
+			url: '/action/upvoteTag',
 			data: {
 				industryID: $(clicked).attr('tagid'),
 				objectID: $(clicked).attr('objectid'), //the objet (claim or company) being affected
@@ -251,7 +251,7 @@ $(document).ready(function() {
 		$(this).addClass('selectedRating');
 	});
 
-	//Method found in general.js
+	// Function can be found in general.js
 	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
 	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
 	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
@@ -275,7 +275,7 @@ $(document).ready(function() {
 
 	/*-----------------Discussion-----------------------*/
 
-	//Injects a new textbox to start a thread
+	// Injects a new textbox to start a thread
 	$('#newComment').click(function() {
 		// $('#newCommentPopup').show(200);
 		// $('#newCommentPopup textarea').focus();
@@ -283,19 +283,44 @@ $(document).ready(function() {
 		$('#newCommentBox').show(200);
 		$('#newCommentBox textarea').focus();
 	});
-	
-	//Injects a new textbox to reply to the above comment
+
+	// Injects a new textbox to reply to the above comment
 	$('.reply').click(function() {
 		$parentLi = $(this).parent().parent().attr('id');
 		$('#' + $parentLi + 'reply').show();
 		$('#' + $parentLi + 'reply textarea').focus();
 	});
 
-	//Submit reply to database
+	// Submit a new thread or reply to database
 	$('.submitReply').click(function() {
-	
+		if ($(this).attr('id') == 'newThread') {
+			$parentCommentID = 0;
+			$level = 0;
+		} else {
+			$parentCommentID = parseInt($(this).parent().attr('id'));
+			$level = parseInt($('#' + $parentCommentID + 'comment').attr('level')) + 1;
+		}
+		$.ajax({
+			type: 'POST',
+			url: '/action/addComment',
+			data: {
+				claimID: $('#discussionContainer').attr('claimID'),
+				comment: ($(this).parent().find('textarea')).val(),
+				parentCommentID: $parentCommentID,
+				level: $level
+			},
+			dataType: 'json',
+			success: function(json) {
+				window.location.reload();
+				//Dom changes processed pre-query
+			},
+			error: function(json) {
+				//alert error message for now
+				alert('Oops, are you logged in?');
+			}
+		});
 	});
-
+	
 	//Cancel reply
 	$('.cancelButton').click(function() {
 		// $('.lightsout').fadeOut();
@@ -312,6 +337,7 @@ $(document).ready(function() {
 
 	//Collapse all children of this
 	$('#discussionContent li').click(function() {
+		// TODO: collase children of this
 		console.log('collapse all children of this');
 	});
 });

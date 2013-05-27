@@ -97,10 +97,17 @@ class Action_model extends CI_Model {
             if (!$voted) {    //user hasnt voted, insert or update row
                 if ($hasVoted->num_rows == 0) {    //user has not voted on this comment, insert new row
                     $result = $this->db->insert('Vote', $data); 
+
+                    // Add 1 to vote count on this comment
+                    $updateVoteCount = "UPDATE Discussion
+                                        SET votes = votes+1
+                                        WHERE ClaimID = $ClaimID
+                                        AND CommentID = $CommentID";
+                    $this->db->query($updateVoteCount);
                 } else {    //user has voted on something, update their vote value
                     $data = array(
                        'Value' => $value,
-                    );
+                        );
                     $where = array(
                         'UserID' => $userid,
                         'ClaimID' => $ClaimID,
@@ -110,6 +117,13 @@ class Action_model extends CI_Model {
                 }
             } else {         //user is unvoting their current vote
                 $result = $this->db->delete('Vote', $data);
+
+                // Subtract 1 from vote count on this comment
+                $updateVoteCount = "UPDATE Discussion
+                                    SET votes = votes-1
+                                    WHERE ClaimID = $ClaimID
+                                    AND CommentID = $CommentID";
+                $this->db->query($updateVoteCount);
             }
         return $result;
     }
@@ -324,7 +338,23 @@ class Action_model extends CI_Model {
                 );
             $this->db->update('Claim', $recalculated, $where);
         }
+        return true;
+    }
 
+    public function addComment($userid) {
+        $claimID = $this->security->xss_clean($this->input->post('claimID'));
+        $comment = $this->security->xss_clean($this->input->post('comment'));
+        $parentCommentID = $this->security->xss_clean($this->input->post('parentCommentID'));
+        $level = $this->security->xss_clean($this->input->post('level'));
+
+        $commentData = array(
+                'ClaimID' => $claimID,
+                'UserID' => $userid,
+                'Comment' => $comment,
+                'ParentCommentID' => $parentCommentID,
+                'level' => $level
+                );
+        $this->db->insert('Discussion', $commentData);
         return true;
     }
 }

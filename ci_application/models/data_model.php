@@ -194,6 +194,13 @@ class Data_model extends CI_Model {
 		}
 		return $resultsArr;
 	}
+
+	public function getUniqueUsers($claimID) {
+		$sql = "SELECT DISTINCT UserID
+				FROM Discussion
+				WHERE ClaimID = $claimID";
+		return $this->db->query($sql)->num_rows();
+	}
 	
 	// ------------- METHODS FOR PROFILE VIEW ---------------
 	

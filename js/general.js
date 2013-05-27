@@ -74,7 +74,7 @@ $(document).ready(function() {
 	function sendLogin(username, password) {
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/login',
+			url: '/action/login',
 			data: {
 				username: username,
 				password: password
@@ -128,7 +128,7 @@ $(document).ready(function() {
 	function addUser(username, password, email) {
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/addUser',
+			url: '/action/addUser',
 			data: {
 				username: username,
 				password: password,

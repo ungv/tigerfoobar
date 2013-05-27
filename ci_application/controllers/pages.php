@@ -62,6 +62,7 @@ class Pages extends Root_Controller {
 
 			$resultsArr = [];
 			$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr, $this->userid);
+			$data['uniqueUsers'] = $this->data_model->getUniqueUsers($claimID);
 			$data['scores'] = $this->data_model->getClaimScores($claimID);
 			$data['userRating'] = get_object_vars($this->data_model->getRatingOnClaim($claimID, $this->userid));
 			

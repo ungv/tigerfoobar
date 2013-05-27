@@ -72,7 +72,7 @@
 			?>
 		<div class="threadContainer">
 			<div class="thread">
-				<h3><a href="/claim/<?=$comment['ClaimID']?>/#comment<?=$comment['CommentID']?>">"<?=$comment['Comment']?>"</a></h3>
+				<h3><a href="/claim/<?=$comment['ClaimID']?>/#<?=$comment['CommentID']?>comment">"<?=$comment['Comment']?>"</a></h3>
 				<p><em>About <a href="/company/<?=$comment['CompanyID']?>"><?=$comment['CoName']?></a>, from '<a href="/claim/<?=$comment['ClaimID']?>"><?=$comment['Title']?></a>,' of which they <?=$comment['Value'] == NULL ? 'have not rated yet' : 'gave a score of <strong class="theirRating">' . $comment["Value"] .'</strong>'?></em>
 				</p>
 			</div>
@@ -104,7 +104,7 @@
 					<?= $vote['Value'] == 0 ? '<span class="disliked">disliked</span>' : '<span class="liked">liked</span>' ?>
 				</p>
 				<p class="votedComment">
-					"<a href="/claim/<?=$vote['ClaimID']?>/#comment<?=$vote['CommentID']?>"><?=$vote['Comment']?></a>"
+					"<a href="/claim/<?=$vote['ClaimID']?>/#<?=$vote['CommentID']?>comment"><?=$vote['Comment']?></a>"
 				</p>
 				<p class="coComment">about <a href="/company/<?=$vote['CompanyID']?>"><?=$vote['CoName']?></a></p>
 			</li>
