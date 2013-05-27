@@ -113,10 +113,9 @@ class Data_model extends CI_Model {
 	public function getCompanyClaims($companyID) {
 		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
 				FROM Claim cl
-				LEFT JOIN Company co
+			    JOIN Company co
 				ON co.CompanyID = cl.CompanyID
-				WHERE co.CompanyID = $companyID
-				GROUP BY cl.Score";
+				WHERE co.CompanyID = $companyID";
 		return $this->db->query($sql)->result_array();
 	}
 	
@@ -212,7 +211,7 @@ class Data_model extends CI_Model {
 	
 	// Get user's submitted claims
 	public function getUserClaims($userID) {
-		$sql = "SELECT c.ClaimID, c.Title, r.Value
+		$sql = "SELECT u.Name, c.ClaimID, c.Score, c.Title, c.numScores, r.Value
 				FROM User u
 				LEFT JOIN Claim c
 				ON c.UserID = u.UserID
@@ -354,17 +353,41 @@ class Data_model extends CI_Model {
 	//Gets claims for the given tag
 	public function getTopClaimsWithTagJSON($tagID) {
 		$topClaimsWithTag = $this->getClaimsWithTag($tagID);
-		$tagName = $topClaimsWithTag[0]["Title"];
+		$tagName = $topClaimsWithTag[0]["Name"];
 		$jsonDataObj = '"name": "Top claims for '.$tagName.'", "children": [';
 		
 		//Builds JSON out of the data in the $data array
-		$companiesWithClaims = '';
 		$claims = "";
 		
 		for ($i = 0; $i < count($topClaimsWithTag); $i++) {
 				$title = str_replace("'","", $topClaimsWithTag[$i]["Title"]);
 				$claimID = $topClaimsWithTag[$i]["Claim_ClaimID"];
 				$score = $topClaimsWithTag[$i]["ClScore"];
+				$size = str_replace("'","", $topClaimsWithTag[$i]["numScores"]);	
+				
+				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
+
+		}
+		
+		$claims = rtrim($claims, ",");
+		$jsonDataObj .= $claims. ']';
+		
+		return $jsonDataObj;
+	}
+	
+	//Gets claims for the given user
+	public function getTopClaimsForUserJSON($userID) {
+		$topClaimsWithTag = $this->getUserClaims($userID);
+		$userName = $topClaimsWithTag[0]["Name"];
+		$jsonDataObj = '"name": "Top claims for '.$userName.'", "children": [';
+		
+		//Builds JSON out of the data in the $data array
+		$claims = "";
+		
+		for ($i = 0; $i < count($topClaimsWithTag); $i++) {
+				$title = str_replace("'","", $topClaimsWithTag[$i]["Title"]);
+				$claimID = $topClaimsWithTag[$i]["ClaimID"];
+				$score = $topClaimsWithTag[$i]["Score"];
 				$size = str_replace("'","", $topClaimsWithTag[$i]["numScores"]);	
 				
 				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';

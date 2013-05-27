@@ -14,14 +14,14 @@
 <script type="text/javascript">
 	$(function () {
 		<?php
-			if (isset($topCompaniesWithClaimsJSON)) {
+			if (isset($pageType) && $pageType == "home") {
 			?>
 				var treemapHeight = $(window).height()+100 - $("#treemapCanvas").offset().top - $("footer").height() - 40;
 				var treemapWidth = $(window).width() - 60;
 			<?php
-			} else if (isset($topClaimsForCompanyJSON) || isset($topClaimsWithTagJSON)) {
+			} else if (isset($pageType) && ($pageType == "company" || $pageType == "tag" || $pageType == "profile")) {
 			?>
-				var treemapHeight = $(window).height() - $("#treemapCanvas").offset().top - $("footer").height() - 40;
+				var treemapHeight = 500;
 				var treemapWidth = $("#main").width();
 			<?php
 			}
@@ -32,10 +32,7 @@
 			y = d3.scale.linear().range([0, h]),
 			bgColor = d3.scale.quantile()
 			   .domain([-3, -2, -1, 0, 1, 2, 3])
-			   .range([colors[0], colors[1], colors[2], colors[3], colors[4], colors[5], colors[6]]),
-			/*borderColor = d3.scale.linear()
-				.domain([-3, 3])
-			   .range(['#000', '#FFF']),*/
+			   .range(['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64']),
 			borderColor = d3.scale.category10(),
 			borderWidth = 5,
 			domain = document.domain,
@@ -57,16 +54,9 @@
 			.attr("width", w)
 			.attr("height", h)
 		  .append("svg:g");
+		  
 		var jsonDataObj = {<?php
-			if (isset($topCompaniesWithClaimsJSON)) {
-				echo($topCompaniesWithClaimsJSON);
-			} else if (isset($topClaimsForCompanyJSON)) {
-				echo($topClaimsForCompanyJSON);
-			} else if (isset($topClaimsWithTagJSON)) {
-				echo($topClaimsWithTagJSON);
-			}
-			
-		//TODO: Fix this mess
+			echo($treemapJSON);
 		?>};
 		console.log("jsonDataObj is: " + jsonDataObj);
 
@@ -81,33 +71,84 @@
 		  .enter().append("svg:g")
 		  .attr("class", "cell")
 		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-		  .attr("stroke", function (d) {return borderColor(d.parent.name);})
-		  .attr("stroke-width", function (d) {return borderWidth;})
-		  .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); })
-		  .on("mouseover", function (d) {d3.select(this).attr("fill", "red");});
+		  /*.attr("stroke", function (d) {return borderColor(d.parent.name);})
+		  .attr("stroke-width", function (d) {return borderWidth;})*/
+		  .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
+		  
+		//$(cell).tipsy();
 		
 		cell.append("svg:rect")
-		  .attr("width", function(d) { return d.dx - borderWidth; })
-		  .attr("height", function(d) { return d.dy - borderWidth; })
-		  .style("fill", function(d) { return bgColor(d.score);});
-
+		  .attr("width", function(d) { return d.dx - borderWidth;})
+		  .attr("height", function(d) { return d.dy - borderWidth;})
+		  .style("fill", function(d) { return bgColor(d.score);})
+		  .on("mouseover", function (d) {d3.select(this).style("fill-opacity", "0.75");})
+		  .on("mouseout", function (d) {d3.select(this).style("fill-opacity", "1.0");});
+		 
 		//Text labels for treemap
 		cell.append("foreignObject")
 		  .attr("x", function(d) { return padding - 5;})
 		  .attr("y", function(d) { return padding})
-		  .on("click", function(d) {window.location.href = "http://" + domain + "/claim/" + d.claimID;})
 		  .attr("width", function(d) {return d.dx - padding})
 		  .attr("height", function(d) {return d.dy - padding})
+		  .style("pointer-events", "none")
 		  .append("xhtml:div")
 			  .attr("dy", ".35em")
 			  .html(function(d) {return d.name})
-			  .style("font-size", function(d) {return (d.dx*d.dy)/10000 + "px";})
+			  .style("font-size", function(d) {return calculateFontSize(d.dx, d.dy);})
 			  //.style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; })
 			  .style("width", function(d) {return d.dx - padding})
-			  .style("height", function(d) {return d.dy - padding});
+			  .style("height", function(d) {return d.dy - padding})
+			   .style("pointer-events", "auto")
+			  .on("click", function(d) {window.location.href = "http://" + domain + "/claim/" + d.claimID;});
+			  
+		function calculateFontSize(width, height) {
+			return (width*height)/6000 + "px";
+		}
 		 
-		//add as many text elements as required to display the full, wrapped text. 
+		 //Tooltips
+		$("svg rect, svg div, svg foreignObject").tipsy({ 
+			gravity: "n",
+			html: true, 
+			title: function() {
+			  var d = this.__data__; // c = colors(d.i);
+			  var html = "<h3>" + d.name + "</h3>";
+			  
+			  //Todo: pass this html value to the "mouseenter" function below so that tooltips can be scaled properly before being displayed.
+			  //One way to possibly do this is bind it to the SVG element above and read it from d
+			  return html;
+			},
+			opacity: "1.0"})
+			.mouseenter(function(e) {
+				var d = this.__data__;
+			
+				var scrollTop = $(window).scrollTop();
+				var scrollLeft = $(window).scrollLeft();
+				var target = e.target;
+				var targetCell = $(target).closest(".cell")[0];
+				var targetCellRect = targetCell.getBoundingClientRect();
 
+				//console.log(target + " top offset of targetCell is: " + $(targetCell).offset().top + " and left offset of targetCell is " + $(targetCell).offset().left);
+				//console.log("Height of targetcell is: " + targetCellRect.height + " and width of targetCell is: " + targetCellRect.width);
+				
+				var top = targetCellRect.top + targetCellRect.height + scrollTop;
+				var left = targetCellRect.left + targetCellRect.width/2 - $(".tipsy").width()/2 + scrollLeft;
+				var rotation = 0;
+				
+				if (top + $(".tipsy").height() > ($(window).height() - 50)) {
+					top = targetCellRect.top - $(".tipsy").height() - 10 + scrollTop;
+					rotation = 180;
+				}
+				
+				$(".tipsy").css({
+					"top": top + "px",
+					"left": left + "px",
+					"transform" : "rotate(" + rotation +"deg)"
+				});
+				
+				$(".tipsy-inner").css({
+					"transform" : "rotate(" + rotation +"deg)"
+				});
+			});
 		d3.select(window).on("click", function() { zoom(root); });
 
 		d3.select("select").on("change", function() {
@@ -133,8 +174,8 @@
 			  .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
 
 		  t.select("rect")
-			  .attr("width", function(d) { return kx * d.dx - 1; })
-			  .attr("height", function(d) { return ky * d.dy - 1; })
+			  .attr("width", function(d) { return kx * d.dx - borderWidth; })
+			  .attr("height", function(d) { return ky * d.dy - borderWidth; })
 
 		  t.select("text")
 			  .attr("x", function(d) { return kx * padding;})

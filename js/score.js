@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	/*-----------------Kudos Scale-----------------------*/
 	// Color the scale
 	resetScale();	
 

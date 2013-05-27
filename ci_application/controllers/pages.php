@@ -35,11 +35,10 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
 		$data['pageType'] = 'home';
-
+		
 		$data['csFiles'] = array('general','ccStyles','addClaim');
-		$data['jsFiles'] = array('general','score','addClaim');
-		$data['topCompaniesWithClaimsJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
-		//signed in logic goes here
+		$data['jsFiles'] = array('general','ccScripts','addClaim');
+		$data['treemapJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
@@ -93,7 +92,7 @@ class Pages extends Root_Controller {
 			$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
 			$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
 			$data['companyTags'] = $this->data_model->getCompanyTags($companyID, $this->userid);
-			$data['topClaimsForCompanyJSON'] = $this->data_model->getClaimsForCompanyJSON($companyID);
+			$data['treemapJSON'] = $this->data_model->getClaimsForCompanyJSON($companyID);
 			
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
@@ -124,7 +123,7 @@ class Pages extends Root_Controller {
 			$data['pageType'] = 'tag';
 			
 			$data['tagInfo'] = $this->data_model->getClaimsWithTag($tagID);
-			$data['topClaimsWithTagJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
+			$data['treemapJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
 			
 			$data['csFiles'] = array('general','tag');
 			$data['jsFiles'] = array('general','tag');
@@ -154,15 +153,17 @@ class Pages extends Root_Controller {
 				$userID = $data['userdata']['userid'];
 			}
 		}
-
+		$data['headerTitle'] = 'View profile';
+		$data['pageType'] = 'profile';
+		
 		//grab basic data
 		$data['curProfile'] = $userID;
 		$data['userInfo'] = get_object_vars($this->data_model->getUser($userID));
 		$data['userClaims'] = $this->data_model->getUserClaims($userID);
 		$data['userComments'] = $this->data_model->getUserComments($userID);
 		$data['userVotes'] = $this->data_model->getUserVotes($userID);
-
 		$data['headerTitle'] = 'User Profile - Patchwork';
+		$data['treemapJSON'] = $this->data_model->getTopClaimsForUserJSON($userID);
 
 		//files needed
 		$data['csFiles'] = array('general','profile');
@@ -170,6 +171,7 @@ class Pages extends Root_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
+		$this->load->view('pages/treemap', $data);
 		$this->load->view('pages/profile', $data);
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');		

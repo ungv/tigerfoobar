@@ -3,7 +3,7 @@
 		title='This claim is
 			<a id="flagNoncredible">Noncredible</a> or 
 				<a id="flagWrong">Wrong Company</a>'>
-	
+
 	<div id="evidenceContainer" class="container">
 		<div id='evidenceContent' class="content">
 			<dl>

@@ -281,6 +281,9 @@ class Action_model extends CI_Model {
                     numClaims = numClaims+1
                     WHERE CompanyID = $company";
         $this->db->query($updateNumClaims);
+            'CompanyID' => $company
+                );
+        $this->db->insert('Claim', $data);
 
         // Get claimID of their new claim
         $getClaim = $this->db->get_where(

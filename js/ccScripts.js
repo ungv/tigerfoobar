@@ -220,8 +220,43 @@ $(document).ready(function() {
 		$(newLink.children('.tagUpvote')[0]).click(function() {
 			sendTagUpvote($(this));
 		});
-		$(newLink.children('.tagUpvote')[0]).click();
 	}
+
+
+	/*-----------------Kudos Scale-----------------------*/
+
+
+	//Alert Kudos value on hover
+	$('.scoreBox').hover(
+		function() {
+			if ($(this).attr('value') == 0)
+				$(this).text('F');
+			else
+				$(this).text($(this).attr('value'));
+		},
+		function() {
+			$(this).text('');
+		}
+	);
+	
+	$('.scoreBox').click(function() {
+		resetScale();
+		$(this).addClass('selectedRating');
+	});
+
+	//Method found in general.js
+	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
+	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
+	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
+	
+	$.each($('.claimScore'), function() {
+		applyColors(parseFloat($(this).text()), $(this).parent(), 'background-color');
+	});
+
+	$.each($('#discussionContent li'), function() {
+		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
+	});
+
 
 	/*-----------------Discussion-----------------------*/
 
@@ -270,7 +305,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
+
 	//Cancel reply
 	$('.cancelButton').click(function() {
 		// $('.lightsout').fadeOut();
