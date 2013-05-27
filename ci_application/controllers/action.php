@@ -45,7 +45,7 @@ class Action extends Root_Controller {
 		for that user
 		NOTE: Send positive message even if user has already upvoted, unless tag isnt found
 	*/
-	public function upvoteIndustry() {
+	public function upvoteTag() {
 		if(!$this->is_logged_in()) {
 			$this->output->set_status_header('400');
         	$data['json'] = '{"message":"Not Logged In"}'; 
@@ -63,9 +63,7 @@ class Action extends Root_Controller {
 	}
 
 	/*
-		Upvote Industry tag on company page, or remove the current vote
-		for that user
-		NOTE: Send positive message even if user has already upvoted, unless tag isnt found
+		Checks if user is logged in and sends comment vote to server
 	*/
 	public function voteComment() {
 		if(!$this->is_logged_in()) {
@@ -83,27 +81,7 @@ class Action extends Root_Controller {
 		}
 		$this->load->view('data/json_view', $data);
 	}
-/////////////////////////////////////////////
-	/*
-		flag stuff
-	*/
-	public function flagContent() {
-		if(!$this->is_logged_in()) {
-			$this->output->set_status_header('400');
-        	$data['json'] = '{"message":"Not Logged In"}'; 
-		}else {
-			$userid = $this->session->userdata('userid');
-			$result = $this->action_model->flagContent($userid);
-			if($result) {	//database updated db, send success method
-				$data['json'] = '{"message":"Successfully contacted server method!"}';
-			}else {			//didn't work, inform user why
-	        	$this->output->set_status_header('400');
-	        	$data['json'] = '{"message":"Cannot Process Flag"}'; 
-			}
-		}
-		$this->load->view('data/json_view', $data);
-	}
-///////////////////////////////////
+
 	/*
 		Adds a new user to the database, username/password required, email optional
 	*/
@@ -148,6 +126,26 @@ class Action extends Root_Controller {
 		}else {
 			$userid = $this->session->userdata('userid');
 			$result = $this->action_model->dropAccount($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			}else {			//didn't work, inform user why
+	        	$this->output->set_status_header('400');
+	        	$data['json'] = '{"message":"Cannot Process Update"}'; 
+			}
+		}
+		$this->load->view('data/json_view', $data);
+	}
+
+	/*
+		Add a claim to the database
+	*/
+	public function addClaim() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->addClaim($userid);
 			if($result) {	//database updated db, send success method
 				$data['json'] = '{"message":"Successfully contacted server method!"}';
 			}else {			//didn't work, inform user why

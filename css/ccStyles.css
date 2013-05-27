@@ -1,44 +1,62 @@
-ul {
-	display: inline;
-}
+/*-------------------------General---------------------------------*/
 
-li {
-	list-style-type: none;
-	float: left;
-	padding-right: 20px;
-	margin-right: 5px;
-}
+	ul {
+		/*display: inline;*/
+	}
 
-hr {
-	color: lightgray;
-	background-color: lightgray;
-}
+	li {
+		list-style-type: none;
+		float: left;
+		padding-right: 20px;
+		margin-right: 5px;
+	}
+
+	hr {
+		color: lightgray;
+		background-color: lightgray;
+	}
+
+	.container {
+		margin-top: 20px;
+	}
+
+	.container h2 {
+		width: 200px;
+	}	
+
+	.content {
+		border: 1px solid #D5D5D5;
+	}
+
+/*------------------------Treemap View-----------------------------*/
+	#treemapCanvas {
+		margin: 50px auto;
+	}
+	
 
 /*-----------------------Claim and Industry Tags-------------------*/
 
-	#tagList span, #tagList li {
+	#tagSection span, #tagSection li {
 		float: left;
 		padding: 2px 2px 2px 2px;
 	}
 
-	#tagList li {
+	#tagSection li {
 		list-style-type: none;
 		background-color: #FEF5CA;
 		border: 1px solid rgb(168, 162, 130);
 	}
 
-	#tagList .tagUpvote {
+	#tagSection .tagUpvote {
 		padding-left:6px;
 		padding-right:6px;
 	}
 
-	.userVoted {
-		background-color:#929292 !important;
-		border: 1px solid darkgrey;
-		padding: 2px;
+	#tagSection li.userVoted {
+		background-color:#DDD;
 	}
 
-/*-----------------------Add New Industry-------------------*/
+/*-----------------------Add New Tag---------------------------*/
 
 	#addTag {
 		background-color: #FEF5CA;
@@ -50,319 +68,310 @@ hr {
 		font-size: 14px;
 	}
 
-#claimPopTags li{
-	border: 2px solid rgb(102, 102, 102);
-	color: white;
-	font-size: 18pt;
-}
+/*-----------------------Evidence View--------------------------*/
 
-.container {
-	margin-top: 20px;
-}
-
-.container h2 {
-	width: 200px;
-}
-
-#evidenceContainer {
-	margin-top: 40px;
-}
-
-.content {
-	border: 1px solid #D5D5D5;
-}
-
-#evidenceContent {
-	border-left: 5px solid blue;
-	background-color: #F2F2F2;
-}
-
-#evidenceContent dl {
-	padding: 5px;
-}
-
-#evidenceContent dt {
-	font-weight: bold;
-	float: left;
-	clear: left;
-}
-
-#evidenceContent dd {
-	margin-left: 75px;
-}
-#scoreContent {
-	overflow: hidden;
-}
-#averageScore {
-	font-size: 20pt;
-	color: #A0A340;
-}
-
-#scoreContent h3 {
-	padding: 10px;
-	border-bottom: 1px solid #CCCCCC;
-	color: green;
-	font-size: 20px;
-}
-
-#scoreContent h3 span{
-	color: darkgrey;
-	font-size: 15px;
-}
-
-#discussionContainer {
-	position: relative;
-}
-
-#discussionContent > div {
-	position: relative;
-	height: 25px;
-	border-bottom: 1px solid lightgray;
-	padding: 5px;
-}
-
-#discussionContent span {
-	color: gray;
-	font-size: 14pt;
-	font-weight: bold;
-}
-
-#discussionContent {
-	border: 1px solid lightgray;
-}
-
-#discussionContent li {
-	border-left: 5px solid;
-	padding-top: 0;
-	padding-left: 5px;
-	position: relative;
-	margin-bottom: 20px;
-}
-
-#discussionContent textarea {
-	float: left;
-	margin-right: 10px;
-	width: 98%;
-}
-
-.discussionOptions {
-	float: right;
-}
-
-.thread {
-	border-left: 1px solid black;
-	overflow: hidden;
-}
-
-#leftCol {
-	float: left;
-	width: 50%;
-	border-right: 1px solid rgb(213, 213, 213);
-}
-
-#leftCol, #scoreDistribution, #evidenceContent, #controlContainer, #relatedTagsContainer, #discussionContent{
-	overflow: hidden;
-}
-
-#rightCol {
-	float: left;
-	width: 49.8%;
-}
-
-#scoreHeader, #relatedTagsHeader {
-	padding: 10px;
-	border-bottom: 1px solid rgb(213, 213, 213);
-	height: 30px;
-}
-
-#relatedTagsContainer {
-	padding: 10px;
-}
-
-#relatedTagsHeader span {
-	font-size: 15pt;
-}
-
-#controlContainer {
-	padding: 10px;
-}
-
-#scoreDistribution{
-	position: relative;
-	overflow: hidden;
-	width: 308px;
-	height: 65px;
-}
-
-#scoreDistribution div {
-	width: 44px;
-	height: 65px;
-	float: left;
-	position: absolute;
-}
-
-.circle {
-	width: 10px;
-	height: 10px;
-	background-color: darkgrey;
-	border-radius: 5px;
-	margin: 5px auto;
-}
-
-#scoreControl label {
-	width: 40px;
-	height: 40px;
-	float: left;
-	opacity: .8;
-}
-
-#scoreControl label:hover {
-	opacity: 1;
-}
-
-#scoreControl input {
-	display: none;
-}
-
-.scoreBox {
-	text-align: center;
-	font-size: 22pt;
-}
-
-.selectedRating {
-	border: 2px solid black !important;
-}
-
-.lowRatedClaims, .highRatedClaims {
-	width: 45%;
-}
-
-.lowRatedClaims {
-	float: left;
-}
-
-.highRatedClaims {
-	float: right;
-}
-
-.claimContainer {
-	border: 1px solid rgb(213, 213, 213);
-	float: left;
-	min-width: 100%;
-	margin-bottom: 20px;
-}
-
-.leftContainer {
-	float: left;
-	width: 15%;
-	color: white;
-}
-
-.rightContainer {
-	float: right;
-	width: 84.7%;
-}
-
-.claimScore, .claimTitle {
-	border-bottom: 1px solid rgb(213, 213, 213);
-	height: 50px;
-}
-
-.claimScore, .claimVotes {
-	text-align: center;
-}
-
-.claimScore, .claimVotes, .claimTitle, .claimTags {
-	padding: 10px;
-}
-
-.claimScore {
-	font-size: 20pt;
-}
-
-#newComment {
-	float: right;
-	padding: 2px;
-	background-color: #E0E0E0;
-	border: 1px solid #CCCCCC;
-}
-
-#newComment:hover {
-	background-color: #CCC;
-	border: 1px solid #777;
-}
-
-#newCommentPopup {
-	position: fixed;
-	top: 20%;
-	left: 50%;
-	width: 400px;
-	margin-left: -200px;
-}
+	#evidenceContainer {
+		margin-top: 40px;
+	}
 
 
-#newCommentPopup textarea {
-	width: 95%;
-	height: 200px;
-}
+	#evidenceContent {
+		border-left: 5px solid blue;
+		background-color: #F2F2F2;
+	}
 
-input[type="radio"] {
-	display: none;
-}
+	#evidenceContent dl {
+		padding: 5px;
+	}
 
-.buttonsContainer {
-	float: right;
-}
+	#evidenceContent dt {
+		font-weight: bold;
+		float: left;
+		clear: left;
+	}
 
-.buttonsContainer > p {
-	float: left;
-	/*margin: 8px 5px 0 0;*/
-}
-
-.buttonsContainer .buttons {
-	margin: 2px 7px 0 0;
-	padding: 2px;
-	font-size: 10pt;
-}
-
-.buttonsContainer label {
-	color: grey;
-}
-
-.buttonsContainer label:hover {
-	color: lightgrey;
-}
-
-.selectedVote {
-	color: #0087C7 !important;
-}
-
-.upVote, .downVote {
-	font-size: 16pt !important;
-}
-
-.box1 {
-	left: 44px;
-}
-.box2 {
-	left: 88px;
-}
-.box4 {
-	left: 176px;
-}
-.box5 {
-	left: 220px;
-}
-.box6{
-	left: 264px;
-}
+	#evidenceContent dd {
+		margin-left: 75px;
+	}
 
 
-/*flag*/
-#flagButton {
-	float: right;
-}
+/*-----------------------Score View----------------------*/
+	
+	#leftCol {
+		float: left;
+		width: 50%;
+		border-right: 1px solid rgb(213, 213, 213);
+	}
 
-img.flagComment {
-	height: 20px;
-}
+	#leftCol, #scoreDistribution, #evidenceContent, #controlContainer, #relatedTagsContainer, #discussionContent{
+		overflow: hidden;
+	}
+
+	#rightCol {
+		float: left;
+		width: 49.8%;
+	}	
+
+	#claimPopTags li{
+		border: 2px solid rgb(102, 102, 102);
+		color: white;
+		font-size: 18pt;
+	}
+
+	#scoreContent {
+		overflow: hidden;
+	}
+
+	#averageScore {
+		font-size: 20pt;
+		color: #A0A340;
+	}
+
+	#scoreContent h3 {
+		padding: 10px;
+		border-bottom: 1px solid #CCCCCC;
+		color: green;
+		font-size: 20px;
+	}
+
+	#scoreContent h3 span{
+		color: darkgrey;
+		font-size: 15px;
+	}
+
+	#scoreHeader, #relatedTagsHeader {
+		padding: 10px;
+		border-bottom: 1px solid rgb(213, 213, 213);
+		height: 30px;
+	}
+
+	#relatedTagsContainer {
+		padding: 10px;
+	}
+
+	#relatedTagsHeader span {
+		font-size: 15pt;
+	}
+
+	#controlContainer {
+		padding: 10px;
+	}
+
+	#scoreDistribution{
+		position: relative;
+		overflow: hidden;
+		width: 308px;
+		height: 65px;
+	}
+
+	#scoreDistribution div {
+		width: 44px;
+		height: 65px;
+		float: left;
+		position: absolute;
+	}
+
+	.circle {
+		width: 10px;
+		height: 10px;
+		background-color: darkgrey;
+		border-radius: 5px;
+		margin: 5px auto;
+	}
+
+	#scoreControl label {
+		width: 40px;
+		height: 40px;
+		float: left;
+		opacity: .8;
+	}
+
+	#scoreControl label:hover {
+		opacity: 1;
+	}
+
+	#scoreControl input {
+		display: none;
+	}
+
+	.scoreBox {
+		text-align: center;
+		font-size: 22pt;
+	}
+
+	.selectedRating {
+		border: 2px solid black !important;
+	}	
+
+	/*position the circles over the respective box*/
+	.box1 {
+		left: 44px;
+	}
+	.box2 {
+		left: 88px;
+	}
+	.box4 {
+		left: 176px;
+	}
+	.box5 {
+		left: 220px;
+	}
+	.box6{
+		left: 264px;
+	}
+
+
+/*-----------------------Discussion View----------------------*/
+
+	#discussionContainer {
+		position: relative;
+	}
+
+	#discussionContent {
+		position: relative;
+	}
+
+	#discussionContent > div {
+		position: relative;
+		height: 25px;
+		border-bottom: 1px solid lightgray;
+		padding: 5px;
+	}
+
+	#discussionContent span {
+		color: gray;
+		font-size: 14pt;
+		font-weight: bold;
+	}
+
+	#discussionContent li {
+		border-left: 5px solid;
+		padding-top: 0;
+		padding-left: 5px;
+		position: relative;
+		margin-bottom: 20px;
+	}
+
+	#discussionContent textarea {
+		float: left;
+		margin-right: 10px;
+		width: 98%;
+	}
+
+	.discussionOptions {
+		float: right;
+	}
+
+	.thread {
+		border-left: 1px solid black;
+		overflow: hidden;
+	}
+
+	#newComment {
+		float: right;
+		padding: 2px;
+		background-color: #E0E0E0;
+		border: 1px solid #CCCCCC;
+	}
+
+	#newComment:hover {
+		background-color: #CCC;
+		border: 1px solid #777;
+	}
+
+	#newCommentPopup {
+		position: fixed;
+		top: 20%;
+		left: 50%;
+		width: 400px;
+		margin-left: -200px;
+	}
+
+	#newCommentPopup textarea {
+		width: 95%;
+		height: 200px;
+	}
+
+	input[type="radio"] {
+		display: none;
+	}
+
+	.buttonsContainer {
+		float: right;
+	}
+
+	.buttonsContainer > p {
+		float: left;
+		/*margin: 8px 5px 0 0;*/
+	}
+
+	.buttonsContainer .buttons {
+		margin: 2px 7px 0 0;
+		padding: 2px;
+		font-size: 10pt;
+	}
+
+	.buttonsContainer label {
+		color: grey;
+	}
+
+	.buttonsContainer label:hover {
+		color: lightgrey;
+	}
+
+	.selectedVote {
+		color: #0087C7 !important;
+	}
+
+	.upVote, .downVote {
+		font-size: 16pt !important;
+	}	
+
+/*-----------------------HighLowClaims View----------------------*/
+
+	.lowRatedClaims, .highRatedClaims {
+		width: 45%;
+	}
+
+	.lowRatedClaims {
+		float: left;
+	}
+
+	.highRatedClaims {
+		float: right;
+	}
+
+	.claimContainer {
+		border: 1px solid rgb(213, 213, 213);
+		float: left;
+		min-width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.leftContainer {
+		float: left;
+		width: 15%;
+		color: white;
+	}
+
+	.rightContainer {
+		float: right;
+		width: 84.7%;
+	}
+
+	.claimScore {
+		font-size: 20pt;
+	}
+
+	.claimScore, .claimTitle {
+		border-bottom: 1px solid rgb(213, 213, 213);
+		height: 50px;
+	}
+
+	.claimScore, .claimVotes {
+		text-align: center;
+	}
+
+	.claimScore, .claimVotes, .claimTitle, .claimTags {
+		padding: 10px;
+	}

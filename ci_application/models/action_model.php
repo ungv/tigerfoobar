@@ -39,73 +39,47 @@ class Action_model extends CI_Model {
     //true otherwise
     public function upvoteIndustry($userid) {
         $tagid = $this->security->xss_clean($this->input->post('industryID'));
-        $companyid = $this->security->xss_clean($this->input->post('companyID'));
+        $objectid = $this->security->xss_clean($this->input->post('objectID'));
+        $tagtype = $this->security->xss_clean($this->input->post('tagType'));
         $voted = $this->security->xss_clean($this->input->post('voted'));
 
         //check tagid is for industry
         $this->db->query('SET FOREIGN_KEY_CHECKS = 0;');
-        $isIndustry = $this->db->get_where('Tags', array('TagsID' => $tagid , 'Type' => 'Industry'));
-        if(!$isIndustry) {  //if not, return false
+        $isVotable = $this->db->get_where('Tags', array('TagsID' => $tagid , 'Type' => $tagtype));
+        if(!$isVotable) {  //if not, return false
             return false;
         }else {             //else, execute query
-            $data = array(
-               'Company_CompanyID' => $companyid ,
-               'Tags_TagsID' => $tagid ,
-               'User_ID' => $userid
-            );
+            //choose tags or industries
+            $data;
+            $table;
+            if($tagtype == 'Industry') {
+                $table = 'Company_has_Tags';
+                $data = array(
+                   'Company_CompanyID' => $objectid ,
+                   'Tags_TagsID' => $tagid ,
+                   'User_ID' => $userid
+                );
+            }else {
+                $table = 'Claim_has_Tags';
+                $data = array(
+                   'Claim_ClaimID' => $objectid ,
+                   'Tags_TagsID' => $tagid ,
+                   'User_ID' => $userid
+                );
+            }
             if(!$voted) {    //user hasnt voted, insert row
-                $result = $this->db->insert('Company_has_Tags', $data); 
+                $result = $this->db->insert($table, $data); 
             }else {         //user has voted, remove row
-                $result = $this->db->delete('Company_has_Tags', $data);
+                $result = $this->db->delete($table, $data);
             }
             return $result;
         }
     }
 
-    // flag stuff
-    public function flagContent($userid) {
-        $targetID = $this->security->xss_clean($this->input->post('targetID'));
-        $targetType = $this->security->xss_clean($this->input->post('targetType'));
-        $flagType = $this->security->xss_clean($this->input->post('flagType'));
-        
-        // check if user already voted on this comment
-        $hasVoted = $this->db->get_where('Flags', array('userID' => $userid , 'target_id' => $targetID, 'target_type' => $targetType));
-        
-        $data = array(
-            'userID' => $userid, 
-            'target_id' => $targetID,
-            'target_type' => $targetType,
-            'flag_type' => $flagType,
-        );
-        
-        //user hasnt voted, insert or update row
-        if ($hasVoted->num_rows == 0) { 
-            $this->db->insert('Flags', $data); 
-        } else {
-            $row = $hasVoted->row();
-
-            // if the same row, delete
-            if (strcmp($row->flag_type, $flagType) == 0) { 
-                $this->db->delete('Flags', $data);
-            
-            // else update row
-            } else { 
-                $data = array(
-                    'flag_type' => $flagType
-                );
-                $where = array(
-                    'userID' => $userid, 
-                    'target_id' => $targetID,
-                    'target_type' => $targetType
-                );
-                $this->db->update('Flags', $data, $where);     
-            }            
-        }
-
-        return true;
-    }
-
-    // Vote on comments
+    //Sends comment vote to server, 
+    //adds a new row if casting new vote, 
+    //update row if already exists,
+    //delete row if unvoting
     public function voteComment($userid) {
         $ClaimID = $this->security->xss_clean($this->input->post('ClaimID'));
         $CommentID = $this->security->xss_clean($this->input->post('CommentID'));
@@ -208,5 +182,89 @@ class Action_model extends CI_Model {
         }
         // else return false, no user found or pw incorrect
         return false;
+    }
+
+    // Adds a claim to the database
+    // Clean input values for security
+    public function addClaim($userid) {
+        $url = $this->security->xss_clean($this->input->post('url'));
+        $title = $this->security->xss_clean($this->input->post('title'));
+        $desc = $this->security->xss_clean($this->input->post('desc'));
+        $company = $this->security->xss_clean($this->input->post('company'));
+        $rating = $this->security->xss_clean($this->input->post('rating'));
+        $tags = $this->security->xss_clean($this->input->post('tags'));
+
+        // Submit the claim without tags first
+        $data = array(
+            'Title' => $title,
+            'Link' => $url,
+            'Description' => $desc,
+            'Score' => $rating,
+            'UserID' => $userid,
+            'CompanyID' => $company
+                );
+        $this->db->insert('Claim', $data);
+
+        // Get claimID of their new claim
+        $getClaim = $this->db->get_where(
+            'Claim', array(
+                'Title' => $title, 
+                'Link' => $url, 
+                'Description' => $desc, 
+                'Score' => $rating,
+                'UserID' => $userid
+                )
+            );
+        $claimID = $getClaim->row()->ClaimID;
+
+        // Submit rating
+        $score = array(
+            'Value' => $rating,
+            'UserID' => $userid,
+            'ClaimID' => $claimID
+            );
+        $this->db->insert('Rating', $score);
+
+        // Insert each new tag as a new row
+        foreach ($tags as $tag) {
+            //Check if this tag already exists in database
+            $existingTags = $this->db->get_where('Tags', array('Name' => $tag));
+            //Insert if no results found
+            if($existingTags->num_rows() == 0) {
+                $newTag = array(
+                    'Name' => $tag,
+                    'Type' => 'Claim Tag',
+                    'is_Seed' => 0
+                    );
+                $this->db->insert('Tags', $newTag);
+            }
+
+            // Get tagsID of tags entered
+            $getTags = $this->db->get_where(
+                'Tags', array(
+                    'Name' => $tag
+                    )
+                );
+            $tagsID = $getTags->row()->TagsID;
+
+            // Check if user has already submitting this tag with this claim
+            $checkTag = $this->db->get_where(
+                'Claim_has_Tags', array(
+                    'Claim_ClaimID' => $claimID, 
+                    'Tags_TagsID' => $tagsID, 
+                    'User_ID' => $userid
+                    )
+                );
+            if($checkTag->num_rows() == 0) {
+                // Finally link tags to the claim if not already there
+                $claimTags = array(
+                   'Claim_ClaimID' => $claimID,
+                   'Tags_TagsID' => $tagsID,
+                   'User_ID' => $userid
+                    );
+                $this->db->insert('Claim_has_Tags', $claimTags);
+            }
+        }
+        return true;
     }
 }

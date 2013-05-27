@@ -27,7 +27,7 @@
 			foreach ($comments as $comment) {
 			?>
 				<li id="comment<?=$comment['CommentID']?>" value="<?=$comment['Value']?>" style="left: <?=$comment['level'] * 15?>px; width: <?=900-$comment['level'] * 15?>px;">
-					<h4>By: <?=$comment['Name']?> On: <?=$comment['Time']?></h4>
+					<h4>By: <?=$comment['Name']?> On: <?=date("F j, Y g:i a", strtotime($comment['Time']))?></h4>
 					<p><?=$comment['Comment']?></p>
 					<div class="buttonsContainer" style="opacity: 0.4;">
 						<p>(+<span class="upNum"><?=$comment['Ups']?></span> | -<span class="downNum"><?=$comment['Downs']?></span>)</p>
@@ -35,7 +35,6 @@
 						<label for="<?=$comment['CommentID']?>upvote" class="buttons upVote <?= $comment['userVotedUp'] ? 'selectedVote' : '' ?>" voted="<?=$comment['userVotedUp']?>" claimID="<?=$comment['ClaimID']?>" value="1">&#9650;</label>
 						<input type="radio" id="<?=$comment['CommentID']?>downvote" name="commentVoting">
 						<label for="<?=$comment['CommentID']?>downvote" class="buttons downVote <?= $comment['userVotedDown'] ? 'selectedVote' : '' ?>" voted="<?=$comment['userVotedDown']?>" claimID="<?=$comment['ClaimID']?>" value="0">&#9660;</label>
-						<img class='flagComment' commentID="<?=$comment['CommentID']?>" src="/img/flag.png" >
 						<button class="buttons reply" value="">Reply</button>
 					</div>
 				</li>

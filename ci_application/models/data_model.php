@@ -103,10 +103,9 @@ class Data_model extends CI_Model {
 	public function getCompanyClaims($companyID) {
 		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
 				FROM Claim cl
-				LEFT JOIN Company co
+			    JOIN Company co
 				ON co.CompanyID = cl.CompanyID
-				WHERE co.CompanyID = $companyID
-				GROUP BY cl.Score";
+				WHERE co.CompanyID = $companyID";
 		return $this->db->query($sql)->result_array();
 	}
 	

@@ -1,6 +1,6 @@
 	<div><h1>#<?=$tagInfo[0]['Name']?></h1></div>
 	<div>
-		<h4><em>Claims associated with this tag:</em></h4>
+		<h4><em>Claims or companies associated with this tag:</em></h4>
 		<ul id="claimsList">
 		<?php
 		foreach ($tagInfo as $claim) {

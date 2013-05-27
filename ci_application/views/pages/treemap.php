@@ -120,8 +120,9 @@
 			opacity: "1.0"})
 			.mouseenter(function(e) {
 				var d = this.__data__;
-				var mouseX = e.clientX + document.body.scrollLeft;
-				var	mouseY = e.clientY + document.body.scrollTop;
+			
+				var scrollTop = $(window).scrollTop();
+				var scrollLeft = $(window).scrollLeft();
 				var target = e.target;
 				var targetCell = $(target).closest(".cell")[0];
 				var targetCellRect = targetCell.getBoundingClientRect();
@@ -129,12 +130,12 @@
 				//console.log(target + " top offset of targetCell is: " + $(targetCell).offset().top + " and left offset of targetCell is " + $(targetCell).offset().left);
 				//console.log("Height of targetcell is: " + targetCellRect.height + " and width of targetCell is: " + targetCellRect.width);
 				
-				var top = targetCellRect.top + targetCellRect.height + document.body.scrollTop;
-				var left = targetCellRect.left + targetCellRect.width/2 - $(".tipsy").width()/2 + document.body.scrollLeft;
+				var top = targetCellRect.top + targetCellRect.height + scrollTop;
+				var left = targetCellRect.left + targetCellRect.width/2 - $(".tipsy").width()/2 + scrollLeft;
 				var rotation = 0;
 				
 				if (top + $(".tipsy").height() > ($(window).height() - 50)) {
-					top = targetCellRect.top - $(".tipsy").height() - 10;
+					top = targetCellRect.top - $(".tipsy").height() - 10 + scrollTop;
 					rotation = 180;
 				}
 				
