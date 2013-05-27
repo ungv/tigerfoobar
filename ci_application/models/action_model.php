@@ -220,6 +220,25 @@ class Action_model extends CI_Model {
                 );
         $this->db->insert('Claim', $data);
 
+        /*----Recalculate average score of company----*/
+        // first get company's current score and the number of claims for that company
+        $query = $this->db->get_where('Company', array('CompanyID' => $company));
+        $curScore = $query->row()->Score;
+        $curNumClaims = $query->row()->numClaims;
+
+        // get the total score of all claims for this company
+        $oldTotal = $curScore * $curNumClaims;
+
+        // finally recalculate the average with the new score
+        $newScore = ($oldTotal + $rating) / ($curNumClaims+1);
+
+        // Update company score with this rating and increase counter for number of claims for company
+        $updateNumClaims = "UPDATE Company
+                    SET Score = $newScore,
+                    numClaims = numClaims+1
+                    WHERE CompanyID = $company";
+        $this->db->query($updateNumClaims);
+
         // Get claimID of their new claim
         $getClaim = $this->db->get_where(
             'Claim', array(
@@ -288,6 +307,10 @@ class Action_model extends CI_Model {
         $rating = $this->security->xss_clean($this->input->post('rating'));
         $claimID = $this->security->xss_clean($this->input->post('claimID'));
 
+        // Keep track of the claim's old and new scores
+        $newScore = 0;
+        $claimOldScore = 0;
+
         $hasRating = $this->db->get_where('Rating', array('UserID' => $userid, 'ClaimID' => $claimID));
         // Insert new rating if no results found and updating number of ratings this claim has
         if($hasRating->num_rows() == 0) {
@@ -298,11 +321,12 @@ class Action_model extends CI_Model {
                 );
             $this->db->insert('Rating', $score);
 
-            $numRatings = "UPDATE Claim
-                        SET Score = (Score*numScores+$rating) / (numScores+1),
+            // Add new rating to claim average and update number of ratings
+            $addRating = "UPDATE Claim
+                        SET Score = (Score*numScores)+$rating / (numScores+1),
                         numScores = numScores+1
                         WHERE ClaimID = $claimID";
-            $this->db->query($numRatings);
+            $this->db->query($addRating);
         } else {
             // Update if they've already submitted a rating for this claim
             $userNewRating = array(
@@ -315,19 +339,23 @@ class Action_model extends CI_Model {
             $this->db->update('Rating', $userNewRating, $where);
 
             /*----Recalculate average score of claim----*/
+            // Because the user already submitted a rating, we have to figure out the difference
+            // between their old rating and new rating in order to recalculate the new average
+
             // first get claim's current score and the number of ratings for that claim
             $claimScoreQuery = $this->db->get_where('Claim', array('ClaimID' => $claimID));
+            $claimOldScore = $claimScoreQuery->row()->Score;
             $numScores = $claimScoreQuery->row()->numScores;
 
             // find the difference between the user's new rating and old rating
-            $oldRating = $hasRating->row()->Value;
-            $diff = $rating - $oldRating;
+            $oldUserRating = $hasRating->row()->Value;
+            $diff = $rating - $oldUserRating;
 
             // get the total score of all ratings
-            $oldTotal = $claimScoreQuery->row()->Score * $numScores;
+            $oldClaimTotal = $claimOldScore * $numScores;
 
             // finally recalculate the average with the new score
-            $newScore = ($oldTotal + $diff) / $numScores;
+            $newScore = ($oldClaimTotal + $diff) / $numScores;
 
             // update this claim's score with the new score
             $recalculated = array(
@@ -338,6 +366,34 @@ class Action_model extends CI_Model {
                 );
             $this->db->update('Claim', $recalculated, $where);
         }
+
+        /*----Recalculate average score of company----*/
+        // first get the company attached to this claim
+        $query = $this->db->get_where('Claim', array('ClaimID' => $claimID));
+        $company = $query->row()->CompanyID;
+
+        // find the difference between the claim's new score and its old score
+        $diff = $newScore - $claimOldScore;
+
+        // get company's current score and the number of claims for that company
+        $query = $this->db->get_where('Company', array('CompanyID' => $company));
+        $curScore = $query->row()->Score;
+        $curNumClaims = $query->row()->numClaims;
+
+        // get the total score of all claims for this company
+        $oldCompanyTotal = $curScore * $curNumClaims;
+
+        // finally recalculate the average with the new score
+        $newScore = ($oldCompanyTotal + $diff) / $curNumClaims;
+
+        // update this company's score with the new score
+        $recalculated = array(
+            'Score' => $newScore
+            );
+        $where = array(
+            'CompanyID' => $company
+            );
+        $this->db->update('Company', $recalculated, $where);
         return true;
     }
 
@@ -356,5 +412,8 @@ class Action_model extends CI_Model {
                 );
         $this->db->insert('Discussion', $commentData);
         return true;
+    }
+
+    private function recalculate() {   
     }
 }

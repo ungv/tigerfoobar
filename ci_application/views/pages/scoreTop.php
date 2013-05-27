@@ -13,7 +13,7 @@
 						<?= //if on company page
 							$pageType == 'company' ?
 							//then print number of company's claims
-							$companyClaims[0]['numScores'] . ' claims, [some number of] comments' : 
+							$companyClaims[0]['Total'] . ' claims, [some number of] ratings' : 
 							//else on claim page, print number of claim's ratings
 							$scores[0]['Total'] . 
 								//if claim only has one rating

@@ -1,9 +1,10 @@
 $(document).ready(function() {
+	// Color the scale
 	resetScale();
 	
 	/*------Rating the claim-------*/
 	// Add or update user's rating on this claim
-	$('input[name=score]').click(function() {
+	$('input[name=claimscore]').click(function() {
 		$.ajax({
 			type: 'POST',
 			url: '/action/sendRating',
@@ -220,57 +221,6 @@ $(document).ready(function() {
 			sendTagUpvote($(this));
 		});
 		$(newLink.children('.tagUpvote')[0]).click();
-	}
-
-
-	/*-----------------Kudos Scale-----------------------*/
-
-	//Alert Kudos value on hover
-	$('.scoreBox').hover(
-		function() {
-			if ($(this).attr('value') == 0)
-				$(this).text('F');
-			else
-				$(this).text($(this).attr('value'));
-		},
-		function() {
-			$(this).text('');
-		}
-	);
-	
-	// Show which box was selected by this user
-	$.each($('.scoreBox'), function() {
-		if ($(this).attr('hasRatedThis') == 1) {
-			$(this).addClass('selectedRating');
-		}
-	});
-
-	// Clear out all other selections and show clicked box as selected
-	$('.scoreBox').click(function() {
-		resetScale();
-		$(this).addClass('selectedRating');
-	});
-
-	// Function can be found in general.js
-	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
-	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
-	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
-	
-	$.each($('.claimScore'), function() {
-		applyColors(parseFloat($(this).text()), $(this).parent(), 'background-color');
-	});
-
-	$.each($('#discussionContent li'), function() {
-		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
-	});
-
-	//Resets and recolors the kudos scale to get rid of border color
-	function resetScale() {
-		$.each($('.scoreBox'), function(i) {
-			$(this).css('background-color', colors[i]);
-			$(this).css('border', '2px solid ' + colors[i]);
-			$(this).removeClass('selectedRating');
-		});
 	}
 
 	/*-----------------Discussion-----------------------*/

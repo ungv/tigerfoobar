@@ -239,6 +239,7 @@ $(document).ready(function() {
 
 // Hide all popups currently showing
 function hidePopups() {
+	$('.lightsout').fadeOut();
 	$('.popup').hide(200);
 	$.each($('.popup'), function() {
 		$('input').val('');
@@ -262,4 +263,13 @@ function applyColors(thisVal, $element, styling, stylewith) {
 	} else if (thisVal > 2) {
 		$element.css(styling, stylewith + colors[6]);
 	}
+}
+
+//Resets and recolors the kudos scale to get rid of border color
+function resetScale() {
+	$.each($('.scoreBox'), function(i) {
+		$(this).css('background-color', colors[i]);
+		$(this).css('border', '2px solid ' + colors[i]);
+		$(this).removeClass('selectedRating');
+	});
 }

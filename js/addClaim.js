@@ -49,6 +49,7 @@ $(document).ready(function() {
 });
 
 // Send request to add new claim to database on submit click
+// Form #newClaimForm calls this function on form submit
 function addClaim() {
 	$url = $('#pasteURL').val();
 	$title = $('input[name=title]').val();
@@ -65,7 +66,6 @@ function addClaim() {
 	for (var i in $tags) {
 		tagsObj[i] = $tags[i].value;
 	}
-	console.log(tagsObj);
 	$.ajax({
 		type: 'POST',
 		url: '/action/addClaim',
@@ -79,8 +79,8 @@ function addClaim() {
 		},
 		dataType: 'json',
 		success: function(json) {
-			alert('Your claim has been submitted!');
 			hidePopups();
+			alert('Your claim has been submitted!');
 			window.location.reload();
 		},
 		error: function() {

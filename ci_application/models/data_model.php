@@ -92,7 +92,7 @@ class Data_model extends CI_Model {
 	public function getRatingOnClaim($claimID, $userid) {
 		if(!isset($userID)) {
 			$userID = -1;
-		}		
+		}
 		$sql = "SELECT Value
 				FROM Rating
 				WHERE ClaimID = $claimID

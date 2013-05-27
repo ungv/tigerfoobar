@@ -29,9 +29,9 @@
 					</div>
 					<?php
 				}
-			} else {
+			} else if ($pageType == 'company') {
 				foreach ($companyClaims as $claim) {
-					$scoreValue = $claim['Score'];
+					$scoreValue = ceil($claim['Score']);
 					$scorePer = $claim['noRatings'] / $claim['Total'];
 					if ($scorePer <= 0.25) {
 						$topPos = 45;
@@ -61,12 +61,13 @@
 		<?php
 		for ($i=0; $i <=6 ; $i++) { 
 			$hasRatedThis = 0;
-			if ($pageType == 'claim' && $userRating['Value'] == $i-3) {
+			// If user has previously rated this claim, switch boolean to true
+			if ($pageType == 'claim' && !empty($userRating) && $userRating->Value == $i-3) {
 				$hasRatedThis = 1;
 			}
 			?>
-			<input type='radio' id="radio<?=$i?>" name='score' value='<?=$i-3?>' ccID='<?=$claimID?>'>
-			<label class="scoreBox" for="radio<?=$i?>" value="<?=$i-3?>" hasRatedThis="<?=$hasRatedThis?>"></label>
+			<input type='radio' id="radio<?=$i?>" name='<?=$pageType == 'claim' ? 'claim' : ''?>score' value='<?=$i-3?>' ccID='<?=$pageType=='claim' ? $claimID : ''?>'>
+			<label class="scoreBox" for="radio<?=$i?>" value="<?=$i-3?>" hasratedthis="<?=$hasRatedThis?>"></label>
 			<?php
 		}
 		?>

@@ -34,9 +34,10 @@ class Pages extends Root_Controller {
 	public function homepage() {
 		$data['headerTitle'] = 'PatchWork - Make a Difference';
 		$data['pageTitle'] = 'Home';
+		$data['pageType'] = 'home';
 
 		$data['csFiles'] = array('general','ccStyles','addClaim');
-		$data['jsFiles'] = array('general','ccScripts','addClaim');
+		$data['jsFiles'] = array('general','score','addClaim');
 		$data['topCompaniesWithClaimsJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
 		//signed in logic goes here
 
@@ -64,11 +65,11 @@ class Pages extends Root_Controller {
 			$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr, $this->userid);
 			$data['uniqueUsers'] = $this->data_model->getUniqueUsers($claimID);
 			$data['scores'] = $this->data_model->getClaimScores($claimID);
-			$data['userRating'] = get_object_vars($this->data_model->getRatingOnClaim($claimID, $this->userid));
+			$data['userRating'] = $this->data_model->getRatingOnClaim($claimID, $this->userid);
 			
 			//files needed
 			$data['csFiles'] = array('general','ccStyles');
-			$data['jsFiles'] = array('general','ccScripts');
+			$data['jsFiles'] = array('general','ccScripts','score');
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/mainTop', $data);
@@ -98,7 +99,7 @@ class Pages extends Root_Controller {
 			$data['pageType'] = 'company';
 
 			$data['csFiles'] = array('general','ccStyles');
-			$data['jsFiles'] = array('general','ccScripts');
+			$data['jsFiles'] = array('general','ccScripts','score');
 			
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/mainTop', $data);
