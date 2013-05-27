@@ -13,7 +13,8 @@ $(document).ready(function() {
 			},
 			dataType: 'json',
 			success: function(json) {
-				alert('Rating submitted!');
+				alert('[Could direct them to add a comment now?]');
+				window.location.reload();
 			},
 			error: function() {
 				alert('Oops, are you logged in?');
@@ -224,7 +225,6 @@ $(document).ready(function() {
 
 	/*-----------------Kudos Scale-----------------------*/
 
-
 	//Alert Kudos value on hover
 	$('.scoreBox').hover(
 		function() {
@@ -238,6 +238,14 @@ $(document).ready(function() {
 		}
 	);
 	
+	// Show which box was selected by this user
+	$.each($('.scoreBox'), function() {
+		if ($(this).attr('hasRatedThis') == 1) {
+			$(this).addClass('selectedRating');
+		}
+	});
+
+	// Clear out all other selections and show clicked box as selected
 	$('.scoreBox').click(function() {
 		resetScale();
 		$(this).addClass('selectedRating');
