@@ -201,7 +201,8 @@ class Action_model extends CI_Model {
             'Description' => $desc,
             'Score' => $rating,
             'UserID' => $userid,
-            'CompanyID' => $company
+            'CompanyID' => $company,
+            'numScores' => 1
                 );
         $this->db->insert('Claim', $data);
 
@@ -265,6 +266,65 @@ class Action_model extends CI_Model {
                 $this->db->insert('Claim_has_Tags', $claimTags);
             }
         }
+        return true;
+    }
+
+    // Update database with users' rating for claims
+    public function sendRating($userid) {
+        $rating = $this->security->xss_clean($this->input->post('rating'));
+        $claimID = $this->security->xss_clean($this->input->post('claimID'));
+
+        $hasRating = $this->db->get_where('Rating', array('UserID' => $userid, 'ClaimID' => $claimID));
+        // Insert new rating if no results found and updating number of ratings this claim has
+        if($hasRating->num_rows() == 0) {
+            $score = array(
+                'Value' => $rating,
+                'UserID' => $userid,
+                'ClaimID' => $claimID
+                );
+            $this->db->insert('Rating', $score);
+
+            $numRatings = "UPDATE Claim
+                        SET Score = (Score*numScores+$rating) / (numScores+1),
+                        numScores = numScores+1
+                        WHERE ClaimID = $claimID";
+            $this->db->query($numRatings);
+        } else {
+            // Update if they've already submitted a rating for this claim
+            $userNewRating = array(
+                'Value' => $rating
+                );
+            $where = array(
+                'UserID' => $userid,
+                'ClaimID' => $claimID
+                );
+            $this->db->update('Rating', $userNewRating, $where);
+
+            /*----Recalculate average score of claim----*/
+            // first get claim's current score and the number of ratings for that claim
+            $claimScoreQuery = $this->db->get_where('Claim', array('ClaimID' => $claimID));
+            $numScores = $claimScoreQuery->row()->numScores;
+
+            // find the difference between the user's new rating and old rating
+            $oldRating = $hasRating->row()->Value;
+            $diff = $rating - $oldRating;
+
+            // get the total score of all ratings
+            $oldTotal = $claimScoreQuery->row()->Score * $numScores;
+
+            // finally recalculate the average with the new score
+            $newScore = ($oldTotal + $diff) / $numScores;
+
+            // update this claim's score with the new score
+            $recalculated = array(
+                'Score' => $newScore
+                );
+            $where = array(
+                'ClaimID' => $claimID
+                );
+            $this->db->update('Claim', $recalculated, $where);
+        }
+
         return true;
     }
 }

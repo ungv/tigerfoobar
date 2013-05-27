@@ -1,6 +1,28 @@
 $(document).ready(function() {
 	resetScale();
 	
+	/*------Rating the claim-------*/
+	// Add or update user's rating on this claim
+	$('input[name=score]').click(function() {
+		$.ajax({
+			type: 'POST',
+			url: 'http://127.0.0.1/action/sendRating',
+			data: {
+				rating: $(this).attr('value'),
+				claimID: $(this).attr('ccID')
+			},
+			dataType: 'json',
+			success: function(json) {
+				alert('[Could direct them to add a comment now?]');
+				window.location.reload();
+			},
+			error: function() {
+				alert('Oops, are you logged in?');
+			}
+		});
+	});
+
+
 	/*------Voting On Comments-------*/
 
 	//Keep track of comments that has either up/down vote already submitted
@@ -203,7 +225,6 @@ $(document).ready(function() {
 
 	/*-----------------Kudos Scale-----------------------*/
 
-
 	//Alert Kudos value on hover
 	$('.scoreBox').hover(
 		function() {
@@ -217,6 +238,14 @@ $(document).ready(function() {
 		}
 	);
 	
+	// Show which box was selected by this user
+	$.each($('.scoreBox'), function() {
+		if ($(this).attr('hasRatedThis') == 1) {
+			$(this).addClass('selectedRating');
+		}
+	});
+
+	// Clear out all other selections and show clicked box as selected
 	$('.scoreBox').click(function() {
 		resetScale();
 		$(this).addClass('selectedRating');

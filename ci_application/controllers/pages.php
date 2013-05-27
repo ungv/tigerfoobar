@@ -56,12 +56,14 @@ class Pages extends Root_Controller {
 			$data['headerTitle'] = 'View Claim - PatchWork';
 			$data['pageType'] = 'claim';
 
+			$data['claimID'] = $claimID;
 			$data['claimInfo'] = get_object_vars($this->data_model->getClaim($claimID));
 			$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
 
 			$resultsArr = [];
 			$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr, $this->userid);
 			$data['scores'] = $this->data_model->getClaimScores($claimID);
+			$data['userRating'] = get_object_vars($this->data_model->getRatingOnClaim($claimID, $this->userid));
 			
 			//files needed
 			$data['csFiles'] = array('general','ccStyles');

@@ -48,7 +48,7 @@ class Data_model extends CI_Model {
 	public function getClaimScores($claimID) {
 		$sql = "SELECT *, COUNT(ClaimID) AS noRatings, 
 					(SELECT COUNT(ClaimID) 
-					FROM Rating 
+					FROM Rating
 					WHERE ClaimID = $claimID) as Total
 				FROM Rating
 				WHERE ClaimID = $claimID
@@ -88,8 +88,18 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 
-	// Need to get number of ratings for each claim
-	
+	// Get user's rating on a specific claim
+	public function getRatingOnClaim($claimID, $userid) {
+		if(!isset($userID)) {
+			$userID = -1;
+		}		
+		$sql = "SELECT Value
+				FROM Rating
+				WHERE ClaimID = $claimID
+				AND UserID = $userid";
+		return $this->db->query($sql)->row();
+	}
+		
 	// ------------- METHODS FOR COMPANY VIEW -------------	
 	//Retrieves the basic data for a company
 	public function getCompany($companyID) {

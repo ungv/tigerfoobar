@@ -257,7 +257,7 @@ function applyColors(thisVal, $element, styling, stylewith) {
 		$element.css(styling, stylewith + colors[3]);
 	} else if (thisVal < 1) {
 		$element.css(styling, stylewith + colors[4]);
-	} else if (thisVal < 2) {
+	} else if (thisVal <= 2) {
 		$element.css(styling, stylewith + colors[5]);
 	} else if (thisVal > 2) {
 		$element.css(styling, stylewith + colors[6]);
