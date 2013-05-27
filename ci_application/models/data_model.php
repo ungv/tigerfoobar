@@ -89,14 +89,14 @@ class Data_model extends CI_Model {
 	}
 
 	// Get user's rating on a specific claim
-	public function getRatingOnClaim($claimID, $userid) {
+	public function getRatingOnClaim($claimID, $userID) {
 		if(!isset($userID)) {
 			$userID = -1;
 		}
 		$sql = "SELECT Value
 				FROM Rating
 				WHERE ClaimID = $claimID
-				AND UserID = $userid";
+				AND UserID = $userID";
 		return $this->db->query($sql)->row();
 	}
 		
