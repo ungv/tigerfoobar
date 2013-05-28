@@ -24,12 +24,4 @@ $(document).ready(function() {
 		resetScale();
 		$(this).addClass('selectedRating');
 	});
-
-	$.each($('.claimScore'), function() {
-		applyColors(parseFloat($(this).text()), $(this).parent(), 'background-color');
-	});
-
-	$.each($('#discussionContent li'), function() {
-		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
-	});
 });

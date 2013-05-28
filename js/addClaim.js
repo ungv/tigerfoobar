@@ -55,36 +55,37 @@ function addClaim() {
 	$title = $('input[name=title]').val();
 	$desc = $('textarea').val();
 	$company = $('#assocCo').tagit('tags');
-	if ($company == '') {
-		$('#coNote').css('color', 'red');
-		$('#coNote').text('*All claims needs to refer to a company')
-		return;
-	}
 	$rating = $('input[name=score]:checked').val();
 	$tags = $('#tagsSearch').tagit('tags');
 	var tagsObj = new Object();
 	for (var i in $tags) {
 		tagsObj[i] = $tags[i].value;
 	}
-	$.ajax({
-		type: 'POST',
-		url: '/action/addClaim',
-		data: {
-			url: $url,
-			title: $title,
-			desc: $desc,
-			company: '206',
-			rating: $rating,
-			tags: tagsObj
-		},
-		dataType: 'json',
-		success: function(json) {
-			hidePopups();
-			alert('Your claim has been submitted!');
-			window.location.reload();
-		},
-		error: function() {
-			alert('Oops, are you logged in?');
-		}
-	});
+	if ($url != '' && $title != '' && $company != '' && $rating != null) {
+		$.ajax({
+			type: 'POST',
+			url: '/action/addClaim',
+			data: {
+				url: $url,
+				title: $title,
+				desc: $desc,
+				company: '206',
+				rating: $rating,
+				tags: tagsObj
+			},
+			dataType: 'json',
+			success: function(json) {
+				hidePopups();
+				alert('Your claim has been submitted!');
+				window.location.reload();
+			},
+			error: function() {
+				alert('Oops, are you logged in?');
+			}
+		});
+	} else {
+		$('#coNote, #ratingNote').css('color', 'red');
+		$('#coNote').show(200);
+		$('#ratingNote').show(200);
+	}
 }

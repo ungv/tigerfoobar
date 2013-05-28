@@ -1,6 +1,19 @@
 $(document).ready(function() {
-	// Color the scale
+	/*-----Coloring-------*/
+	//Method found in general.js
 	resetScale();
+
+	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
+	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
+	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
+	
+	$.each($('.claimScore'), function() {
+		applyColors(parseFloat($(this).text()), $(this).parent(), 'background-color');
+	});
+
+	$.each($('#discussionContent li'), function() {
+		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
+	});	
 	
 	/*------Rating the claim-------*/
 	// Add or update user's rating on this claim

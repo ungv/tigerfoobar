@@ -269,11 +269,7 @@ class Action_model extends CI_Model {
         $curScore = $query->row()->Score;
         $curNumClaims = $query->row()->numClaims;
 
-        // get the total score of all claims for this company
-        $oldTotal = $curScore * $curNumClaims;
-
-        // finally recalculate the average with the new score
-        $newScore = ($oldTotal + $rating) / ($curNumClaims+1);
+        $newScore = ($curScore * $curNumClaims + $rating) / ($curNumClaims+1);
 
         // Update company score with this rating and increase counter for number of claims for company
         $updateNumClaims = "UPDATE Company
@@ -303,37 +299,25 @@ class Action_model extends CI_Model {
         $this->db->insert('Rating', $score);
 
         // Insert each new tag as a new row
-        foreach ($tags as $tag) {
-            //Check if this tag already exists in database
-            $existingTags = $this->db->get_where('Tags', array('Name' => $tag));
-            //Insert if no results found
-            if($existingTags->num_rows() == 0) {
-                $newTag = array(
-                    'Name' => $tag,
-                    'Type' => 'Claim Tag',
-                    'is_Seed' => 0
-                    );
-                $this->db->insert('Tags', $newTag);
-            }
+        if (!empty($tags)) {
+            foreach ($tags as $tag) {
+                //Check if this tag already exists in database
+                $getTags = $this->db->get_where('Tags', array('Name' => $tag));
+                //Insert if no results found
+                if($getTags->num_rows() == 0) {
+                    $newTag = array(
+                        'Name' => $tag,
+                        'Type' => 'Claim Tag',
+                        'is_Seed' => 0
+                        );
+                    $this->db->insert('Tags', $newTag);
+                }
 
-            // Get tagsID of tags entered
-            $getTags = $this->db->get_where(
-                'Tags', array(
-                    'Name' => $tag
-                    )
-                );
-            $tagsID = $getTags->row()->TagsID;
-
-            // Check if user has already submitting this tag with this claim
-            $checkTag = $this->db->get_where(
-                'Claim_has_Tags', array(
-                    'Claim_ClaimID' => $claimID, 
-                    'Tags_TagsID' => $tagsID, 
-                    'User_ID' => $userid
-                    )
-                );
-            if($checkTag->num_rows() == 0) {
-                // Finally link tags to the claim if not already there
+                // Need this in case tag was recently entered and need to retrieve its new tagID
+                $getTags = $this->db->get_where('Tags', array('Name' => $tag));
+                
+                // Get tagsID of tags entered and link tags to the claim
+                $tagsID = $getTags->row()->TagsID;
                 $claimTags = array(
                    'Claim_ClaimID' => $claimID,
                    'Tags_TagsID' => $tagsID,
@@ -364,12 +348,20 @@ class Action_model extends CI_Model {
                 );
             $this->db->insert('Rating', $score);
 
+            // Get the current claim score before updating to check difference
+            $oldScoreQuery = $this->db->get_where('Claim', array('ClaimID' => $claimID));
+            $claimOldScore = $oldScoreQuery->row()->Score;
+            $curNumScores = $oldScoreQuery->row()->numScores;
+
+            $newScore = ($claimOldScore * $curNumScores + $rating) / ($curNumScores+1);
+
             // Add new rating to claim average and update number of ratings
             $addRating = "UPDATE Claim
-                        SET Score = (Score*numScores)+$rating / (numScores+1),
+                        SET Score = $newScore,
                         numScores = numScores+1
                         WHERE ClaimID = $claimID";
             $this->db->query($addRating);
+
         } else {
             // Update if they've already submitted a rating for this claim
             $userNewRating = array(
@@ -394,11 +386,7 @@ class Action_model extends CI_Model {
             $oldUserRating = $hasRating->row()->Value;
             $diff = $rating - $oldUserRating;
 
-            // get the total score of all ratings
-            $oldClaimTotal = $claimOldScore * $numScores;
-
-            // finally recalculate the average with the new score
-            $newScore = ($oldClaimTotal + $diff) / $numScores;
+            $newScore = ($claimOldScore * $numScores + $diff) / $numScores;
 
             // update this claim's score with the new score
             $recalculated = array(
@@ -423,11 +411,7 @@ class Action_model extends CI_Model {
         $curScore = $query->row()->Score;
         $curNumClaims = $query->row()->numClaims;
 
-        // get the total score of all claims for this company
-        $oldCompanyTotal = $curScore * $curNumClaims;
-
-        // finally recalculate the average with the new score
-        $newScore = ($oldCompanyTotal + $diff) / $curNumClaims;
+        $newScore = ($curScore * $curNumClaims + $diff) / $curNumClaims;
 
         // update this company's score with the new score
         $recalculated = array(
