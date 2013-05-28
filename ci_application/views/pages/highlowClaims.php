@@ -22,7 +22,7 @@ if ($pageType == 'company') {
 						<?=$claim['Score']?>
 					</div>
 					<div class="claimVotes">
-						104
+						<?=$claim['noRatings']?>
 					</div>
 				</div>
 				<div class="rightContainer">
@@ -30,7 +30,7 @@ if ($pageType == 'company') {
 						<a href="/claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a>
 					</div>
 					<div class="claimTags">
-						Tags: PowermacG4, safety ...
+						Tags: [need help with this query]
 					</div>
 				</div>
 			</div>

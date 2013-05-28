@@ -22,9 +22,10 @@
 					?>
 					<ul id="claimPopTags">
 						<?php
+						// need to get most popular claims for this company, then get their most popular tags
 						foreach ($companyTags AS $tag) {
 							?>
-							<li><?=$tag['Name']?></li>
+							<li>[need help with this query]<?//=$tag['Name']?></li>
 							<?php
 						}
 						?>
