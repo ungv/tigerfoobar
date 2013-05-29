@@ -50,6 +50,12 @@
 	#tagSection .tagUpvote {
 		padding-left:6px;
 		padding-right:6px;
+		color: green;
+	}
+
+	#tagSection .tagUpvote:hover {
+		color: black;
+		text-decoration: underline;		
 	}
 
 	#tagSection li.userVoted {
