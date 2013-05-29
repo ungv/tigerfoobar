@@ -109,13 +109,38 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->row();
 	}
 
-	//Retrieves the top claims for a given company
+	//Retrieves the all claims for a given company
 	public function getCompanyClaims($companyID) {
 		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
 				FROM Claim cl
 			    JOIN Company co
 				ON co.CompanyID = cl.CompanyID
-				WHERE co.CompanyID = $companyID";
+				WHERE co.CompanyID = $companyID
+				ORDER BY cl.Score";
+		return $this->db->query($sql)->result_array();
+	}
+
+	//Retrieves the top $n positive claims for a given company
+	public function getCompanyClaimsPos($companyID) {
+		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
+				FROM Claim cl
+			    JOIN Company co
+				ON co.CompanyID = cl.CompanyID
+				WHERE co.CompanyID = $companyID
+				AND cl.Score > 0
+				ORDER BY cl.Score DESC";
+		return $this->db->query($sql)->result_array();
+	}
+
+	//Retrieves the top $n negative claims for a given company
+	public function getCompanyClaimsNeg($companyID) {
+		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
+				FROM Claim cl
+			    JOIN Company co
+				ON co.CompanyID = cl.CompanyID
+				WHERE co.CompanyID = $companyID
+				AND cl.Score < 0
+				ORDER BY cl.Score ASC";
 		return $this->db->query($sql)->result_array();
 	}
 	

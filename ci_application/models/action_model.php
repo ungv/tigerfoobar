@@ -251,6 +251,25 @@ class Action_model extends CI_Model {
         $rating = $this->security->xss_clean($this->input->post('rating'));
         $tags = $this->security->xss_clean($this->input->post('tags'));
 
+        // Convert company name to its id
+        // If happen to find more than 1 result, just get the company with
+        // the most claims so far
+        $query = "SELECT CompanyID
+                FROM Company
+                WHERE Name LIKE '%$company%'
+                ORDER BY numClaims
+                LIMIT 1";
+        $result = $this->db->query($query);
+        // If no companies similar to this name were found, add as new row
+        if ($result->num_rows() == 0) {
+            $data = array(
+                'Name' => $company,
+                'numClaims' => 1
+                );
+            $this->db->insert('Company', $data);
+        }
+        $companyID = $this->db->query($query)->row()->CompanyID;
+
         // Submit the claim without tags first
         $data = array(
             'Title' => $title,
@@ -258,14 +277,14 @@ class Action_model extends CI_Model {
             'Description' => $desc,
             'Score' => $rating,
             'UserID' => $userid,
-            'CompanyID' => $company,
+            'CompanyID' => $companyID,
             'numScores' => 1
                 );
         $this->db->insert('Claim', $data);
 
         /*----Recalculate average score of company----*/
         // first get company's current score and the number of claims for that company
-        $query = $this->db->get_where('Company', array('CompanyID' => $company));
+        $query = $this->db->get_where('Company', array('CompanyID' => $companyID));
         $curScore = $query->row()->Score;
         $curNumClaims = $query->row()->numClaims;
 
@@ -275,7 +294,7 @@ class Action_model extends CI_Model {
         $updateNumClaims = "UPDATE Company
                     SET Score = $newScore,
                     numClaims = numClaims+1
-                    WHERE CompanyID = $company";
+                    WHERE CompanyID = $companyID";
         $this->db->query($updateNumClaims);
 
         // Get claimID of their new claim
