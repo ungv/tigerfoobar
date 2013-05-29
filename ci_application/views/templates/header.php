@@ -26,10 +26,8 @@
 
 <body>
 	<header>
-		<h1><a href="<?= base_url()?>"><img id="logoImage" src="<?= base_url() . 'img/' . 'patchwork_logo.png'?>"/>atchwork</a></h1>
+		<h1><a href="/"><img id="logoImage" src="/img/patchwork_logo.png"/>atchwork</a></h1>
 		<SECTION id='topbar'>
-			<img id="logo" src="/img/logo.png" />
-			<h1><a href="/">Patchwork</a></h1>
 			<!--Search box-->
 			<input id="searchInput" type="text" placeholder="Search for companies or products/services"/>
 			<ul id="autoCompleteResults" style="display: none;">
