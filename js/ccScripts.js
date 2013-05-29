@@ -371,3 +371,4 @@ $(document).ready(function() {
 $('label.scoreBox, span.tagUpvote, a.addTag').tooltipster();
 $('span.tagUpvote').tooltipster();
 $('#addTag').tooltipster();
+$('img.flagComment').tooltipster();

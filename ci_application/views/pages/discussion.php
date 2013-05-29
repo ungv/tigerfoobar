@@ -62,7 +62,7 @@
 						<label for="<?=$comment['CommentID']?>upvote" class="buttons upVote <?= $comment['userVotedUp'] ? 'selectedVote' : '' ?>" voted="<?=$comment['userVotedUp']?>" value="1">&#9650;</label>
 						<input type="radio" id="<?=$comment['CommentID']?>downvote" name="commentVoting">
 						<label for="<?=$comment['CommentID']?>downvote" class="buttons downVote <?= $comment['userVotedDown'] ? 'selectedVote' : '' ?>" voted="<?=$comment['userVotedDown']?>" value="0">&#9660;</label>
-						<img class='flagComment' commentID="<?=$comment['CommentID']?>" src="/img/flag.png" >
+						<img class='flagComment' commentID="<?=$comment['CommentID']?>" src="/img/flag.png" title='Flag Comment'>
 						<button class="buttons reply" value="">Reply</button>
 					</div>
 				</li>
