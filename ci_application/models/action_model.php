@@ -76,6 +76,49 @@ class Action_model extends CI_Model {
         }
     }
 
+    // flag stuff
+    public function flagContent($userid) {
+        $targetID = $this->security->xss_clean($this->input->post('targetID'));
+        $targetType = $this->security->xss_clean($this->input->post('targetType'));
+        $flagType = $this->security->xss_clean($this->input->post('flagType'));
+        
+        // check if user already voted on this comment
+        $hasVoted = $this->db->get_where('Flags', array('userID' => $userid , 'target_id' => $targetID, 'target_type' => $targetType));
+        
+        $data = array(
+            'userID' => $userid, 
+            'target_id' => $targetID,
+            'target_type' => $targetType,
+            'flag_type' => $flagType,
+        );
+        
+        //user hasnt voted, insert or update row
+        if ($hasVoted->num_rows == 0) { 
+            $this->db->insert('Flags', $data); 
+        } else {
+            $row = $hasVoted->row();
+
+            // if the same row, delete
+            if (strcmp($row->flag_type, $flagType) == 0) { 
+                $this->db->delete('Flags', $data);
+            
+            // else update row
+            } else { 
+                $data = array(
+                    'flag_type' => $flagType
+                );
+                $where = array(
+                    'userID' => $userid, 
+                    'target_id' => $targetID,
+                    'target_type' => $targetType
+                );
+                $this->db->update('Flags', $data, $where);     
+            }            
+        }
+
+        return true;
+    }
+
     //Sends comment vote to server, 
     //adds a new row if casting new vote, 
     //update row if already exists,
@@ -97,10 +140,17 @@ class Action_model extends CI_Model {
             if (!$voted) {    //user hasnt voted, insert or update row
                 if ($hasVoted->num_rows == 0) {    //user has not voted on this comment, insert new row
                     $result = $this->db->insert('Vote', $data); 
+
+                    // Add 1 to vote count on this comment
+                    $updateVoteCount = "UPDATE Discussion
+                                        SET votes = votes+1
+                                        WHERE ClaimID = $ClaimID
+                                        AND CommentID = $CommentID";
+                    $this->db->query($updateVoteCount);
                 } else {    //user has voted on something, update their vote value
                     $data = array(
                        'Value' => $value,
-                    );
+                        );
                     $where = array(
                         'UserID' => $userid,
                         'ClaimID' => $ClaimID,
@@ -110,6 +160,13 @@ class Action_model extends CI_Model {
                 }
             } else {         //user is unvoting their current vote
                 $result = $this->db->delete('Vote', $data);
+
+                // Subtract 1 from vote count on this comment
+                $updateVoteCount = "UPDATE Discussion
+                                    SET votes = votes-1
+                                    WHERE ClaimID = $ClaimID
+                                    AND CommentID = $CommentID";
+                $this->db->query($updateVoteCount);
             }
         return $result;
     }
@@ -182,5 +239,224 @@ class Action_model extends CI_Model {
         }
         // else return false, no user found or pw incorrect
         return false;
+    }
+
+    // Adds a claim to the database
+    // Clean input values for security
+    public function addClaim($userid) {
+        $url = $this->security->xss_clean($this->input->post('url'));
+        $title = $this->security->xss_clean($this->input->post('title'));
+        $desc = $this->security->xss_clean($this->input->post('desc'));
+        $company = $this->security->xss_clean($this->input->post('company'));
+        $rating = $this->security->xss_clean($this->input->post('rating'));
+        $tags = $this->security->xss_clean($this->input->post('tags'));
+
+        // Convert company name to its id
+        // If happen to find more than 1 result, just get the company with
+        // the most claims so far
+        $query = "SELECT CompanyID
+                FROM Company
+                WHERE Name LIKE '%$company%'
+                ORDER BY numClaims
+                LIMIT 1";
+        $result = $this->db->query($query);
+        // If no companies similar to this name were found, add as new row
+        if ($result->num_rows() == 0) {
+            $data = array(
+                'Name' => $company,
+                'numClaims' => 1
+                );
+            $this->db->insert('Company', $data);
+        }
+        $companyID = $this->db->query($query)->row()->CompanyID;
+
+        // Submit the claim without tags first
+        $data = array(
+            'Title' => $title,
+            'Link' => $url,
+            'Description' => $desc,
+            'Score' => $rating,
+            'UserID' => $userid,
+            'CompanyID' => $companyID,
+            'numScores' => 1
+                );
+        $this->db->insert('Claim', $data);
+
+        /*----Recalculate average score of company----*/
+        // first get company's current score and the number of claims for that company
+        $query = $this->db->get_where('Company', array('CompanyID' => $companyID));
+        $curScore = $query->row()->Score;
+        $curNumClaims = $query->row()->numClaims;
+
+        $newScore = ($curScore * $curNumClaims + $rating) / ($curNumClaims+1);
+
+        // Update company score with this rating and increase counter for number of claims for company
+        $updateNumClaims = "UPDATE Company
+                    SET Score = $newScore,
+                    numClaims = numClaims+1
+                    WHERE CompanyID = $companyID";
+        $this->db->query($updateNumClaims);
+
+        // Get claimID of their new claim
+        $getClaim = $this->db->get_where(
+            'Claim', array(
+                'Title' => $title, 
+                'Link' => $url, 
+                'Description' => $desc, 
+                'Score' => $rating,
+                'UserID' => $userid
+                )
+            );
+        $claimID = $getClaim->row()->ClaimID;
+
+        // Submit rating
+        $score = array(
+            'Value' => $rating,
+            'UserID' => $userid,
+            'ClaimID' => $claimID
+            );
+        $this->db->insert('Rating', $score);
+
+        // Insert each new tag as a new row
+        if (!empty($tags)) {
+            foreach ($tags as $tag) {
+                //Check if this tag already exists in database
+                $getTags = $this->db->get_where('Tags', array('Name' => $tag));
+                //Insert if no results found
+                if($getTags->num_rows() == 0) {
+                    $newTag = array(
+                        'Name' => $tag,
+                        'Type' => 'Claim Tag',
+                        'is_Seed' => 0
+                        );
+                    $this->db->insert('Tags', $newTag);
+                }
+
+                // Need this in case tag was recently entered and need to retrieve its new tagID
+                $getTags = $this->db->get_where('Tags', array('Name' => $tag));
+                
+                // Get tagsID of tags entered and link tags to the claim
+                $tagsID = $getTags->row()->TagsID;
+                $claimTags = array(
+                   'Claim_ClaimID' => $claimID,
+                   'Tags_TagsID' => $tagsID,
+                   'User_ID' => $userid
+                    );
+                $this->db->insert('Claim_has_Tags', $claimTags);
+            }
+        }
+        return true;
+    }
+
+    // Update database with users' rating for claims
+    public function sendRating($userid) {
+        $rating = $this->security->xss_clean($this->input->post('rating'));
+        $claimID = $this->security->xss_clean($this->input->post('claimID'));
+
+        // Keep track of the claim's old and new scores
+        $newScore = 0;
+        $claimOldScore = 0;
+
+        $hasRating = $this->db->get_where('Rating', array('UserID' => $userid, 'ClaimID' => $claimID));
+        // Insert new rating if no results found and updating number of ratings this claim has
+        if($hasRating->num_rows() == 0) {
+            $score = array(
+                'Value' => $rating,
+                'UserID' => $userid,
+                'ClaimID' => $claimID
+                );
+            $this->db->insert('Rating', $score);
+
+            // Get the current claim score before updating to check difference
+            $oldScoreQuery = $this->db->get_where('Claim', array('ClaimID' => $claimID));
+            $claimOldScore = $oldScoreQuery->row()->Score;
+            $curNumScores = $oldScoreQuery->row()->numScores;
+
+            $newScore = ($claimOldScore * $curNumScores + $rating) / ($curNumScores+1);
+
+            // Add new rating to claim average and update number of ratings
+            $addRating = "UPDATE Claim
+                        SET Score = $newScore,
+                        numScores = numScores+1
+                        WHERE ClaimID = $claimID";
+            $this->db->query($addRating);
+
+        } else {
+            // Update if they've already submitted a rating for this claim
+            $userNewRating = array(
+                'Value' => $rating
+                );
+            $where = array(
+                'UserID' => $userid,
+                'ClaimID' => $claimID
+                );
+            $this->db->update('Rating', $userNewRating, $where);
+
+            /*----Recalculate average score of claim----*/
+            // Because the user already submitted a rating, we have to figure out the difference
+            // between their old rating and new rating in order to recalculate the new average
+
+            // first get claim's current score and the number of ratings for that claim
+            $claimScoreQuery = $this->db->get_where('Claim', array('ClaimID' => $claimID));
+            $claimOldScore = $claimScoreQuery->row()->Score;
+            $numScores = $claimScoreQuery->row()->numScores;
+
+            // find the difference between the user's new rating and old rating
+            $oldUserRating = $hasRating->row()->Value;
+            $diff = $rating - $oldUserRating;
+
+            $newScore = ($claimOldScore * $numScores + $diff) / $numScores;
+
+            // update this claim's score with the new score
+            $recalculated = array(
+                'Score' => $newScore
+                );
+            $where = array(
+                'ClaimID' => $claimID
+                );
+            $this->db->update('Claim', $recalculated, $where);
+        }
+
+        /*----Recalculate average score of company----*/
+        // first get the company attached to this claim
+        $query = $this->db->get_where('Claim', array('ClaimID' => $claimID));
+        $company = $query->row()->CompanyID;
+
+        // find the difference between the claim's new score and its old score
+        $diff = $newScore - $claimOldScore;
+
+        // get company's current score and the number of claims for that company
+        $query = $this->db->get_where('Company', array('CompanyID' => $company));
+        $curScore = $query->row()->Score;
+        $curNumClaims = $query->row()->numClaims;
+
+        $newScore = ($curScore * $curNumClaims + $diff) / $curNumClaims;
+
+        // update this company's score with the new score
+        $recalculated = array(
+            'Score' => $newScore
+            );
+        $where = array(
+            'CompanyID' => $company
+            );
+        $this->db->update('Company', $recalculated, $where);
+        return true;
+    }
+
+    public function addComment($userid) {
+        $claimID = $this->security->xss_clean($this->input->post('claimID'));
+        $comment = $this->security->xss_clean($this->input->post('comment'));
+        $parentCommentID = $this->security->xss_clean($this->input->post('parentCommentID'));
+        $level = $this->security->xss_clean($this->input->post('level'));
+
+        $commentData = array(
+                'ClaimID' => $claimID,
+                'UserID' => $userid,
+                'Comment' => $comment,
+                'ParentCommentID' => $parentCommentID,
+                'level' => $level
+                );
+        $this->db->insert('Discussion', $commentData);
+        return true;
     }
 }

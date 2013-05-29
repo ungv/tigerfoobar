@@ -1,4 +1,18 @@
+/*
+	
+	Stylings for company, claim, and tag pages
+	
+	Patchwork
+
+*/
+
+
+
 /*-------------------------General---------------------------------*/
+
+	ul {
+		/*display: inline;*/
+	}
 
 	li {
 		display: inline;
@@ -53,6 +67,12 @@
 	#tagSection .tagUpvote {
 		padding-left:6px;
 		padding-right:6px;
+		color: green;
+	}
+
+	#tagSection .tagUpvote:hover {
+		color: black;
+		text-decoration: underline;		
 	}
 
 	#tagSection li.userVoted {
@@ -342,6 +362,7 @@
 
 	.highRatedClaims {
 		float: right;
+		margin-right: 2px;
 	}
 
 	.claimContainer {
@@ -377,4 +398,14 @@
 
 	.claimScore, .claimVotes, .claimTitle, .claimTags {
 		padding: 10px;
+	}
+
+/*-----------------------Flags----------------------*/
+
+	#flagButton {
+		float: right;
+	}
+
+	img.flagComment {
+		height: 20px;
 	}

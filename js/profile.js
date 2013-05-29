@@ -70,7 +70,7 @@ $(document).ready(function() {
 function updateProfile(col, newInfo) {
 	$.ajax({
 		type: 'POST',
-		url: 'http://127.0.0.1/action/updateProfile',
+		url: '/action/updateProfile',
 		data: {
 			col: col,
 			newInfo: newInfo
@@ -98,7 +98,7 @@ function updateProfile(col, newInfo) {
 function dropAccount(password) {
 	$.ajax({
 		type: 'POST',
-		url: 'http://127.0.0.1/action/dropAccount',
+		url: '/action/dropAccount',
 		data: {
 			password: password
 		},

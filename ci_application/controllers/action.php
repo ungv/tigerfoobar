@@ -83,6 +83,30 @@ class Action extends Root_Controller {
 	}
 
 	/*
+
+		flag stuff
+	*/
+
+	public function flagContent() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+
+			$result = $this->action_model->flagContent($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			}else {			//didn't work, inform user why
+	        	$this->output->set_status_header('400');
+	        	$data['json'] = '{"message":"Cannot Process Flag"}'; 
+			}
+		}
+		$this->load->view('data/json_view', $data);
+	}
+
+
+	/*
 		Adds a new user to the database, username/password required, email optional
 	*/
 	public function addUser() {
@@ -126,6 +150,68 @@ class Action extends Root_Controller {
 		}else {
 			$userid = $this->session->userdata('userid');
 			$result = $this->action_model->dropAccount($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			}else {			//didn't work, inform user why
+	        	$this->output->set_status_header('400');
+	        	$data['json'] = '{"message":"Cannot Process Update"}'; 
+			}
+		}
+		$this->load->view('data/json_view', $data);
+	}
+
+	/*
+		Add a claim to the database
+	*/
+	public function addClaim() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->addClaim($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			}else {			//didn't work, inform user why
+	        	$this->output->set_status_header('400');
+	        	$data['json'] = '{"message":"Cannot Process Update"}'; 
+			}
+		}
+		$this->load->view('data/json_view', $data);
+	}
+
+	/*
+		Add a rating to a claim
+	*/
+	public function sendRating() {
+
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->sendRating($userid);
+
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			}else {			//didn't work, inform user why
+	        	$this->output->set_status_header('400');
+	        	$data['json'] = '{"message":"Cannot Process Update"}'; 
+			}
+		}
+		$this->load->view('data/json_view', $data);
+	}
+
+	/*
+		Add a comment to the database
+	*/
+	public function addComment() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->addComment($userid);
 			if($result) {	//database updated db, send success method
 				$data['json'] = '{"message":"Successfully contacted server method!"}';
 			}else {			//didn't work, inform user why

@@ -108,6 +108,12 @@ header, #logoImage{
 	height:52px;
 }
 
+#logo {
+	float: left;
+	width: 40px;
+	margin-right: 10px;
+}
+
 #topbar {
 	width: 915px;
 	margin: 0 auto;
@@ -224,10 +230,6 @@ footer, footer a{
 	
 /*SignupPopup------------------------*/
 input {
-	opacity: 0.6;
-}
-
-input {
 	opacity: 1;
 }
 
@@ -289,6 +291,10 @@ input[type=button], input[type=submit] {
 
 .full {
 	width: 95%;
+}
+
+.threeQuarters {
+	width: 75%;
 }
 
 .half {

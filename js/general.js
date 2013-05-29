@@ -70,6 +70,28 @@ $(document).ready(function() {
 		hidePopups();
 	});
 
+	//Sends the passed login parameters to server onclick
+	function sendLogin(username, password) {
+		$.ajax({
+			type: 'POST',
+			url: '/action/login',
+			data: {
+				username: username,
+				password: password
+			},
+			dataType: 'json',
+			success: function(json) {
+				hidePopups();
+				window.location.reload();
+			},
+			error: function() {
+				$('#login_fail').show(200);
+				$('#login_password').val('');
+			}
+		});
+	}
+	
+
 	/*------Sigining Up------*/
 
 	//Show signin box onclick
@@ -106,7 +128,7 @@ $(document).ready(function() {
 	function addUser(username, password, email) {
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/addUser',
+			url: '/action/addUser',
 			data: {
 				username: username,
 				password: password,
@@ -231,7 +253,11 @@ $(document).ready(function() {
 	};;
 });
 
+/*--------Public functions that need to be accessed by other JS files----------*/
+
+// Hide all popups currently showing
 function hidePopups() {
+	$('.lightsout').fadeOut();
 	$('.popup').hide(200);
 	$.each($('.popup'), function() {
 		$('input').val('');
@@ -250,31 +276,41 @@ function applyColors(thisVal, $element, styling, stylewith) {
 		$element.css(styling, stylewith + colors[3]);
 	} else if (thisVal < 1) {
 		$element.css(styling, stylewith + colors[4]);
-	} else if (thisVal < 2) {
+	} else if (thisVal <= 2) {
 		$element.css(styling, stylewith + colors[5]);
 	} else if (thisVal > 2) {
 		$element.css(styling, stylewith + colors[6]);
 	}
 }
 
-//Sends the passed login parameters to server onclick
-//Reloads the current page
-function sendLogin(username, password) {
-	$.ajax({
-		type: 'POST',
-		url: 'http://127.0.0.1/action/login',
-		data: {
-			username: username,
-			password: password
-		},
-		dataType: 'json',
-		success: function(json) {
-			hidePopups();
-			window.location.reload();
-		},
-		error: function() {
-			$('#login_fail').show(200);
-			$('#login_password').val('');
-		}
-	});
-}
+<<<<<<< HEAD
+	//Sends the passed login parameters to server onclick
+	//Reloads the current page
+	function sendLogin(username, password) {
+		$.ajax({
+			type: 'POST',
+			url: 'http://127.0.0.1/action/login',
+			data: {
+				username: username,
+				password: password
+			},
+			dataType: 'json',
+			success: function(json) {
+				hidePopups();
+				window.location.reload();
+			},
+			error: function() {
+				$('#login_fail').show(200);
+				$('#login_password').val('');
+			}
+		});
+	}
+
+	//Resets and recolors the kudos scale to get rid of border color
+	function resetScale() {
+		$.each($('.scoreBox'), function(i) {
+			$(this).css('background-color', colors[i]);
+			$(this).css('border', '2px solid ' + colors[i]);
+			$(this).removeClass('selectedRating');
+		});
+	}

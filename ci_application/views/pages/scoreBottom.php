@@ -10,7 +10,8 @@
 				<?php
 				} else {
 				?>
-					<span>Other claims related to <a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></span>
+					<span><a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></span><br/>
+					<span style="font-size: 10pt;">related claims:</span>
 				<?php
 				}
 				?>
@@ -21,9 +22,10 @@
 					?>
 					<ul id="claimPopTags">
 						<?php
+						// need to get most popular claims for this company, then get their most popular tags
 						foreach ($companyTags AS $tag) {
 							?>
-							<li><?=$tag['Name']?></li>
+							<li>[need help with this query]<?//=$tag['Name']?></li>
 							<?php
 						}
 						?>

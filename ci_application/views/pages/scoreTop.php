@@ -6,18 +6,43 @@
 				<!-- have to make form auto submit with js -->
 				<div id="scoreHeader">
 					<span id="averageScore"><?=$pageType == 'company' ? $companyInfo['Score'] : $claimInfo['ClaimScore']?></span>
-					<span id="scoreInfo">(
 						<?php
+						$string = '';
 						if (!empty($scores) || !empty($companyClaims)) {
-						?>
-						<?=$pageType == 'company' ? $companyClaims[0]['numScores'] . ' claims, [some number of] comments' : $scores[0]['Total'] . ($scores[0]['Total'] == 1 ? ' rating, ' : ' ratings, ') . count($comments) . (count($comments) == 1 ? ' comment' : ' comments')?>
-						<?php
+							$totalNumRatings = 0;
+							if ($pageType == 'company') {
+								foreach($companyClaims as $claim) {
+									$totalNumRatings += $claim['noRatings'];
+								}
+								$string .= $companyClaims[0]['Total'];
+								if ($companyClaims[0]['Total'] == 1)
+									$string .= ' claim, ';
+								else 
+									$string .= ' claims, ';
+								$string .= $totalNumRatings;
+								if ($totalNumRatings == 1)
+									$string .= ' rating';
+								else 
+									$string .= ' ratings';
+							} else {
+								$string .= $scores[0]['Total'];
+								if ($scores[0]['Total'] == 1)
+									$string .= ' rating, ';
+								else 
+									$string .= ' ratings, ';
+								$string .= count($comments);
+								if (count($comments) == 1)
+									$string .= ' comment';
+								else 
+									$string .= ' comments';								
+							}
 						} else {
-						?>
-							This claim has not been rated by anyone yet. Submit a rating below!
-						<?php
+							?>
+							<!-- should never enter this statement since a claim will always have at least one rating -->
+							<?php
+							$string += 'This claim has not been rated by anyone yet. Submit a rating below!';
 						}
 						?>
-					)</span>
+					<span id="scoreInfo">(<?=$string?>)</span>
 				</div>
 	<!--End ScoreTop content-->

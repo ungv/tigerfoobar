@@ -1,6 +1,42 @@
 $(document).ready(function() {
+	/*-----Coloring-------*/
+	//Method found in general.js
 	resetScale();
+
+	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
+	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
+	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
 	
+	$.each($('.claimScore'), function() {
+		applyColors(parseFloat($(this).text()), $(this).parent(), 'background-color');
+	});
+
+	$.each($('#discussionContent li'), function() {
+		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
+	});	
+	
+	/*------Rating the claim-------*/
+	// Add or update user's rating on this claim
+	$('input[name=claimscore]').click(function() {
+		$.ajax({
+			type: 'POST',
+			url: '/action/sendRating',
+			data: {
+				rating: $(this).attr('value'),
+				claimID: $(this).attr('claimid')
+			},
+			dataType: 'json',
+			success: function(json) {
+				alert('Thanks for rating this claim! Go ahead and add a comment below!');
+				window.location.reload();
+			},
+			error: function() {
+				alert('Oops, are you logged in?');
+			}
+		});
+	});
+
+
 	/*------Voting On Comments-------*/
 
 	//Keep track of comments that has either up/down vote already submitted
@@ -23,9 +59,9 @@ $(document).ready(function() {
 		var value = $(button).attr('value');
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/voteComment',
+			url: '/action/voteComment',
 			data: {
-				ClaimID: $(clicked).attr('ClaimID'),
+				ClaimID: $('#discussionContainer').attr('claimid'),
 				CommentID: parseInt($(clicked).attr('for')),
 				voted: voted,
 				value: value
@@ -79,6 +115,67 @@ $(document).ready(function() {
 		});
 	}
 
+	/*--------Flags------------*/
+	$('#flagButton').tooltipster({
+		trigger: 'click',
+		interactive: true,
+		interactiveTolerance: 5000,
+		position: 'bottom',
+		functionReady: function(origin, tooltip) {
+			$('#flagNoncredible').click(function() {
+				flagContent($(this), 'claim', 'noncredible');
+			});
+
+			$('#flagWrong').click(function() {
+				flagContent($(this), 'claim', 'wrongcompany');
+			});
+		}
+	});
+
+	$('label[for="radio3"]').click(function() {
+		flagContent($(this), 'claim', 'trivial');
+	});
+
+	$('img.flagComment').click(function() {
+		flagContent($(this), 'comment', 'badcomment');
+	});
+
+	function flagContent (button, targettype, flagetype) {
+		var clicked = $(button);
+		var targetID;
+
+		if (targettype == 'claim') {
+			targetID = $('#discussionContainer').attr('claimid');
+		} else {
+			targetID = $(clicked).attr('commentID');
+		};
+		
+		var targetType = targettype;
+		var flagType = flagetype;
+	
+		$.ajax({
+			type: 'POST',
+			url: '/action/flagContent',
+			data: {
+				targetID: targetID,
+				targetType: targetType,
+				flagType: flagType
+				// industryID: $(this).attr('tagid'),
+				// companyID: $(this).attr('companyid'),
+				// voted: voted
+			},
+			dataType: 'json',
+			success: function(json) {
+				//Dom changes processed pre-query
+				alert('Flagged');
+			},
+			error: function(json) {
+				//alert error message for now
+				alert(json.responseJSON.message);
+			}
+		});
+	}
+
 
 	/*------Upvoting Industry Tags-------*/
 
@@ -110,7 +207,7 @@ $(document).ready(function() {
 		$(clicked.parent().children(".tagTotal")[0]).text(oldVotes);
 		$.ajax({
 			type: 'POST',
-			url: 'http://127.0.0.1/action/upvoteTag',
+			url: '/action/upvoteTag',
 			data: {
 				industryID: $(clicked).attr('tagid'),
 				objectID: $(clicked).attr('objectid'), //the objet (claim or company) being affected
@@ -206,56 +303,12 @@ $(document).ready(function() {
 		$(newLink.children('.tagUpvote')[0]).click(function() {
 			sendTagUpvote($(this));
 		});
-		$(newLink.children('.tagUpvote')[0]).click();
 	}
 
-
-	/*-----------------Kudos Scale-----------------------*/
-
-
-	//Alert Kudos value on hover
-	$('.scoreBox').hover(
-		function() {
-			if ($(this).attr('value') == 0)
-				$(this).text('F');
-			else
-				$(this).text($(this).attr('value'));
-		},
-		function() {
-			$(this).text('');
-		}
-	);
-	
-	$('.scoreBox').click(function() {
-		resetScale();
-		$(this).addClass('selectedRating');
-	});
-
-	//Method found in general.js
-	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
-	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
-	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
-	
-	$.each($('.claimScore'), function() {
-		applyColors(parseFloat($(this).text()), $(this).parent(), 'background-color');
-	});
-
-	$.each($('#discussionContent li'), function() {
-		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
-	});
-
-	//Resets and recolors the kudos scale to get rid of border color
-	function resetScale() {
-		$.each($('.scoreBox'), function(i) {
-			$(this).css('background-color', colors[i]);
-			$(this).css('border', '2px solid ' + colors[i]);
-			$(this).removeClass('selectedRating');
-		});
-	}
 
 	/*-----------------Discussion-----------------------*/
 
-	//Injects a new textbox to start a thread
+	// Injects a new textbox to start a thread
 	$('#newComment').click(function() {
 		// $('#newCommentPopup').show(200);
 		// $('#newCommentPopup textarea').focus();
@@ -263,17 +316,42 @@ $(document).ready(function() {
 		$('#newCommentBox').show(200);
 		$('#newCommentBox textarea').focus();
 	});
-	
-	//Injects a new textbox to reply to the above comment
+
+	// Injects a new textbox to reply to the above comment
 	$('.reply').click(function() {
 		$parentLi = $(this).parent().parent().attr('id');
 		$('#' + $parentLi + 'reply').show();
 		$('#' + $parentLi + 'reply textarea').focus();
 	});
 
-	//Submit reply to database
+	// Submit a new thread or reply to database
 	$('.submitReply').click(function() {
-	
+		if ($(this).attr('id') == 'newThread') {
+			$parentCommentID = 0;
+			$level = 0;
+		} else {
+			$parentCommentID = parseInt($(this).parent().attr('id'));
+			$level = parseInt($('#' + $parentCommentID + 'comment').attr('level')) + 1;
+		}
+		$.ajax({
+			type: 'POST',
+			url: '/action/addComment',
+			data: {
+				claimID: $('#discussionContainer').attr('claimID'),
+				comment: ($(this).parent().find('textarea')).val(),
+				parentCommentID: $parentCommentID,
+				level: $level
+			},
+			dataType: 'json',
+			success: function(json) {
+				window.location.reload();
+				//Dom changes processed pre-query
+			},
+			error: function(json) {
+				//alert error message for now
+				alert('Oops, are you logged in?');
+			}
+		});
 	});
 
 	//Cancel reply
@@ -292,6 +370,14 @@ $(document).ready(function() {
 
 	//Collapse all children of this
 	$('#discussionContent li').click(function() {
+		// TODO: collase children of this
 		console.log('collapse all children of this');
 	});
 });
+
+
+// tooltips
+$('label.scoreBox, span.tagUpvote, a.addTag').tooltipster();
+$('span.tagUpvote').tooltipster();
+$('#addTag').tooltipster();
+$('img.flagComment').tooltipster();

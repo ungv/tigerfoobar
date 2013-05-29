@@ -31,12 +31,14 @@ $(document).ready(function() {
 	
 	//Listen for paste event to popup add new claim form
 	$("#pasteURL").bind('paste', function() {
-		$('#urlInput').removeClass('quarter').addClass('full');
+		$('#urlInput').removeClass('quarter').addClass('threeQuarters');
 		$('#urlSubmit').show(200);
 		$('.lightsout').fadeIn();
 	});
+
+	// Hide form and revert back to page refresh state
 	$(".cancelButton").click(function() {
-		$('#urlInput').removeClass('full').addClass('quarter');
+		$('#urlInput').removeClass('threeQuarters').addClass('quarter');
 		$('#urlSubmit').hide(200);
 		$("#pasteURL").val('');
 		$('#urlButton').show('fade', 600);
@@ -45,3 +47,45 @@ $(document).ready(function() {
 		return false;
 	});
 });
+
+// Send request to add new claim to database on submit click
+// Form #newClaimForm calls this function on form submit
+function addClaim() {
+	$url = $('#pasteURL').val();
+	$title = $('input[name=title]').val();
+	$desc = $('textarea').val();
+	$company = $('#assocCo').tagit('tags')[0].value;
+	$rating = $('input[name=score]:checked').val();
+	$tags = $('#tagsSearch').tagit('tags');
+	var tagsObj = new Object();
+	for (var i in $tags) {
+		tagsObj[i] = $tags[i].value;
+	}
+	if ($url != '' && $title != '' && $company != '' && $rating != null) {
+		$.ajax({
+			type: 'POST',
+			url: '/action/addClaim',
+			data: {
+				url: $url,
+				title: $title,
+				desc: $desc,
+				company: $company,
+				rating: $rating,
+				tags: tagsObj
+			},
+			dataType: 'json',
+			success: function(json) {
+				hidePopups();
+				alert('Your claim has been submitted!');
+				window.location.reload();
+			},
+			error: function() {
+				alert('Oops, are you logged in?');
+			}
+		});
+	} else {
+		$('#coNote, #ratingNote').css('color', 'red');
+		$('#coNote').show(200);
+		$('#ratingNote').show(200);
+	}
+}

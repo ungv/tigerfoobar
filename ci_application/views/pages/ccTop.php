@@ -27,11 +27,11 @@ if ($pageType != 'tag') {
 			foreach ($list AS $tag) {
 			?>
 					<li<?php if($tag['uservoted']) { ?> class="userVoted" <?php } ?>>
-						<span class="tagName"><?=$tag['Name']?></span>
+						<span class="tagName"><a href="/tag/<?=$tag['TagsID']?>"><?=$tag['Name']?></a></span>
 						<span>(</span>
 							<span class="tagTotal"><?=$tag['votes']?></span>
 						<span>)</span>
-						<span class="tagUpvote" tagtype="<?=$tagtype?>" tagid="<?=$tag['TagsID']?>" objectid="<?=$objectid?>" voted="<?=$tag['uservoted']?>">
+						<span class="tagUpvote" tagtype="<?=$tagtype?>" tagid="<?=$tag['TagsID']?>" objectid="<?=$objectid?>" voted="<?=$tag['uservoted']?>" title='Approve tag'>
 							<?php if($tag['uservoted']) { ?>
 									-
 							<?php }else { ?>
@@ -41,12 +41,13 @@ if ($pageType != 'tag') {
 					</li>
 			<?php } ?>
 		</ul>
+<<<<<<< HEAD
 		<a id="addTag" href="#" <?php if(!$isLogged) { ?>style="display:none;"<?php } ?>>+</a>
+=======
+		<a id="addTag" href="#" title='Add new tag'>+</a>
+>>>>>>> a639c0eedd170d6632bde555eab549ce2d84fa50
 		<div id="newTagPopup" style="display:none;">
 			<input id="newtag_name" tagtype="Industry" type="text" placeholder="Type an Industry name"/>
 		</div>
 	</div>
-	<?php
-}
-?>
 <!--End of Top-->

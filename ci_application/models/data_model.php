@@ -40,7 +40,7 @@ class Data_model extends CI_Model {
 	public function getClaimScores($claimID) {
 		$sql = "SELECT *, COUNT(ClaimID) AS noRatings, 
 					(SELECT COUNT(ClaimID) 
-					FROM Rating 
+					FROM Rating
 					WHERE ClaimID = $claimID) as Total
 				FROM Rating
 				WHERE ClaimID = $claimID
@@ -80,8 +80,18 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 
-	// Need to get number of ratings for each claim
-	
+	// Get user's rating on a specific claim
+	public function getRatingOnClaim($claimID, $userID) {
+		if(!isset($userID)) {
+			$userID = -1;
+		}
+		$sql = "SELECT Value
+				FROM Rating
+				WHERE ClaimID = $claimID
+				AND UserID = $userID";
+		return $this->db->query($sql)->row();
+	}
+		
 	// ------------- METHODS FOR COMPANY VIEW -------------	
 	//Retrieves the basic data for a company
 	public function getCompany($companyID) {
@@ -91,14 +101,38 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->row();
 	}
 
-	//Retrieves the top claims for a given company
+	//Retrieves the all claims for a given company
 	public function getCompanyClaims($companyID) {
 		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
 				FROM Claim cl
-				LEFT JOIN Company co
+			    JOIN Company co
 				ON co.CompanyID = cl.CompanyID
 				WHERE co.CompanyID = $companyID
-				GROUP BY cl.Score";
+				ORDER BY cl.Score";
+		return $this->db->query($sql)->result_array();
+	}
+
+	//Retrieves the top $n positive claims for a given company
+	public function getCompanyClaimsPos($companyID) {
+		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
+				FROM Claim cl
+			    JOIN Company co
+				ON co.CompanyID = cl.CompanyID
+				WHERE co.CompanyID = $companyID
+				AND cl.Score > 0
+				ORDER BY cl.Score DESC";
+		return $this->db->query($sql)->result_array();
+	}
+
+	//Retrieves the top $n negative claims for a given company
+	public function getCompanyClaimsNeg($companyID) {
+		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
+				FROM Claim cl
+			    JOIN Company co
+				ON co.CompanyID = cl.CompanyID
+				WHERE co.CompanyID = $companyID
+				AND cl.Score < 0
+				ORDER BY cl.Score ASC";
 		return $this->db->query($sql)->result_array();
 	}
 	
@@ -176,6 +210,13 @@ class Data_model extends CI_Model {
 		}
 		return $resultsArr;
 	}
+
+	public function getUniqueUsers($claimID) {
+		$sql = "SELECT DISTINCT UserID
+				FROM Discussion
+				WHERE ClaimID = $claimID";
+		return $this->db->query($sql)->num_rows();
+	}
 	
 	// ------------- METHODS FOR PROFILE VIEW ---------------
 	
@@ -187,7 +228,7 @@ class Data_model extends CI_Model {
 	
 	// Get user's submitted claims
 	public function getUserClaims($userID) {
-		$sql = "SELECT c.ClaimID, c.Title, r.Value
+		$sql = "SELECT u.Name, c.ClaimID, c.Score, c.Title, c.numScores, r.Value
 				FROM User u
 				LEFT JOIN Claim c
 				ON c.UserID = u.UserID
@@ -329,17 +370,41 @@ class Data_model extends CI_Model {
 	//Gets claims for the given tag
 	public function getTopClaimsWithTagJSON($tagID) {
 		$topClaimsWithTag = $this->getClaimsWithTag($tagID);
-		$tagName = $topClaimsWithTag[0]["Title"];
+		$tagName = $topClaimsWithTag[0]["Name"];
 		$jsonDataObj = '"name": "Top claims for '.$tagName.'", "children": [';
 		
 		//Builds JSON out of the data in the $data array
-		$companiesWithClaims = '';
 		$claims = "";
 		
 		for ($i = 0; $i < count($topClaimsWithTag); $i++) {
 				$title = str_replace("'","", $topClaimsWithTag[$i]["Title"]);
 				$claimID = $topClaimsWithTag[$i]["Claim_ClaimID"];
 				$score = $topClaimsWithTag[$i]["ClScore"];
+				$size = str_replace("'","", $topClaimsWithTag[$i]["numScores"]);	
+				
+				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
+
+		}
+		
+		$claims = rtrim($claims, ",");
+		$jsonDataObj .= $claims. ']';
+		
+		return $jsonDataObj;
+	}
+	
+	//Gets claims for the given user
+	public function getTopClaimsForUserJSON($userID) {
+		$topClaimsWithTag = $this->getUserClaims($userID);
+		$userName = $topClaimsWithTag[0]["Name"];
+		$jsonDataObj = '"name": "Top claims for '.$userName.'", "children": [';
+		
+		//Builds JSON out of the data in the $data array
+		$claims = "";
+		
+		for ($i = 0; $i < count($topClaimsWithTag); $i++) {
+				$title = str_replace("'","", $topClaimsWithTag[$i]["Title"]);
+				$claimID = $topClaimsWithTag[$i]["ClaimID"];
+				$score = $topClaimsWithTag[$i]["Score"];
 				$size = str_replace("'","", $topClaimsWithTag[$i]["numScores"]);	
 				
 				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';

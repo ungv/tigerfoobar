@@ -1,61 +1,26 @@
-	<div id="user" class="container">
-		<h1><?=$userInfo['Name']?></h1>
-
-		<?php
-		//User tools
-		//Only visible when viewing own profile page and logged in
-		if (isset($userdata['userid']) && $userdata['userid'] == $curProfile) {
-		?>
-		<p><a id="changeUser" href="">Change username</a> | <a id="changePass" href="">Change password</a> | <a id="changeEmail" href="">Change email</a> | <a id="deleteAccount" href="">delete account</a></p><br/>
-		<p id="message"></p>
-		<div id="changeUserBox" class="popup" style="display: none;">
-			<input type="text" name="newUser" maxlength="20" placeholder="new username" />
-			<button class="submitButton" type="submit">Update</button>
-			<button class="cancelButton" type="button">cancel</button>
-		</div>
-		<div id="changePassBox" class="popup" style="display: none;">
-			<input type="password" name="newPass" placeholder="new password" />
-			<button class="submitButton" type="submit">Update</button>
-			<button class="cancelButton" type="button">cancel</button>
-		</div>
-		<div id="changeEmailBox" class="popup" style="display: none;">
-			<input type="email" name="newEmail" placeholder="new email" />
-			<button class="submitButton" type="submit">Update</button>
-			<button class="cancelButton" type="button">cancel</button>
-		</div>
-		<div id="deleteAccountBox" class="popup" style="display: none;">
-			<div><strong>ARE YOU ABSOLUTELY SURE?!</strong></div>
-			<input type="password" name="verifyDeletion" placeholder="Enter password to delete" />
-			<button class="submitButton" type="submit">Yes</button>
-			<button class="cancelButton" type="button">no</button>
-			<div><em>*This will not delete content you have already submitted to this website. You will not be able to access your account after this.</em></div>
-		</div>
-		<?php
-		}
-		?>
-	</div>
 	
 	<!-- User submissions -->
-	<div id="submissions">
-		<h3>Submissions:</h3>
-		<?php
-		// If the user has not submitted anything before, display message
-		if (empty($userClaims[0]['ClaimID'])) {
-		?>
-			<p>You haven't submitted any content yet! Get started with the button at the top!</p>
-		<?php
-		} else {
-		?>
-		<ul>
+	<div id="listview">
+		<div id="submissions">
 			<?php
-			foreach ($userClaims as $claim) {
+			// If the user has not submitted anything before, display message
+			if (empty($userClaims[0]['ClaimID'])) {
 			?>
-			<li id="<?=$claim['Value']?>"><a href="/claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a></li>
+				<p>You haven't submitted any content yet! Get started with the button at the top!</p>
 			<?php
+			} else {
+			?>
+			<ul>
+				<?php
+				foreach ($userClaims as $claim) {
+				?>
+				<li id="<?=$claim['Value']?>"><a href="/claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a></li>
+				<?php
+				}
 			}
-		}
-		?>
-		</ul>
+			?>
+			</ul>
+		</div>
 	</div>
 	
 	<!-- User comments -->
@@ -72,7 +37,7 @@
 			?>
 		<div class="threadContainer">
 			<div class="thread">
-				<h3><a href="/claim/<?=$comment['ClaimID']?>/#comment<?=$comment['CommentID']?>">"<?=$comment['Comment']?>"</a></h3>
+				<h3><a href="/claim/<?=$comment['ClaimID']?>/#<?=$comment['CommentID']?>comment">"<?=$comment['Comment']?>"</a></h3>
 				<p><em>About <a href="/company/<?=$comment['CompanyID']?>"><?=$comment['CoName']?></a>, from '<a href="/claim/<?=$comment['ClaimID']?>"><?=$comment['Title']?></a>,' of which they <?=$comment['Value'] == NULL ? 'have not rated yet' : 'gave a score of <strong class="theirRating">' . $comment["Value"] .'</strong>'?></em>
 				</p>
 			</div>
@@ -104,7 +69,7 @@
 					<?= $vote['Value'] == 0 ? '<span class="disliked">disliked</span>' : '<span class="liked">liked</span>' ?>
 				</p>
 				<p class="votedComment">
-					"<a href="/claim/<?=$vote['ClaimID']?>/#comment<?=$vote['CommentID']?>"><?=$vote['Comment']?></a>"
+					"<a href="/claim/<?=$vote['ClaimID']?>/#<?=$vote['CommentID']?>comment"><?=$vote['Comment']?></a>"
 				</p>
 				<p class="coComment">about <a href="/company/<?=$vote['CompanyID']?>"><?=$vote['CoName']?></a></p>
 			</li>
