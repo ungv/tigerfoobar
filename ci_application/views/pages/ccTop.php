@@ -27,7 +27,7 @@
 						<span>(</span>
 							<span class="tagTotal"><?=$tag['votes']?></span>
 						<span>)</span>
-						<span class="tagUpvote" tagtype="<?=$tagtype?>" tagid="<?=$tag['TagsID']?>" objectid="<?=$objectid?>" voted="<?=$tag['uservoted']?>">
+						<span class="tagUpvote" tagtype="<?=$tagtype?>" tagid="<?=$tag['TagsID']?>" objectid="<?=$objectid?>" voted="<?=$tag['uservoted']?>" title='Approve tag'>
 							<?php if($tag['uservoted']) { ?>
 									-
 							<?php }else { ?>
@@ -37,7 +37,7 @@
 					</li>
 			<?php } ?>
 		</ul>
-		<a id="addTag" href="#">+</a>
+		<a id="addTag" href="#" title='Add new tag'>+</a>
 		<div id="newTagPopup" style="display:none;">
 			<input id="newtag_name" tagtype="Industry" type="text" placeholder="Type an Industry name"/>
 		</div>

@@ -368,4 +368,6 @@ $(document).ready(function() {
 
 
 // tooltips
-$('label.scoreBox').tooltipster();
+$('label.scoreBox, span.tagUpvote, a.addTag').tooltipster();
+$('span.tagUpvote').tooltipster();
+$('#addTag').tooltipster();
