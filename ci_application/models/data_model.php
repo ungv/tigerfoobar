@@ -328,7 +328,7 @@ class Data_model extends CI_Model {
 				$claimID = $topCompanies[$i]["ClaimID"];
 				
 				
-				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
+				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . ', "company" : "'. $currCompany .'"},';
 				$i++;
 			} 
 			$claims = rtrim($claims, ",");
