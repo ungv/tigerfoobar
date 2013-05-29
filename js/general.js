@@ -1,7 +1,7 @@
 /*
 	Patchwork - General Front End Functionality
 */
-var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
+var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#5cffae', '#31b373', '#106138'];
 
 $(document).ready(function() {
 	/*--------FORM VALIDATION (DOCUMENTATION http://docs.jquery.com/Plugins/Validation)--------*/
