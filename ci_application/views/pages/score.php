@@ -75,7 +75,7 @@
 			}
 			?>
 			<input type='radio' id="radio<?=$i?>" name='<?=$pageType == 'claim' ? 'claim' : ''?>score' value='<?=$i-3?>' claimid='<?=$pageType=='claim' ? $claimID : ''?>'>
-			<label class="scoreBox" for="radio<?=$i?>" value="<?=$i-3?>" hasratedthis="<?=$hasRatedThis?>"></label>
+			<label class="scoreBox tooltip" for="radio<?=$i?>" value="<?=$i-3?>" hasratedthis="<?=$hasRatedThis?>" title='Rate this claim as <strong><?=$i-3?></strong>'></label>
 			<?php
 		}
 		?>

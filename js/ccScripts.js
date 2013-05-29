@@ -365,3 +365,7 @@ $(document).ready(function() {
 		console.log('collapse all children of this');
 	});
 });
+
+
+// tooltips
+$('label.scoreBox').tooltipster();
