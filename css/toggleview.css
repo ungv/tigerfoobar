@@ -1,0 +1,44 @@
+/*Toggle------------------------*/
+	#toggleviewContainer {
+		margin-bottom: 50px !important;
+	}
+
+	#toggleviewContainer div:first-child {
+		margin-right: 10px;
+	}
+
+	#toggleviewContainer div {
+		float: left;
+	}
+
+	.toggleviewButtons {
+		border: 1px solid white;
+		width: 39px;
+		height: 25px;
+	}
+
+	.selected {
+		border: 1px solid white !important;
+		background-color: darkgray !important;
+	}
+	
+	.toggleviewButtons:hover {
+		border: 1px solid darkgray !important;
+		background-color: lightgray !important;
+	}
+
+	#toggleMap {
+		background: url('/img/toggleButtons.png') 0 0;
+	}
+
+	#toggleList {
+		background: url('/img/toggleButtons.png') 39px 0;
+	}
+
+	#treemapCanvas {
+		margin-top: 0px;
+	}
+
+	#listview {
+		display: none;
+	}
