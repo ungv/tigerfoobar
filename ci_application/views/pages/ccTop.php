@@ -1,5 +1,4 @@
 <?php
-if ($pageType != 'tag') {
 	$tagtype;
 	$plural;
 	if ($pageType == 'company') {	//loading industries
@@ -41,11 +40,7 @@ if ($pageType != 'tag') {
 					</li>
 			<?php } ?>
 		</ul>
-<<<<<<< HEAD
-		<a id="addTag" href="#" <?php if(!$isLogged) { ?>style="display:none;"<?php } ?>>+</a>
-=======
-		<a id="addTag" href="#" title='Add new tag'>+</a>
->>>>>>> a639c0eedd170d6632bde555eab549ce2d84fa50
+		<a id="addTag" href="#" <?php if(!$isLogged) { ?>style="display:none;"<?php } ?> title='Add new tag'>+</a>
 		<div id="newTagPopup" style="display:none;">
 			<input id="newtag_name" tagtype="Industry" type="text" placeholder="Type an Industry name"/>
 		</div>
