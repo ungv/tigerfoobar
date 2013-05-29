@@ -54,7 +54,7 @@ function addClaim() {
 	$url = $('#pasteURL').val();
 	$title = $('input[name=title]').val();
 	$desc = $('textarea').val();
-	$company = $('#assocCo').tagit('tags');
+	$company = $('#assocCo').tagit('tags')[0].value;
 	$rating = $('input[name=score]:checked').val();
 	$tags = $('#tagsSearch').tagit('tags');
 	var tagsObj = new Object();
@@ -69,7 +69,7 @@ function addClaim() {
 				url: $url,
 				title: $title,
 				desc: $desc,
-				company: '206',
+				company: $company,
 				rating: $rating,
 				tags: tagsObj
 			},
