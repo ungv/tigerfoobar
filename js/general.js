@@ -283,7 +283,6 @@ function applyColors(thisVal, $element, styling, stylewith) {
 	}
 }
 
-<<<<<<< HEAD
 	//Sends the passed login parameters to server onclick
 	//Reloads the current page
 	function sendLogin(username, password) {
