@@ -130,8 +130,17 @@ $(document).ready(function() {
 
 	//Displays textbox to add new industry tag
 	$('#addTag').click( function() {
-		$('#newTagPopup').show(200);
-		$('#newclaimtag_name').focus();
+		$('#newTagPopup').show();
+		$('#addTag').hide();
+		$('#newtag_name').focus();
+	});
+
+	//When the newtag text input loses focus,
+	//hide it and show the add tag button again
+	$('#newtag_name').blur(function() {
+		$('#addTag').show();
+		$('#newTagPopup').hide();
+		$('#newtag_name').val("");
 	});
 
 	//Autocomplete for adding new industry

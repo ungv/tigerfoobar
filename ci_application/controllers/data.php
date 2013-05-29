@@ -53,31 +53,37 @@ class Data extends CI_Controller {
 	//Returns a list of companies, claims, and tags relavent to the
 	//root term
 	public function searchAutocomplete($root) {
-		$i = 0;
-		$companyList = $this->data_model->companiesByName($root);
 		$claimList = $this->data_model->claimsByName($root);
-		//$data['json'] = '{"Companies": ['; !!three times
+		$companyList = $this->data_model->companiesByName($root);
+		$tagList = $this->data_model->tagsByName($root);
 		$data['json'] = '[';
-		foreach($companyList as $company) {
-			$data['json'] .= '{"value":"'. $company['Name'] .'","label":'. $company['CompanyID'] .'}';
-			//$data['json'] .= '"'. $industry['Name'] .'"';
-			if($i < count($companyList) -1) {
-				$data['json'] .= ',';
-			}
-			$i++;
-		}
+		$data['json'] .= $this->writeACItems("Claims","claim",$claimList);
 		$data['json'] .= ',';
-		$i = 0;
-		//TODO: super redundant, fix
-		foreach($claimList as $claim) {
-			$data['json'] .= '{"value":"'. $claim['Title'] .'","label":'. $claim['ClaimID'] .'}';
-			//$data['json'] .= '"'. $industry['Name'] .'"';
-			if($i < count($claimList) -1) {
-				$data['json'] .= ',';
-			}
-			$i++;
-		}
+		$data['json'] .= $this->writeACItems("Companies","company",$companyList);
+		$data['json'] .= ',';
+		$data['json'] .= $this->writeACItems("Tags","tag",$tagList);
 		$data['json'] .= ']';
 		$this->load->view('data/json_view', $data);
+	}
+
+	//Writes out the appropriate SQL fields of the given SQL
+	//result as JSON to be returned as 
+	private function writeACItems($headerName , $type, $list) {
+		$i = 0;
+		//add header item
+		$result = '{"name":"' . $headerName. '","id":-1,"type":"header","score":-1},';
+		if(!$list) {
+			$result .= '{"name":"No ' . $headerName . ' found","id":null,"type":"empty","score":"null"}';
+		}
+		//add each item from SQL
+		foreach($list as $item) {
+			$result .= '{"name":"'. $item['name'] .'","id":'. $item['id'] 
+					.',"type":"' . $type . '","score":"'. $item['score'] . '"}';
+			if($i < count($list) -1) {
+				$result .= ',';
+			}
+			$i++;
+		}
+		return $result;
 	}
 }

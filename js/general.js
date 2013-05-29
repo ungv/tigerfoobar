@@ -51,7 +51,7 @@ $(document).ready(function() {
 		highlightOnExistColor: '#000'
 	});
 	
- 	/*------Logging In------*/
+ 	/*------------Logging In-----------*/
 	
 	//Show login popup onclick
 	$('#login').click(function() {
@@ -138,7 +138,7 @@ $(document).ready(function() {
 		hidePopups();
 	});
 
-	/*-----Auto Complete Info----*/
+	/*--------Auto Complete Info-------*/
 
 	var projects = [
 			{
@@ -170,18 +170,24 @@ $(document).ready(function() {
 	            url: "/data/searchAutocomplete/" + $('#searchInput').val(),
 	            dataType: 'json',
 	            success: function (data) {
+	            	$('#claimResults').html('<h3>Claims</h3>');
+	            	$('#companyResults').html('<h3>Companies</h3>');
 	            	if (data.length == 0) {
 	            		data.push(
 			          		{
-		                        'label':  'No tags found.' ,
-		                        'value':  -1
+		                        'name':  'No claims found found.',
+		                        'id': -1,
+		                        'type': "Empty",
+		                        'score': -1
 		                    }
 		                );
 		            }
 	                response(data.map(function (value) {
 	                    return {
-	                        'label':  value.value ,
-	                        'value': value.label
+	                        'name':  value.name ,
+	                        'id': value.id,
+	                        'type': value.type,
+	                        'score': value.score
 	                    };  
 	                }));
 	            }   
@@ -189,28 +195,40 @@ $(document).ready(function() {
 	    },
 	    select: function( event, ui ) {
 			//search for that company/claim/tag combination
-		}
-	});
-	/*
-	$( "#searchInput" ).autocomplete({
-		minLength: 0,
-		source: projects,
-		focus: function( event, ui ) {
-			$( "#tags" ).val( ui.item.label );
-			return false;
+
 		},
-		select: function( event, ui ) {
-			$( "#tags" ).val( ui.item.label );
-			return false;
+		open: function() { 
+			$('.ui-menu').width(915); 
+			//$(".ui-menu-item").hide();
+			//$(".ui-autocomplete").hide();
+			//$("#autoCompleteResults").show();
 		}
-	})
-	
-	.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-		return $( "<li>" )
-		.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-		.appendTo( ul );
-	};
-	*/
+	}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+		
+		//check if header
+		var autocompleteLi;
+		if(item.type == "header") {
+			autocompleteLi = $( "<li>" , {
+				"class": "autoCompleteHeader",
+				"text" : item.name
+			});
+		}else if(item.type == "empty") {
+			autocompleteLi = $( "<li>" , {
+				"text" : item.name
+			});
+		}else {
+			autocompleteLi = $( "<li>" , {
+				"class": "autoCompleteResult"
+			})
+			.html( '<a><span class="resultName">' + item.name + '</span>' +
+					'<span class="resultScore">' + item.score + '</span></a>');
+			//!! can changes later to label industry
+			autocompleteLi.addClass(item.type+"Result")
+			$(autocompleteLi.children("a")[0]).attr("href","http://127.0.0.1/" + item.type + "/" + item.id);
+		}
+		autocompleteLi.appendTo(ul);
+		return autocompleteLi;
+	};;
 });
 
 function hidePopups() {
@@ -240,6 +258,7 @@ function applyColors(thisVal, $element, styling, stylewith) {
 }
 
 //Sends the passed login parameters to server onclick
+//Reloads the current page
 function sendLogin(username, password) {
 	$.ajax({
 		type: 'POST',

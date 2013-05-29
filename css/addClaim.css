@@ -2,9 +2,11 @@
 	margin-bottom: 0px !important;
 }
 
+/*removed to fit welcome message
 #urlButton, #urlInput {
 	position: absolute;
 }
+*/
 
 #urlButton {
 	opacity: 0.6;

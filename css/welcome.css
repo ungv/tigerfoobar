@@ -1,0 +1,37 @@
+/*
+	CSS for the welcome message and intro video
+
+	Patchwork
+*/
+
+/*-------------General---------------------*/
+	#welcomeMessage div{
+		float:left;
+		font-size:15pt;
+	}
+
+/*-------------Call to Arms---------------------*/
+
+
+	#callToArms{
+		width:400px;
+		margin-right:15px;
+	}
+
+	#callToArms p{
+		margin-top:10px;
+		margin-bottom:10px;
+		text-align:justify;
+		text-justify:inter-word;
+	}
+
+/*-------------Video---------------------*/
+
+
+	#videoContainer{
+		width:500px;
+	}
+
+
+
+

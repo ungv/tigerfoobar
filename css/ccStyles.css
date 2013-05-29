@@ -1,10 +1,7 @@
 /*-------------------------General---------------------------------*/
 
-	ul {
-		display: inline;
-	}
-
 	li {
+		display: inline;
 		list-style-type: none;
 		float: left;
 		padding-right: 20px;
@@ -35,6 +32,11 @@
 	
 
 /*-----------------------Claim and Industry Tags-------------------*/
+	
+	#tagSection{
+		overflow:hidden;
+		margin-bottom:0px;
+	}
 
 	#tagSection span, #tagSection li {
 		float: left;
@@ -45,6 +47,7 @@
 		list-style-type: none;
 		background-color: #FEF5CA;
 		border: 1px solid rgb(168, 162, 130);
+		border-radius:3px;
 	}
 
 	#tagSection .tagUpvote {
@@ -71,7 +74,7 @@
 /*-----------------------Evidence View--------------------------*/
 
 	#evidenceContainer {
-		margin-top: 40px;
+		margin-top: 20px;
 	}
 
 

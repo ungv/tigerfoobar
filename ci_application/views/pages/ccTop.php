@@ -1,28 +1,27 @@
 <?php
 if ($pageType != 'tag') {
-
-	// Victor (5-20-13): I made the id and class names uniform across 'claim' and 'company' pages to give it the same css styling. I also made those changes in the JS so the scripts are still working.
-	?>
-	<div id="tagSection">
-	<?php
+	$tagtype;
+	$plural;
 	if ($pageType == 'company') {	//loading industries
 		$objectid = $companyInfo['CompanyID'];
 		$tagtype = 'Industry';
+		$plural = 'Industries';
 		$list = $companyTags;
 	?>
 		<h1><?=$companyInfo['Name']?></h1>
-		<span>Industries:</span>
 	<?php
 	}else {							//loading claim tags
 		$objectid = $claimInfo['ClaimID'];
 		$tagtype = 'Claim Tag';
+		$plural = 'Claim Tags';
 		$list = $claimTags;
 	?>
 		<h1><a href="<?=$claimInfo['Link']?>" target="_blank"><?=$claimInfo['ClaimTitle']?></a></h1>
-		<span>Tags:</span>
 	<?php
 	}
 	?>
+	<div id="tagSection">
+		<span><?=$plural ?>:</span>
 		<ul id="taglist" tagtype="<?=$tagtype?>" objectid="<?=$objectid?>">
 			<?php
 			foreach ($list AS $tag) {
@@ -42,7 +41,7 @@ if ($pageType != 'tag') {
 					</li>
 			<?php } ?>
 		</ul>
-		<a id="addTag" href="#">+</a>
+		<a id="addTag" href="#" <?php if(!$isLogged) { ?>style="display:none;"<?php } ?>>+</a>
 		<div id="newTagPopup" style="display:none;">
 			<input id="newtag_name" tagtype="Industry" type="text" placeholder="Type an Industry name"/>
 		</div>

@@ -15,33 +15,25 @@ class Data_model extends CI_Model {
 	// ------------- SEARCH METHODS -------------
 
 	public function companiesByName($root) {
-		$sql = "SELECT * from Company
-				WHERE Company.Name like '%$root%'
-				ORDER BY Score DESC
-				LIMIT 5";
-		return $this->db->query($sql)->result_array();
-		//$this->rowsByName($root,"Company");
+		return $this->rowsByName($root,"Company","Name", array("CompanyID","Name","Score"));
 	}
 
 	public function claimsByName($root) {
-		$sql = "SELECT * from Claim
-				WHERE Claim.Title like '%$root%'
-				ORDER BY Score DESC
-				LIMIT 5";
-		return $this->db->query($sql)->result_array();
-		$this->rowsByName($root , "Claim");
+		return $this->rowsByName($root , "Claim", "Title", array("ClaimID","Title","Score"));
+	}
+
+	public function tagsByName($root) {
+		return $this->rowsByName($root , "Tags", "Name", array("TagsID","Name","Type"));
 	}
 
 	//Returns the rows containing the root term in the given table.
 	//Orders results by votes
-	public function rowsByName($root, $table) {
-		/*
-		$sql = "SELECT * from ".$table."
-				WHERE Name like '%$root%'
+	public function rowsByName($root, $table,$comparefield, $fields) {
+		$sql = "SELECT $fields[0] as id , $fields[1] as name , $fields[2] as score from $table
+				WHERE $comparefield like '%$root%'
 				ORDER BY Score DESC
 				LIMIT 5";
 		return $this->db->query($sql)->result_array();
-		*/
 	}
 
 	// ------------- METHODS FOR GETTING THE SCORE INFORMATION -------------

@@ -38,10 +38,19 @@ class Pages extends Root_Controller {
 		$data['csFiles'] = array('general','ccStyles','addClaim');
 		$data['jsFiles'] = array('general','ccScripts','addClaim');
 		$data['topCompaniesWithClaimsJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
-		//signed in logic goes here
+		//load welcome css headers
+		$signedIn = $this->is_logged_in();
+		if(!$signedIn) {
+			array_push($data['csFiles'],'welcome');
+		}
 
+		//Views
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
+		//if not logged in, show welcome message
+		if(!$signedIn) {
+			$this->load->view('pages/welcome', $data);
+		}
 		$this->load->view('pages/addClaim', $data);
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('pages/treemap', $data);
@@ -176,11 +185,12 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'About - PatchWork';
 		$data['pageType'] = 'About';
 
-		$data['csFiles'] = array('general','ccStyles');
+		$data['csFiles'] = array('general','ccStyles','welcome');
 		$data['jsFiles'] = array('general','ccScripts');
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
+		$this->load->view('pages/welcome', $data);
 		$this->load->view('pages/about');
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');
