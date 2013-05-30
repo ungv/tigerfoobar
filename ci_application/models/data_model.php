@@ -352,7 +352,11 @@ class Data_model extends CI_Model {
 	public function getClaimsForCompanyJSON($companyID) {
 		$topClaimsForCompany = $this->getCompanyClaims($companyID);
 		//TODO: handle the case where no claims on company
-		$companyName = $topClaimsForCompany[0]["Title"];
+		
+		$companyName = "";
+		if (isset($topClaimsForCompany[0])) {
+			$companyName = $topClaimsForCompany[0]["Title"];
+		}
 		$jsonDataObj = '"name": "Top claims for '.$companyName.'", "children": [';
 		
 		//Builds JSON out of the data in the $data array
@@ -378,7 +382,12 @@ class Data_model extends CI_Model {
 	//Gets claims for the given tag
 	public function getTopClaimsWithTagJSON($tagID) {
 		$topClaimsWithTag = $this->getClaimsWithTag($tagID);
-		$tagName = $topClaimsWithTag[0]["Name"];
+		
+		$tagName = "";
+		if (isset($topClaimsWithTag[0])) {
+			$tagName = $topClaimsWithTag[0]["Name"];
+		}
+
 		$jsonDataObj = '"name": "Top claims for '.$tagName.'", "children": [';
 		
 		//Builds JSON out of the data in the $data array
@@ -402,18 +411,23 @@ class Data_model extends CI_Model {
 	
 	//Gets claims for the given user
 	public function getTopClaimsForUserJSON($userID) {
-		$topClaimsWithTag = $this->getUserClaims($userID);
-		$userName = $topClaimsWithTag[0]["Name"];
+		$topClaimsForUser = $this->getUserClaims($userID);
+		
+		$userName = "";
+		if (isset($topClaimsForUser[0])) {
+			$userName = $topClaimsForUser[0]["Name"];
+		}
+
 		$jsonDataObj = '"name": "Top claims for '.$userName.'", "children": [';
 		
 		//Builds JSON out of the data in the $data array
 		$claims = "";
 		
-		for ($i = 0; $i < count($topClaimsWithTag); $i++) {
-				$title = str_replace("'","", $topClaimsWithTag[$i]["Title"]);
-				$claimID = $topClaimsWithTag[$i]["ClaimID"];
-				$score = $topClaimsWithTag[$i]["Score"];
-				$size = str_replace("'","", $topClaimsWithTag[$i]["numScores"]);	
+		for ($i = 0; $i < count($topClaimsForUser); $i++) {
+				$title = str_replace("'","", $topClaimsForUser[$i]["Title"]);
+				$claimID = $topClaimsForUser[$i]["ClaimID"];
+				$score = $topClaimsForUser[$i]["Score"];
+				$size = str_replace("'","", $topClaimsForUser[$i]["numScores"]);	
 				
 				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
 

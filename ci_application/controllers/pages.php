@@ -89,7 +89,13 @@ class Pages extends Root_Controller {
 			$this->homepage();
 		}else {
 			//grab basic data
-			$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
+			$companyData = $this->data_model->getCompany($companyID);
+			if ($companyData != null) {
+				$data['companyInfo'] = get_object_vars($companyData);
+			} else {
+				$data['companyInfo'] = "Company not found";
+			}
+			//$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
 			$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
 			$data['companyClaimsPos'] = $this->data_model->getCompanyClaimsPos($companyID);
 			$data['companyClaimsNeg'] = $this->data_model->getCompanyClaimsNeg($companyID);

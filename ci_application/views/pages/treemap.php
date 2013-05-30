@@ -154,7 +154,8 @@
 				});
 			});
 			
-			
+		<?php if (isset($pageType) && $pageType == "home") {
+		?>
 		//Add company borders
 		var companyNodes = treemap.nodes(root)
 		.filter(function (d) {return d.children});
@@ -173,10 +174,13 @@
 			.attr("height", function(d) { return d.dy - 1;})
 			.style("fill-opacity", function(d) { return "0.0";}) //Fix
 			.style("stroke", function(d) {return "white";})
-			.style("stroke-width", function(d) {return "7";})
+			.style("stroke-width", function(d) {return "5";})
 			.style("pointer-events", "none");
 		$(".companyCellContainer>g:nth-child(1)").detach();
 		//End company borders
+		<?php
+		}
+		?>
 		
 		d3.select(window).on("click", function() { zoom(root); });
 		d3.select("select").on("change", function() {
