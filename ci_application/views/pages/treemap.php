@@ -34,7 +34,7 @@
 			   .domain([-3, -2, -1, 0, 1, 2, 3])
 			   .range(['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64']),
 			borderColor = d3.scale.category10(),
-			borderWidth = 5,
+			borderWidth = 1,
 			domain = document.domain,
 			padding = 20,
 			root,
@@ -53,7 +53,8 @@
 		  .append("svg:svg")
 			.attr("width", w)
 			.attr("height", h)
-		  .append("svg:g");
+		  .append("svg:g")
+			.attr("class", "outerG");
 		  
 		var jsonDataObj = {<?php
 			echo($treemapJSON);
@@ -63,29 +64,32 @@
 		var data = jsonDataObj;
 		node = root = data;
 
-		var nodes = treemap.nodes(root)
-		  .filter(function(d) { return !d.children; });
+		var claimNodes = treemap.nodes(root)
+		.filter(function (d) {return !d.children;})
 
-		var cell = svg.selectAll("g")
-		  .data(nodes)
-		  .enter().append("svg:g")
-		  .attr("class", "cell")
-		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-		  /*.attr("stroke", function (d) {return borderColor(d.parent.name);})
-		  .attr("stroke-width", function (d) {return borderWidth;})*/
-		  .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
+		
+		var claimCell = svg.selectAll(".outerG")
+			.data(claimNodes)
+			.enter()
+			.append("svg:g")
+			.attr("class", "cell")
+			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+			/*.attr("stroke", function (d) {return borderColor(d.parent.name);})
+			.attr("stroke-width", function (d) {return borderWidth;})*/
+
 		  
 		//$(cell).tipsy();
 		
-		cell.append("svg:rect")
+		claimCell.append("svg:rect")
 		  .attr("width", function(d) { return d.dx - borderWidth;})
 		  .attr("height", function(d) { return d.dy - borderWidth;})
 		  .style("fill", function(d) { return bgColor(d.score);})
 		  .on("mouseover", function (d) {d3.select(this).style("fill-opacity", "0.75");})
-		  .on("mouseout", function (d) {d3.select(this).style("fill-opacity", "1.0");});
+		  .on("mouseout", function (d) {d3.select(this).style("fill-opacity", "1.0");})
+		  .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
 		 
 		//Text labels for treemap
-		cell.append("foreignObject")
+		claimCell.append("foreignObject")
 		  .attr("x", function(d) { return padding - 5;})
 		  .attr("y", function(d) { return padding})
 		  .attr("width", function(d) {return d.dx - padding})
@@ -111,7 +115,7 @@
 			html: true, 
 			title: function() {
 			  var d = this.__data__; // c = colors(d.i);
-			  var html = "<h3>" + d.name + "</h3>";
+			  var html = "<h3>" + d.name + "</h3> <br/> <h4> " + d.company + "</h4>";
 			  
 			  //Todo: pass this html value to the "mouseenter" function below so that tooltips can be scaled properly before being displayed.
 			  //One way to possibly do this is bind it to the SVG element above and read it from d
@@ -149,8 +153,36 @@
 					"transform" : "rotate(" + rotation +"deg)"
 				});
 			});
-		d3.select(window).on("click", function() { zoom(root); });
+			
+		<?php if (isset($pageType) && $pageType == "home") {
+		?>
+		//Add company borders
+		var companyNodes = treemap.nodes(root)
+		.filter(function (d) {return d.children});
 
+		var companyCellContainer = svg.append("svg:g")
+		.attr("class", "companyCellContainer");
+		
+		var companyCell = companyCellContainer.selectAll(".companyCellContainer")
+		.data(companyNodes)
+		.enter()
+		.append("svg:g")
+			.attr("class", "cell")
+			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		.append("svg:rect")
+			.attr("width", function(d) { return d.dx - 1;})
+			.attr("height", function(d) { return d.dy - 1;})
+			.style("fill-opacity", function(d) { return "0.0";}) //Fix
+			.style("stroke", function(d) {return "white";})
+			.style("stroke-width", function(d) {return "5";})
+			.style("pointer-events", "none");
+		$(".companyCellContainer>g:nth-child(1)").detach();
+		//End company borders
+		<?php
+		}
+		?>
+		
+		d3.select(window).on("click", function() { zoom(root); });
 		d3.select("select").on("change", function() {
 			treemap.value(this.value == "size" ? size : count).nodes(root);
 			zoom(node);
