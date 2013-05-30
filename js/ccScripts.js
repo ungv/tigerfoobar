@@ -18,22 +18,24 @@ $(document).ready(function() {
 	/*------Rating the claim-------*/
 	// Add or update user's rating on this claim
 	$('input[name=claimscore]').click(function() {
-		$.ajax({
-			type: 'POST',
-			url: '/action/sendRating',
-			data: {
-				rating: $(this).attr('value'),
-				claimID: $(this).attr('claimid')
-			},
-			dataType: 'json',
-			success: function(json) {
-				alert('Thanks for rating this claim! Go ahead and add a comment below!');
-				window.location.reload();
-			},
-			error: function() {
-				alert('Oops, are you logged in?');
-			}
-		});
+		if (isLoggedIn('to rate this claim')) {
+			$.ajax({
+				type: 'POST',
+				url: '/action/sendRating',
+				data: {
+					rating: $(this).attr('value'),
+					claimID: $(this).attr('claimid')
+				},
+				dataType: 'json',
+				success: function(json) {
+					alert('Thanks for rating this claim! Go ahead and add a comment below!');
+					window.location.reload();
+				},
+				error: function() {
+					console.log('error in rating the claim');
+				}
+			});
+		}
 	});
 
 
@@ -48,8 +50,10 @@ $(document).ready(function() {
 
 	//Onclick, send vote to server
 	$('.upVote, .downVote').click(function() {
-		$(this).parent().find('.buttons').removeClass('selectedVote');		//Reset selection loaded from server
-		sendCommentVote($(this));
+		if (isLoggedIn('to vote on this comment')) {
+			$(this).parent().find('.buttons').removeClass('selectedVote');		//Reset selection loaded from server
+			sendCommentVote($(this));
+		}
 	});
 
 	//Send vote to server
@@ -107,10 +111,7 @@ $(document).ready(function() {
 				$(clicked.parent().find(".downNum")).text(oldDownVotes);
 			},
 			error: function(json) {
-				//Must be logged in to cast vote
-				alert('You must be logged in to vote');
-				$('#loginPopup').show(200);
-				window.scrollTo(0, 0);
+				console.log('user needs to be logged in to vote');
 			}
 		});
 	}
@@ -123,21 +124,29 @@ $(document).ready(function() {
 		position: 'bottom',
 		functionReady: function(origin, tooltip) {
 			$('#flagNoncredible').click(function() {
-				flagContent($(this), 'claim', 'noncredible');
+				if (isLoggedIn('to flag this non-credible evidence')) {
+					flagContent($(this), 'claim', 'noncredible');
+				}
 			});
 
 			$('#flagWrong').click(function() {
-				flagContent($(this), 'claim', 'wrongcompany');
+				if (isLoggedIn('to flag the company linking')) {
+					flagContent($(this), 'claim', 'wrongcompany');
+				}
 			});
 		}
 	});
 
 	$('label[for="radio3"]').click(function() {
-		flagContent($(this), 'claim', 'trivial');
+		if (isLoggedIn('to flag the company linking')) {
+			flagContent($(this), 'claim', 'trivial');
+		}
 	});
 
 	$('img.flagComment').click(function() {
-		flagContent($(this), 'comment', 'badcomment');
+		if (isLoggedIn('to flag this comment')) {
+			flagContent($(this), 'comment', 'badcomment');
+		}
 	});
 
 	function flagContent (button, targettype, flagetype) {
@@ -182,7 +191,9 @@ $(document).ready(function() {
 	//Onclick, send vote to server
 	//switch value when clicked
 	$('.tagUpvote').click(function() {
-		sendTagUpvote($(this));
+		if (isLoggedIn('to vote on this tag')) {
+			sendTagUpvote($(this));
+		}
 	});
 
 	//Sends the upvote or downvote to the server using the type of tag
@@ -313,15 +324,19 @@ $(document).ready(function() {
 		// $('#newCommentPopup').show(200);
 		// $('#newCommentPopup textarea').focus();
 		// $('.lightsout').fadeIn();
-		$('#newCommentBox').show(200);
-		$('#newCommentBox textarea').focus();
+		if (isLoggedIn('add a new comment')) {
+			$('#newCommentBox').show(200);
+			$('#newCommentBox textarea').focus();
+		}
 	});
 
 	// Injects a new textbox to reply to the above comment
 	$('.reply').click(function() {
-		$parentLi = $(this).parent().parent().attr('id');
-		$('#' + $parentLi + 'reply').show();
-		$('#' + $parentLi + 'reply textarea').focus();
+		if (isLoggedIn('reply to this comment')) {
+			$parentLi = $(this).parent().parent().attr('id');
+			$('#' + $parentLi + 'reply').show();
+			$('#' + $parentLi + 'reply textarea').focus();
+		}
 	});
 
 	// Submit a new thread or reply to database

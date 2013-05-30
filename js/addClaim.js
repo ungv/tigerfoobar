@@ -24,9 +24,11 @@ $(document).ready(function() {
 
 	//Click on button with text to convert to input
 	$('#urlButton').click(function() {
-		$('#urlButton').hide('fade', 200);
-		$('#urlInput').show('fade', 600);
-		$('#pasteURL').focus();
+		if (isLoggedIn('add a claim')) {
+			$('#urlButton').hide('fade', 200);
+			$('#urlInput').show('fade', 600);
+			$('#pasteURL').focus();
+		}
 	});
 	
 	//Listen for paste event to popup add new claim form
@@ -57,6 +59,8 @@ function addClaim() {
 	$company = $('#assocCo').tagit('tags')[0].value;
 	$rating = $('input[name=score]:checked').val();
 	$tags = $('#tagsSearch').tagit('tags');
+
+	// For some reason, ajax only allows plain objects
 	var tagsObj = new Object();
 	for (var i in $tags) {
 		tagsObj[i] = $tags[i].value;

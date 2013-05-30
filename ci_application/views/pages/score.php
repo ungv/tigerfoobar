@@ -58,7 +58,7 @@
 		<?php
 		for ($i=0; $i <=6 ; $i++) { 
 			$hasRatedThis = 0;
-			// If user has previously rated this claim, switch boolean to true
+			// If user has previously rated this claim, high the box they've rated
 			if ($pageType == 'claim' && !empty($userRating) && $userRating->Value == $i-3) {
 				$hasRatedThis = 1;
 			} else if ($pageType == 'home' && $i == 3) {

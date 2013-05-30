@@ -251,6 +251,10 @@ class Action_model extends CI_Model {
         $rating = $this->security->xss_clean($this->input->post('rating'));
         $tags = $this->security->xss_clean($this->input->post('tags'));
 
+        if ($url == '' || $title == '' || $company == '' || $rating == '') {
+            return false;
+        }
+
         // Convert company name to its id
         // If happen to find more than 1 result, just get the company with
         // the most claims so far
@@ -263,7 +267,7 @@ class Action_model extends CI_Model {
         // If no companies similar to this name were found, add as new row
         if ($result->num_rows() == 0) {
             $data = array(
-                'Name' => $company,
+                'Name' => ucwords($company),
                 'numClaims' => 1
                 );
             $this->db->insert('Company', $data);

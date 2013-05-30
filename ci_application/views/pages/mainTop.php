@@ -1,2 +1,2 @@
 <!-- Start Main Content -->
-<div id="main">
+<div id="main" signedin="<?=isset($signedIn)?>">

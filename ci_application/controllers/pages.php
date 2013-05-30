@@ -41,6 +41,8 @@ class Pages extends Root_Controller {
 		$signedIn = $this->is_logged_in();
 		if(!$signedIn) {
 			array_push($data['csFiles'],'welcome');
+		} else {
+			$data['signedIn'] = true;			
 		}
 		$data['jsFiles'] = array('general','score','addClaim');
 		$data['treemapJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
@@ -63,6 +65,9 @@ class Pages extends Root_Controller {
 		if($claimID == -1) {
 			$this->homepage(); //!! change to TreemapSearch later
 		}else {
+			if ($this->is_logged_in()) {
+				$data['signedIn'] = true;
+			}
 			$data['headerTitle'] = 'View Claim - PatchWork';
 			$data['pageType'] = 'claim';
 
@@ -98,6 +103,9 @@ class Pages extends Root_Controller {
 		if($companyID == -1) {
 			$this->homepage();
 		}else {
+			if ($this->is_logged_in()) {
+				$data['signedIn'] = true;
+			}			
 			//grab basic data
 			$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
 			$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
@@ -131,7 +139,9 @@ class Pages extends Root_Controller {
 		if($tagID == -1) {
 			$this->homepage(); //!! change to TreemapSearch later
 		}else {
-
+			if ($this->is_logged_in()) {
+				$data['signedIn'] = true;
+			}
 			$data['headerTitle'] = 'View Tag - PatchWork';
 			$data['pageType'] = 'tag';
 			
@@ -159,13 +169,13 @@ class Pages extends Root_Controller {
 
 		//handle case when no parameter is passed
 		if ($userID == -1) {
-			if (!isset($data['userdata']['userid'])) {
+			if ($this->is_logged_in()) {
+				//user is logged in, set variable as the userid in session and continue as normal
+				$userID = $data['userdata']['userid'];
+			} else {
 				//if user is not logged in, redirect
 				$this->homepage();
 				return;
-			} else {
-				//user is logged in, set variable as the userid in session and continue as normal
-				$userID = $data['userdata']['userid'];
 			}
 		}
 		$data['headerTitle'] = 'View profile';

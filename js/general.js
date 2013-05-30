@@ -283,33 +283,45 @@ function applyColors(thisVal, $element, styling, stylewith) {
 	}
 }
 
-	//Sends the passed login parameters to server onclick
-	//Reloads the current page
-	function sendLogin(username, password) {
-		$.ajax({
-			type: 'POST',
-			url: 'http://127.0.0.1/action/login',
-			data: {
-				username: username,
-				password: password
-			},
-			dataType: 'json',
-			success: function(json) {
-				hidePopups();
-				window.location.reload();
-			},
-			error: function() {
-				$('#login_fail').show(200);
-				$('#login_password').val('');
-			}
-		});
-	}
+//Sends the passed login parameters to server onclick
+//Reloads the current page
+function sendLogin(username, password) {
+	$.ajax({
+		type: 'POST',
+		url: 'http://127.0.0.1/action/login',
+		data: {
+			username: username,
+			password: password
+		},
+		dataType: 'json',
+		success: function(json) {
+			hidePopups();
+			window.location.reload();
+		},
+		error: function() {
+			$('#login_fail').show(200);
+			$('#login_password').val('');
+		}
+	});
+}
 
-	//Resets and recolors the kudos scale to get rid of border color
-	function resetScale() {
-		$.each($('.scoreBox'), function(i) {
-			$(this).css('background-color', colors[i]);
-			$(this).css('border', '2px solid ' + colors[i]);
-			$(this).removeClass('selectedRating');
-		});
+//Resets and recolors the kudos scale to get rid of border color
+function resetScale() {
+	$.each($('.scoreBox'), function(i) {
+		$(this).css('background-color', colors[i]);
+		$(this).css('border', '2px solid ' + colors[i]);
+		$(this).removeClass('selectedRating');
+	});
+}
+
+// Check if the user is logged in before committing any action
+// Pass in the element that contains the 'claimid' attribute to check if it is set
+function isLoggedIn($action) {
+	if ($('#main').attr('signedin') != 1) {
+		alert('Please log in to ' + $action);
+		$('#loginPopup').show(200);
+		window.scrollTo(0, 0);
+		return false;
 	}
+	return true;
+}
