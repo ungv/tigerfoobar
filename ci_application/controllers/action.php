@@ -221,4 +221,11 @@ class Action extends Root_Controller {
 		}
 		$this->load->view('data/json_view', $data);
 	}
+
+	/*
+		Get score history for a claim
+	*/
+	public function scoreHistory() {
+		
+	}
 }

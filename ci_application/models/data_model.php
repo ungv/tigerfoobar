@@ -382,4 +382,15 @@ class Data_model extends CI_Model {
 		
 		return $jsonDataObj;
 	}
+
+
+	//------------- METHODS FOR HIGHCHARTS VIEW ------------
+	public function getScoreHistory($claimID) {
+		$sql = "SELECT * 
+				FROM Rating
+				WHERE ClaimID = $claimID
+				ORDER BY Time";
+		return $this->db->query($sql)->result_array();
+	}
+
 }

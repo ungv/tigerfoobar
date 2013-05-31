@@ -83,6 +83,8 @@ class Pages extends Root_Controller {
 			//$data['treemapJSON'] = $this->data_model->getClaimsForCompanyJSON($companyID);
 			//$data['treemapSize'] = ["full", 500]; //Scott
 			
+			$data['scoreHistory'] = $this->data_model->getScoreHistory($claimID);
+
 			//files needed
 			$data['csFiles'] = array('general','ccStyles', 'tooltipster');
 			$data['jsFiles'] = array('general','ccScripts','score');
@@ -91,6 +93,7 @@ class Pages extends Root_Controller {
 			$this->load->view('pages/mainTop', $data);
 			$this->load->view('pages/ccTop', $data);
 			$this->load->view('pages/evidence', $data);
+			$this->load->view('pages/highcharts', $data);
 			$this->load->view('pages/scoreTop', $data);
 			$this->load->view('pages/score', $data);
 			
