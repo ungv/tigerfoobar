@@ -1,17 +1,32 @@
+<?php
+$string = '';
+if ($pageType == 'claim') {
+    $string .= 'this claim';
+} else {
+    $string .= $companyInfo['Name'];
+}
+?>
+
 <script type="text/javascript">
-var companyName = '<?=$claimInfo['CoName']?>';
-var dateTime = '<?=$scoreHistory[0]['Time']?>'.split(' ');
-var datePieces = dateTime[0].split('-');
-var timePieces = dateTime[1].split(':');
-console.log(datePieces + ", " + timePieces);
+var thisThing = "<?=$string?>";
+var jsonDataObj = {<?php echo($scoreHistory)?>};
+var dates = new Array();
+var values = new Array();
+for (var i in jsonDataObj['scores']) {
+    dates.push(jsonDataObj['scores'][i]['date']);
+    values.push(jsonDataObj['scores'][i]['value']);
+}
 $(function () {
-    $('#container').highcharts({
+    if (dates.length < 2) {
+        $('#chartContainer').hide();
+    }
+    $('#chartContainer').highcharts({
         chart: {
             zoomType: 'x',
             spacingRight: 20
         },
         title: {
-            text: 'Score history of ' + companyName
+            text: 'Score history for ' + thisThing
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
@@ -19,11 +34,14 @@ $(function () {
                 'Drag your finger over the plot to zoom in'
         },
         xAxis: {
-            categories: 
+            title: {
+                text: 'Timestamps'
+            },
+            categories: dates
         },
         yAxis: {
             title: {
-                text: 'Score'
+                text: 'Rating'
             }
         },
         tooltip: {
@@ -57,15 +75,12 @@ $(function () {
 
         series: [{
             type: 'area',
-            name: 'Rating',
-            pointInterval: 24 * 3600 * 1000,
-            pointStart: Date.UTC(datePieces[0], datePieces[1]-1, datePieces[2]),
-            data: [
-                ['jan', 0.6804], ['feb', 0.6781], ['feb', 0.6756]           
-            ]
+            name: 'Score',
+            //pointInterval: 24 * 3600 * 1000, // used to rescale when there are more data points
+            data: values
         }]
     });
 });
 </script>
 
-<div id="container" style="min-width: 400px; height: 200px; margin: 0 auto"></div>
+<div id="chartContainer" style="min-width: 400px; height: 200px; margin: 0 auto"></div>

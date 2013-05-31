@@ -385,12 +385,40 @@ class Data_model extends CI_Model {
 
 
 	//------------- METHODS FOR HIGHCHARTS VIEW ------------
-	public function getScoreHistory($claimID) {
+	// Get the history of all changes to this claim's score
+	public function getClaimScoreHistoryJSON($claimID) {
 		$sql = "SELECT * 
 				FROM Rating
 				WHERE ClaimID = $claimID
 				ORDER BY Time";
-		return $this->db->query($sql)->result_array();
+		$rawData = $this->db->query($sql)->result_array();
+		$jsonDataObj = '"scores": [';
+		$values = '';
+		for ($i = 0; $i < count($rawData); $i++) {
+			$date = explode(' ', $rawData[$i]['Time'])[0];
+			$values .= '{"date" : "' . $date . '", "value" : ' . $rawData[$i]['Value'] . '},';
+		}
+		$values = rtrim($values, ',');
+		$jsonDataObj .= $values . ']';
+		return $jsonDataObj;
+	}
+
+	// Get the history of all changes to this company's score
+	public function getCompanyScoreHistoryJSON($companyID) {
+		$sql = "SELECT * 
+				FROM CompanyRatings
+				WHERE CompanyID = $companyID
+				ORDER BY Time";
+		$rawData = $this->db->query($sql)->result_array();
+		$jsonDataObj = '"scores": [';
+		$values = '';
+		for ($i = 0; $i < count($rawData); $i++) {
+			$date = explode(' ', $rawData[$i]['Time'])[0];
+			$values .= '{"date" : "' . $date . '", "value" : ' . $rawData[$i]['Score'] . '},';
+		}
+		$values = rtrim($values, ',');
+		$jsonDataObj .= $values . ']';
+		return $jsonDataObj;
 	}
 
 }

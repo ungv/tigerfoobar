@@ -59,7 +59,7 @@
 		var jsonDataObj = {<?php
 			echo($treemapJSON);
 		?>};
-		console.log("jsonDataObj is: " + jsonDataObj);
+		console.log(jsonDataObj);
 
 		var data = jsonDataObj;
 		node = root = data;
