@@ -25,6 +25,16 @@
 		text-justify:inter-word;
 	}
 
+	p:first-child:first-letter { 
+		float: left; 
+		color: green; 
+		font-size: 50px; 
+		line-height: 25px; 
+		padding-top: 2px; 
+		padding-right: 3px; 
+	}
+
+
 /*-------------Video---------------------*/
 
 
@@ -32,6 +42,44 @@
 		width:500px;
 	}
 
+/*call to actions*/
 
+	#actions {
+		clear: both;
+		overflow: hidden;
 
+		/*  create a flex layout context */
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		/* Then we define the flow direction and if we allow the items to wrap 
+		* Remember this is the same as:
+		*/
+		-webkit-flex-flow: row wrap;
+		flex-flow: row wrap;
 
+		/* Then we define how is distributed the remaining space */
+		justify-content: space-around;
+
+		text-align: center;
+	}
+
+	#actions > div {
+		padding: 5px;
+		border: 1px solid;
+		/*height: 60px;*/
+		width: 280px;
+		margin: auto;
+	}
+
+	#actions > div img {
+		width: 80px;
+		/*display: inline;*/
+	}
+
+	#actions > div p {
+		/*width: 80px;*/
+		/*display: inline;*/
+	}

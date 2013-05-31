@@ -26,7 +26,7 @@
 			}
 			foreach ($comments as $comment) {
 			?>
-				<li id="<?=$comment['CommentID']?>comment" value="<?=$comment['Value']?>" style="left: <?=$comment['level'] * 15?>px; width: <?=900-$comment['level'] * 15?>px;" level="<?=$comment['level']?>">
+				<li id="<?=$comment['CommentID']?>comment" value="<?=$comment['Value']?>" style="left: <?=$comment['level'] * 15?>px; width: <?=900-$comment['level'] * 15?>px;" level="<?=$comment['level']?>" class='comments' title='<?=$comment['Name']?> rated this claim as <strong><?=$comment['Value']?></strong>'>
 					<?php
 						// Calculate time past since comment posted
 						// PHP time() is in Europe/Paris (+9) timezone, but MySQL server time is UTC (+3),

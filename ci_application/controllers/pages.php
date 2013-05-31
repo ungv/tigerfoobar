@@ -123,7 +123,7 @@ class Pages extends Root_Controller {
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
 
-			$data['csFiles'] = array('general','ccStyles','toggleview');
+			$data['csFiles'] = array('general','ccStyles','toggleview','tooltipster');
 			$data['jsFiles'] = array('general','ccScripts','score','toggleview');
 			
 			$this->load->view('templates/header', $data);

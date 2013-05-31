@@ -6,6 +6,8 @@
 <head>
 	<title><?= $headerTitle ?></title>
 
+	<link rel="icon" type="image/png" href="/img/patchwork_logo.png" />
+
 	<?php 
 	/*Our Stylesheets*/
 	foreach($csFiles as $csFile) { ?>

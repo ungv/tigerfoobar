@@ -17,6 +17,7 @@ html {
 	font-size: 14px;
 	line-height: 16px;
 	padding: 8px 10px;
+	text-align: center;
 }
 
 /* This next selector defines the color of the border on the outside of the arrow. This will automatically match the color and size of the border set on the main tooltip styles. Set display: none; if you would like a border around the tooltip but no border around the arrow */
