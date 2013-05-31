@@ -1,12 +1,7 @@
 #urlContainer {
 	margin-bottom: 0px !important;
+	float: left;
 }
-
-/*removed to fit welcome message
-#urlButton, #urlInput {
-	position: absolute;
-}
-*/
 
 #urlButton {
 	opacity: 0.6;
