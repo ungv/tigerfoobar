@@ -80,6 +80,8 @@ class Pages extends Root_Controller {
 			$data['uniqueUsers'] = $this->data_model->getUniqueUsers($claimID);
 			$data['scores'] = $this->data_model->getClaimScores($claimID);
 			$data['userRating'] = $this->data_model->getRatingOnClaim($claimID, $this->userid);
+			//$data['treemapJSON'] = $this->data_model->getClaimsForCompanyJSON($companyID);
+			//$data['treemapSize'] = ["full", 500]; //Scott
 			
 			//files needed
 			$data['csFiles'] = array('general','ccStyles', 'tooltipster');
@@ -91,6 +93,7 @@ class Pages extends Root_Controller {
 			$this->load->view('pages/evidence', $data);
 			$this->load->view('pages/scoreTop', $data);
 			$this->load->view('pages/score', $data);
+			
 			$this->load->view('pages/scoreBottom', $data);
 			$this->load->view('pages/discussion', $data);
 			$this->load->view('pages/mainBottom', $data);
@@ -118,7 +121,7 @@ class Pages extends Root_Controller {
 			$data['companyClaimsPos'] = $this->data_model->getCompanyClaimsPos($companyID);
 			$data['companyClaimsNeg'] = $this->data_model->getCompanyClaimsNeg($companyID);
 			$data['companyTags'] = $this->data_model->getCompanyTags($companyID, $this->userid);
-			$data['treemapJSON'] = $this->data_model->getClaimsForCompanyJSON($companyID);
+			$data['treemapJSON'] = $this->data_model->getJSON("companyClaims",$companyID);
 			
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
@@ -152,7 +155,8 @@ class Pages extends Root_Controller {
 			$data['pageType'] = 'tag';
 			
 			$data['tagInfo'] = $this->data_model->getClaimsWithTag($tagID);
-			$data['treemapJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
+			//$data['treemapJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
+			$data['treemapJSON'] = $this->data_model->getJSON("claimsWithTag",$tagID);
 			
 			$data['csFiles'] = array('general','tag','toggleview');
 			$data['jsFiles'] = array('general','tag','toggleview');
@@ -194,7 +198,8 @@ class Pages extends Root_Controller {
 		$data['userComments'] = $this->data_model->getUserComments($userID);
 		$data['userVotes'] = $this->data_model->getUserVotes($userID);
 		$data['headerTitle'] = 'User Profile - Patchwork';
-		$data['treemapJSON'] = $this->data_model->getTopClaimsForUserJSON($userID);
+		//$data['treemapJSON'] = $this->data_model->getTopClaimsForUserJSON($userID);
+		$data['treemapJSON'] = $this->data_model->getJSON("userClaims",$userID);
 
 		//files needed
 		$data['csFiles'] = array('general','profile','toggleview');

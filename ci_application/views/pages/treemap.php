@@ -115,8 +115,15 @@
 			html: true, 
 			title: function() {
 			  var d = this.__data__; // c = colors(d.i);
-			  var html = "<h3>" + d.name + "</h3> <br/> <h4> " + d.company + "</h4>";
+			  var html = "<h3>" + d.name + "</h3> <br/>";
 			  
+			  <?php
+				if (isset($pageType) && $pageType == "home") {
+			  ?>
+			  html+="<h4> " + d.company + "</h4>";
+			  <?php
+				}
+			  ?>
 			  //Todo: pass this html value to the "mouseenter" function below so that tooltips can be scaled properly before being displayed.
 			  //One way to possibly do this is bind it to the SVG element above and read it from d
 			  return html;
