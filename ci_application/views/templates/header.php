@@ -22,6 +22,8 @@
 	<script src="/js/additional-methods.min.js" type="text/javascript"></script>
 	<script src="/js/jquery.tipsy.js" type="text/javascript"></script>
 	<script src="/js/jquery.tooltipster.min.js" type="text/javascript"></script>
+	<script src="/js/tagit.js" type="text/javascript"></script>	
+	<script src="/js/highcharts.js" type="text/javascript"></script>	
 </head>
 
 <body>

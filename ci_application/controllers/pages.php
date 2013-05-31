@@ -82,6 +82,7 @@ class Pages extends Root_Controller {
 			$data['userRating'] = $this->data_model->getRatingOnClaim($claimID, $this->userid);
 			
 			$companyID = $data['claimInfo']['CompanyID'];
+			$data['scoreHistory'] = $this->data_model->getClaimScoreHistoryJSON($claimID);
 			$data['treemapJSON'] = $this->data_model->getJSON("companyTopClaims", $companyID);
 			//$data['treemapSize'] = ["full", 500]; //Scott
 			
@@ -97,6 +98,7 @@ class Pages extends Root_Controller {
 			$this->load->view('pages/score', $data);
 			$this->load->view('pages/treemap', $data);
 			$this->load->view('pages/scoreBottom', $data);
+			$this->load->view('pages/highcharts', $data);
 			$this->load->view('pages/discussion', $data);
 			$this->load->view('pages/mainBottom', $data);
 			$this->load->view('templates/footer');
@@ -123,6 +125,7 @@ class Pages extends Root_Controller {
 			$data['companyClaimsPos'] = $this->data_model->getCompanyClaimsPos($companyID);
 			$data['companyClaimsNeg'] = $this->data_model->getCompanyClaimsNeg($companyID);
 			$data['companyTags'] = $this->data_model->getCompanyTags($companyID, $this->userid);
+			$data['scoreHistory'] = $this->data_model->getCompanyScoreHistoryJSON($companyID);
 			$data['treemapJSON'] = $this->data_model->getJSON("companyClaims",$companyID);
 			
 			$data['headerTitle'] = 'View Company - PatchWork';
@@ -137,6 +140,7 @@ class Pages extends Root_Controller {
 			$this->load->view('pages/scoreTop', $data);
 			$this->load->view('pages/score', $data);
 			$this->load->view('pages/scoreBottom', $data);
+			$this->load->view('pages/highcharts', $data);
 			$this->load->view('pages/toggleview', $data);
 			$this->load->view('pages/highlowClaims', $data);
 			$this->load->view('pages/treemap', $data);
