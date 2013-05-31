@@ -288,6 +288,19 @@ class Data_model extends CI_Model {
 		*/
 	}
 	
+	//Retrieves the all claims for a given company
+	public function getCompanyTopClaims($companyID) {
+		$N = 5;
+		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
+				FROM Claim cl
+			    JOIN Company co
+				ON co.CompanyID = cl.CompanyID
+				WHERE co.CompanyID = $companyID
+				ORDER BY cl.Score
+				Limit 0, $N";
+		return $this->db->query($sql)->result_array();
+	}
+	
 	//Gets data for the top companies along with their claims and formats them as JSON to be used in a treemap view
 	public function getTopCompaniesWithClaimsJSON() {
 
@@ -356,6 +369,12 @@ class Data_model extends CI_Model {
 			}
 		} else if ($type == "userClaims") {
 			$rawData = $this->getUserClaims($entityID);
+			
+			if (isset($rawData[0])) {
+				$name = $rawData[0]["Name"];
+			}
+		} else if ($type == "companyTopClaims") {
+			$rawData = $this->getCompanyTopClaims($entityID);
 			
 			if (isset($rawData[0])) {
 				$name = $rawData[0]["Name"];

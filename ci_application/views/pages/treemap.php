@@ -1,8 +1,5 @@
 <?php
-	/*TODO (5/17/13):
-	* -Make the SVG text bring users to the relevant claim page on click
-	* -Create on-hover tooltips that show more detail and slightly change the color of hovered cells to indicate
-	* that the cell is clickable
+	/* Todo
 	* -Limit the number of claims per top company returned in the data model
 	*/
 ?>
@@ -16,16 +13,24 @@
 		<?php
 			if (isset($pageType) && $pageType == "home") {
 			?>
-				var treemapHeight = $(window).height()+100 - $("#treemapCanvas").offset().top - $("footer").height() - 40;
-				var treemapWidth = $(window).width() - 60;
+				var availVisibleHeight = $(window).height()+100 - $("#treemapCanvas").offset().top - $("footer").height() - 40;
+				var treemapHeight = (availVisibleHeight >= 500) ? availVisibleHeight : 500;
+				
+				var availVisibleWidth = $(window).width() - 60;
+				var treemapWidth = (availVisibleWidth >= 500) ? availVisibleWidth : 500;
 			<?php
 			} else if (isset($pageType) && ($pageType == "company" || $pageType == "tag" || $pageType == "profile")) {
 			?>
 				var treemapHeight = 500;
 				var treemapWidth = $("#main").width();
 			<?php
+			} else if (isset($pageType) && $pageType == "claim") {
+			?>
+				var treemapHeight = 100;
+				var treemapWidth = 410;
+			<?php	
 			}
-		?>
+			?>
 		var w = treemapWidth,
 			h = treemapHeight,
 			x = d3.scale.linear().range([0, w]),
@@ -59,6 +64,8 @@
 		var jsonDataObj = {<?php
 			echo($treemapJSON);
 		?>};
+
+		
 		console.log("jsonDataObj is: " + jsonDataObj);
 
 		var data = jsonDataObj;
