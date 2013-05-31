@@ -20,7 +20,7 @@
 	}
 	?>
 	<div id="tagSection">
-		<span><?=$plural ?>:</span>
+		<div id="tagSectionIndicator"><?=$plural ?>:</div>
 		<ul id="taglist" tagtype="<?=$tagtype?>" objectid="<?=$objectid?>">
 			<?php
 			foreach ($list AS $tag) {
@@ -42,7 +42,7 @@
 		</ul>
 		<a id="addTag" href="#" <?php if(!$isLogged) { ?>style="display:none;"<?php } ?> title='Add new tag'>+</a>
 		<div id="newTagPopup" style="display:none;">
-			<input id="newtag_name" tagtype="Industry" type="text" placeholder="Type an Industry name"/>
+			<input id="newtag_name" tagtype="<?=$tagtype?>" type="text" placeholder="Type a tag name"/>
 		</div>
 	</div>
 <!--End of Top-->

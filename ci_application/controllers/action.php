@@ -40,10 +40,27 @@ class Action extends Root_Controller {
 		redirect(base_url());
 	}
 
+
+	/*
+		Creates a brand new tag using the passed name
+	*/
+	public function createTag($tagName) {
+		$tagName = str_replace('%20', ' ', $tagName);
+		$tagtype = $this->uri->segment(4);
+		
+		$newTag = $this->action_model->createTag($tagName, $tagtype);
+		if(!$newTag) {
+			$data['text'] = -1;
+		}else {
+			$newTag = get_object_vars($newTag->row());
+			$data['text'] = $newTag['TagsID'];
+		}
+		$this->load->view('data/text_view', $data);
+	}
+
 	/*
 		Upvote Industry tag on company page, or remove the current vote
 		for that user
-		NOTE: Send positive message even if user has already upvoted, unless tag isnt found
 	*/
 	public function upvoteTag() {
 		if(!$this->is_logged_in()) {
@@ -51,7 +68,7 @@ class Action extends Root_Controller {
         	$data['json'] = '{"message":"Not Logged In"}'; 
 		}else {
 			$userid = $this->session->userdata('userid');
-			$result = $this->action_model->upvoteIndustry($userid);
+			$result = $this->action_model->upvoteTag($userid);		//!!catch server error here
 			if($result) {	//database updated db, send success method
 				$data['json'] = '{"message":"Successfully contacted server method!"}';
 			}else {			//didn't work, inform user why
@@ -83,7 +100,6 @@ class Action extends Root_Controller {
 	}
 
 	/*
-
 		flag stuff
 	*/
 

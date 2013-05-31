@@ -90,7 +90,7 @@ input.infocus, textarea.infocus {
 
 header{
 	/*vertical, then horizontal*/
-	width:900px;
+	width: 100%;
 	padding: 3px;
 	margin:0px auto 15px;
 	
@@ -100,8 +100,6 @@ header{
 	left: 0;
 	border-top:3px solid #fff;
 	border-bottom:3px solid #ccc;
-	
-	width: 100%;
 }
 
 header, #logoImage{
@@ -116,6 +114,7 @@ header, #logoImage{
 
 #topbar {
 	width: 915px;
+	max-width:70%;
 	margin: 0 auto;
 	/*background-color: #4D7938;*/
 	/*position: relative;*/
@@ -130,6 +129,7 @@ header h1 {
 	font-size:43px;
 	font-weight:normal;
 	position:absolute;
+	z-index:0;
 	left:5px;
 }
 
@@ -149,6 +149,8 @@ header input {
 	width: 915px;
 	height:20px;
 	margin-top:9px;
+	position: relative;
+	z-index: 2;
 }
 
 header span {
@@ -353,5 +355,10 @@ input[type=button], input[type=submit] {
 
 	.ui-menu-item a.ui-state-focus{
 		margin:0px !important;
-		border:0px !important;
+		border-image-width:0px !important;
+	}
+
+	li.ui-menu-item a {
+    	display: block;
+    	font-weight:bold;
 	}

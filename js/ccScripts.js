@@ -108,7 +108,6 @@ $(document).ready(function() {
 			},
 			error: function(json) {
 				//Must be logged in to cast vote
-				alert('You must be logged in to vote');
 				$('#loginPopup').show(200);
 				window.scrollTo(0, 0);
 			}
@@ -270,39 +269,110 @@ $(document).ready(function() {
 		            }
 	                response(data.map(function (value) {
 	                    return {
-	                        'label':  value.value ,
-	                        'value': value.label
+	                        'id':  value.id ,
+	                        'name': value.name
 	                    };  
 	                }));
 	            }   
 	        }); 
 	    },
+		open: function() { 
+			$('.ui-menu').width(270); 
+			//$(".ui-menu-item").hide();
+			//$(".ui-autocomplete").hide();
+			//$("#autoCompleteResults").show();
+		},
 	    select: function( event, ui ) {
-			sendNewTag(ui.item.label,ui.item.value);
+	    	//send tag upvote to server
+	    	if(ui.item.id == -1) {		//totally new tag, create then upvote
+	    		var newTagName = $("#newtag_name").val();
+	    		createTag(newTagName);
+	    	}else {
+				voteOnNewTag(ui.item.id,ui.item.name);
+			}
 			$(this).val(''); 
 			return false;
 		}
-	});
+	}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+		//check if header
+		var autocompleteLi;
+		if(item.name == "Possible Tags") {
+			autocompleteLi = $( "<li>" , {
+				"class": "autoCompleteHeader",
+				"text" : item.name
+			});
+		}else if(item.name == "empty") {
+			autocompleteLi = $( "<li>" , {
+				"html" : 	'<a href="#">Click to add <span class="originalTagPreview">' + 
+								$("#newtag_name").val() + 
+							'</span> as new tag</a>'
+			});
+		}else {
+			autocompleteLi = $( "<li>" , {
+				"class": "tagSuggestion",
+				"tagid": item.id,
+				"text" : item.name
+			}).html('<a href="#">'+item.name+'</a>');
+		}
+		autocompleteLi.appendTo(ul);
+		return autocompleteLi;
+	};;
+
+	function createTag(name) {
+		var newType;
+		if($('#taglist').attr('tagtype') == "Industry") {
+			newType = "industry";
+		}else {
+			newType = "claimTag";
+		}
+		var newID;
+		$.ajax({
+			type: 'POST',
+			url: '/action/createTag/'+name+"/"+newType,
+			success: function(r) {	//Return saying tag was created
+				console.log("original response:" + r);
+				if(parseInt(r) != -1) {
+					voteOnNewTag(parseInt(r),name);
+				}
+			},
+			error: function(r) {
+				console.log("original response:" + r);
+			}
+		});
+	}
 	
-	//Sends information about the newly created
+	//Sends information about the newly voted on
 	//industry-company connection to the server
-	function sendNewTag(label, value) {
-		var tagtype = $('#taglist').attr('tagtype');
-		var newLink = $('<li>', {
-			"html": '	<span class="tagName">' + label + '</span>' +
-					'	<span>(</span> ' +
-					'		<span class="tagTotal">0</span>' +
-					'	<span>)</span>' +
-					'	<span class="tagUpvote" tagtype="'+tagtype+'" tagid="'+ value + '" objectid="'+ $('#taglist').attr('objectid') +'" voted="0">' +
-					'		+  ' +
-					'	</span>'
-		});
-		$('#taglist').append(newLink);
-		$("#newtag_name").val(""); //clear textbox
-		//call current vote method, triger click
-		$(newLink.children('.tagUpvote')[0]).click(function() {
-			sendTagUpvote($(this));
-		});
+	//if already a current tag, tries to upvote that instead
+	function voteOnNewTag(id, name) {
+		//check if already there
+		var tagCheck = ($("#taglist").find("[tagid='" + id + "']"));
+
+		if(tagCheck.length > 0) { //tag has been created, upvote if can
+			//check if user has voted on it
+			if(tagCheck.attr("voted") == "0") {//if user has voted, do nothing
+				tagCheck.click();
+			}
+		}else {
+			var tagtype = $('#taglist').attr('tagtype');
+			var newLink = $('<li>', {
+				"html": '	<span class="tagName"><a href="/tag/'+id+'">' + name + '</a></span>' +
+						'	<span>(</span> ' +
+						'		<span class="tagTotal">0</span>' +
+						'	<span>)</span>' +
+						'	<span class="tagUpvote" tagtype="' + tagtype + '" tagid="'+ id + '" objectid="'+ $('#taglist').attr('objectid') +'" voted="0">' +
+						'		+  ' +
+						'	</span>'
+			});
+			$('#taglist').append(newLink);
+			$("#newtag_name").val(""); //clear textbox
+			//call current vote method, triger click
+			$(newLink.children('.tagUpvote')[0]).click(function() {
+				sendTagUpvote($(this));
+			});
+			$(newLink.children('.tagUpvote')[0]).click();
+		}
+		//pulse green at end
 	}
 
 

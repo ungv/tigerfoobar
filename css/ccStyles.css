@@ -49,19 +49,30 @@
 	
 	#tagSection{
 		overflow:hidden;
-		margin-bottom:0px;
+		margin-bottom:-20px;
 	}
 
-	#tagSection span, #tagSection li {
-		float: left;
-		padding: 2px 2px 2px 2px;
+	#tagSectionIndicator{
+		width:80px;
+	}
+
+	#taglist{
+		overflow:hidden;
+		width:835px;
+	}
+
+	#tagSectionIndicator, #taglist {
+		float:left;
 	}
 
 	#tagSection li {
+		float: left;
+		padding: 2px 2px 2px 2px;
 		list-style-type: none;
 		background-color: #FEF5CA;
 		border: 1px solid rgb(168, 162, 130);
 		border-radius:3px;
+		margin-bottom:5px;
 	}
 
 	#tagSection .tagUpvote {
@@ -76,19 +87,30 @@
 	}
 
 	#tagSection li.userVoted {
-		background-color:#DDD;
+		background-color:#EEE;
 	}
 
 /*-----------------------Add New Tag---------------------------*/
 
 	#addTag {
 		background-color: #FEF5CA;
-		border: 0;
+		border: 1px solid #999;
+		border-radius:3px;
 		font-weight: bold;
 		display: inline;
 		float: left;
-		padding: 5px 24px 5px 24px;
+		padding: 4px 20px 4px 20px;
 		font-size: 14px;
+		clear:both;
+	}
+
+	#newtag_name, #addTag{
+		margin-left:80px;
+	}
+
+	.originalTagPreview{
+		color:#B06307;
+		padding:3px 0px 3px 0px;
 	}
 
 /*-----------------------Evidence View--------------------------*/

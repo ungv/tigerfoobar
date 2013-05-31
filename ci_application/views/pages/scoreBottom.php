@@ -6,7 +6,7 @@
 				<?php
 				if ($pageType == 'company') {
 				?>
-					<span>Tags applied to related claims</span>
+					<span>Popular Claim Tags for <?=$companyInfo['Name']?></span>
 				<?php
 				} else {
 				?>
@@ -23,9 +23,9 @@
 					<ul id="claimPopTags">
 						<?php
 						// need to get most popular claims for this company, then get their most popular tags
-						foreach ($companyTags AS $tag) {
+						foreach ($companyClaimTags AS $tag) {
 							?>
-							<li>[need help with this query]<?//=$tag['Name']?></li>
+							<li><?=$tag['Name']?> <?=$tag['total']?></li>
 							<?php
 						}
 						?>

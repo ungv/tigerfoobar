@@ -32,21 +32,42 @@ class Action_model extends CI_Model {
         return false;
 	}
 
+    //Creates a new tag with name defined by the user, and the tagtype
+    //according to the page it was passed from
+    public function createTag($name, $tagtype) {
+        if(strcmp($tagtype,"industry") == 0) {  //creating new industry tag
+            $tagtype = "Industry";
+        }else { //creating new claim tag
+            $tagtype = "Claim Tag";
+        }
+        $tagExists = $this->db->get_where('Tags', array('Name' => $name , 'Type' => $tagtype));
+        if($tagExists->num_rows() == 0) { //add new tag to system
+            $table = 'Tags';
+            $data = array(
+               'Name' => $name ,
+               'Type' => $tagtype
+            );
+            $this->db->insert($table, $data); 
+            return $this->db->get_where('Tags', array('Name' => $name , 'Type' => $tagtype));
+        }else {
+            return 0;
+        }
+    }
+
     //Upvotes the relationship between the passed tag and company using
     //the user id who sent it, or deletes the vote the user previously made 
     //depending on the boolean value post (voted)
     //Returns: false if the tag id is corrupt or if the query failed, 
     //true otherwise
-    public function upvoteIndustry($userid) {
+    public function upvoteTag($userid) {
         $tagid = $this->security->xss_clean($this->input->post('industryID'));
         $objectid = $this->security->xss_clean($this->input->post('objectID'));
         $tagtype = $this->security->xss_clean($this->input->post('tagType'));
         $voted = $this->security->xss_clean($this->input->post('voted'));
 
-        //check tagid is for industry
-        $this->db->query('SET FOREIGN_KEY_CHECKS = 0;');
+        //check tagid is for existing tag
         $isVotable = $this->db->get_where('Tags', array('TagsID' => $tagid , 'Type' => $tagtype));
-        if(!$isVotable) {  //if not, return false
+        if(!$isVotable) {  //if not, adding new tag
             return false;
         }else {             //else, execute query
             //choose tags or industries

@@ -112,6 +112,32 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 
+	//Finds the tags that are most often applied to claims about a given company
+	public function getCompanyClaimTags($companyID) {
+		$sql = "SELECT t.Name, t.TagsID, COUNT(t.TagsID) as total
+				FROM Tags t
+				JOIN Claim_has_Tags c
+				ON c.Tags_TagsID = t.TagsID
+				JOIN Claim c2
+				ON c.Claim_ClaimID = c2.ClaimID
+				WHERE c2.CompanyID = $companyID
+				GROUP BY t.Name, t.TagsID
+				ORDER BY COUNT(t.TagsID) DESC
+				LIMIT 10";
+		return $this->db->query($sql)->result_array();
+	}
+
+	/*
+	$sql = "SELECT DISTINCT t.Name, t.TagsID, COUNT(c.Company_CompanyID) as votes , 
+				sum(case when c.User_id = $userID then 1 else 0 end) as uservoted
+				FROM Tags t
+				JOIN Company_has_Tags c
+				ON c.Tags_TagsID = t.TagsID
+				WHERE c.Company_CompanyID = $companyID
+				GROUP BY t.Name, t.TagsID
+				ORDER BY COUNT(c.Company_CompanyID) DESC";
+	*/
+
 	//Retrieves the top $n positive claims for a given company
 	public function getCompanyClaimsPos($companyID) {
 		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, co.Name
@@ -155,11 +181,12 @@ class Data_model extends CI_Model {
 	}
 
 	//Returns SQL from the Tags table, used for fetching autocomplete data
+	//
 	public function tagList($root) {
 		$tagtype = $this->security->xss_clean($this->input->get('tagtype'));
 		$sql = "SELECT * from Tags
 				WHERE Tags.Name like '$root%'
-				AND Tags.Type like '$tagtype' 
+				AND Tags.Type like '$tagtype'
 				LIMIT 10";
 		return $this->db->query($sql)->result_array();
 	}

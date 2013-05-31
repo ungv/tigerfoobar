@@ -95,12 +95,14 @@ class Pages extends Root_Controller {
 
 	//company page
 	public function company($companyID = -1) {
-		if($companyID == -1) {
+		if($companyID == -1 || !$this->data_model->getCompany($companyID)) {
 			$this->homepage();
 		}else {
 			//grab basic data
 			$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
 			$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
+			$data['companyClaimTags'] = $this->data_model->getCompanyClaimTags($companyID);
+
 			$data['companyClaimsPos'] = $this->data_model->getCompanyClaimsPos($companyID);
 			$data['companyClaimsNeg'] = $this->data_model->getCompanyClaimsNeg($companyID);
 			$data['companyTags'] = $this->data_model->getCompanyTags($companyID, $this->userid);
