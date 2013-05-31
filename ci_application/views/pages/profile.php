@@ -14,7 +14,7 @@
 				<?php
 				foreach ($userClaims as $claim) {
 				?>
-				<li id="<?=$claim['Value']?>"><a href="/claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a></li>
+				<li id="<?=$claim['Score']?>"><a href="/claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a></li>
 				<?php
 				}
 			}
