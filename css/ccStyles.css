@@ -44,7 +44,9 @@
 		margin: 50px auto;
 	}
 	
-
+	#scoreContainer #treemapCanvas {
+		margin: 5px auto;
+	}
 /*-----------------------Claim and Industry Tags-------------------*/
 	
 	#tagSection{

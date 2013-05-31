@@ -74,13 +74,15 @@ class Pages extends Root_Controller {
 			$data['claimID'] = $claimID;
 			$data['claimInfo'] = get_object_vars($this->data_model->getClaim($claimID));
 			$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
-
+		
 			$resultsArr = [];
 			$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr, $this->userid);
 			$data['uniqueUsers'] = $this->data_model->getUniqueUsers($claimID);
 			$data['scores'] = $this->data_model->getClaimScores($claimID);
 			$data['userRating'] = $this->data_model->getRatingOnClaim($claimID, $this->userid);
-			//$data['treemapJSON'] = $this->data_model->getClaimsForCompanyJSON($companyID);
+			
+			$companyID = $data['claimInfo']['CompanyID'];
+			$data['treemapJSON'] = $this->data_model->getJSON("companyTopClaims", $companyID);
 			//$data['treemapSize'] = ["full", 500]; //Scott
 			
 			//files needed
@@ -93,7 +95,7 @@ class Pages extends Root_Controller {
 			$this->load->view('pages/evidence', $data);
 			$this->load->view('pages/scoreTop', $data);
 			$this->load->view('pages/score', $data);
-			
+			$this->load->view('pages/treemap', $data);
 			$this->load->view('pages/scoreBottom', $data);
 			$this->load->view('pages/discussion', $data);
 			$this->load->view('pages/mainBottom', $data);
