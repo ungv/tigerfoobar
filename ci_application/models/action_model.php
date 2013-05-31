@@ -137,16 +137,19 @@ class Action_model extends CI_Model {
                'CommentID' => $CommentID,
                'UserID' => $userid,
             );
-            if (!$voted) {    //user hasnt voted, insert or update row
+            // determine which column to update
+            if ($value == 1) {
+                $col = 'upvotes';
+            } else {
+                $col = 'downvotes';
+            }
+            if (!$voted) {    //user hasnt voted on this specific vote, insert or update row
                 if ($hasVoted->num_rows == 0) {    //user has not voted on this comment, insert new row
                     $result = $this->db->insert('Vote', $data); 
-
-                    // Add 1 to vote count on this comment
                     $updateVoteCount = "UPDATE Discussion
-                                        SET votes = votes+1
+                                        SET $col = $col+1
                                         WHERE ClaimID = $ClaimID
                                         AND CommentID = $CommentID";
-                    $this->db->query($updateVoteCount);
                 } else {    //user has voted on something, update their vote value
                     $data = array(
                        'Value' => $value,
@@ -156,14 +159,29 @@ class Action_model extends CI_Model {
                         'ClaimID' => $ClaimID,
                         'CommentID' => $CommentID
                         );
-                    $result = $this->db->update('Vote', $data, $where);                     
+                    $result = $this->db->update('Vote', $data, $where);
+                    if ($value == 1) {                    
+                        $updateVoteCount = "UPDATE Discussion
+                                            SET upvotes = upvotes + 1,
+                                            downvotes = downvotes - 1
+                                            WHERE ClaimID = $ClaimID
+                                            AND CommentID = $CommentID";
+                    } else {
+                        $updateVoteCount = "UPDATE Discussion
+                                            SET upvotes = upvotes - 1,
+                                            downvotes = downvotes + 1
+                                            WHERE ClaimID = $ClaimID
+                                            AND CommentID = $CommentID";
+                    }
                 }
+                $this->db->query($updateVoteCount);
+                      
             } else {         //user is unvoting their current vote
                 $result = $this->db->delete('Vote', $data);
 
                 // Subtract 1 from vote count on this comment
                 $updateVoteCount = "UPDATE Discussion
-                                    SET votes = votes-1
+                                    SET $col = $col-1
                                     WHERE ClaimID = $ClaimID
                                     AND CommentID = $CommentID";
                 $this->db->query($updateVoteCount);
