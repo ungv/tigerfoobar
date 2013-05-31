@@ -14,7 +14,9 @@
 			<button class="cancelButton" type="button">cancel</button>
 		</div>
 		<div id="changePassBox" class="popup" style="display: none;">
+			<div id="passMatchMsg" style="color: red; display: none;">Passwords do not match</div>
 			<input type="password" name="newPass" placeholder="new password" />
+			<input type="password" name="newPass2" placeholder="password again" />
 			<button class="submitButton" type="submit">Update</button>
 			<button class="cancelButton" type="button">cancel</button>
 		</div>

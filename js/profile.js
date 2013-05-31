@@ -27,7 +27,7 @@ $(document).ready(function() {
 		$id = $(this).attr('id');
 		hidePopups();
 		$('#' + $id + 'Box').show(200);
-		($('#' + $id + 'Box').find('input')).focus();
+		($('#' + $id + 'Box input:first-child')).focus();
 	});
 
 	$('.cancelButton').click(function() {
@@ -55,12 +55,18 @@ $(document).ready(function() {
 			updateProfile('Name', ($(this).parent().find($('input')).val()));
 		}
 		if ($(this).parent().attr('id') == 'changePassBox') {
-			updateProfile('Password', ($(this).parent().find($('input')).val()));
+			if ($('input[name=newPass]').val() == $('input[name=newPass2]').val()) {
+				updateProfile('Password', ($(this).parent().find($('input')).val()));
+			} else {
+				$('#passMatchMsg').hide();
+				$('#passMatchMsg').show(200);
+			}
 		}
 		if ($(this).parent().attr('id') == 'changeEmailBox') {
 			updateProfile('Email', ($(this).parent().find($('input')).val()));
 		}
 		if ($(this).parent().attr('id') == 'deleteAccountBox') {
+			alert('user cannot delete account yet');
 			//dropAccount(($(this).parent().find($('input')).val()));
 		}
 	});

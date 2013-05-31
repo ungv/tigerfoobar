@@ -63,20 +63,22 @@
 			<button type="submit" id="login_submit" class="submitButton">Log in</button>
 			<button type="button" id="login_cancel" class="cancelButton">cancel</button>
 		</div>
-		<div id="signupPopup" class="popup" style="display: none;">
-			<h3>Create an account and start helping others!</h3>
-			<p id="username_exists" style="display: none; color: red;">
-				This username already exists, please try a different one.
-			</p>
-			<input type="text" name="username" placeholder="Desired codename"/>
-			<input type="password" name="password" placeholder="Top secret password"/>
-			<input type="text" name="email" placeholder="Email (*optional)"/>
-			<p>
-				*We only require an email to help you recover a lost username/password and will never spam you with anything, ever!
-			</p>
-			<button type="submit" id="signup_submit" class="submitButton">Sign me up!</button>
-			<button type="button" id="signup_cancel" class="cancelButton">Wait, no...</button>
-		</div>
+		<form id="signupForm" action="javascript:addUser()">
+			<div id="signupPopup" class="popup" style="display: none;">
+				<h3>Create an account and start helping others!</h3>
+				<p id="username_exists" style="display: none; color: red;">
+					This username already exists, please try a different one.
+				</p>
+				<input type="text" name="username" placeholder="Desired codename"/>
+				<input type="password" name="password" placeholder="Top secret password"/>
+				<input type="text" name="email" placeholder="Email (*optional)"/>
+				<p>
+					*We only require an email to help you recover a lost username/password and will never spam you with anything, ever!
+				</p>
+				<button type="submit" id="signup_submit" class="submitButton">Sign me up!</button>
+				<button type="button" id="signup_cancel" class="cancelButton">Wait, no...</button>
+			</div>
+		</form>
 	</header>
 
 	<div class="lightsout"></div>

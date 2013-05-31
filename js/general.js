@@ -119,32 +119,6 @@ $(document).ready(function() {
 		$(this).removeClass('hover');
 	});
 
-	$('#signup_submit').click(function() {
-		addUser($('#signupPopup input[name="username"]').val(), $('#signupPopup input[name="password"]').val(), $('#signupPopup input[name="email"]').val());
-		console.log($('#signupPopup input[name="username"]').val(), $('#signupPopup input[name="password"]').val(), $('#signupPopup input[name="email"]').val());
-	});
-
-	//Adds a new user to the database
-	function addUser(username, password, email) {
-		$.ajax({
-			type: 'POST',
-			url: '/action/addUser',
-			data: {
-				username: username,
-				password: password,
-				email: email
-			},
-			dataType: 'json',
-			success: function(json) {
-				sendLogin(username, password);
-			},
-			error: function() {
-				$('#username_exists').show(200);
-			}
-		});
-	}
-
-
 	/*-----Lights out----*/
 
 	//Adjust height of overlay to fill screen when page loads
@@ -324,4 +298,27 @@ function isLoggedIn($action) {
 		return false;
 	}
 	return true;
+}
+
+//Adds a new user to the database
+function addUser() {
+	$username = $('#signupPopup input[name="username"]').val();
+	$password = $('#signupPopup input[name="password"]').val();
+	$email = $('#signupPopup input[name="email"]').val();
+	$.ajax({
+		type: 'POST',
+		url: '/action/addUser',
+		data: {
+			username: $username,
+			password: $password,
+			email: $email
+		},
+		dataType: 'json',
+		success: function(json) {
+			sendLogin($username, $password);
+		},
+		error: function() {
+			$('#username_exists').show(200);
+		}
+	});
 }
