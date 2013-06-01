@@ -237,7 +237,7 @@ class Data_model extends CI_Model {
 	
 	// Get user's submitted comments
 	public function getUserComments($userID) {
-		$sql = "SELECT u.Name, c.ClaimID, d.CommentID, d.Comment, c.Title, c.CompanyID, co.Name AS CoName, r.Value
+		$sql = "SELECT u.Name, c.ClaimID, d.CommentID, d.Comment, c.Title, c.CompanyID, co.Name AS CoName, r.Value, d.Time
 				FROM User u
 				LEFT JOIN Discussion d
 				ON u.UserID = d.UserID
@@ -248,13 +248,14 @@ class Data_model extends CI_Model {
 				AND d.ClaimID = r.ClaimID
 				LEFT JOIN Company co
 				ON co.CompanyID = c.CompanyID
-				WHERE u.UserID = $userID";
+				WHERE u.UserID = $userID
+				ORDER BY d.Time DESC";
 		return $this->db->query($sql)->result_array();
 	}	
 	
 	// Get user's votes on comments
 	public function getUserVotes($userID) {
-		$sql = "SELECT u.Name, v.Value, v.CommentID, d.Comment, v.Time, c.ClaimID, c.Title, co.CompanyID, co.Name AS CoName
+		$sql = "SELECT u.Name, v.Value, v.CommentID, d.Comment, v.Time, c.ClaimID, c.Title, co.CompanyID, co.Name AS CoName, v.Time
 				FROM User u
 				LEFT JOIN Vote v
 				ON u.UserID = v.UserID
@@ -264,7 +265,8 @@ class Data_model extends CI_Model {
 				ON c.ClaimID = d.ClaimID
 				LEFT JOIN Company co
 				ON co.CompanyID = c.CompanyID
-				WHERE u.UserID = $userID";
+				WHERE u.UserID = $userID
+				ORDER BY v.Time DESC";
 		return $this->db->query($sql)->result_array();
 	}
 	

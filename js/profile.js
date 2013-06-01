@@ -75,6 +75,14 @@ $(document).ready(function() {
 			//dropAccount(($(this).parent().find($('input')).val()));
 		}
 	});
+	
+	$('.scrollBox').scrollTop(0);
+	$('.scrollBox').bind('scroll', function() {
+		$(this).addClass('topBorder');
+		if ($(this).scrollTop() == 0) {
+			$(this).removeClass('topBorder');
+		}
+	});
 });
 
 //Updates the user profile with new information
