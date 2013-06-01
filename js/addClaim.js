@@ -57,50 +57,52 @@ $(document).ready(function() {
 // Send request to add new claim to database on submit click
 // Form #newClaimForm calls this function on form submit
 function addClaim() {
-	$url = $('#pasteURL').val();
-	$title = $('input[name=title]').val();
-	$desc = $('textarea').val();
-	$company = $('#assocCo').tagit('tags');
-	$rating = $('input[name=score]:checked').val();
-	$tags = $('#tagsSearch').tagit('tags');
+	if (isLoggedIn('add a claim')) {
+		$url = $('#pasteURL').val();
+		$title = $('input[name=title]').val();
+		$desc = $('textarea').val();
+		$company = $('#assocCo').tagit('tags');
+		$rating = $('input[name=score]:checked').val();
+		$tags = $('#tagsSearch').tagit('tags');
 
-	// For some reason, ajax only allows plain objects
-	var tagsObj = new Object();
-	for (var i in $tags) {
-		tagsObj[i] = $tags[i].value;
-	}
-	if ($url != '' && $title != '' && $company != '' && $rating != null) {
-		$('#loadingGif').show(100).animate({
-			left: '200px'
-		}, 10000);
-		$.ajax({
-			type: 'POST',
-			url: '/action/addClaim',
-			data: {
-				url: $url,
-				title: $title,
-				desc: $desc,
-				company: $company[0].value,
-				rating: $rating,
-				tags: tagsObj
-			},
-			dataType: 'json',
-			success: function(json) {
-				$('#successAlert').fadeIn();
-				$('#successAlert').fadeOut(3000);
-				window.location.reload();
-			},
-			error: function() {
-				alert('Oops, are you logged in?');
-			}
-		});
-	} else {
-		$('#coNote, #ratingNote').css('color', 'red');
-		if ($url == '')
-			$('#urlNote').show(200);
-		if ($company == '')
-			$('#coNote').show(200);
-		if ($rating == null)
-			$('#ratingNote').show(200);
+		// For some reason, ajax only allows plain objects
+		var tagsObj = new Object();
+		for (var i in $tags) {
+			tagsObj[i] = $tags[i].value;
+		}
+		if ($url != '' && $title != '' && $company != '' && $rating != null) {
+			$('#loadingGif').show(100).animate({
+				left: '200px'
+			}, 10000);
+			$.ajax({
+				type: 'POST',
+				url: '/action/addClaim',
+				data: {
+					url: $url,
+					title: $title,
+					desc: $desc,
+					company: $company[0].value,
+					rating: $rating,
+					tags: tagsObj
+				},
+				dataType: 'json',
+				success: function(json) {
+					$('#successAlert').fadeIn();
+					$('#successAlert').fadeOut(3000);
+					window.location.reload();
+				},
+				error: function() {
+					alert('Oops, are you logged in?');
+				}
+			});
+		} else {
+			$('#coNote, #ratingNote').css('color', 'red');
+			if ($url == '')
+				$('#urlNote').show(200);
+			if ($company == '')
+				$('#coNote').show(200);
+			if ($rating == null)
+				$('#ratingNote').show(200);
+		}
 	}
 }

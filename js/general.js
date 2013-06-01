@@ -289,7 +289,9 @@ function resetScale() {
 }
 
 // Check if the user is logged in before committing any action
-// Pass in the element that contains the 'claimid' attribute to check if it is set
+// The 'signedin' attribute is set on the main container that is on every page
+// If user is logged in, attribute is set to 1, else 0
+// Pass in the string to finish the alert text content
 function isLoggedIn($action) {
 	if ($('#main').attr('signedin') != 1) {
 		alert('Please log in to ' + $action);
