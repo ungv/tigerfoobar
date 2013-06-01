@@ -8,7 +8,7 @@
 		<div id='evidenceContent' class="content">
 			<dl>
 				<dt>URL: </dt>
-					<dd><a href="<?=$claimInfo['Link']?>"><?=$claimInfo['Link']?></a></dd>
+					<dd><a href="<?=$claimInfo['Link']?>" target="_blank"><?=$claimInfo['Link']?></a></dd>
 				<dt>Synopsis: </dt>
 					<dd><?=$claimInfo['Description']?></dd>
 				<dt>Company: </dt>

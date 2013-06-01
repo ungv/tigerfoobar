@@ -51,15 +51,19 @@ $(document).ready(function() {
 	});
 
 	$('.submitButton').click(function() {
-		if ($(this).parent().attr('id') == 'changeUserBox') {
-			updateProfile('Name', ($(this).parent().find($('input')).val()));
-		}
-		if ($(this).parent().attr('id') == 'changePassBox') {
-			if ($('input[name=newPass]').val() == $('input[name=newPass2]').val()) {
-				updateProfile('Password', ($(this).parent().find($('input')).val()));
-			} else {
-				$('#passMatchMsg').hide();
-				$('#passMatchMsg').show(200);
+		if ($(this).parent().find($('input')).val() == '') {
+			$(this).parent().find('.emptyMsg').show(200);
+		} else {
+			if ($(this).parent().attr('id') == 'changeUserBox') {
+				updateProfile('Name', ($(this).parent().find($('input')).val()));
+			}
+			if ($(this).parent().attr('id') == 'changePassBox') {
+				if ($('input[name=newPass]').val() != '' && $('input[name=newPass]').val() == $('input[name=newPass2]').val()) {
+					updateProfile('Password', ($(this).parent().find($('input')).val()));
+				} else {
+					$('#passMatchMsg').hide();
+					$('#passMatchMsg').show(200);
+				}
 			}
 		}
 		if ($(this).parent().attr('id') == 'changeEmailBox') {
@@ -67,6 +71,7 @@ $(document).ready(function() {
 		}
 		if ($(this).parent().attr('id') == 'deleteAccountBox') {
 			alert('user cannot delete account yet');
+			// TODO: check entered password against password in database as confirmation for deletion
 			//dropAccount(($(this).parent().find($('input')).val()));
 		}
 	});

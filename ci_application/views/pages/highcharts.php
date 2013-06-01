@@ -19,7 +19,7 @@ for (var i in jsonDataObj['scores']) {
 $(function () {
     if (dates.length < 2) {
         $('#chartContainer').hide();
-        $('#relatedTagsContainer').text('This claim is lonely without ratings. Give it a score on the left!');
+        $('#relatedTagsContainer').text('This claim is lonely without another rating. Give it a score on the left!');
     }
     $('#chartContainer').highcharts({
         chart: {
