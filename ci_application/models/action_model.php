@@ -312,9 +312,9 @@ class Action_model extends CI_Model {
 
         $newScore = ($curScore * $curNumClaims + $rating) / ($curNumClaims+1);
 
-        // add old score to company's score history for graph
+        // add new score to company's score history for graph
         $data = array(
-            'Score' => $curScore,
+            'Score' => $newScore,
             'CompanyID' => $companyID
             );
         $this->db->insert('CompanyRatings', $data);
