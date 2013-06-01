@@ -286,7 +286,7 @@ class Action_model extends CI_Model {
         if ($result->num_rows() == 0) {
             $data = array(
                 'Name' => ucwords($company),
-                'numClaims' => 1
+                'numClaims' => 0
                 );
             $this->db->insert('Company', $data);
         }
@@ -301,7 +301,7 @@ class Action_model extends CI_Model {
             'UserID' => $userid,
             'CompanyID' => $companyID,
             'numScores' => 1
-                );
+            );
         $this->db->insert('Claim', $data);
 
         /*----Recalculate average score of company----*/
@@ -312,10 +312,18 @@ class Action_model extends CI_Model {
 
         $newScore = ($curScore * $curNumClaims + $rating) / ($curNumClaims+1);
 
+        // add old score to company's score history for graph
+        $data = array(
+            'Score' => $curScore,
+            'CompanyID' => $companyID
+            );
+        $this->db->insert('CompanyRatings', $data);
+
         // Update company score with this rating and increase counter for number of claims for company
         $updateNumClaims = "UPDATE Company
                     SET Score = $newScore,
-                    numClaims = numClaims+1
+                    numClaims = numClaims+1,
+                    Time = date('Y-m-d ' . (date('H')-6) . ':i:s')
                     WHERE CompanyID = $companyID";
         $this->db->query($updateNumClaims);
 
@@ -399,18 +407,20 @@ class Action_model extends CI_Model {
             // Add new rating to claim average and update number of ratings
             $addRating = "UPDATE Claim
                         SET Score = $newScore,
-                        numScores = numScores+1
+                        numScores = numScores+1,
+                        Time = date('Y-m-d ' . (date('H')-6) . ':i:s')
                         WHERE ClaimID = $claimID";
             $this->db->query($addRating);
 
         } else {
             // Update if they've already submitted a rating for this claim
             $userNewRating = array(
-                'Value' => $rating
+                'Value' => $rating,
+                'Time' => date('Y-m-d ' . (date('H')-6) . ':i:s')
                 );
             $where = array(
                 'UserID' => $userid,
-                'ClaimID' => $claimID
+                'ClaimID' => $claimID,
                 );
             $this->db->update('Rating', $userNewRating, $where);
 
@@ -431,10 +441,11 @@ class Action_model extends CI_Model {
 
             // update this claim's score with the new score
             $recalculated = array(
-                'Score' => $newScore
+                'Score' => $newScore,
+                'Time' => date('Y-m-d ' . (date('H')-6) . ':i:s')
                 );
             $where = array(
-                'ClaimID' => $claimID
+                'ClaimID' => $claimID,
                 );
             $this->db->update('Claim', $recalculated, $where);
         }
@@ -456,7 +467,8 @@ class Action_model extends CI_Model {
 
         // update this company's score with the new score
         $recalculated = array(
-            'Score' => $newScore
+            'Score' => $newScore,
+            'Time' => date('Y-m-d ' . (date('H')-6) . ':i:s')
             );
         $where = array(
             'CompanyID' => $company
