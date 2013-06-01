@@ -406,16 +406,16 @@ class Data_model extends CI_Model {
 	//------------- METHODS FOR HIGHCHARTS VIEW ------------
 	// Get the history of all changes to this claim's score
 	public function getClaimScoreHistoryJSON($claimID) {
-		$sql = "SELECT * 
+		$sql = "SELECT SUM(Value)/COUNT(Value) as Avg, DATE(Time) as DateOnly
 				FROM Rating
 				WHERE ClaimID = $claimID
-				ORDER BY Time";
+				GROUP BY DateOnly
+				ORDER BY DateOnly ASC";
 		$rawData = $this->db->query($sql)->result_array();
 		$jsonDataObj = '"scores": [';
 		$values = '';
 		for ($i = 0; $i < count($rawData); $i++) {
-			$date = explode(' ', $rawData[$i]['Time'])[0];
-			$values .= '{"date" : "' . $date . '", "value" : ' . $rawData[$i]['Value'] . '},';
+			$values .= '{"date" : "' . $rawData[$i]['DateOnly'] . '", "value" : ' . $rawData[$i]['Avg'] . '},';
 		}
 		$values = rtrim($values, ',');
 		$jsonDataObj .= $values . ']';
@@ -424,16 +424,16 @@ class Data_model extends CI_Model {
 
 	// Get the history of all changes to this company's score
 	public function getCompanyScoreHistoryJSON($companyID) {
-		$sql = "SELECT * 
+		$sql = "SELECT SUM(Score)/COUNT(Score) as Avg, DATE(Time) as DateOnly
 				FROM CompanyRatings
 				WHERE CompanyID = $companyID
-				ORDER BY Time";
+				GROUP BY DateOnly
+				ORDER BY DateOnly ASC";
 		$rawData = $this->db->query($sql)->result_array();
 		$jsonDataObj = '"scores": [';
 		$values = '';
 		for ($i = 0; $i < count($rawData); $i++) {
-			$date = explode(' ', $rawData[$i]['Time'])[0];
-			$values .= '{"date" : "' . $date . '", "value" : ' . $rawData[$i]['Score'] . '},';
+			$values .= '{"date" : "' . $rawData[$i]['DateOnly'] . '", "value" : ' . $rawData[$i]['Avg'] . '},';
 		}
 		$values = rtrim($values, ',');
 		$jsonDataObj .= $values . ']';

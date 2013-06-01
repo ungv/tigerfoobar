@@ -1,6 +1,4 @@
-	<!--Start ScoreBottom content-->
-
-				</div>
+	<!--Start ScoreBottom content to close scoreRight-->
 			</section>
 		</div>
 	</div>

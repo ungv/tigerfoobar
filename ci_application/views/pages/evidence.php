@@ -11,6 +11,8 @@
 					<dd><a href="<?=$claimInfo['Link']?>"><?=$claimInfo['Link']?></a></dd>
 				<dt>Synopsis: </dt>
 					<dd><?=$claimInfo['Description']?></dd>
+				<dt>Company: </dt>
+					<dd><a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></dd>
 			</dl>
 			<hr>
 			<dl>

@@ -19,29 +19,31 @@ for (var i in jsonDataObj['scores']) {
 $(function () {
     if (dates.length < 2) {
         $('#chartContainer').hide();
+        $('#relatedTagsContainer').text('This claim is lonely without ratings. Give it a score on the left!');
     }
     $('#chartContainer').highcharts({
         chart: {
+            type: 'area',
             zoomType: 'x',
-            spacingRight: 20
+            spacingRight: 10
+        },
+        credits: {
+            enabled: false
         },
         title: {
-            text: 'Score history for ' + thisThing
+            text: ''
         },
-        subtitle: {
-            text: document.ontouchstart === undefined ?
-                'Click and drag in the plot area to zoom in' :
-                'Drag your finger over the plot to zoom in'
-        },
+        // subtitle: {
+        //     text: document.ontouchstart === undefined ?
+        //         'Click and drag in the plot area to zoom in' :
+        //         'Drag your finger over the plot to zoom in'
+        // },
         xAxis: {
-            title: {
-                text: 'Timestamps'
-            },
             categories: dates
         },
         yAxis: {
             title: {
-                text: 'Rating'
+                text: 'Avg Rating'
             }
         },
         tooltip: {
@@ -74,13 +76,12 @@ $(function () {
         },
 
         series: [{
-            type: 'area',
-            name: 'Score',
-            //pointInterval: 24 * 3600 * 1000, // used to rescale when there are more data points
+            name: 'Daily Avg',
+            pointInterval: 1,
             data: values
         }]
     });
 });
 </script>
 
-<div id="chartContainer" style="min-width: 400px; height: 200px; margin: 0 auto"></div>
+<div id="chartContainer" style="min-width: 400px; height: 100px; margin: 0 auto"></div>
