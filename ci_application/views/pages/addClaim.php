@@ -28,7 +28,7 @@
 			<h4>Tags related to this article:</h4>
 			<ul id="tagsSearch" name="tagsSearch" class="outfocus"></ul>
 			<p><em>FYI: hit 'enter' or 'tab' to turn words into tags or separate them by a semicolon (;)</em></p>
-			<img id="loadingGif" src="/img/load.gif" />
+			<!-- <img id="loadingGif" src="/img/pacmanload.gif" /> -->
 			<button type="submit" id="addClaim" class="submitButton">Submit</button>
 			<button type="button" class="cancelButton">cancel</button>
 		</div>

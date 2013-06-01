@@ -71,9 +71,11 @@ function addClaim() {
 			tagsObj[i] = $tags[i].value;
 		}
 		if ($url != '' && $title != '' && $company != '' && $rating != null) {
-			$('#loadingGif').show(100).animate({
-				left: '200px'
-			}, 10000);
+			$('#addClaim').text('').addClass('loadingGif').attr('disabled', 'disabled');
+			// animate pacman moving across screen
+			// $('#loadingGif').show().animate(function() {
+			// 	left: '200px'
+			// }, 10000);
 			$.ajax({
 				type: 'POST',
 				url: '/action/addClaim',

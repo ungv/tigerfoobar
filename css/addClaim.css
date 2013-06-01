@@ -52,11 +52,19 @@
 	float: right;
 }
 
+/* to animate pacman moving across screen
 #loadingGif {
 	z-index: 300;
 	position: absolute;
 	margin-top: 10px;
 	display: none;
+}*/
+
+.loadingGif {
+	background-image: url('/img/loading.gif');
+	background-repeat: no-repeat;
+	width: 32px;
+	height: 32px;
 }
 
 #successAlert {	
