@@ -15,16 +15,6 @@
 		$plural = 'Claim Tags';
 		$list = $claimTags;
 	?>
-		<div id='navBar'>
-			<p></p>
-				<a href="/">Home</a> >>
-				<a href="/claims">Claims</a> >> 
-				A claim about <a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a>
-
-			</p>
-		</div>
-
-
 		<h1><a href="<?=$claimInfo['Link']?>" target="_blank"><?=$claimInfo['ClaimTitle']?></a></h1>
 	<?php
 	}
