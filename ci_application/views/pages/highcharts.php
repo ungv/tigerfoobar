@@ -17,9 +17,9 @@ for (var i in jsonDataObj['scores']) {
     values.push(jsonDataObj['scores'][i]['value']);
 }
 $(function () {
-    if (dates.length < 2) {
+    if (dates.length < 1) {
         $('#chartContainer').hide();
-        $('#relatedTagsContainer').text('This claim is lonely without another rating. Give it a score on the left!');
+        $('#relatedTagsContainer').text('This claim is lonely without more ratings. Give it a score on the left!');
     }
     $('#chartContainer').highcharts({
         chart: {

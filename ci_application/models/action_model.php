@@ -128,6 +128,7 @@ class Action_model extends CI_Model {
         $CommentID = $this->security->xss_clean($this->input->post('CommentID'));
         $voted = $this->security->xss_clean($this->input->post('voted'));
         $value = $this->security->xss_clean($this->input->post('value'));
+        $nowTime = date('Y-m-d H:i:s', time()-21600);
 
         // check if user already voted on this comment
         $hasVoted = $this->db->get_where('Vote', array('UserID' => $userid , 'CommentID' => $CommentID));
@@ -136,6 +137,7 @@ class Action_model extends CI_Model {
                'Value' => $value,
                'CommentID' => $CommentID,
                'UserID' => $userid,
+               'Time' => $nowTime
             );
             // determine which column to update
             if ($value == 1) {
@@ -147,12 +149,13 @@ class Action_model extends CI_Model {
                 if ($hasVoted->num_rows == 0) {    //user has not voted on this comment, insert new row
                     $result = $this->db->insert('Vote', $data); 
                     $updateVoteCount = "UPDATE Discussion
-                                        SET $col = $col+1
+                                        SET $col = $col+1,
                                         WHERE ClaimID = $ClaimID
                                         AND CommentID = $CommentID";
                 } else {    //user has voted on something, update their vote value
                     $data = array(
-                       'Value' => $value,
+                        'Value' => $value,
+                        'Time' => $nowTime
                         );
                     $where = array(
                         'UserID' => $userid,
@@ -163,7 +166,7 @@ class Action_model extends CI_Model {
                     if ($value == 1) {                    
                         $updateVoteCount = "UPDATE Discussion
                                             SET upvotes = upvotes + 1,
-                                            downvotes = downvotes - 1
+                                            downvotes = downvotes - 1,
                                             WHERE ClaimID = $ClaimID
                                             AND CommentID = $CommentID";
                     } else {
@@ -268,6 +271,7 @@ class Action_model extends CI_Model {
         $company = $this->security->xss_clean($this->input->post('company'));
         $rating = $this->security->xss_clean($this->input->post('rating'));
         $tags = $this->security->xss_clean($this->input->post('tags'));
+        $nowTime = date('Y-m-d H:i:s', time()-21600);
 
         if ($url == '' || $title == '' || $company == '' || $rating == '') {
             return false;
@@ -322,8 +326,7 @@ class Action_model extends CI_Model {
         // Update company score with this rating and increase counter for number of claims for company
         $updateNumClaims = "UPDATE Company
                     SET Score = $newScore,
-                    numClaims = numClaims+1,
-                    Time = date('Y-m-d ' . (date('H')-6) . ':i:s')
+                    numClaims = numClaims+1
                     WHERE CompanyID = $companyID";
         $this->db->query($updateNumClaims);
 
@@ -343,7 +346,8 @@ class Action_model extends CI_Model {
         $score = array(
             'Value' => $rating,
             'UserID' => $userid,
-            'ClaimID' => $claimID
+            'ClaimID' => $claimID,
+            'Time' => $nowTime
             );
         $this->db->insert('Rating', $score);
 
@@ -382,6 +386,7 @@ class Action_model extends CI_Model {
     public function sendRating($userid) {
         $rating = $this->security->xss_clean($this->input->post('rating'));
         $claimID = $this->security->xss_clean($this->input->post('claimID'));
+        $nowTime = date('Y-m-d H:i:s', time()-21600);
 
         // Keep track of the claim's old and new scores
         $newScore = 0;
@@ -393,7 +398,8 @@ class Action_model extends CI_Model {
             $score = array(
                 'Value' => $rating,
                 'UserID' => $userid,
-                'ClaimID' => $claimID
+                'ClaimID' => $claimID,
+                'Time' => $nowTime
                 );
             $this->db->insert('Rating', $score);
 
@@ -407,8 +413,7 @@ class Action_model extends CI_Model {
             // Add new rating to claim average and update number of ratings
             $addRating = "UPDATE Claim
                         SET Score = $newScore,
-                        numScores = numScores+1,
-                        Time = date('Y-m-d ' . (date('H')-6) . ':i:s')
+                        numScores = numScores+1
                         WHERE ClaimID = $claimID";
             $this->db->query($addRating);
 
@@ -416,7 +421,7 @@ class Action_model extends CI_Model {
             // Update if they've already submitted a rating for this claim
             $userNewRating = array(
                 'Value' => $rating,
-                'Time' => date('Y-m-d ' . (date('H')-6) . ':i:s')
+                'Time' => $nowTime
                 );
             $where = array(
                 'UserID' => $userid,
@@ -441,8 +446,7 @@ class Action_model extends CI_Model {
 
             // update this claim's score with the new score
             $recalculated = array(
-                'Score' => $newScore,
-                'Time' => date('Y-m-d ' . (date('H')-6) . ':i:s')
+                'Score' => $newScore
                 );
             $where = array(
                 'ClaimID' => $claimID,
@@ -467,8 +471,7 @@ class Action_model extends CI_Model {
 
         // update this company's score with the new score
         $recalculated = array(
-            'Score' => $newScore,
-            'Time' => date('Y-m-d ' . (date('H')-6) . ':i:s')
+            'Score' => $newScore
             );
         $where = array(
             'CompanyID' => $company
