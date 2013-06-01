@@ -13,6 +13,9 @@ $(document).ready(function() {
 			}
 		},
 		messages: {
+			pasteURL: {
+				required: "^Your claim should be supported with evidence"
+			},
 			title: {
 				required: "^We'd very much like a title"
 			},
@@ -41,7 +44,7 @@ $(document).ready(function() {
 	// Hide form and revert back to page refresh state
 	$(".cancelButton").click(function() {
 		$('#urlInput').removeClass('threeQuarters').addClass('quarter');
-		$('#urlSubmit').hide(200);
+		$('.popup').hide(200);
 		$("#pasteURL").val('');
 		$('#urlButton').show('fade', 600);
 		$('#urlInput').hide('fade', 200);
@@ -50,13 +53,14 @@ $(document).ready(function() {
 	});
 });
 
+
 // Send request to add new claim to database on submit click
 // Form #newClaimForm calls this function on form submit
 function addClaim() {
 	$url = $('#pasteURL').val();
 	$title = $('input[name=title]').val();
 	$desc = $('textarea').val();
-	$company = $('#assocCo').tagit('tags')[0].value;
+	$company = $('#assocCo').tagit('tags');
 	$rating = $('input[name=score]:checked').val();
 	$tags = $('#tagsSearch').tagit('tags');
 
@@ -66,6 +70,9 @@ function addClaim() {
 		tagsObj[i] = $tags[i].value;
 	}
 	if ($url != '' && $title != '' && $company != '' && $rating != null) {
+		$('#loadingGif').show(100).animate({
+			left: '200px'
+		}, 10000);
 		$.ajax({
 			type: 'POST',
 			url: '/action/addClaim',
@@ -73,14 +80,14 @@ function addClaim() {
 				url: $url,
 				title: $title,
 				desc: $desc,
-				company: $company,
+				company: $company[0].value,
 				rating: $rating,
 				tags: tagsObj
 			},
 			dataType: 'json',
 			success: function(json) {
-				hidePopups();
-				alert('Your claim has been submitted!');
+				$('#successAlert').fadeIn();
+				$('#successAlert').fadeOut(3000);
 				window.location.reload();
 			},
 			error: function() {
@@ -89,7 +96,11 @@ function addClaim() {
 		});
 	} else {
 		$('#coNote, #ratingNote').css('color', 'red');
-		$('#coNote').show(200);
-		$('#ratingNote').show(200);
+		if ($url == '')
+			$('#urlNote').show(200);
+		if ($company == '')
+			$('#coNote').show(200);
+		if ($rating == null)
+			$('#ratingNote').show(200);
 	}
 }

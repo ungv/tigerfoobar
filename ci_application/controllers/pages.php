@@ -60,6 +60,30 @@ class Pages extends Root_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	//add claim page
+	//this page uses the same code as 'addClaim.php' and modifies elements with 
+	//'addclaimPage.js' and 'addclaimPage.css'
+	public function addclaim() {
+		if ($this->is_logged_in()) {
+			$data['signedIn'] = true;
+		}
+		$data['headerTitle'] = 'Add a Claim - PatchWork';
+		$data['pageType'] = 'home';
+
+		//files needed
+		$data['csFiles'] = array('general','ccStyles','addClaim','addclaimPage');
+		$data['jsFiles'] = array('addclaimPage','general','ccScripts','addClaim','score');
+
+		//Views
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/mainTop', $data);
+		$this->load->view('pages/addclaimPage', $data);
+		$this->load->view('pages/addClaim', $data);
+		$this->load->view('pages/mainBottom', $data);
+		$this->load->view('templates/footer');
+	}
+
+
 	//claim page
 	public function claim($claimID = -1) {
 		if($claimID == -1) {

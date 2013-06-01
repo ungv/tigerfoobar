@@ -33,7 +33,7 @@
 #urlSubmit {
 	width: 350px;
 	height: inherit;
-	margin-top: 50px;
+	margin-top: 10px;
 }
 
 #urlSubmit input, textarea {
@@ -50,4 +50,25 @@
 
 #submit, #cancel {
 	float: right;
+}
+
+#loadingGif {
+	z-index: 300;
+	position: absolute;
+	margin-top: 10px;
+	display: none;
+}
+
+#successAlert {	
+	z-index: 300;
+	position: fixed;
+	left: 50%;
+	width: 200px;
+	margin-left: -100px;
+	top: 40%;
+	background-color: lightgray;
+	padding: 5px;
+	color: green;
+	font-size: 20pt;
+	display: none;
 }
