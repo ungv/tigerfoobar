@@ -60,6 +60,10 @@ h1, h2, h3 {
 	font-family: Rockwell;
 }
 
+h5 {
+	display: inline-block;
+}
+
 input, textarea {
 	padding: 5px;
 	outline: none;

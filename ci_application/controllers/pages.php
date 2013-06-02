@@ -36,7 +36,7 @@ class Pages extends Root_Controller {
 		$data['pageTitle'] = 'Home';
 		$data['pageType'] = 'home';
 		
-		$data['csFiles'] = array('general','ccStyles','addClaim');
+		$data['csFiles'] = array('general','ccStyles','addClaim', 'tooltipster');
 		//load welcome css headers
 		$signedIn = $this->is_logged_in();
 		if(!$signedIn) {
@@ -156,7 +156,7 @@ class Pages extends Root_Controller {
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
 
-			$data['csFiles'] = array('general','ccStyles','toggleview');
+			$data['csFiles'] = array('general','ccStyles','toggleview', 'tooltipster');
 			$data['jsFiles'] = array('general','ccScripts','score','toggleview');
 			
 			$this->load->view('templates/header', $data);
@@ -190,7 +190,7 @@ class Pages extends Root_Controller {
 			//$data['treemapJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
 			$data['treemapJSON'] = $this->data_model->getJSON("claimsWithTag",$tagID);
 			
-			$data['csFiles'] = array('general','tag','toggleview');
+			$data['csFiles'] = array('general','tag','toggleview', 'tooltipster');
 			$data['jsFiles'] = array('general','tag','toggleview');
 
 			$this->load->view('templates/header', $data);
@@ -234,7 +234,7 @@ class Pages extends Root_Controller {
 		$data['treemapJSON'] = $this->data_model->getJSON("userClaims",$userID);
 
 		//files needed
-		$data['csFiles'] = array('general','profile','toggleview');
+		$data['csFiles'] = array('general','profile','toggleview', 'tooltipster');
 		$data['jsFiles'] = array('general','profile','toggleview');
 
 		$this->load->view('templates/header', $data);

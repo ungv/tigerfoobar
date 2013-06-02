@@ -10,6 +10,12 @@
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script type="text/javascript">
 	$(function () {
+		var mouseX, mouseY;
+		$(document).mousemove(function(e) {
+			mouseX = e.clientX;
+			mouseY = e.clientY;
+		}).mouseover();
+		
 		<?php
 			if (isset($pageType) && $pageType == "home") {
 			?>
@@ -81,13 +87,11 @@
 			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 			/*.attr("stroke", function (d) {return borderColor(d.parent.name);})
 			.attr("stroke-width", function (d) {return borderWidth;})*/
-
-		  
-		//$(cell).tipsy();
 		
 		claimCell.append("svg:rect")
 		  .attr("width", function(d) { return d.dx - borderWidth;})
 		  .attr("height", function(d) { return d.dy - borderWidth;})
+		  .attr("title", function(d) {return computeTitle(d);})
 		  .style("fill", function(d) { return bgColor(d.score);})
 		  .on("mouseover", function (d) {d3.select(this).style("fill-opacity", "0.75");})
 		  .on("mouseout", function (d) {d3.select(this).style("fill-opacity", "1.0");})
@@ -99,72 +103,88 @@
 		  .attr("y", function(d) { return padding})
 		  .attr("width", function(d) {return d.dx - padding})
 		  .attr("height", function(d) {return d.dy - padding})
+		  //.attr("title", function(d) {return computeTitle(d);})
 		  .style("pointer-events", "none")
 		  .append("xhtml:div")
 			  .attr("dy", ".35em")
-			  .html(function(d) {return d.name})
-			  .style("font-size", function(d) {return calculateFontSize(d.dx, d.dy);})
-			  //.style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; })
+			  //.attr("title", function(d) {return computeTitle(d);})
+			  .html(function(d) {return ((d.name.length < 100) ? d.name : (d.name.substring(0,100)+'...'));})
+			  .style("font-size", function(d) {return calculateFontSize(d.dx - padding, d.dy - padding, $(this).html());})
 			  .style("width", function(d) {return d.dx - padding})
 			  .style("height", function(d) {return d.dy - padding})
-			   .style("pointer-events", "auto")
-			  .on("click", function(d) {window.location.href = "http://" + domain + "/claim/" + d.claimID;});
+			  .style("cursor", "pointer")
+			  .style("pointer-events", "auto")
+			  .on("mouseover", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "0.75");})
+			  .on("mouseout", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "1.0");})
+			  .on("click", function(d) {window.location.href = "/claim/" + d.claimID;});
 			  
-		function calculateFontSize(width, height) {
-			return (width*height)/6000 + "px";
+		function calculateFontSize(width, height, text) {
+			var maxSize = 50;
+			var sizingDiv = $("<div></div>");
+			sizingDiv.css({"height": height, "font-size": "50px", "display":"inline-block", "visibility":"hidden"});
+			sizingDiv.html(text);
+			$("body").append(sizingDiv);
+			
+			var trueWidth = sizingDiv.width();
+			var trueFontSize = width/trueWidth*maxSize;
+			return trueFontSize + "px";//(width*height)/4000 + "px";
 		}
-		 
-		 //Tooltips
-		$("svg rect, svg div, svg foreignObject").tipsy({ 
-			gravity: "n",
-			html: true, 
-			title: function() {
-			  var d = this.__data__; // c = colors(d.i);
-			  var html = "<h3>" + d.name + "</h3> <br/>";
-			  
-			  <?php
+		
+		function computeTitle(d) {
+			var html = "<a href = '/claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
+			html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
+			<?php
 				if (isset($pageType) && $pageType == "home") {
 			  ?>
-			  html+="<h4> " + d.company + "</h4>";
+				html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5>";
 			  <?php
 				}
-			  ?>
-			  //Todo: pass this html value to the "mouseenter" function below so that tooltips can be scaled properly before being displayed.
-			  //One way to possibly do this is bind it to the SVG element above and read it from d
-			  return html;
-			},
-			opacity: "1.0"})
-			.mouseenter(function(e) {
-				var d = this.__data__;
-			
+			?>
+			html += "<h5>Submitted by: <a href = '/profile/" + d.userID + "'>" + d.userName + "</a></h5>";
+			return html;
+		}
+		
+		//Tooltips
+		$("svg rect").tooltipster({
+			trigger: 'hover',
+			interactive: true,
+			interactiveTolerance: 10000,
+			onlyOne: true,
+			maxWidth: 400,
+			functionReady: function(origin, tooltip) {
 				var scrollTop = $(window).scrollTop();
 				var scrollLeft = $(window).scrollLeft();
-				var target = e.target;
+				var target = origin;
 				var targetCell = $(target).closest(".cell")[0];
 				var targetCellRect = targetCell.getBoundingClientRect();
-
-				//console.log(target + " top offset of targetCell is: " + $(targetCell).offset().top + " and left offset of targetCell is " + $(targetCell).offset().left);
-				//console.log("Height of targetcell is: " + targetCellRect.height + " and width of targetCell is: " + targetCellRect.width);
 				
 				var top = targetCellRect.top + targetCellRect.height + scrollTop;
-				var left = targetCellRect.left + targetCellRect.width/2 - $(".tipsy").width()/2 + scrollLeft;
+				var left = targetCellRect.left + targetCellRect.width/2 - $(tooltip).width()/2 + scrollLeft;
+				
+				//var top = mouseX;
+				//var left = mouseY;
+				
 				var rotation = 0;
 				
-				if (top + $(".tipsy").height() > ($(window).height() - 50)) {
-					top = targetCellRect.top - $(".tipsy").height() - 10 + scrollTop;
+				if (top + $(tooltip).height() > ($(window).height() - 50)) {
+					top = targetCellRect.top - $(tooltip).height() - 10 + scrollTop;
 					rotation = 180;
 				}
 				
-				$(".tipsy").css({
+				$(tooltip).css({
 					"top": top + "px",
 					"left": left + "px",
 					"transform" : "rotate(" + rotation +"deg)"
 				});
 				
-				$(".tipsy-inner").css({
+				$(".tooltipster-content").css({
 					"transform" : "rotate(" + rotation +"deg)"
 				});
-			});
+				$($(".tooltipster-base")[0]).show();
+			},
+			position: 'bottom'
+		});
+
 			
 		<?php if (isset($pageType) && $pageType == "home") {
 		?>
