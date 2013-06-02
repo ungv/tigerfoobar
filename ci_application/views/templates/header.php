@@ -6,6 +6,8 @@
 <head>
 	<title><?= $headerTitle ?></title>
 
+	<link rel="icon" type="image/png" href="/img/patchwork_logo.png" />
+
 	<?php 
 	/*Our Stylesheets*/
 	foreach($csFiles as $csFile) { ?>
@@ -81,6 +83,34 @@
 				<button type="button" id="signup_cancel" class="cancelButton">Wait, no...</button>
 			</div>
 		</form>
+	
+<?php
+	// Navataion - Breadcrumbs
+	// if claim
+	if ($pageType == 'claim') {
+?>
+		<div id='navv'>
+			<p>
+				<a href="/claim">Claims</a> >> 
+				<a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a> >>
+				<strong><?=$claimInfo['ClaimTitle']?></strong>
+			</p>
+		</div>
+
+<?php
+	} elseif ($pageType == 'company') {
+?>
+		<div id='navv'>
+			<p>
+				<a href="/company">Companies</a> >> 
+				<strong><?=$companyInfo['Name']?></strong>
+			</p>
+		</div>
+
+<?php		
+	}
+?>
+			
 	</header>
 
 	<div class="lightsout"></div>

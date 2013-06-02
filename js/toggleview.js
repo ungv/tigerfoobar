@@ -14,4 +14,6 @@ $(document).ready(function() {
 		$('#toggleMap').removeClass('selected');
 		$('#toggleList').addClass('selected');
 	});
+
+	$('.toggleviewButtons').tooltipster();
 });

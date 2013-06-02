@@ -18,7 +18,8 @@
 		<p>
 			By sharing objective articles and facts about corporations and their products,
 			as well as being part of a global peer review system, we can create a generation
-			of consumer activists that makes the best possible decisions.
+			of consumer activists that makes the best possible decisions. 
+			<a href="/about">Learn More</a>
 		</p>
 	</div>
 	<div id="videoContainer">
@@ -36,3 +37,30 @@
 		?>
 	</div>
 </section>
+
+<div id='actions'>
+	<a href="/claim" style="display:block">
+		<div>
+			<h3>Explore Claims</h3>
+			<img src="/img/explore_claims_icon.png">
+			<p>Start exploring popular claims now</p>
+		</div>
+	</a>
+
+	<a href="/company">
+		<div>
+			<h3>Explore Companies</h3>
+			<img src="/img/explore_claims_icon.png">
+			<p>Start exploring popular companies now</p>
+		</div>
+	</a>
+
+	<a href="/addclaim">
+		<div>
+			<h3>Contrubute</h3>
+			<img src="/img/contribute_icon.png">
+			<p>Contrubite a claim now</p>
+		</div>
+	</a>
+
+</div>
