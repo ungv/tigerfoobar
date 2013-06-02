@@ -37,6 +37,7 @@
 			<?php	
 			}
 			?>
+		
 		var w = treemapWidth,
 			h = treemapHeight,
 			x = d3.scale.linear().range([0, w]),
@@ -107,9 +108,9 @@
 		  .style("pointer-events", "none")
 		  .append("xhtml:div")
 			  .attr("dy", ".35em")
-			  //.attr("title", function(d) {return computeTitle(d);})
+			  .attr("title", function(d) {return computeTitle(d);})
 			  .html(function(d) {return ((d.name.length < 100) ? d.name : (d.name.substring(0,100)+'...'));})
-			  .style("font-size", function(d) {return calculateFontSize(d.dx - padding, d.dy - padding, $(this).html());})
+			  .style("font-size", function(d) {return calculateFontSize(d.dx - 2*padding, d.dy - 2*padding, $(this).html());})
 			  .style("width", function(d) {return d.dx - padding})
 			  .style("height", function(d) {return d.dy - padding})
 			  .style("cursor", "pointer")
@@ -120,13 +121,34 @@
 			  
 		function calculateFontSize(width, height, text) {
 			var maxSize = 50;
+			var currSize = maxSize;
 			var sizingDiv = $("<div></div>");
-			sizingDiv.css({"height": height, "font-size": "50px", "display":"inline-block", "visibility":"hidden"});
-			sizingDiv.html(text);
 			$("body").append(sizingDiv);
+			sizingDiv.html(text);
+	
+			sizingDiv.css({"max-width": width + 50, "font-size": maxSize, "display":"inline-block", "visibility":"visible", "word-spacing":"" });
 			
 			var trueWidth = sizingDiv.width();
-			var trueFontSize = width/trueWidth*maxSize;
+			if (trueWidth>width) {
+				currSize = (width/trueWidth)*currSize;
+				sizingDiv.css("font-size", currSize);
+			}
+			
+			var trueHeight = sizingDiv.height();
+			if (trueHeight>height) {
+				currSize = (height/trueHeight)*currSize;
+				sizingDiv.css("font-size", currSize);
+			}
+			/*
+			var trueFontSizeHeight = (height/trueHeight)*maxSize;
+			sizingDiv.css("font-size", trueFontSizeHeight);
+			
+			var newTrueWidth = sizingDiv.width();
+			var newTrueFontSizeWidth = (width/newTrueWidth)*trueFontSizeHeight;*/
+			
+			//sizingDiv.remove();
+			
+			var trueFontSize = currSize;//newTrueFontSizeWidth;//newTrueFontSizeWidth < trueFontSizeHeight ? trueFontSizeHeight : newTrueFontSizeWidth;
 			return trueFontSize + "px";//(width*height)/4000 + "px";
 		}
 		
@@ -136,7 +158,7 @@
 			<?php
 				if (isset($pageType) && $pageType == "home") {
 			  ?>
-				html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5>";
+				html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
 			  <?php
 				}
 			?>
@@ -145,12 +167,13 @@
 		}
 		
 		//Tooltips
-		$("svg rect").tooltipster({
+		$("svg rect, svg div").tooltipster({
 			trigger: 'hover',
 			interactive: true,
 			interactiveTolerance: 10000,
 			onlyOne: true,
 			maxWidth: 400,
+			timer: 20000,
 			functionReady: function(origin, tooltip) {
 				var scrollTop = $(window).scrollTop();
 				var scrollLeft = $(window).scrollLeft();
@@ -171,6 +194,10 @@
 					rotation = 180;
 				}
 				
+				if (left < 0) {
+					left = 0;
+				}
+				
 				$(tooltip).css({
 					"top": top + "px",
 					"left": left + "px",
@@ -180,7 +207,9 @@
 				$(".tooltipster-content").css({
 					"transform" : "rotate(" + rotation +"deg)"
 				});
-				$($(".tooltipster-base")[0]).show();
+				
+				$(this).position = "top";
+				//$(".tooltipster-base").show();
 			},
 			position: 'bottom'
 		});
