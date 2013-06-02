@@ -146,7 +146,7 @@
 			var newTrueWidth = sizingDiv.width();
 			var newTrueFontSizeWidth = (width/newTrueWidth)*trueFontSizeHeight;*/
 			
-			//sizingDiv.remove();
+			sizingDiv.remove();
 			
 			var trueFontSize = currSize;//newTrueFontSizeWidth;//newTrueFontSizeWidth < trueFontSizeHeight ? trueFontSizeHeight : newTrueFontSizeWidth;
 			return trueFontSize + "px";//(width*height)/4000 + "px";
