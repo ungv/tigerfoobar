@@ -107,7 +107,7 @@
 		  .style("pointer-events", "none")
 		  .append("xhtml:div")
 			  .attr("dy", ".35em")
-			  .attr("title", function(d) {return computeTitle(d);})
+			  //.attr("title", function(d) {return computeTitle(d);})
 			  .html(function(d) {return ((d.name.length < 100) ? d.name : (d.name.substring(0,100)+'...'));})
 			  .style("font-size", function(d) {return calculateFontSize(d.dx - padding, d.dy - padding, $(this).html());})
 			  .style("width", function(d) {return d.dx - padding})
@@ -132,11 +132,11 @@
 		
 		function computeTitle(d) {
 			var html = "<a href = '/claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
-		
+			html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
 			<?php
 				if (isset($pageType) && $pageType == "home") {
 			  ?>
-				html+="<h4>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h4>";
+				html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5>";
 			  <?php
 				}
 			?>
@@ -145,11 +145,12 @@
 		}
 		
 		//Tooltips
-		$("svg rect, svg div").tooltipster({
+		$("svg rect").tooltipster({
 			trigger: 'hover',
 			interactive: true,
 			interactiveTolerance: 10000,
 			onlyOne: true,
+			maxWidth: 400,
 			functionReady: function(origin, tooltip) {
 				var scrollTop = $(window).scrollTop();
 				var scrollLeft = $(window).scrollLeft();
