@@ -1,8 +1,8 @@
 	<!--Start Evidence Content-->
-	<img id='flagButton' class='tooltip' src="/img/flag.png" 
+	<!-- <img id='flagButton' class='tooltip' src="/img/flag.png" 
 		title='This claim is 
 			<a id="flagNoncredible">Noncredible</a> or 
-				<a id="flagWrong">Wrong Company</a>'>
+				<a id="flagWrong">Wrong Company</a>'> -->
 	
 	<div id="evidenceContainer" class="container">
 		<div id='evidenceContent' class="content">
@@ -13,6 +13,10 @@
 					<dd><?=$claimInfo['Description']?></dd>
 			</dl>
 			<hr>
+		<img id='flagButton' class='tooltip' src="/img/flag.png" 
+		title='This claim is 
+			<a id="flagNoncredible">Noncredible</a> or 
+				<a id="flagWrong">Wrong Company</a>'>		
 			<dl>
 				<dt>Submitted: </dt>
 					<dd><?=date("F j, Y", strtotime($claimInfo['ClaimTime']))?></dd>

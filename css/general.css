@@ -179,6 +179,22 @@ header span {
 	margin-bottom: 1em;
 }
 
+#navv {
+	position: relative;
+	top: 12px;
+	background-color: lightgrey;
+}
+
+#navv p {
+	width: 915px;
+	margin: 0 auto;
+}
+
+#navv p a {
+	color: green;
+}
+
+
 /*Footer---------------------------*/
 
 footer {

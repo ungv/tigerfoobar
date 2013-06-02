@@ -404,6 +404,11 @@
 
 	#flagButton {
 		float: right;
+		opacity: .5;
+	}
+
+	#flagButton:hover {
+		opacity: 1;
 	}
 
 	img.flagComment {

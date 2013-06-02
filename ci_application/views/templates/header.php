@@ -79,6 +79,34 @@
 			<button type="submit" id="signup_submit" class="submitButton">Sign me up!</button>
 			<button type="button" id="signup_cancel" class="cancelButton">Wait, no...</button>
 		</div>
+	
+<?php
+	// Navataion - Breadcrumbs
+	// if claim
+	if ($pageType == 'claim') {
+?>
+		<div id='navv'>
+			<p>
+				<a href="/claim">Claims</a> >> 
+				<a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a> >>
+				<strong><?=$claimInfo['ClaimTitle']?></strong>
+			</p>
+		</div>
+
+<?php
+	} elseif ($pageType == 'company') {
+?>
+		<div id='navv'>
+			<p>
+				<a href="/company">Companies</a> >> 
+				<strong><?=$companyInfo['Name']?></strong>
+			</p>
+		</div>
+
+<?php		
+	}
+?>
+			
 	</header>
 
 	<div class="lightsout"></div>
