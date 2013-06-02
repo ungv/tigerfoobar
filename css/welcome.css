@@ -66,15 +66,18 @@
 		text-align: center;
 	}
 
-	#actions > div {
-		padding: 5px;
-		border: 1px solid;
-		/*height: 60px;*/
-		width: 280px;
+	#actions a {
 		margin: auto;
 	}
 
-	#actions > div img {
+	#actions div {
+		padding: 5px;
+		border: 1px solid;
+		/*height: 60px;*/
+		width: 280px;	
+	}
+
+	#actions div img {
 		width: 80px;
 		/*display: inline;*/
 	}

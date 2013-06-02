@@ -39,26 +39,28 @@
 </section>
 
 <div id='actions'>
-	<div>
-		<h3>Explore Claims</h3>
-		<div class='flexing'>
+	<a href="/claim" style="display:block">
+		<div>
+			<h3>Explore Claims</h3>
 			<img src="/img/explore_claims_icon.png">
 			<p>Start exploring popular claims now</p>
 		</div>
-	</div>
+	</a>
 
-	<div>
-		<h3>Explore Companies</h3>
-		<div class='flexing'>
+	<a href="/company">
+		<div>
+			<h3>Explore Companies</h3>
 			<img src="/img/explore_claims_icon.png">
 			<p>Start exploring popular companies now</p>
 		</div>
-	</div>
+	</a>
 
-	<div>
-		<h3>Contrubute</h3>
-		<img src="/img/contribute_icon.png">
-		<p>Contrubite a claim now</p>
-	</div>
+	<a href="/addclaim">
+		<div>
+			<h3>Contrubute</h3>
+			<img src="/img/contribute_icon.png">
+			<p>Contrubite a claim now</p>
+		</div>
+	</a>
 
 </div>
