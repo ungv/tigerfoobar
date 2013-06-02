@@ -13,7 +13,7 @@ $(document).ready(function() {
 
 	$.each($('#discussionContent li'), function() {
 		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
-	});	
+	});
 	
 	/*------Rating the claim-------*/
 	// Add or update user's rating on this claim
@@ -139,8 +139,10 @@ $(document).ready(function() {
 	});
 
 	$('label[for="radio3"]').click(function() {
-		if (isLoggedIn('to flag the company linking')) {
-			flagContent($(this), 'claim', 'trivial');
+		if ($('#radio3').attr('name') == 'claimscore') {
+			if (isLoggedIn('to flag the company linking')) {
+				flagContent($(this), 'claim', 'trivial');
+			}
 		}
 	});
 
