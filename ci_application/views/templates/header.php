@@ -30,7 +30,7 @@
 
 <body>
 	<header>
-		<h1><a href="/"><img id="logoImage" src="/img/patchwork_logo.png"/>atchwork</a></h1>
+		<h1><a href="/"><img id="logoImage" src="/img/patchwork_logo.png"/><span id="title_text">atchwork</span></a></h1>
 		<SECTION id='topbar'>
 			<!--Search box-->
 			<input id="searchInput" type="text" placeholder="Search for companies or products/services"/>
@@ -46,17 +46,14 @@
 		<!--Profile/login/register-->
 		<?php if($isLogged) { ?>
 			<span id="login_buttons">
-				<a id="login" href = "#" style="display: none;"> Log In</a>
-				<a id="signup" href = "#" style="display: none;">Sign Up</a>
 				<a id="login_status" href="/profile/<?=$userid?>"><?= $username ?></a>
+				<a id="urlButton" href="#">add claim</a>
 				<a id="logout" href="/action/logout">logout</a>
 			</span>
 		<?php }else { ?>
 			<span id="login_buttons">
 				<a id="login" href = "#">Log In</a>
 				<a id="signup" href = "#">Sign Up</a>
-				<a id="login_status" style="display: none;"></a>
-				<a id="logout" style="display: none;" href="/action/logout">logout</a>			
 			</span>
 		<?php } ?>
 		<form id="loginForm" action="javascript:sendLogin()">
@@ -85,6 +82,9 @@
 				<button type="button" id="signup_cancel" class="cancelButton">Wait, no...</button>
 			</div>
 		</form>
+		<?/*
+		
+		*/?>
 	
 <?php
 	// Navigation - Breadcrumbs
