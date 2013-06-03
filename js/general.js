@@ -1,11 +1,19 @@
 /*
 	Patchwork - General Front End Functionality
 */
+// Global array to keep colors consistent
+//				-3 			-2 			-1 			0 			1 		2 			3
 var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#5cffae', '#31b373', '#106138'];
 
 $(document).ready(function() {
-	/*--------FORM VALIDATION (DOCUMENTATION http://docs.jquery.com/Plugins/Validation)--------*/
+	/*------------Welcome message stuff-----------------*/
+	$('#welcomeContainer').css('height', $('body').height());
+	$('#welcomeContainer').fadeIn(500);
+	$(window).click(function() {
+		$('#welcomeContainer').fadeOut(500);
+	});
 
+	/*--------FORM VALIDATION (DOCUMENTATION http://docs.jquery.com/Plugins/Validation)--------*/
 	// Call jQuery validate plugin that injects messages for required fields on form submit
 	$('#signupForm').validate({
 		rules: {
@@ -57,6 +65,7 @@ $(document).ready(function() {
 	$('#login').click(function() {
 		hidePopups();
 		$('#loginPopup').show(200);
+		$('#login_username').focus();
 	});
 
 	//Ask server to login on click
@@ -98,6 +107,7 @@ $(document).ready(function() {
 	$('#signup').click(function() {
 		hidePopups();
 		$('#signupPopup').show(200);
+		$('input[name=username]').focus();
 	});
 
 	//Hide Signinpopup
