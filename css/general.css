@@ -16,8 +16,9 @@ html {
 
 body{
 	color:#444;
-	font-family: Cambria;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size: 14px;
+	background: url('/img/square_bg.png');
 }
 
 .lightsout {
@@ -60,6 +61,10 @@ h1, h2, h3 {
 	font-family: Rockwell;
 }
 
+h5 {
+	display: inline-block;
+}
+
 input, textarea {
 	padding: 5px;
 	outline: none;
@@ -90,16 +95,27 @@ input.infocus, textarea.infocus {
 
 header{
 	/*vertical, then horizontal*/
+<<<<<<< HEAD
 	width: 100%;
 	padding: 3px;
+=======
+	width:900px;
+>>>>>>> 1ec2192c5eec2a50e9e8db132e3a41a95fcf6ec3
 	margin:0px auto 15px;
 	
 	background-color: #0A6107;
+	padding-top: 2px;
 
 	top: 0;
 	left: 0;
+<<<<<<< HEAD
 	border-top:3px solid #fff;
 	border-bottom:3px solid #ccc;
+=======
+	border-bottom:3px solid #f0f0f0;
+	
+	width: 100%;
+>>>>>>> 1ec2192c5eec2a50e9e8db132e3a41a95fcf6ec3
 }
 
 header, #logoImage{
@@ -126,7 +142,6 @@ header, #logoImage{
 }
 
 header h1 {
-	font-size:43px;
 	font-weight:normal;
 	position:absolute;
 	z-index:0;
@@ -146,7 +161,7 @@ header a:hover, footer a:hover {
 }
 
 header input {
-	width: 915px;
+	width: 70%;
 	height:20px;
 	margin-top:9px;
 	position: relative;
@@ -182,6 +197,23 @@ header span {
 	font-weight: bold;
 	margin-bottom: 1em;
 }
+
+#navv {
+	position: relative;
+	top: 12px;
+	background-color: #f0f0f0;
+	padding-bottom:3px;
+}
+
+#navv p {
+	width: 915px;
+	margin: 0 auto;
+}
+
+#navv p a {
+	color: green;
+}
+
 
 /*Footer---------------------------*/
 
@@ -227,7 +259,12 @@ footer, footer a{
 }
 
 #main h1{
-	font-size:40px;
+	font-size: 28px;
+	margin-top: 20px;
+}
+
+#main h1 a{
+	color:#666;
 }
 	
 /*SignupPopup------------------------*/
@@ -257,7 +294,7 @@ input {
 }
 
 #signupPopup, #loginPopup {
-	top: 35px;
+	top: 65px;
 	right: 0px;
 }
 

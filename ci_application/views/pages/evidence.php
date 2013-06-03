@@ -1,18 +1,24 @@
 	<!--Start Evidence Content-->
-	<img id='flagButton' class='tooltip' src="/img/flag.png" 
+	<!-- <img id='flagButton' class='tooltip' src="/img/flag.png" 
 		title='This claim is 
 			<a id="flagNoncredible">Noncredible</a> or 
-				<a id="flagWrong">Wrong Company</a>'>
+				<a id="flagWrong">Wrong Company</a>'> -->
 	
 	<div id="evidenceContainer" class="container">
 		<div id='evidenceContent' class="content">
 			<dl>
 				<dt>URL: </dt>
-					<dd><a href="<?=$claimInfo['Link']?>"><?=$claimInfo['Link']?></a></dd>
+					<dd><a href="<?=$claimInfo['Link']?>" target="_blank"><?=$claimInfo['Link']?></a></dd>
 				<dt>Synopsis: </dt>
 					<dd><?=$claimInfo['Description']?></dd>
+				<dt>Company: </dt>
+					<dd><a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></dd>
 			</dl>
 			<hr>
+		<img id='flagButton' class='tooltip' src="/img/flag.png" 
+		title='This claim is 
+			<a id="flagNoncredible">Noncredible</a> or 
+				<a id="flagWrong">Wrong Company</a>'>		
 			<dl>
 				<dt>Submitted: </dt>
 					<dd><?=date("F j, Y", strtotime($claimInfo['ClaimTime']))?></dd>

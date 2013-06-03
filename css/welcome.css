@@ -10,6 +10,50 @@
 		font-size:15pt;
 	}
 
+	#welcomeContainer {
+		background-color: rgba(235, 231, 183, 0.7);
+		position: absolute;
+		left: 0;
+		top: 60px;
+		padding-top: 10%;
+		padding-left: 15%;
+		width: 86%;
+		z-index: 300;
+		display: none;
+	}
+
+	#welcomeMessage {
+		position: relative;
+		width: 940px;
+		height: 400px;
+		padding: 10px;
+		background-color: white;
+		opacity: 1;
+	}
+
+	#welcomeButtons {
+		margin-top: 30px;
+	}
+
+	#welcomeButtons button {
+		padding: 10px;
+	}
+
+	#xbutton {
+		position: absolute;
+		right: 0;
+		top: 0;
+		font-size: 18pt;
+		color: gray;
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+	}
+
+	#xbutton:hover {
+		background-color: lightgray;
+	}
+
 /*-------------Call to Arms---------------------*/
 
 
@@ -25,13 +69,49 @@
 		text-justify:inter-word;
 	}
 
-/*-------------Video---------------------*/
+	p:first-child:first-letter { 
+		float: left; 
+		color: green; 
+		font-size: 50px; 
+		line-height: 25px; 
+		padding-top: 2px; 
+		padding-right: 3px; 
+	}
 
+
+/*-------------Video---------------------*/
 
 	#videoContainer{
 		width:500px;
 	}
 
+/*------------call to actions------------*/
 
+	#actions {
+		text-align: center;
+		width: 900px;
+		height: 145px;
+		margin: 0 auto;
+	}
 
+	#actions a {
+		float: left;
+	}
 
+	#actions div {
+		padding: 5px;
+		border: 1px solid;
+		width: 280px;	
+		height: 130px;
+		margin-right: 5px;
+	}
+
+	#actions div img {
+		width: 80px;
+		/*display: inline;*/
+	}
+
+	#actions > div p {
+		/*width: 80px;*/
+		/*display: inline;*/
+	}

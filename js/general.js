@@ -1,11 +1,19 @@
 /*
 	Patchwork - General Front End Functionality
 */
-var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64'];
+// Global array to keep colors consistent
+//				-3 			-2 			-1 			0 			1 		2 			3
+var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#5cffae', '#31b373', '#106138'];
 
 $(document).ready(function() {
-	/*--------FORM VALIDATION (DOCUMENTATION http://docs.jquery.com/Plugins/Validation)--------*/
+	/*------------Welcome message stuff-----------------*/
+	$('#welcomeContainer').css('height', $('body').height());
+	$('#welcomeContainer').fadeIn(500);
+	$(window).click(function() {
+		$('#welcomeContainer').fadeOut(500);
+	});
 
+	/*--------FORM VALIDATION (DOCUMENTATION http://docs.jquery.com/Plugins/Validation)--------*/
 	// Call jQuery validate plugin that injects messages for required fields on form submit
 	$('#signupForm').validate({
 		rules: {
@@ -57,6 +65,7 @@ $(document).ready(function() {
 	$('#login').click(function() {
 		hidePopups();
 		$('#loginPopup').show(200);
+		$('#login_username').focus();
 	});
 
 	//Ask server to login on click
@@ -98,6 +107,7 @@ $(document).ready(function() {
 	$('#signup').click(function() {
 		hidePopups();
 		$('#signupPopup').show(200);
+		$('input[name=username]').focus();
 	});
 
 	//Hide Signinpopup
@@ -118,32 +128,6 @@ $(document).ready(function() {
 	}).mouseleave(function() {
 		$(this).removeClass('hover');
 	});
-
-	$('#signup_submit').click(function() {
-		addUser($('#signupPopup input[name="username"]').val(), $('#signupPopup input[name="password"]').val(), $('#signupPopup input[name="email"]').val());
-		console.log($('#signupPopup input[name="username"]').val(), $('#signupPopup input[name="password"]').val(), $('#signupPopup input[name="email"]').val());
-	});
-
-	//Adds a new user to the database
-	function addUser(username, password, email) {
-		$.ajax({
-			type: 'POST',
-			url: '/action/addUser',
-			data: {
-				username: username,
-				password: password,
-				email: email
-			},
-			dataType: 'json',
-			success: function(json) {
-				sendLogin(username, password);
-			},
-			error: function() {
-				$('#username_exists').show(200);
-			}
-		});
-	}
-
 
 	/*-----Lights out----*/
 
@@ -283,33 +267,70 @@ function applyColors(thisVal, $element, styling, stylewith) {
 	}
 }
 
-	//Sends the passed login parameters to server onclick
-	//Reloads the current page
-	function sendLogin(username, password) {
-		$.ajax({
-			type: 'POST',
-			url: 'http://127.0.0.1/action/login',
-			data: {
-				username: username,
-				password: password
-			},
-			dataType: 'json',
-			success: function(json) {
-				hidePopups();
-				window.location.reload();
-			},
-			error: function() {
-				$('#login_fail').show(200);
-				$('#login_password').val('');
-			}
-		});
-	}
+//Sends the passed login parameters to server onclick
+//Reloads the current page
+function sendLogin(username, password) {
+	$.ajax({
+		type: 'POST',
+		url: 'http://127.0.0.1/action/login',
+		data: {
+			username: username,
+			password: password
+		},
+		dataType: 'json',
+		success: function(json) {
+			hidePopups();
+			window.location.reload();
+		},
+		error: function() {
+			$('#login_fail').show(200);
+			$('#login_password').val('');
+		}
+	});
+}
 
-	//Resets and recolors the kudos scale to get rid of border color
-	function resetScale() {
-		$.each($('.scoreBox'), function(i) {
-			$(this).css('background-color', colors[i]);
-			$(this).css('border', '2px solid ' + colors[i]);
-			$(this).removeClass('selectedRating');
-		});
+//Resets and recolors the kudos scale to get rid of border color
+function resetScale() {
+	$.each($('.scoreBox'), function(i) {
+		$(this).css('background-color', colors[i]);
+		$(this).css('border', '2px solid ' + colors[i]);
+		$(this).removeClass('selectedRating');
+	});
+}
+
+// Check if the user is logged in before committing any action
+// The 'signedin' attribute is set on the main container that is on every page
+// If user is logged in, attribute is set to 1, else 0
+// Pass in the string to finish the alert text content
+function isLoggedIn($action) {
+	if ($('#main').attr('signedin') != 1) {
+		alert('Please log in to ' + $action);
+		$('#loginPopup').show(200);
+		window.scrollTo(0, 0);
+		return false;
 	}
+	return true;
+}
+
+//Adds a new user to the database
+function addUser() {
+	$username = $('#signupPopup input[name="username"]').val();
+	$password = $('#signupPopup input[name="password"]').val();
+	$email = $('#signupPopup input[name="email"]').val();
+	$.ajax({
+		type: 'POST',
+		url: '/action/addUser',
+		data: {
+			username: $username,
+			password: $password,
+			email: $email
+		},
+		dataType: 'json',
+		success: function(json) {
+			sendLogin($username, $password);
+		},
+		error: function() {
+			$('#username_exists').show(200);
+		}
+	});
+}

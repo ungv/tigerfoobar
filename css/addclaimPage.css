@@ -1,0 +1,27 @@
+#newClaimForm {
+	float: left;
+}
+
+#urlContainer {
+	display: none;
+}
+
+#urlSubmit {
+	position: relative;
+	overflow: hidden;
+	margin: 5px 0 5px 0;
+	background-color: rgb(238, 238, 238);
+	width: 350px;
+	padding: 20px;
+	border: 1px solid rgb(214, 214, 214);
+	-moz-box-shadow: 3px 3px 3px #888;
+	-webkit-box-shadow: 3px 3px 3px #888;
+	box-shadow: 3px 3px 3px #888;
+}
+
+.right {
+	float: right;
+	border: 1px dashed green;
+	width: 500px;
+	height: 600px;
+}

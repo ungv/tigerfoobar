@@ -1,12 +1,7 @@
 #urlContainer {
 	margin-bottom: 0px !important;
+	float: left;
 }
-
-/*removed to fit welcome message
-#urlButton, #urlInput {
-	position: absolute;
-}
-*/
 
 #urlButton {
 	opacity: 0.6;
@@ -38,7 +33,7 @@
 #urlSubmit {
 	width: 350px;
 	height: inherit;
-	margin-top: 50px;
+	margin-top: 10px;
 }
 
 #urlSubmit input, textarea {
@@ -55,4 +50,33 @@
 
 #submit, #cancel {
 	float: right;
+}
+
+/* to animate pacman moving across screen
+#loadingGif {
+	z-index: 300;
+	position: absolute;
+	margin-top: 10px;
+	display: none;
+}*/
+
+.loadingGif {
+	background-image: url('/img/loading.gif');
+	background-repeat: no-repeat;
+	width: 32px;
+	height: 32px;
+}
+
+#successAlert {	
+	z-index: 300;
+	position: fixed;
+	left: 50%;
+	width: 200px;
+	margin-left: -100px;
+	top: 40%;
+	background-color: lightgray;
+	padding: 5px;
+	color: green;
+	font-size: 20pt;
+	display: none;
 }

@@ -1,6 +1,4 @@
-	<!--Start ScoreBottom content-->
 			</section>
-
 			<section id="rightCol">
 				<div id="relatedTagsHeader">
 				<?php

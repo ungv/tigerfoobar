@@ -13,27 +13,29 @@ $(document).ready(function() {
 
 	$.each($('#discussionContent li'), function() {
 		applyColors(parseInt($(this).attr('value')), $(this), 'border-left', '5px solid ');
-	});	
+	});
 	
 	/*------Rating the claim-------*/
 	// Add or update user's rating on this claim
 	$('input[name=claimscore]').click(function() {
-		$.ajax({
-			type: 'POST',
-			url: '/action/sendRating',
-			data: {
-				rating: $(this).attr('value'),
-				claimID: $(this).attr('claimid')
-			},
-			dataType: 'json',
-			success: function(json) {
-				alert('Thanks for rating this claim! Go ahead and add a comment below!');
-				window.location.reload();
-			},
-			error: function() {
-				alert('Oops, are you logged in?');
-			}
-		});
+		if (isLoggedIn('to rate this claim')) {
+			$.ajax({
+				type: 'POST',
+				url: '/action/sendRating',
+				data: {
+					rating: $(this).attr('value'),
+					claimID: $(this).attr('claimid')
+				},
+				dataType: 'json',
+				success: function(json) {
+					alert('Thanks for rating this claim! Go ahead and add a comment below!');
+					window.location.reload();
+				},
+				error: function() {
+					console.log('error in rating the claim');
+				}
+			});
+		}
 	});
 
 
@@ -48,8 +50,10 @@ $(document).ready(function() {
 
 	//Onclick, send vote to server
 	$('.upVote, .downVote').click(function() {
-		$(this).parent().find('.buttons').removeClass('selectedVote');		//Reset selection loaded from server
-		sendCommentVote($(this));
+		if (isLoggedIn('to vote on this comment')) {
+			$(this).parent().find('.buttons').removeClass('selectedVote');		//Reset selection loaded from server
+			sendCommentVote($(this));
+		}
 	});
 
 	//Send vote to server
@@ -57,6 +61,44 @@ $(document).ready(function() {
 		var voted = parseInt($(button).attr('voted')); //0 if not voted, 1 if voted
 		var clicked = $(button);
 		var value = $(button).attr('value');
+		//Update vount counts to reflect changes
+		//Get current vote count
+		var oldUpVotes = parseInt($(clicked.parent().find(".upNum")).text());
+		var oldDownVotes = parseInt($(clicked.parent().find(".downNum")).text());
+
+		if(!voted)  {		//If clicked on non-selected arrow
+			if (clicked.hasClass('upVote')) {		//Clicked on up arrow
+				oldUpVotes++;
+				if (clicked.parent().hasClass('beenVoted')) {		//If either arrow has already been selected
+					oldDownVotes--;					
+				}
+			} else if (clicked.hasClass('downVote')) {		//Clicked on down arrow
+				oldDownVotes++;
+				if (clicked.parent().hasClass('beenVoted')) {		//If either arrow has already been selected
+					oldUpVotes--;
+				}
+			}
+			clicked.parent().addClass('beenVoted');		//This comment has been voted on
+
+			//Update which arrow has been selected
+			clicked.parent().find('.buttons').attr('voted','0');
+			clicked.attr('voted','1');
+			clicked.addClass('selectedVote');
+
+		} else if (voted) {		//else user wants to unvote selection
+			if (clicked.hasClass('upVote')) {		//Clicked on up arrow
+				oldUpVotes--;
+			} else if (clicked.hasClass('downVote')) {		//Clicked on down arrow
+				oldDownVotes--;
+			}
+			//This comment now does not have any votes selected
+			clicked.parent().removeClass('beenVoted');
+			clicked.attr('voted','0');
+			clicked.removeClass('selectedVote');
+		}
+		//Inject new vote counts
+		$(clicked.parent().find(".upNum")).text(oldUpVotes);
+		$(clicked.parent().find(".downNum")).text(oldDownVotes);		
 		$.ajax({
 			type: 'POST',
 			url: '/action/voteComment',
@@ -67,44 +109,7 @@ $(document).ready(function() {
 				value: value
 			},
 			dataType: 'json',
-			success: function(json) {	//Update vount counts to reflect changes
-				//Get current vote count
-				var oldUpVotes = parseInt($(clicked.parent().find(".upNum")).text());
-				var oldDownVotes = parseInt($(clicked.parent().find(".downNum")).text());
-
-				if(!voted)  {		//If clicked on non-selected arrow
-					if (clicked.hasClass('upVote')) {		//Clicked on up arrow
-						oldUpVotes++;
-						if (clicked.parent().hasClass('beenVoted')) {		//If either arrow has already been selected
-							oldDownVotes--;					
-						}
-					} else if (clicked.hasClass('downVote')) {		//Clicked on down arrow
-						oldDownVotes++;
-						if (clicked.parent().hasClass('beenVoted')) {		//If either arrow has already been selected
-							oldUpVotes--;
-						}
-					}
-					clicked.parent().addClass('beenVoted');		//This comment has been voted on
-
-					//Update which arrow has been selected
-					clicked.parent().find('.buttons').attr('voted','0');
-					clicked.attr('voted','1');
-					clicked.addClass('selectedVote');
-
-				} else if (voted) {		//else user wants to unvote selection
-					if (clicked.hasClass('upVote')) {		//Clicked on up arrow
-						oldUpVotes--;
-					} else if (clicked.hasClass('downVote')) {		//Clicked on down arrow
-						oldDownVotes--;
-					}
-					//This comment now does not have any votes selected
-					clicked.parent().removeClass('beenVoted');
-					clicked.attr('voted','0');
-					clicked.removeClass('selectedVote');
-				}
-				//Inject new vote counts
-				$(clicked.parent().find(".upNum")).text(oldUpVotes);
-				$(clicked.parent().find(".downNum")).text(oldDownVotes);
+			success: function(json) {
 			},
 			error: function(json) {
 				//Must be logged in to cast vote
@@ -122,21 +127,31 @@ $(document).ready(function() {
 		position: 'bottom',
 		functionReady: function(origin, tooltip) {
 			$('#flagNoncredible').click(function() {
-				flagContent($(this), 'claim', 'noncredible');
+				if (isLoggedIn('to flag this non-credible evidence')) {
+					flagContent($(this), 'claim', 'noncredible');
+				}
 			});
 
 			$('#flagWrong').click(function() {
-				flagContent($(this), 'claim', 'wrongcompany');
+				if (isLoggedIn('to flag the company linking')) {
+					flagContent($(this), 'claim', 'wrongcompany');
+				}
 			});
 		}
 	});
 
 	$('label[for="radio3"]').click(function() {
-		flagContent($(this), 'claim', 'trivial');
+		if ($('#radio3').attr('name') == 'claimscore') {
+			if (isLoggedIn('to flag the company linking')) {
+				flagContent($(this), 'claim', 'trivial');
+			}
+		}
 	});
 
 	$('img.flagComment').click(function() {
-		flagContent($(this), 'comment', 'badcomment');
+		if (isLoggedIn('to flag this comment')) {
+			flagContent($(this), 'comment', 'badcomment');
+		}
 	});
 
 	function flagContent (button, targettype, flagetype) {
@@ -181,7 +196,9 @@ $(document).ready(function() {
 	//Onclick, send vote to server
 	//switch value when clicked
 	$('.tagUpvote').click(function() {
-		sendTagUpvote($(this));
+		if (isLoggedIn('to vote on this tag')) {
+			sendTagUpvote($(this));
+		}
 	});
 
 	//Sends the upvote or downvote to the server using the type of tag
@@ -330,13 +347,12 @@ $(document).ready(function() {
 			type: 'POST',
 			url: '/action/createTag/'+name+"/"+newType,
 			success: function(r) {	//Return saying tag was created
-				console.log("original response:" + r);
 				if(parseInt(r) != -1) {
 					voteOnNewTag(parseInt(r),name);
 				}
 			},
 			error: function(r) {
-				console.log("original response:" + r);
+				//
 			}
 		});
 	}
@@ -383,15 +399,19 @@ $(document).ready(function() {
 		// $('#newCommentPopup').show(200);
 		// $('#newCommentPopup textarea').focus();
 		// $('.lightsout').fadeIn();
-		$('#newCommentBox').show(200);
-		$('#newCommentBox textarea').focus();
+		if (isLoggedIn('add a new comment')) {
+			$('#newCommentBox').show(200);
+			$('#newCommentBox textarea').focus();
+		}
 	});
 
 	// Injects a new textbox to reply to the above comment
 	$('.reply').click(function() {
-		$parentLi = $(this).parent().parent().attr('id');
-		$('#' + $parentLi + 'reply').show();
-		$('#' + $parentLi + 'reply textarea').focus();
+		if (isLoggedIn('reply to this comment')) {
+			$parentLi = $(this).parent().parent().attr('id');
+			$('#' + $parentLi + 'reply').show();
+			$('#' + $parentLi + 'reply textarea').focus();
+		}
 	});
 
 	// Submit a new thread or reply to database
@@ -451,3 +471,6 @@ $('label.scoreBox, span.tagUpvote, a.addTag').tooltipster();
 $('span.tagUpvote').tooltipster();
 $('#addTag').tooltipster();
 $('img.flagComment').tooltipster();
+$('li.comments').tooltipster({
+	position: 'left'
+});

@@ -44,7 +44,9 @@
 		margin: 50px auto;
 	}
 	
-
+	#scoreContainer #treemapCanvas {
+		margin: 5px auto;
+	}
 /*-----------------------Claim and Industry Tags-------------------*/
 	
 	#tagSection{
@@ -121,7 +123,7 @@
 
 
 	#evidenceContent {
-		border-left: 5px solid blue;
+		border-left: 5px solid #555;
 		background-color: #F2F2F2;
 	}
 
@@ -136,7 +138,7 @@
 	}
 
 	#evidenceContent dd {
-		margin-left: 75px;
+		margin-left: 90px;
 	}
 
 
@@ -144,7 +146,7 @@
 	
 	#leftCol {
 		float: left;
-		width: 50%;
+		width: 37%;
 		border-right: 1px solid rgb(213, 213, 213);
 	}
 
@@ -154,7 +156,7 @@
 
 	#rightCol {
 		float: left;
-		width: 49.8%;
+		width: 62.8%;
 	}	
 
 	#claimPopTags li{
@@ -254,6 +256,9 @@
 	}
 	.box2 {
 		left: 88px;
+	}
+	.box3 {
+		left: 132px;
 	}
 	.box4 {
 		left: 176px;
@@ -426,6 +431,11 @@
 
 	#flagButton {
 		float: right;
+		opacity: .5;
+	}
+
+	#flagButton:hover {
+		opacity: 1;
 	}
 
 	img.flagComment {

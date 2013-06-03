@@ -36,11 +36,13 @@ class Pages extends Root_Controller {
 		$data['pageTitle'] = 'Home';
 		$data['pageType'] = 'home';
 		
-		$data['csFiles'] = array('general','ccStyles','addClaim');
+		$data['csFiles'] = array('general','ccStyles','addClaim', 'tooltipster');
 		//load welcome css headers
 		$signedIn = $this->is_logged_in();
 		if(!$signedIn) {
 			array_push($data['csFiles'],'welcome');
+		} else {
+			$data['signedIn'] = true;			
 		}
 		$data['jsFiles'] = array('general','score','addClaim');
 		$data['treemapJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
@@ -48,46 +50,90 @@ class Pages extends Root_Controller {
 		//Views
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
-		//if not logged in, show welcome message
-		if(!$signedIn) {
-			$this->load->view('pages/welcome', $data);
-		}
 		$this->load->view('pages/addClaim', $data);
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('pages/treemap', $data);
+		//if not logged in, show welcome message
+		if(!$signedIn) {
+			$this->load->view('pages/welcome', $data);
+			$this->load->view('pages/welcomeActions', $data);
+		}
 		$this->load->view('templates/footer');
 	}
+
+	//add claim page
+	//this page uses the same code as 'addClaim.php' and modifies elements with 
+	//'addclaimPage.js' and 'addclaimPage.css'
+	public function addclaim() {
+		if ($this->is_logged_in()) {
+			$data['signedIn'] = true;
+		}
+		$data['headerTitle'] = 'Add a Claim - PatchWork';
+		$data['pageType'] = 'home';
+
+		//files needed
+		$data['csFiles'] = array('general','ccStyles','addClaim','addclaimPage');
+		$data['jsFiles'] = array('addclaimPage','general','ccScripts','addClaim','score');
+
+		//Views
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/mainTop', $data);
+		$this->load->view('pages/addclaimPage', $data);
+		$this->load->view('pages/addClaim', $data);
+		$this->load->view('pages/mainBottom', $data);
+		$this->load->view('templates/footer');
+	}
+
 
 	//claim page
 	public function claim($claimID = -1) {
 		if($claimID == -1) {
 			$this->homepage(); //!! change to TreemapSearch later
 		}else {
+			if ($this->is_logged_in()) {
+				$data['signedIn'] = true;
+			}
 			$data['headerTitle'] = 'View Claim - PatchWork';
 			$data['pageType'] = 'claim';
 
-			$data['claimID'] = $claimID;
-			$data['claimInfo'] = get_object_vars($this->data_model->getClaim($claimID));
-			$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
-
-			$resultsArr = [];
-			$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr, $this->userid);
-			$data['uniqueUsers'] = $this->data_model->getUniqueUsers($claimID);
-			$data['scores'] = $this->data_model->getClaimScores($claimID);
-			$data['userRating'] = $this->data_model->getRatingOnClaim($claimID, $this->userid);
-			
 			//files needed
 			$data['csFiles'] = array('general','ccStyles', 'tooltipster');
 			$data['jsFiles'] = array('general','ccScripts','score');
 
-			$this->load->view('templates/header', $data);
-			$this->load->view('pages/mainTop', $data);
-			$this->load->view('pages/ccTop', $data);
-			$this->load->view('pages/evidence', $data);
-			$this->load->view('pages/scoreTop', $data);
-			$this->load->view('pages/score', $data);
-			$this->load->view('pages/scoreBottom', $data);
-			$this->load->view('pages/discussion', $data);
+			$data['claimID'] = $claimID;
+			$data['claimInfo'] = $this->data_model->getClaim($claimID);
+
+			// only load full page when this claim has been found
+			if ($data['claimInfo'] != null) {
+				$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
+			
+				$resultsArr = [];
+				$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr, $this->userid);
+				$data['uniqueUsers'] = $this->data_model->getUniqueUsers($claimID);
+				$data['scores'] = $this->data_model->getClaimScores($claimID);
+				$data['userRating'] = $this->data_model->getRatingOnClaim($claimID, $this->userid);
+				
+				$companyID = $data['claimInfo']['CompanyID'];
+				$data['scoreHistory'] = $this->data_model->getClaimScoreHistoryJSON($claimID);
+				$data['treemapJSON'] = $this->data_model->getJSON("companyTopClaims", $companyID);
+				//$data['treemapSize'] = ["full", 500]; //Scott
+				
+				$this->load->view('templates/header', $data);
+				$this->load->view('pages/mainTop', $data);
+				$this->load->view('pages/ccTop', $data);
+				$this->load->view('pages/evidence', $data);
+				$this->load->view('pages/scoreTop', $data);
+				$this->load->view('pages/score', $data);
+				$this->load->view('pages/scoreRight', $data);
+				$this->load->view('pages/highcharts', $data);
+				$this->load->view('pages/scoreBottom', $data);
+				// $this->load->view('pages/treemap', $data);
+				$this->load->view('pages/discussion', $data);
+			} else {
+				$this->load->view('templates/header', $data);
+				$this->load->view('pages/mainTop', $data);
+				$this->load->view('pages/notfound', $data);
+			}
 			$this->load->view('pages/mainBottom', $data);
 			$this->load->view('templates/footer');
 		}
@@ -98,31 +144,45 @@ class Pages extends Root_Controller {
 		if($companyID == -1 || !$this->data_model->getCompany($companyID)) {
 			$this->homepage();
 		}else {
-			//grab basic data
-			$data['companyInfo'] = get_object_vars($this->data_model->getCompany($companyID));
-			$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
-			$data['companyClaimTags'] = $this->data_model->getCompanyClaimTags($companyID);
-
-			$data['companyClaimsPos'] = $this->data_model->getCompanyClaimsPos($companyID);
-			$data['companyClaimsNeg'] = $this->data_model->getCompanyClaimsNeg($companyID);
-			$data['companyTags'] = $this->data_model->getCompanyTags($companyID, $this->userid);
-			$data['treemapJSON'] = $this->data_model->getClaimsForCompanyJSON($companyID);
-			
+			if ($this->is_logged_in()) {
+				$data['signedIn'] = true;
+			}			
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
 
-			$data['csFiles'] = array('general','ccStyles','toggleview');
+			$data['csFiles'] = array('general','ccStyles','toggleview','tooltipster');
 			$data['jsFiles'] = array('general','ccScripts','score','toggleview');
+
+			//grab basic data
+			$companyData = $this->data_model->getCompany($companyID);
 			
-			$this->load->view('templates/header', $data);
-			$this->load->view('pages/mainTop', $data);
-			$this->load->view('pages/ccTop', $data);
-			$this->load->view('pages/scoreTop', $data);
-			$this->load->view('pages/score', $data);
-			$this->load->view('pages/scoreBottom', $data);
-			$this->load->view('pages/toggleview', $data);
-			$this->load->view('pages/highlowClaims', $data);
-			$this->load->view('pages/treemap', $data);
+			// only load full page when this company has been found
+			if ($companyData != null) {
+				$data['companyInfo'] = get_object_vars($companyData);
+
+				$data['companyClaims'] = $this->data_model->getCompanyClaims($companyID);
+				$data['companyClaimsPos'] = $this->data_model->getCompanyClaimsPos($companyID);
+				$data['companyClaimsNeg'] = $this->data_model->getCompanyClaimsNeg($companyID);
+				$data['companyTags'] = $this->data_model->getCompanyTags($companyID, $this->userid);
+				$data['scoreHistory'] = $this->data_model->getCompanyScoreHistoryJSON($companyID);
+				$data['treemapJSON'] = $this->data_model->getJSON("companyClaims",$companyID);
+				
+				$this->load->view('templates/header', $data);
+				$this->load->view('pages/mainTop', $data);
+				$this->load->view('pages/ccTop', $data);
+				$this->load->view('pages/scoreTop', $data);
+				$this->load->view('pages/score', $data);
+				$this->load->view('pages/scoreRight', $data);
+				$this->load->view('pages/highcharts', $data);
+				$this->load->view('pages/scoreBottom', $data);
+				$this->load->view('pages/toggleview', $data);
+				$this->load->view('pages/highlowClaims', $data);
+				$this->load->view('pages/treemap', $data);
+			} else {
+				$this->load->view('templates/header', $data);
+				$this->load->view('pages/mainTop', $data);
+				$this->load->view('pages/notfound', $data);
+			}
 			$this->load->view('pages/mainBottom', $data);
 			$this->load->view('templates/footer');
 		}
@@ -133,22 +193,32 @@ class Pages extends Root_Controller {
 		if($tagID == -1) {
 			$this->homepage(); //!! change to TreemapSearch later
 		}else {
-
+			if ($this->is_logged_in()) {
+				$data['signedIn'] = true;
+			}
 			$data['headerTitle'] = 'View Tag - PatchWork';
 			$data['pageType'] = 'tag';
-			
-			$data['tagInfo'] = $this->data_model->getClaimsWithTag($tagID);
-			$data['treemapJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
-			
-			$data['csFiles'] = array('general','tag','toggleview');
-			$data['jsFiles'] = array('general','tag','toggleview');
 
+			$data['csFiles'] = array('general','tag','toggleview', 'tooltipster');
+			$data['jsFiles'] = array('general','tag','toggleview');
+			
+			$data['tagName'] = $this->data_model->getTag($tagID);
+			$data['tagInfo'] = $this->data_model->getClaimsWithTag($tagID);
+			//$data['treemapJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
+			$data['treemapJSON'] = $this->data_model->getJSON("claimsWithTag",$tagID);
+			
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/mainTop', $data);
 			$this->load->view('pages/tagTitle', $data);
-			$this->load->view('pages/toggleview', $data);
-			$this->load->view('pages/tag', $data);
-			$this->load->view('pages/treemap', $data);
+
+			// only load full page when this tag has been found and there are claims with this tag
+			if ($data['tagInfo'] != null) {
+				$this->load->view('pages/toggleview', $data);
+				$this->load->view('pages/tag', $data);
+				$this->load->view('pages/treemap', $data);
+			} else if ($data['tagName'] == null) {
+				$this->load->view('pages/notfound', $data);
+			}
 			$this->load->view('pages/mainBottom', $data);
 			$this->load->view('templates/footer');
 		}
@@ -161,37 +231,46 @@ class Pages extends Root_Controller {
 
 		//handle case when no parameter is passed
 		if ($userID == -1) {
-			if (!isset($data['userdata']['userid'])) {
+			if ($this->is_logged_in()) {
+				//user is logged in, set variable as the userid in session and continue as normal
+				$userID = $data['userdata']['userid'];
+			} else {
 				//if user is not logged in, redirect
 				$this->homepage();
 				return;
-			} else {
-				//user is logged in, set variable as the userid in session and continue as normal
-				$userID = $data['userdata']['userid'];
 			}
 		}
 		$data['headerTitle'] = 'View profile';
 		$data['pageType'] = 'profile';
 		
-		//grab basic data
-		$data['curProfile'] = $userID;
-		$data['userInfo'] = get_object_vars($this->data_model->getUser($userID));
-		$data['userClaims'] = $this->data_model->getUserClaims($userID);
-		$data['userComments'] = $this->data_model->getUserComments($userID);
-		$data['userVotes'] = $this->data_model->getUserVotes($userID);
-		$data['headerTitle'] = 'User Profile - Patchwork';
-		$data['treemapJSON'] = $this->data_model->getTopClaimsForUserJSON($userID);
-
 		//files needed
-		$data['csFiles'] = array('general','profile','toggleview');
+		$data['csFiles'] = array('general','profile','toggleview', 'tooltipster');
 		$data['jsFiles'] = array('general','profile','toggleview');
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/mainTop', $data);
-		$this->load->view('pages/profileTitle', $data);
-		$this->load->view('pages/toggleview', $data);
-		$this->load->view('pages/treemap', $data);
-		$this->load->view('pages/profile', $data);
+		//grab basic data
+		$data['curProfile'] = $userID;
+		$data['userInfo'] = $this->data_model->getUser($userID);
+		
+		// only load full page when this user has been found
+		if ($data['userInfo'] != null) {
+			$data['userClaims'] = $this->data_model->getUserClaims($userID);
+			$data['userComments'] = $this->data_model->getUserComments($userID);
+			$data['userVotes'] = $this->data_model->getUserVotes($userID);
+			$data['headerTitle'] = 'User Profile - Patchwork';
+			//$data['treemapJSON'] = $this->data_model->getTopClaimsForUserJSON($userID);
+			$data['treemapJSON'] = $this->data_model->getJSON("userClaims",$userID);
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/mainTop', $data);
+			$this->load->view('pages/profileTitle', $data);
+			$this->load->view('pages/toggleview', $data);
+			$this->load->view('pages/treemap', $data);
+			$this->load->view('pages/profile', $data);
+		} else {
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/mainTop', $data);
+			$this->load->view('pages/notfound', $data);
+		}
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');
 	}
@@ -205,7 +284,7 @@ class Pages extends Root_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
-		$this->load->view('pages/welcome', $data);
+		$this->load->view('pages/welcomeActions', $data);
 		$this->load->view('pages/about');
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');
@@ -238,25 +317,4 @@ class Pages extends Root_Controller {
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');
 	}
-
-	/*
-	public function view($page = 'home') {
-		if ( ! file_exists('ci_application/views/pages/'.$page.'.php')) {
-			// Whoops, we don't have a page for that!
-			show_404();
-		}
-		
-		//url helper
-		$this->load->helper('url');
-
-		// Capitalize the first letter
-		$data['headerTitle'] = ucfirst($page) . ' - patchwork';
-		$data['pageTitle'] = ucfirst($page);
-		
-		//load views
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/'. $page, $data);
-		$this->load->view('templates/footer', $data);
-	}
-	*/
 }

@@ -1,8 +1,5 @@
 <?php
-	/*TODO (5/17/13):
-	* -Make the SVG text bring users to the relevant claim page on click
-	* -Create on-hover tooltips that show more detail and slightly change the color of hovered cells to indicate
-	* that the cell is clickable
+	/* Todo
 	* -Limit the number of claims per top company returned in the data model
 	*/
 ?>
@@ -13,19 +10,34 @@
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script type="text/javascript">
 	$(function () {
+		var mouseX, mouseY;
+		$(document).mousemove(function(e) {
+			mouseX = e.clientX;
+			mouseY = e.clientY;
+		}).mouseover();
+		
 		<?php
 			if (isset($pageType) && $pageType == "home") {
 			?>
-				var treemapHeight = $(window).height()+100 - $("#treemapCanvas").offset().top - $("footer").height() - 40;
-				var treemapWidth = $(window).width() - 60;
+				var availVisibleHeight = $(window).height()+100 - $("#treemapCanvas").offset().top - $("footer").height() - 40;
+				var treemapHeight = (availVisibleHeight >= 500) ? availVisibleHeight : 500;
+				
+				var availVisibleWidth = $(window).width() - 60;
+				var treemapWidth = (availVisibleWidth >= 500) ? availVisibleWidth : 500;
 			<?php
 			} else if (isset($pageType) && ($pageType == "company" || $pageType == "tag" || $pageType == "profile")) {
 			?>
 				var treemapHeight = 500;
 				var treemapWidth = $("#main").width();
 			<?php
+			} else if (isset($pageType) && $pageType == "claim") {
+			?>
+				var treemapHeight = 100;
+				var treemapWidth = 410;
+			<?php	
 			}
-		?>
+			?>
+		
 		var w = treemapWidth,
 			h = treemapHeight,
 			x = d3.scale.linear().range([0, w]),
@@ -34,7 +46,7 @@
 			   .domain([-3, -2, -1, 0, 1, 2, 3])
 			   .range(['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64']),
 			borderColor = d3.scale.category10(),
-			borderWidth = 5,
+			borderWidth = 1,
 			domain = document.domain,
 			padding = 20,
 			root,
@@ -53,104 +65,185 @@
 		  .append("svg:svg")
 			.attr("width", w)
 			.attr("height", h)
-		  .append("svg:g");
+		  .append("svg:g")
+			.attr("class", "outerG");
 		  
 		var jsonDataObj = {<?php
 			echo($treemapJSON);
 		?>};
-		console.log("jsonDataObj is: " + jsonDataObj);
+		console.log(jsonDataObj);
 
 		var data = jsonDataObj;
 		node = root = data;
 
-		var nodes = treemap.nodes(root)
-		  .filter(function(d) { return !d.children; });
+		var claimNodes = treemap.nodes(root)
+		.filter(function (d) {return !d.children;})
 
-		var cell = svg.selectAll("g")
-		  .data(nodes)
-		  .enter().append("svg:g")
-		  .attr("class", "cell")
-		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-		  /*.attr("stroke", function (d) {return borderColor(d.parent.name);})
-		  .attr("stroke-width", function (d) {return borderWidth;})*/
-		  .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
-		  
-		//$(cell).tipsy();
 		
-		cell.append("svg:rect")
+		var claimCell = svg.selectAll(".outerG")
+			.data(claimNodes)
+			.enter()
+			.append("svg:g")
+			.attr("class", "cell")
+			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+			/*.attr("stroke", function (d) {return borderColor(d.parent.name);})
+			.attr("stroke-width", function (d) {return borderWidth;})*/
+		
+		claimCell.append("svg:rect")
 		  .attr("width", function(d) { return d.dx - borderWidth;})
 		  .attr("height", function(d) { return d.dy - borderWidth;})
+		  .attr("title", function(d) {return computeTitle(d);})
 		  .style("fill", function(d) { return bgColor(d.score);})
 		  .on("mouseover", function (d) {d3.select(this).style("fill-opacity", "0.75");})
-		  .on("mouseout", function (d) {d3.select(this).style("fill-opacity", "1.0");});
+		  .on("mouseout", function (d) {d3.select(this).style("fill-opacity", "1.0");})
+		  .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
 		 
 		//Text labels for treemap
-		cell.append("foreignObject")
+		claimCell.append("foreignObject")
 		  .attr("x", function(d) { return padding - 5;})
 		  .attr("y", function(d) { return padding})
 		  .attr("width", function(d) {return d.dx - padding})
 		  .attr("height", function(d) {return d.dy - padding})
+		  //.attr("title", function(d) {return computeTitle(d);})
 		  .style("pointer-events", "none")
 		  .append("xhtml:div")
 			  .attr("dy", ".35em")
-			  .html(function(d) {return d.name})
-			  .style("font-size", function(d) {return calculateFontSize(d.dx, d.dy);})
-			  //.style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; })
+			  .attr("title", function(d) {return computeTitle(d);})
+			  .html(function(d) {return ((d.name.length < 100) ? d.name : (d.name.substring(0,100)+'...'));})
+			  .style("font-size", function(d) {return calculateFontSize(d.dx - 2*padding, d.dy - 2*padding, $(this).html());})
 			  .style("width", function(d) {return d.dx - padding})
 			  .style("height", function(d) {return d.dy - padding})
-			   .style("pointer-events", "auto")
-			  .on("click", function(d) {window.location.href = "http://" + domain + "/claim/" + d.claimID;});
+			  .style("cursor", "pointer")
+			  .style("pointer-events", "auto")
+			  .on("mouseover", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "0.75");})
+			  .on("mouseout", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "1.0");})
+			  .on("click", function(d) {window.location.href = "/claim/" + d.claimID;});
 			  
-		function calculateFontSize(width, height) {
-			return (width*height)/6000 + "px";
-		}
-		 
-		 //Tooltips
-		$("svg rect, svg div, svg foreignObject").tipsy({ 
-			gravity: "n",
-			html: true, 
-			title: function() {
-			  var d = this.__data__; // c = colors(d.i);
-			  var html = "<h3>" + d.name + "</h3>";
-			  
-			  //Todo: pass this html value to the "mouseenter" function below so that tooltips can be scaled properly before being displayed.
-			  //One way to possibly do this is bind it to the SVG element above and read it from d
-			  return html;
-			},
-			opacity: "1.0"})
-			.mouseenter(function(e) {
-				var d = this.__data__;
+		function calculateFontSize(width, height, text) {
+			var maxSize = 50;
+			var currSize = maxSize;
+			var sizingDiv = $("<div></div>");
+			$("body").append(sizingDiv);
+			sizingDiv.html(text);
+	
+			sizingDiv.css({"max-width": width + 50, "font-size": maxSize, "display":"inline-block", "visibility":"visible", "word-spacing":"" });
 			
+			var trueWidth = sizingDiv.width();
+			if (trueWidth>width) {
+				currSize = (width/trueWidth)*currSize;
+				sizingDiv.css("font-size", currSize);
+			}
+			
+			var trueHeight = sizingDiv.height();
+			if (trueHeight>height) {
+				currSize = (height/trueHeight)*currSize;
+				sizingDiv.css("font-size", currSize);
+			}
+			/*
+			var trueFontSizeHeight = (height/trueHeight)*maxSize;
+			sizingDiv.css("font-size", trueFontSizeHeight);
+			
+			var newTrueWidth = sizingDiv.width();
+			var newTrueFontSizeWidth = (width/newTrueWidth)*trueFontSizeHeight;*/
+			
+			sizingDiv.remove();
+			
+			var trueFontSize = currSize;//newTrueFontSizeWidth;//newTrueFontSizeWidth < trueFontSizeHeight ? trueFontSizeHeight : newTrueFontSizeWidth;
+			return trueFontSize + "px";//(width*height)/4000 + "px";
+		}
+		
+		function computeTitle(d) {
+			var html = "<a href = '/claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
+			html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
+			<?php
+				if (isset($pageType) && $pageType == "home") {
+			  ?>
+				html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
+			  <?php
+				}
+			?>
+			html += "<h5>Submitted by: <a href = '/profile/" + d.userID + "'>" + d.userName + "</a></h5>";
+			return html;
+		}
+		
+		//Tooltips
+		$("svg rect, svg div").tooltipster({
+			trigger: 'hover',
+			interactive: true,
+			interactiveTolerance: 10000,
+			onlyOne: true,
+			maxWidth: 400,
+			timer: 20000,
+			functionReady: function(origin, tooltip) {
 				var scrollTop = $(window).scrollTop();
 				var scrollLeft = $(window).scrollLeft();
-				var target = e.target;
+				var target = origin;
 				var targetCell = $(target).closest(".cell")[0];
 				var targetCellRect = targetCell.getBoundingClientRect();
-
-				//console.log(target + " top offset of targetCell is: " + $(targetCell).offset().top + " and left offset of targetCell is " + $(targetCell).offset().left);
-				//console.log("Height of targetcell is: " + targetCellRect.height + " and width of targetCell is: " + targetCellRect.width);
 				
 				var top = targetCellRect.top + targetCellRect.height + scrollTop;
-				var left = targetCellRect.left + targetCellRect.width/2 - $(".tipsy").width()/2 + scrollLeft;
+				var left = targetCellRect.left + targetCellRect.width/2 - $(tooltip).width()/2 + scrollLeft;
+				
+				//var top = mouseX;
+				//var left = mouseY;
+				
 				var rotation = 0;
 				
-				if (top + $(".tipsy").height() > ($(window).height() - 50)) {
-					top = targetCellRect.top - $(".tipsy").height() - 10 + scrollTop;
+				if (top + $(tooltip).height() > ($(window).height() - 50)) {
+					top = targetCellRect.top - $(tooltip).height() - 10 + scrollTop;
 					rotation = 180;
 				}
 				
-				$(".tipsy").css({
+				if (left < 0) {
+					left = 0;
+				}
+				
+				$(tooltip).css({
 					"top": top + "px",
 					"left": left + "px",
 					"transform" : "rotate(" + rotation +"deg)"
 				});
 				
-				$(".tipsy-inner").css({
+				$(".tooltipster-content").css({
 					"transform" : "rotate(" + rotation +"deg)"
 				});
-			});
-		d3.select(window).on("click", function() { zoom(root); });
+				
+				$(this).position = "top";
+				//$(".tooltipster-base").show();
+			},
+			position: 'bottom'
+		});
 
+			
+		<?php if (isset($pageType) && $pageType == "home") {
+		?>
+		//Add company borders
+		var companyNodes = treemap.nodes(root)
+		.filter(function (d) {return d.children});
+
+		var companyCellContainer = svg.append("svg:g")
+		.attr("class", "companyCellContainer");
+		
+		var companyCell = companyCellContainer.selectAll(".companyCellContainer")
+		.data(companyNodes)
+		.enter()
+		.append("svg:g")
+			.attr("class", "cell")
+			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		.append("svg:rect")
+			.attr("width", function(d) { return d.dx - 1;})
+			.attr("height", function(d) { return d.dy - 1;})
+			.style("fill-opacity", function(d) { return "0.0";}) //Fix
+			.style("stroke", function(d) {return "white";})
+			.style("stroke-width", function(d) {return "5";})
+			.style("pointer-events", "none");
+		$(".companyCellContainer>g:nth-child(1)").detach();
+		//End company borders
+		<?php
+		}
+		?>
+		
+		d3.select(window).on("click", function() { zoom(root); });
 		d3.select("select").on("change", function() {
 			treemap.value(this.value == "size" ? size : count).nodes(root);
 			zoom(node);
