@@ -42,9 +42,9 @@ class Pages extends Root_Controller {
 		if(!$signedIn) {
 			array_push($data['csFiles'],'welcome');
 		} else {
-			$data['signedIn'] = true;			
+			$data['signedIn'] = true;
 		}
-		$data['jsFiles'] = array('general','score','addClaim');
+		$data['jsFiles'] = array('general','score','addClaim','welcome');
 		$data['treemapJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
 
 		//Views

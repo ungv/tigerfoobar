@@ -5,11 +5,6 @@
 */
 
 /*-------------General---------------------*/
-	#welcomeMessage div{
-		float:left;
-		font-size:15pt;
-	}
-
 	#welcomeContainer {
 		background-color: rgba(235, 231, 183, 0.7);
 		position: absolute;
@@ -29,6 +24,13 @@
 		padding: 10px;
 		background-color: white;
 		opacity: 1;
+		-moz-border-radius: 15px;
+		border-radius: 15px;		
+	}
+
+	#welcomeMessage div{
+		float:left;
+		font-size:15pt;
 	}
 
 	#welcomeButtons {
@@ -67,6 +69,7 @@
 		margin-bottom:10px;
 		text-align:justify;
 		text-justify:inter-word;
+		line-height: 21px;
 	}
 
 	p:first-child:first-letter { 
