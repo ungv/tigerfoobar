@@ -9,10 +9,9 @@ $(document).ready(function() {
 	/*------------Welcome message stuff-----------------*/
 	$('#welcomeContainer').css('height', $('body').height());
 	$('#welcomeContainer').fadeIn(500);
-	$('#welcomeContainer, #xbutton, #welcomeButtons button').click(function() {
+	$(window).click(function() {
 		$('#welcomeContainer').fadeOut(500);
 	});
-
 
 	/*--------FORM VALIDATION (DOCUMENTATION http://docs.jquery.com/Plugins/Validation)--------*/
 	// Call jQuery validate plugin that injects messages for required fields on form submit
@@ -66,6 +65,7 @@ $(document).ready(function() {
 	$('#login').click(function() {
 		hidePopups();
 		$('#loginPopup').show(200);
+		$('#login_username').focus();
 	});
 
 	//Ask server to login on click
@@ -107,6 +107,7 @@ $(document).ready(function() {
 	$('#signup').click(function() {
 		hidePopups();
 		$('#signupPopup').show(200);
+		$('input[name=username]').focus();
 	});
 
 	//Hide Signinpopup
