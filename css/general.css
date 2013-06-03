@@ -16,9 +16,9 @@ html {
 
 body{
 	color:#444;
-	font-family: Cambria;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size: 14px;
-	/*background: url('/img/square_bg.png');*/
+	background: url('/img/square_bg.png');
 }
 
 .lightsout {
@@ -96,15 +96,14 @@ input.infocus, textarea.infocus {
 header{
 	/*vertical, then horizontal*/
 	width:900px;
-	padding: 3px;
 	margin:0px auto 15px;
 	
 	background-color: #0A6107;
+	padding-top: 2px;
 
 	top: 0;
 	left: 0;
-	border-top:3px solid #fff;
-	border-bottom:3px solid #ccc;
+	border-bottom:3px solid #f0f0f0;
 	
 	width: 100%;
 }
@@ -129,7 +128,6 @@ header, #logoImage{
 }
 
 header h1 {
-	font-size:43px;
 	font-weight:normal;
 	position:absolute;
 	left:5px;
@@ -186,7 +184,8 @@ header span {
 #navv {
 	position: relative;
 	top: 12px;
-	background-color: lightgrey;
+	background-color: #f0f0f0;
+	padding-bottom:3px;
 }
 
 #navv p {
@@ -243,7 +242,12 @@ footer, footer a{
 }
 
 #main h1{
-	font-size:40px;
+	font-size: 28px;
+	margin-top: 20px;
+}
+
+#main h1 a{
+	color:#666;
 }
 	
 /*SignupPopup------------------------*/
