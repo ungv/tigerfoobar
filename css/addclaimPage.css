@@ -25,3 +25,37 @@
 	width: 500px;
 	height: 600px;
 }
+
+.arrow_box {
+	position: relative;
+	background: #fff;
+	border: 3px solid #2c2c2c;
+
+	height: 35px;
+}
+
+.arrow_box:after, .arrow_box:before {
+	right: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-right-color: #fff;
+	border-width: 15px;
+	top: 50%;
+	margin-top: -15px;
+}
+
+.arrow_box:before {
+	border-color: rgba(44, 44, 44, 0);
+	border-right-color: #2c2c2c;
+	border-width: 19px;
+	top: 50%;
+	margin-top: -19px;
+}

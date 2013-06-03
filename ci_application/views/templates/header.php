@@ -6,7 +6,7 @@
 <head>
 	<title><?= $headerTitle ?></title>
 
-	<link rel="icon" type="image/png" href="/img/patchwork_logo.png" />
+	<link rel="icon" type="image/png" href="/img/favicon.png" />
 
 	<?php 
 	/*Our Stylesheets*/
@@ -59,14 +59,16 @@
 				<a id="logout" style="display: none;" href="/action/logout">logout</a>			
 			</span>
 		<?php } ?>
-		<div id="loginPopup" class="popup" style="display:none;">
-			<h3>Login to your Account</h3>
-			<p id="login_fail" style="display: none; color: red;">Login failed, please try again.</p>
-			<input id="login_username" type="text" placeholder="Your codename"/>
-			<input id="login_password" type="password" placeholder="Your top secret password"/>
-			<button type="submit" id="login_submit" class="submitButton">Log in</button>
-			<button type="button" id="login_cancel" class="cancelButton">cancel</button>
-		</div>
+		<form id="loginForm" action="javascript:sendLogin()">
+			<div id="loginPopup" class="popup" style="display:none;">
+				<h3>Login to your Account</h3>
+				<p id="login_fail" style="display: none; color: red;">Login failed, please try again.</p>
+				<input id="login_username" type="text" placeholder="Your codename"/>
+				<input id="login_password" type="password" placeholder="Your top secret password"/>
+				<button type="submit" id="login_submit" class="submitButton">Log in</button>
+				<button type="button" id="login_cancel" class="cancelButton">cancel</button>
+			</div>
+		</form>
 		<form id="signupForm" action="javascript:addUser()">
 			<div id="signupPopup" class="popup" style="display: none;">
 				<h3>Create an account and start helping others!</h3>
@@ -85,9 +87,9 @@
 		</form>
 	
 <?php
-	// Navataion - Breadcrumbs
+	// Navigation - Breadcrumbs
 	// if claim
-	if ($pageType == 'claim') {
+	if ($pageType == 'claim' && $claimInfo != null) {
 ?>
 		<div id='navv'>
 			<p>
@@ -98,7 +100,7 @@
 		</div>
 
 <?php
-	} elseif ($pageType == 'company') {
+	} elseif ($pageType == 'company' && !empty($companyInfo)) {
 ?>
 		<div id='navv'>
 			<p>
