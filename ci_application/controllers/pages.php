@@ -50,13 +50,14 @@ class Pages extends Root_Controller {
 		//Views
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
-		//if not logged in, show welcome message
-		if(!$signedIn) {
-			$this->load->view('pages/welcome', $data);
-		}
 		$this->load->view('pages/addClaim', $data);
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('pages/treemap', $data);
+		//if not logged in, show welcome message
+		if(!$signedIn) {
+			$this->load->view('pages/welcome', $data);
+			$this->load->view('pages/welcomeActions', $data);
+		}
 		$this->load->view('templates/footer');
 	}
 
@@ -256,7 +257,7 @@ class Pages extends Root_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
-		$this->load->view('pages/welcome', $data);
+		$this->load->view('pages/welcomeActions', $data);
 		$this->load->view('pages/about');
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');
