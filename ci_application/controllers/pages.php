@@ -36,7 +36,7 @@ class Pages extends Root_Controller {
 		$data['pageTitle'] = 'Home';
 		$data['pageType'] = 'home';
 		
-		$data['csFiles'] = array('general','ccStyles','addClaim', 'tooltipster');
+		$data['csFiles'] = array('general','ccStyles','addClaim', 'tooltipster', 'homepage');
 		//load welcome css headers
 		$signedIn = $this->is_logged_in();
 		if(!$signedIn) {
