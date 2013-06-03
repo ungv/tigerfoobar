@@ -19,7 +19,8 @@ for (var i in jsonDataObj['scores']) {
 $(function () {
     if (dates.length < 1) {
         $('#chartContainer').hide();
-        $('#relatedTagsContainer').text('This claim is lonely without more ratings. Give it a score on the left!');
+        // Claims will always have at least one rating, but new companies might not have any claims
+        $('#relatedTagsContainer').text('This company is lonely without more claims. Submit a new claim with the "+" at the top!');
     }
     $('#chartContainer').highcharts({
         chart: {

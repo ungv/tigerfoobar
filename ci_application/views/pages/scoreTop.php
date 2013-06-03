@@ -12,7 +12,7 @@
 							$totalNumRatings = 0;
 							if ($pageType == 'company') {
 								foreach($companyClaims as $claim) {
-									$totalNumRatings += $claim['noRatings'];
+									$totalNumRatings += $claim['numScores'];
 								}
 								$string .= $companyClaims[0]['Total'];
 								if ($companyClaims[0]['Total'] == 1)

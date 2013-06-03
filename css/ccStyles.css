@@ -48,7 +48,7 @@
 
 /*------------------------Treemap View-----------------------------*/
 	#treemapCanvas {
-		margin: 50px auto;
+		margin: 20px auto;
 	}
 	
 	#scoreContainer #treemapCanvas {
@@ -230,7 +230,7 @@
 
 	#scoreControl label {
 		width: 40px;
-		height: 40px;
+		height: 25px;
 		float: left;
 		opacity: .8;
 	}
@@ -245,7 +245,7 @@
 
 	.scoreBox {
 		text-align: center;
-		font-size: 22pt;
+		font-size: 16pt;
 	}
 
 	.selectedRating {
