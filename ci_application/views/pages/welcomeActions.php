@@ -11,7 +11,7 @@
 		<a href="/company">
 			<div>
 				<h3>Explore Companies</h3>
-				<img src="/img/explore_claims_icon.png">
+				<img src="/img/globe.png">
 				<p>Start exploring popular companies now</p>
 			</div>
 		</a>
