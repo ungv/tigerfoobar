@@ -187,7 +187,7 @@ class Action_model extends CI_Model {
                     if ($value == 1) {                    
                         $updateVoteCount = "UPDATE Discussion
                                             SET upvotes = upvotes + 1,
-                                            downvotes = downvotes - 1,
+                                            downvotes = downvotes - 1
                                             WHERE ClaimID = $ClaimID
                                             AND CommentID = $CommentID";
                     } else {
