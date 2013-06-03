@@ -251,12 +251,12 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'About - PatchWork';
 		$data['pageType'] = 'About';
 
-		$data['csFiles'] = array('general','ccStyles','welcome');
+		$data['csFiles'] = array('general','ccStyles', 'about');
 		$data['jsFiles'] = array('general','ccScripts');
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
-		$this->load->view('pages/welcome', $data);
+		// $this->load->view('pages/welcome', $data);
 		$this->load->view('pages/about');
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');
