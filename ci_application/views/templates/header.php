@@ -6,7 +6,7 @@
 <head>
 	<title><?= $headerTitle ?></title>
 
-	<link rel="icon" type="image/png" href="/img/patchwork_logo.png" />
+	<link rel="icon" type="image/png" href="/img/favicon.png" />
 
 	<?php 
 	/*Our Stylesheets*/
@@ -87,9 +87,9 @@
 		</form>
 	
 <?php
-	// Navataion - Breadcrumbs
+	// Navigation - Breadcrumbs
 	// if claim
-	if ($pageType == 'claim') {
+	if ($pageType == 'claim' && $claimInfo != null) {
 ?>
 		<div id='navv'>
 			<p>
@@ -100,7 +100,7 @@
 		</div>
 
 <?php
-	} elseif ($pageType == 'company') {
+	} elseif ($pageType == 'company' && !empty($companyInfo)) {
 ?>
 		<div id='navv'>
 			<p>

@@ -26,16 +26,24 @@
 	<!-- User comments -->
 	<div id="comments" class="container">
 		<h3>Comments:</h3>
-		<div class="scrollBox">
-			<?php
-			// If the user has not commented on anything before, display message
-			if (empty($userComments[0]['Comment'])) {
+		<?php
+		if (count($userComments) < 5) {
+		?>
+			<div>
+		<?php
+		} else {
+		?>
+			<div class="scrollBox">
+		<?php
+		}
+		// If the user has not commented on anything before, display message
+		if (empty($userComments[0]['Comment'])) {
+		?>
+			<p>You haven't commented on anyone's claims yet! Get started on the <a href="/claim">claims page</a></p>
+		<?php
+		} else {
+			foreach ($userComments as $comment) {
 			?>
-				<p>You haven't commented on anyone's claims yet! Get started on the <a href="/claim">claims page</a></p>
-			<?php
-			} else {
-				foreach ($userComments as $comment) {
-				?>
 			<div class="threadContainer">
 				<div class="thread">
 					<h3><a href="/claim/<?=$comment['ClaimID']?>/#<?=$comment['CommentID']?>comment">"<?=$comment['Comment']?>"</a><span style="font-size: 10pt;"> on <?= date("F j, Y, g:i a", strtotime($comment['Time'])-10800)?></span></h3>
@@ -43,10 +51,10 @@
 					</p>
 				</div>
 			</div>
-				<?php
-				}
+			<?php
 			}
-			?>
+		}
+		?>
 		</div>
 	</div>
 	

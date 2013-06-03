@@ -51,7 +51,7 @@ class Data_model extends CI_Model {
 
 	// ------------- METHODS FOR CLAIM VIEW -------------
 
-	//Returns all the relavent information about the claim and it's company,
+	//Returns all the relevant information about the claim and it's company,
 	//as well as the user who created it.
 	public function getClaim($claimID) {
 		$sql = "SELECT cl.ClaimID, cl.Link, cl.Title AS ClaimTitle, cl.Description, cl.Score AS ClaimScore, cl.UserID, cl.CompanyID, cl.Time AS ClaimTime, co.Name AS CoName, u.Name AS UserName
@@ -61,7 +61,8 @@ class Data_model extends CI_Model {
 				LEFT JOIN User u
 				ON cl.UserID = u.UserID
 				WHERE cl.ClaimID = $claimID";
-		return $this->db->query($sql)->row();
+		if ($this->db->query($sql)->result_array() != null)
+			return $this->db->query($sql)->result_array()[0];
 	}
 	
 	// Get all tags assocated with a specific claim
@@ -168,6 +169,14 @@ class Data_model extends CI_Model {
 		
 	// ------------- METHODS FOR TAG VIEW ---------------
 
+	// Just get the tag name
+	public function getTag($tagID) {
+		$sql = "SELECT *
+				FROM Tags
+				WHERE tagsID = $tagID";
+		return $this->db->query($sql)->result_array();
+	}
+
 	// Get all claims associated with a specific tag
 	public function getClaimsWithTag($tagID) {
 		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID as ClaimID, c.Title, c.Description, c.Score AS Score, c.numScores, co.CompanyID, co.Name AS CoName, co.Score AS CoScore, u.Name as userName, u.UserID
@@ -226,7 +235,8 @@ class Data_model extends CI_Model {
 	// Get user information
 	public function getUser($userID) {
 		$query = $this->db->get_where('User', array('UserID' => $userID));
-		return $query->row();
+		if ($query->result_array() != null)
+			return $query->result_array()[0];
 	}
 	
 	// Get user's submitted claims
