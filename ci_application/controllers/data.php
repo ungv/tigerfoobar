@@ -86,4 +86,23 @@ class Data extends CI_Controller {
 		}
 		return $result;
 	}
+	
+	/*------------------Treemap related ---------------------------*/
+	public function topCompaniesWithClaims() {
+		$claimJSON = $this->data_model->getTopCompaniesWithClaimsJSON();
+		$data['json'] = "{" . $claimJSON . "}";
+		$this->load->view('data/json_view', $data);
+	}
+	
+	public function claimsInRange() {
+		$claimJSON = $this->data_model->getJSON("claimsInRange", null);
+		$data['json'] = "{" . $claimJSON . "}";
+		$this->load->view('data/json_view', $data);
+	}
+
+	public function companiesInRange() {
+		$companyJSON = $this->data_model->getJSON("companiesInRange", null);
+		$data['json'] = "{" . $companyJSON . "}";
+		$this->load->view('data/json_view', $data);
+	}
 }

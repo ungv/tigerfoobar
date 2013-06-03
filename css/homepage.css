@@ -1,6 +1,6 @@
 #main ul {
 	float: left;
-	width: 960px;
+	/*width: 960px;*/
 	margin-top: 50px;
 }
 
@@ -96,7 +96,28 @@
 
 #treemapCanvas {
 	margin: auto;
-	margin-top: 50px;
+	margin-top: 30px;
+	margin-bottom: 60px;
+	font-family: Cambria, serif;
+}
+
+#treemapFilters {
+	width: 100%;
+	padding-left: 15px;
+}
+
+#treemapFilters  .button {
+	padding: 5px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	float: left;
+	cursor: pointer;
+	
+	border: 2px solid #7ed6d7;;
+}
+
+#treemapFilters  .button.active {
+	background-color: #7ed6d7;
 }
 
 .full {
