@@ -98,7 +98,7 @@ class Pages extends Root_Controller {
 
 			//files needed
 			$data['csFiles'] = array('general','ccStyles', 'tooltipster');
-			$data['jsFiles'] = array('general','ccScripts','score');
+			$data['jsFiles'] = array('general','ccScripts','addClaim','score');
 
 			$data['claimID'] = $claimID;
 			$data['claimInfo'] = $this->data_model->getClaim($claimID);
@@ -151,7 +151,7 @@ class Pages extends Root_Controller {
 			$data['pageType'] = 'company';
 
 			$data['csFiles'] = array('general','ccStyles','toggleview','tooltipster');
-			$data['jsFiles'] = array('general','ccScripts','score','toggleview');
+			$data['jsFiles'] = array('general','ccScripts','addClaim','score','toggleview');
 
 			//grab basic data
 			$companyData = $this->data_model->getCompany($companyID);
@@ -200,7 +200,7 @@ class Pages extends Root_Controller {
 			$data['pageType'] = 'tag';
 
 			$data['csFiles'] = array('general','tag','toggleview', 'tooltipster');
-			$data['jsFiles'] = array('general','tag','toggleview');
+			$data['jsFiles'] = array('general','tag','addClaim','toggleview');
 			
 			$data['tagName'] = $this->data_model->getTag($tagID);
 			$data['tagInfo'] = $this->data_model->getClaimsWithTag($tagID);
@@ -245,7 +245,7 @@ class Pages extends Root_Controller {
 		
 		//files needed
 		$data['csFiles'] = array('general','profile','toggleview', 'tooltipster');
-		$data['jsFiles'] = array('general','profile','toggleview');
+		$data['jsFiles'] = array('general','profile','addClaim','toggleview');
 
 		//grab basic data
 		$data['curProfile'] = $userID;
@@ -280,7 +280,7 @@ class Pages extends Root_Controller {
 		$data['pageType'] = 'About';
 
 		$data['csFiles'] = array('general','ccStyles','welcome');
-		$data['jsFiles'] = array('general','ccScripts');
+		$data['jsFiles'] = array('general','ccScripts','addClaim');
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
@@ -295,7 +295,7 @@ class Pages extends Root_Controller {
 		$data['pageType'] = 'Team';
 
 		$data['csFiles'] = array('general','ccStyles', 'team');
-		$data['jsFiles'] = array('general','ccScripts');
+		$data['jsFiles'] = array('general','ccScripts','addClaim');
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
@@ -309,7 +309,7 @@ class Pages extends Root_Controller {
 		$data['pageType'] = 'FAQ';
 
 		$data['csFiles'] = array('general','ccStyles', 'faq');
-		$data['jsFiles'] = array('general','ccScripts');
+		$data['jsFiles'] = array('general','ccScripts','addClaim');
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);

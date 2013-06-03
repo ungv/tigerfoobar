@@ -47,7 +47,7 @@
 		<?php if($isLogged) { ?>
 			<span id="login_buttons">
 				<a id="login_status" href="/profile/<?=$userid?>"><?= $username ?></a>
-				<a id="urlButton" href="#">add claim</a>
+				<a id="urlButton" href="#">+</a>
 				<a id="logout" href="/action/logout">logout</a>
 			</span>
 		<?php }else { ?>
