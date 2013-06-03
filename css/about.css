@@ -1,0 +1,9 @@
+#aboutPage h2 {
+	clear: both;
+}
+
+#aboutPage img {
+	width: 300px;
+	float: left;
+}
+

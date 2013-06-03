@@ -279,7 +279,7 @@ class Pages extends Root_Controller {
 		$data['headerTitle'] = 'About - PatchWork';
 		$data['pageType'] = 'About';
 
-		$data['csFiles'] = array('general','ccStyles','welcome');
+		$data['csFiles'] = array('general','ccStyles', 'about');
 		$data['jsFiles'] = array('general','ccScripts','addClaim');
 
 		$this->load->view('templates/header', $data);
