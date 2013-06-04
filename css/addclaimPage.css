@@ -22,7 +22,7 @@
 .right {
 	float: right;
 	border: 1px dashed green;
-	width: 500px;
+	width: 500px !important;
 	height: 600px;
 }
 

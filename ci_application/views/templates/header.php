@@ -15,14 +15,12 @@
 	<?php } ?>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="/css/tagit-awesome-blue.css">
-	<link rel="stylesheet" href="/css/tipsy.css">
 
 	<?php /*jQuery Scripts*/?>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
 	<script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="/js/additional-methods.min.js" type="text/javascript"></script>
-	<script src="/js/jquery.tipsy.js" type="text/javascript"></script>
 	<script src="/js/jquery.tooltipster.min.js" type="text/javascript"></script>
 	<script src="/js/tagit.js" type="text/javascript"></script>	
 	<script src="/js/highcharts.js" type="text/javascript"></script>	
