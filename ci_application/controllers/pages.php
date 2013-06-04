@@ -107,7 +107,7 @@ class Pages extends Root_Controller {
 			if ($data['claimInfo'] != null) {
 				$data['claimTags'] = $this->data_model->getClaimTags($claimID, $this->userid);
 			
-				$resultsArr = [];
+				$resultsArr = array();
 				$data['comments'] = $this->data_model->getDiscussion($claimID, 0, 0, $resultsArr, $this->userid);
 				$data['uniqueUsers'] = $this->data_model->getUniqueUsers($claimID);
 				$data['scores'] = $this->data_model->getClaimScores($claimID);

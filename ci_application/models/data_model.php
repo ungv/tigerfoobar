@@ -61,8 +61,9 @@ class Data_model extends CI_Model {
 				LEFT JOIN User u
 				ON cl.UserID = u.UserID
 				WHERE cl.ClaimID = $claimID";
-		if ($this->db->query($sql)->result_array() != null)
-			return $this->db->query($sql)->result_array()[0];
+		$results = $this->db->query($sql)->result_array();
+		if ($results != null)
+			return $results[0];
 	}
 	
 	// Get all tags assocated with a specific claim
@@ -262,8 +263,9 @@ class Data_model extends CI_Model {
 	// Get user information
 	public function getUser($userID) {
 		$query = $this->db->get_where('User', array('UserID' => $userID));
-		if ($query->result_array() != null)
-			return $query->result_array()[0];
+		$results = $query->result_array();
+		if ($results != null)
+			return $results[0];
 	}
 	
 	// Get user's submitted claims

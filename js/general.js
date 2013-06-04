@@ -62,38 +62,9 @@ $(document).ready(function() {
 		$('#login_username').focus();
 	});
 
-	//Ask server to login on click
-	$('#login_submit').click(function() {
-		$('#login_fail').hide(200);
-		sendLogin( $('#login_username').val() , $('#login_password').val() );
-	});
-
-	//Ask server to login on click
 	$('#login_cancel').click(function() {
 		hidePopups();
 	});
-
-	//Sends the passed login parameters to server onclick
-	function sendLogin(username, password) {
-		$.ajax({
-			type: 'POST',
-			url: '/action/login',
-			data: {
-				username: username,
-				password: password
-			},
-			dataType: 'json',
-			success: function(json) {
-				hidePopups();
-				window.location.reload();
-			},
-			error: function() {
-				$('#login_fail').show(200);
-				$('#login_password').val('');
-			}
-		});
-	}
-	
 
 	/*------Sigining Up------*/
 
@@ -262,14 +233,16 @@ function applyColors(thisVal, $element, styling, stylewith) {
 }
 
 //Sends the passed login parameters to server onclick
-//Reloads the current page
-function sendLogin(username, password) {
+function sendLogin() {
+	$('#login_fail').hide(200);
+	$username = $('#login_username').val();
+	$password = $('#login_password').val();
 	$.ajax({
 		type: 'POST',
-		url: 'http://127.0.0.1/action/login',
+		url: '/action/login',
 		data: {
-			username: username,
-			password: password
+			username: $username,
+			password: $password
 		},
 		dataType: 'json',
 		success: function(json) {

@@ -5,7 +5,8 @@ class Root_Controller extends CI_Controller {
     {
         parent::__construct();
         //Helpers
-		$this->load->helper('url');
+        $this->load->helper('url');
+		$this->load->helper('captcha');
 		$this->load->library('session');
         //checking login
         $data['userid'] = null;
