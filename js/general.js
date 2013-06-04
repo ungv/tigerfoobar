@@ -6,12 +6,6 @@
 var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#5cffae', '#31b373', '#106138'];
 
 $(document).ready(function() {
-	/*------------Welcome message stuff-----------------*/
-	$('#welcomeContainer').css('height', $('body').height());
-	$('#welcomeContainer').fadeIn(500);
-	$(window).click(function() {
-		$('#welcomeContainer').fadeOut(500);
-	});
 
 	/*--------FORM VALIDATION (DOCUMENTATION http://docs.jquery.com/Plugins/Validation)--------*/
 	// Call jQuery validate plugin that injects messages for required fields on form submit
