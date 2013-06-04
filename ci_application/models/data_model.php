@@ -280,7 +280,7 @@ class Data_model extends CI_Model {
 		$N = 10;
 		$M = 10;
 		
-		$sql = "Select cl.ClaimID as ClaimID, cl.Title, cl.Score as claimScore, cl.Description, cl.numScores, cl.description, cl.UserID, u.Name as userName, topCompanies.numClaims, topCompanies.Name, topCompanies.companyID, topCompanies.Score as companyScore
+		$sql = "Select cl.ClaimID as ClaimID, cl.Title, cl.Score as claimScore, cl.Description, cl.numScores, cl.description, cl.UserID, u.Name as userName, topCompanies.numClaims, topCompanies.Name as companyName, topCompanies.companyID, topCompanies.Score as companyScore
 			From Claim cl
 			Join
 				(Select * 
@@ -299,7 +299,7 @@ class Data_model extends CI_Model {
 	//Retrieves the all claims for a given company
 	public function getCompanyTopClaims($companyID) {
 		$N = 5;
-		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, cl.Description, co.Name, u.Name as userName, u.UserID
+		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, cl.Description, co.Name AS companyName, u.Name as userName, u.UserID
 				FROM Claim cl
 			    JOIN Company co
 				ON co.CompanyID = cl.CompanyID
@@ -312,11 +312,21 @@ class Data_model extends CI_Model {
 	}
 	
 	public function getClaimsInRange($rangeStart, $rangeEnd) {
-		$sql = "SELECT cl.*, u.Name as userName
+		$sql = "SELECT cl.*, u.Name as userName, co.numClaims AS Total, co.Name AS companyName, co.companyID, co.Score AS companyScore
 				FROM Claim cl
 				JOIN User u
 				ON cl.UserID = u.UserID
-				ORDER BY cl.Score
+				JOIN Company co
+				On cl.CompanyID = co.CompanyID
+				ORDER BY cl.numScores
+				Limit $rangeStart, $rangeEnd";
+		return $this->db->query($sql)->result_array();
+	}
+	
+	public function getCompaniesInRange($rangeStart, $rangeEnd) {
+		$sql = "SELECT co.numClaims, co.Name AS companyName, co.companyID, co.Score AS companyScore
+				FROM Company co
+				ORDER BY co.numClaims
 				Limit $rangeStart, $rangeEnd";
 		return $this->db->query($sql)->result_array();
 	}
@@ -333,19 +343,15 @@ class Data_model extends CI_Model {
 		$companyID = "";
 		
 		for ($i = 0; $i < count($topCompanies); $i++) {
-		
-			
-			//foreach($topClaims as $topClaim) {
-
-			if ($topCompanies[$i]["Name"] != $currCompany) {
-				$currCompany = $topCompanies[$i]["Name"];
+			if ($topCompanies[$i]["companyName"] != $currCompany) {
+				$currCompany = $topCompanies[$i]["companyName"];
 				$companyID = $topCompanies[$i]["companyID"];
-				$companiesWithClaims .= '{"name": "' . $topCompanies[$i]["Name"] . '", "children": [';
+				$companiesWithClaims .= '{"name": "' . $topCompanies[$i]["companyName"] . '", "children": [';
 			}
 			
 			$claims = '';
 			$rating = $topCompanies[$i]["companyScore"];			
-			while (($i < count($topCompanies)) && $topCompanies[$i]["Name"] == $currCompany) {
+			while (($i < count($topCompanies)) && $topCompanies[$i]["companyName"] == $currCompany) {
 				$title = str_replace("'","", $topCompanies[$i]["Title"]);
 				$size = str_replace("'","", $topCompanies[$i]["numScores"]);
 				$score = $topCompanies[$i]["claimScore"];
@@ -379,6 +385,7 @@ class Data_model extends CI_Model {
 		$rawData = null;
 		$name = "";
 		
+		//For each type of treemap, initialize variables a little bit differently
 		if ($type == "companyClaims") {
 			$rawData = $this->getCompanyClaims($entityID);
 			
@@ -409,7 +416,7 @@ class Data_model extends CI_Model {
 			if (isset($rawData[0])) {
 				$name = "all";
 			}
-		} else if ($type == "claimsInRange") {
+		} else if ($type == "companiesInRange") {
 			$rawData = $this->getCompaniesInRange(0, 100);
 			
 			if (isset($rawData[0])) {
@@ -423,16 +430,21 @@ class Data_model extends CI_Model {
 		$claims = "";
 		
 		for ($i = 0; $i < count($rawData); $i++) {
-				$title = str_replace("'","", $rawData[$i]["Title"]);
-				$claimID = $rawData[$i]["ClaimID"];
-				$score = $rawData[$i]["Score"];
-				$size = str_replace("'","", $rawData[$i]["numScores"]);	
-				$userName = $rawData[$i]["userName"];
-				$userID = $rawData[$i]["UserID"];
-				$claimDescription = str_replace('"', "", $rawData[$i]["Description"]);
-				
-				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "description" : "' . $claimDescription . '", "score" : "' . $score .'", "size" : ' . $size . ', "userName": "'. $userName .'", "userID" : "'. $userID .'"},';
-
+				if ($type == "companiesInRange") {
+					$companyName = $rawData[$i]["companyName"];
+					$companyID = $rawData[$i]["companyID"];
+					$score = $rawData[$i]["companyScore"];
+					$size = str_replace("'","", $rawData[$i]["numClaims"]);	
+					$claims .= '{"company" : "' . $companyName . '", "companyID" : "'. $companyID .'", "score" : "' . $score .'", "size" : ' . $size . '},';
+				} else {
+					$title = str_replace("'","", $rawData[$i]["Title"]);
+					$claimID = $rawData[$i]["ClaimID"];
+					$userName = $rawData[$i]["userName"];
+					$userID = $rawData[$i]["UserID"];
+					$size = str_replace("'","", $rawData[$i]["numScores"]);	
+					$claimDescription = str_replace('"', "", $rawData[$i]["Description"]);
+					$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "description" : "' . $claimDescription . '", "score" : "' . $score .'", "size" : ' . $size . ', "userName": "'. $userName .'", "userID" : "'. $userID .'"},';
+				}
 		}
 		
 		$claims = rtrim($claims, ",");

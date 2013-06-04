@@ -377,3 +377,7 @@ input[type=button], input[type=submit] {
 		margin:0px !important;
 		border:0px !important;
 	}
+/*-----------General treemap styles-----------*/
+	#treemapCanvas {
+		font-family: Cambria, serif;
+	}

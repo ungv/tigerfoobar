@@ -1,4 +1,14 @@
 <?php	
+	/* TODO 6/3/13
+	* Finish filters
+	* Position tooltips at the cursor position
+	* Enable /claim/ 
+		     /company/
+			 /tag/
+			 /profile/ (?)
+	   treemaps
+	*
+	*/
 	if (isset($pageType) && $pageType == "home") {
 ?>
 	<div id = "treemapFilters">
@@ -10,7 +20,7 @@
 			All Claims
 		</div>
 		
-		<div class = "button">
+		<div id = "showAllCompaniesButton" class = "button">
 			All Companies
 		</div>
 		
@@ -96,6 +106,7 @@
 			
 			$("#showAllClaimsButton").click(showAllClaims);
 			$("#claimsByCompanyButton").click(showTopCompaniesWithClaims);
+			$("#showAllCompaniesButton").click(showAllClaims);
 		}
 		
 		function generateTreemap(data) {
@@ -170,25 +181,27 @@
 			var companyNodes = treemap.nodes(root)
 			.filter(function (d) {return d.children});
 
-			var companyCellContainer = svg.append("svg:g")
-			.attr("class", "companyCellContainer");
-			
-			var companyCell = companyCellContainer.selectAll(".companyCellContainer")
-			.data(companyNodes)
-			.enter()
-			.append("svg:g")
-				.attr("class", "cell")
-				.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-			.append("svg:rect")
-				.attr("width", function(d) { return d.dx - 1;})
-				.attr("height", function(d) { return d.dy - 1;})
-				.attr("rx", "10")
-				.attr("ry", "10")
-				.style("fill-opacity", function(d) { return "0.0";}) //Fix
-				.style("stroke", function(d) {return "white";})
-				.style("stroke-width", function(d) {return "5";})
-				.style("pointer-events", "none");
-			$(".companyCellContainer>g:nth-child(1)").detach();
+			if (companyNodes.length > 1) {
+				var companyCellContainer = svg.append("svg:g")
+				.attr("class", "companyCellContainer");
+				
+				var companyCell = companyCellContainer.selectAll(".companyCellContainer")
+				.data(companyNodes)
+				.enter()
+				.append("svg:g")
+					.attr("class", "cell")
+					.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+				.append("svg:rect")
+					.attr("width", function(d) { return d.dx - 1;})
+					.attr("height", function(d) { return d.dy - 1;})
+					.attr("rx", "10")
+					.attr("ry", "10")
+					.style("fill-opacity", function(d) { return "0.0";}) //Fix
+					.style("stroke", function(d) {return "white";})
+					.style("stroke-width", function(d) {return "5";})
+					.style("pointer-events", "none");
+				$(".companyCellContainer>g:nth-child(1)").detach();
+			}
 			//End company borders
 			<?php
 			}
@@ -202,7 +215,7 @@
 		}
 		
 		function makeTooltips(selector) {
-		//Tooltips
+			//Tooltips
 			$(selector).tooltipster({
 				trigger: 'hover',
 				interactive: true,
@@ -250,6 +263,32 @@
 				position: 'bottom'
 			});
 		}
+				
+		function computeTitle(d) {
+			var html = ""
+			
+			if (typeof d.claimID !== 'undefined' && typeof d.name !== 'undefined') {
+				html += "<a href = '/claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
+			}
+			
+			if (typeof d.description !== 'undefined') {
+				html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
+			}	
+			<?php
+				if (isset($pageType) && $pageType == "home") {
+			  ?>
+				if (typeof d.companyID !== 'undefined' && typeof d.company !== 'undefined') {
+					html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
+				}
+			  <?php
+				}
+			?>
+			
+			if (typeof d.userID !== 'undefined' && typeof d.userName !== 'undefined') {
+				html += "<h5>Submitted by: <a href = '/profile/" + d.userID + "'>" + d.userName + "</a></h5>";
+			}
+			return html;
+		}
 		
 		function calculateFontSize(width, height, text) {
 				var maxSize = 50;
@@ -291,20 +330,6 @@
 		function count(d) {
 		  return 1;
 		}
-		
-		function computeTitle(d) {
-			var html = "<a href = '/claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
-			html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
-			<?php
-				if (isset($pageType) && $pageType == "home") {
-			  ?>
-				html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
-			  <?php
-				}
-			?>
-			html += "<h5>Submitted by: <a href = '/profile/" + d.userID + "'>" + d.userName + "</a></h5>";
-			return html;
-		}
 
 		function zoom(d, svg) {
 		  var kx = w / d.dx, ky = h / d.dy;
@@ -345,6 +370,18 @@
 			$(e.target).addClass("active");
 			
 			$.getJSON("/data/claimsInRange", function(result){
+				//Clear old treemap
+				$("#treemapCanvas").empty();
+
+				generateTreemap(result);
+			});
+		}
+		
+		function showAllClaims(e) {
+			$(".active").removeClass("active");
+			$(e.target).addClass("active");
+			
+			$.getJSON("/data/companiesInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
 
