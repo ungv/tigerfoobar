@@ -314,7 +314,7 @@ class Data_model extends CI_Model {
 	//Retrieves the all claims for a given company
 	public function getCompanyTopClaims($companyID) {
 		$N = 5;
-		$sql = "SELECT cl.Title, cl.Score as claimScore, cl.ClaimID, cl.Description, cl.numScores AS noRatings, co.numClaims AS Total, cl.Description, co.Name AS companyName, u.Name as userName, u.UserID
+		$sql = "SELECT cl.Title, cl.Score as claimScore, cl.ClaimID, cl.Description, cl.numScores, co.numClaims AS Total, cl.Description, co.Name AS companyName, u.Name as userName, u.UserID
 				FROM Claim cl
 			    JOIN Company co
 				ON co.CompanyID = cl.CompanyID
@@ -396,7 +396,7 @@ class Data_model extends CI_Model {
 	}
 	
 	//Gets claims for the given company
-	public function getJSON($type, $entityID) {
+	public function getJSON($type, $entityID) { 
 		$rawData = null;
 		$name = "";
 		
@@ -423,7 +423,7 @@ class Data_model extends CI_Model {
 			$rawData = $this->getCompanyTopClaims($entityID);
 			
 			if (isset($rawData[0])) {
-				$name = $rawData[0]["Name"];
+				$name = $rawData[0]["companyName"];
 			}
 		} else if ($type == "claimsInRange") {
 			$rawData = $this->getClaimsInRange(0, 100);

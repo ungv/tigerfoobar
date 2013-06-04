@@ -171,7 +171,13 @@
 				  .style("pointer-events", "auto")
 				  .on("mouseover", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "0.75");})
 				  .on("mouseout", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "1.0");})
-				  .on("click", function(d) {window.location.href = "/claim/" + d.claimID;});
+				  .on("click", function(d) {
+						if (typeof d.claimID !== 'undefined') { //The clicked item is a claim title
+							window.location.href = "/claim/" + d.claimID;
+						} else if (typeof d.companyID !== 'undefined') { //The clicked item is a company name
+							window.location.href = "/company/" + d.companyID;
+						}
+					});
 
 			makeTooltips("svg rect, svg div");
 			
@@ -226,21 +232,13 @@
 				functionReady: function(origin, tooltip) {
 					var scrollTop = $(window).scrollTop();
 					var scrollLeft = $(window).scrollLeft();
-					var target = origin;
-					var targetCell = $(target).closest(".cell")[0];
-					var targetCellRect = targetCell.getBoundingClientRect();
-					
-					var top = targetCellRect.top + targetCellRect.height + scrollTop;
-					var left = targetCellRect.left + targetCellRect.width/2 - $(tooltip).width()/2 + scrollLeft;
-					
-					//var top = mouseX;
-					//var left = mouseY;
-					
+					var top = scrollTop + mouseY;
+					var left = scrollLeft + mouseX - $(tooltip).width()/2;
+
 					var rotation = 0;
 					
 					if (top + $(tooltip).height() > ($(window).height() - 50)) {
-						top = targetCellRect.top - $(tooltip).height() - 10 + scrollTop;
-						rotation = 180;
+						top = top - $(tooltip).height();
 					}
 					
 					if (left < 0) {
@@ -250,15 +248,7 @@
 					$(tooltip).css({
 						"top": top + "px",
 						"left": left + "px",
-						"transform" : "rotate(" + rotation +"deg)"
 					});
-					
-					$(".tooltipster-content").css({
-						"transform" : "rotate(" + rotation +"deg)"
-					});
-					
-					$(this).position = "top";
-					//$(".tooltipster-base").show();
 				},
 				position: 'bottom'
 			});

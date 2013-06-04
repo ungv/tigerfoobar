@@ -151,7 +151,7 @@ class Pages extends Root_Controller {
 			$data['companyClaimsNeg'] = $this->data_model->getCompanyClaimsNeg($companyID);
 			$data['companyTags'] = $this->data_model->getCompanyTags($companyID, $this->userid);
 			$data['scoreHistory'] = $this->data_model->getCompanyScoreHistoryJSON($companyID);
-			$data['treemapJSON'] = $this->data_model->getJSON("companyClaims",$companyID);
+			$data['treemapJSON'] = $this->data_model->getJSON("companyTopClaims", $companyID);
 			
 			$data['headerTitle'] = 'View Company - PatchWork';
 			$data['pageType'] = 'company';
