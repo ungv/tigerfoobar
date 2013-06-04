@@ -311,6 +311,15 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 	
+	public function getUserClaimsForTreemap($userID) {
+		$sql = "SELECT u.Name as userName, u.UserID, c.Description, c.ClaimID, c.Score as claimScore, c.Title, c.numScores
+				FROM User u
+				LEFT JOIN Claim c
+				ON c.UserID = u.UserID
+				WHERE u.UserID = $userID";
+		return $this->db->query($sql)->result_array();
+	}
+	
 	//Retrieves the all claims for a given company
 	public function getCompanyTopClaims($companyID) {
 		$N = 5;
@@ -414,7 +423,7 @@ class Data_model extends CI_Model {
 				$name = $rawData[0]["Name"];
 			}
 		} else if ($type == "userClaims") {
-			$rawData = $this->getUserClaims($entityID);
+			$rawData = $this->getUserClaimsForTreemap($entityID);
 			
 			if (isset($rawData[0])) {
 				$name = $rawData[0]["userName"];
