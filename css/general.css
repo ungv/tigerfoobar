@@ -22,10 +22,10 @@ body{
 
 .lightsout {
 	position: absolute;
-	top: 0;
+	top: 54px;
 	left: 0;
 	width: 100%;
-	z-index: 100;
+	z-index: 90;
 	background-color: rgba(235, 231, 183, 0.7);
 	opacity: 0.7;
 	display: none;

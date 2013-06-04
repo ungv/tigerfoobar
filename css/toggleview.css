@@ -1,6 +1,6 @@
 /*Toggle------------------------*/
 	#toggleviewContainer {
-		margin-bottom: 50px !important;
+		height: 40px;
 	}
 
 	#toggleviewContainer div:first-child {

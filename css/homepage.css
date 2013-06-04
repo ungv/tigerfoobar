@@ -1,12 +1,12 @@
 #main ul {
 	float: left;
 	/*width: 960px;*/
-	margin-top: 50px;
+	/*margin-top: 50px;*/ /*gave a lot of white space above tags boxes in add claim box*/
 }
 
 #main li {
 	width: 150px;
-	height: 90px;
+	/*height: 90px;*/ /*made tags boxes too tall in add claim box*/
 	border: 1px;
 	padding: 2px;
 	opacity: 0.8;
@@ -32,7 +32,7 @@
 }
 
 #urlButton, #urlInput {
-	position: absolute;
+	/*position: absolute;*/ /*made add claim button hide behind logout*/ 
 }
 
 #urlButton {

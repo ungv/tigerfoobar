@@ -1,27 +1,7 @@
 	
-	<!-- User submissions -->
-	<div id="listview">
-		<div id="submissions">
-			<?php
-			// If the user has not submitted anything before, display message
-			if (empty($userClaims[0]['ClaimID'])) {
-			?>
-				<p>You haven't submitted any content yet! Get started with the button at the top!</p>
-			<?php
-			} else {
-			?>
-			<ul>
-				<?php
-				foreach ($userClaims as $claim) {
-				?>
-				<li id="<?=$claim['Score']?>"><a href="/claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a></li>
-				<?php
-				}
-			}
-			?>
-			</ul>
-		</div>
-	</div>
+	<?php
+	// User submissions come from tag.php
+	?>
 	
 	<!-- User comments -->
 	<div id="comments" class="container">

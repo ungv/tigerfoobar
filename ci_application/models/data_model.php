@@ -268,11 +268,14 @@ class Data_model extends CI_Model {
 	
 	// Get user's submitted claims
 	public function getUserClaims($userID) {
-		$sql = "SELECT u.Name as userName, u.UserID, c.Description, c.ClaimID, c.Score, c.Title, c.numScores
+		$sql = "SELECT u.Name as userName, u.UserID, c.Description, c.ClaimID, c.CompanyID, co.Name as CoName, c.Score, c.Title, c.numScores
 				FROM User u
 				LEFT JOIN Claim c
 				ON c.UserID = u.UserID
-				WHERE u.UserID = $userID";
+				JOIN Company co
+				ON c.CompanyID = co.CompanyID
+				WHERE u.UserID = $userID
+				ORDER BY c.Time DESC";
 		return $this->db->query($sql)->result_array();
 	}	
 	

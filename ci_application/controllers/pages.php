@@ -203,7 +203,7 @@ class Pages extends Root_Controller {
 			$data['jsFiles'] = array('general','tag','addClaim','toggleview');
 			
 			$data['tagName'] = $this->data_model->getTag($tagID);
-			$data['tagInfo'] = $this->data_model->getClaimsWithTag($tagID);
+			$data['listofclaims'] = $this->data_model->getClaimsWithTag($tagID);
 			//$data['treemapJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
 			$data['treemapJSON'] = $this->data_model->getJSON("claimsWithTag",$tagID);
 			
@@ -212,7 +212,7 @@ class Pages extends Root_Controller {
 			$this->load->view('pages/tagTitle', $data);
 
 			// only load full page when this tag has been found and there are claims with this tag
-			if ($data['tagInfo'] != null) {
+			if ($data['listofclaims'] != null) {
 				$this->load->view('pages/toggleview', $data);
 				$this->load->view('pages/tag', $data);
 				$this->load->view('pages/treemap', $data);
@@ -244,8 +244,8 @@ class Pages extends Root_Controller {
 		$data['pageType'] = 'profile';
 		
 		//files needed
-		$data['csFiles'] = array('general','profile','toggleview', 'tooltipster');
-		$data['jsFiles'] = array('general','profile','addClaim','toggleview');
+		$data['csFiles'] = array('general','profile','toggleview', 'tooltipster','tag');
+		$data['jsFiles'] = array('general','profile','addClaim','toggleview','tag');
 
 		//grab basic data
 		$data['curProfile'] = $userID;
@@ -253,7 +253,7 @@ class Pages extends Root_Controller {
 		
 		// only load full page when this user has been found
 		if ($data['userInfo'] != null) {
-			$data['userClaims'] = $this->data_model->getUserClaims($userID);
+			$data['listofclaims'] = $this->data_model->getUserClaims($userID);
 			$data['userComments'] = $this->data_model->getUserComments($userID);
 			$data['userVotes'] = $this->data_model->getUserVotes($userID);
 			$data['headerTitle'] = 'User Profile - Patchwork';
@@ -265,6 +265,7 @@ class Pages extends Root_Controller {
 			$this->load->view('pages/profileTitle', $data);
 			$this->load->view('pages/toggleview', $data);
 			$this->load->view('pages/treemap', $data);
+			$this->load->view('pages/tag', $data);
 			$this->load->view('pages/profile', $data);
 		} else {
 			$this->load->view('templates/header', $data);

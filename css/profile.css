@@ -25,6 +25,7 @@ li {
 #user h1 {
 	float: left;
 	margin-top: 0;
+	width: 0px;
 }
 
 #user p {
@@ -44,31 +45,7 @@ li {
 	font-size: 16pt;
 }
 
-/* Submissions section styles */
-#submissions li {
-	width: 110px;
-	height: 90px;
-	border: 1px;
-	padding: 2px;
-	opacity: 0.8;
-	float: left;
-}
-
-#submissions li:hover {
-	opacity: 1;
-}
-
-/* Votes section styles */
-.threadContainer {
-	background-color: #E7E7E7;
-	padding: 10px;
-	margin-top: 10px;
-}
-
-#votes li {
-	margin: 5px 0 10px 10px;
-}
-
+/*------Comments section styles---------*/
 .votedComment {
 	font-size: 14pt;
 	margin-left: 10px;
@@ -88,4 +65,15 @@ li {
 
 .topBorder {
 	border-top: 2px solid darkgray;
+}
+
+/*------Votes section styles---------*/
+.threadContainer {
+	background-color: #E7E7E7;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+#votes li {
+	margin: 5px 0 10px 10px;
 }
