@@ -383,10 +383,10 @@ $(document).ready(function() {
 			$('#taglist').append(newLink);
 			$("#newtag_name").val(""); //clear textbox
 			//call current vote method, triger click
-			$(newLink.children().children('.tagUpvote')[0]).click(function() {
+			$(newLink.find('.tagUpvote')[0]).click(function() {
 				sendTagUpvote($(this));
 			});
-			$(newLink.children().children('.tagUpvote')[0]).click();
+			$(newLink.find('.tagUpvote')[0]).click();
 		}
 		//pulse green at end
 	}
