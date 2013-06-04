@@ -370,21 +370,23 @@ $(document).ready(function() {
 		}else {
 			var tagtype = $('#taglist').attr('tagtype');
 			var newLink = $('<li>', {
-				"html": '	<span class="tagName"><a href="/tag/'+id+'">' + name + '</a></span>' +
+				"html": '	<div class="fancyTags notVoted">' +
+						'	<span class="tagName"><a href="/tag/'+id+'">' + name + '</a></span>' +
 						'	<span>(</span> ' +
 						'		<span class="tagTotal">0</span>' +
 						'	<span>)</span>' +
 						'	<span class="tagUpvote" tagtype="' + tagtype + '" tagid="'+ id + '" objectid="'+ $('#taglist').attr('objectid') +'" voted="0">' +
-						'		+  ' +
-						'	</span>'
+						'	&nbsp;' +
+						'	</span>' +
+						'	</div>'
 			});
 			$('#taglist').append(newLink);
 			$("#newtag_name").val(""); //clear textbox
 			//call current vote method, triger click
-			$(newLink.children('.tagUpvote')[0]).click(function() {
+			$(newLink.children().children('.tagUpvote')[0]).click(function() {
 				sendTagUpvote($(this));
 			});
-			$(newLink.children('.tagUpvote')[0]).click();
+			$(newLink.children().children('.tagUpvote')[0]).click();
 		}
 		//pulse green at end
 	}
