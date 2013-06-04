@@ -5,7 +5,6 @@
 	*/
 ?>
 
-<div id="welcomeContainer">
 	<section id="welcomeMessage">
 		<button id="xbutton">X</button>
 		<div id="callToArms">
@@ -38,7 +37,6 @@
 			?>
 		</div>
 		<div id="welcomeButtons">
-			<button>Explore now</button>
+			<button class="submitButton">Explore now</button>
 		</div>
 	</section>
-</div>

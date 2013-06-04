@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	/*------------Welcome message stuff-----------------*/
-	$('#welcomeContainer').css('height', $('body').height());
-	$('#welcomeContainer').fadeIn(500);
+	$('.lightsout').fadeIn(400);
 	$(window).click(function() {
-		$('#welcomeContainer').fadeOut(500);
+		$('.lightsout').fadeOut(500);
+		$('#welcomeMessage').fadeOut(500);
 	});
 });
