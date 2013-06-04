@@ -296,29 +296,44 @@ class Data_model extends CI_Model {
 		*/
 	}
 	
+	public function getClaimsWithTagForTreemap($tagID) {
+		$sql = "SELECT DISTINCT t.Name, ct.Claim_ClaimID as ClaimID, c.Title, c.Description, c.Score AS claimScore, c.numScores, co.CompanyID, co.Name AS companyName, co.Score AS companyScore, u.Name as userName, u.UserID
+				FROM Tags t
+				LEFT JOIN Claim_has_Tags ct
+				ON t.TagsID = ct.Tags_TagsID
+				LEFT JOIN Claim c
+				ON ct.Claim_ClaimID = c.ClaimID
+                LEFT JOIN Company co
+                ON c.CompanyID = co.CompanyID
+				JOIN User u
+				On c.UserID = u.UserID
+				WHERE t.tagsID = $tagID";
+		return $this->db->query($sql)->result_array();
+	}
+	
 	//Retrieves the all claims for a given company
 	public function getCompanyTopClaims($companyID) {
 		$N = 5;
-		$sql = "SELECT cl.*, cl.numScores AS noRatings, co.numClaims AS Total, cl.Description, co.Name AS companyName, u.Name as userName, u.UserID
+		$sql = "SELECT cl.Title, cl.Score as claimScore, cl.ClaimID, cl.Description, cl.numScores AS noRatings, co.numClaims AS Total, cl.Description, co.Name AS companyName, u.Name as userName, u.UserID
 				FROM Claim cl
 			    JOIN Company co
 				ON co.CompanyID = cl.CompanyID
 				Join User u
 				On cl.UserID = u.UserID
 				WHERE co.CompanyID = $companyID
-				ORDER BY cl.Score
+				ORDER BY cl.Score DESC
 				Limit 0, $N";
 		return $this->db->query($sql)->result_array();
 	}
 	
 	public function getClaimsInRange($rangeStart, $rangeEnd) {
-		$sql = "SELECT cl.*, u.Name as userName, co.numClaims AS Total, co.Name AS companyName, co.companyID, co.Score AS companyScore
+		$sql = "SELECT cl.Title, cl.Score as claimScore, cl.ClaimID, cl.Description, cl.UserID, cl.numScores, u.Name as userName, co.numClaims AS Total, co.Name AS companyName, co.companyID, co.Score AS companyScore
 				FROM Claim cl
 				JOIN User u
 				ON cl.UserID = u.UserID
 				JOIN Company co
 				On cl.CompanyID = co.CompanyID
-				ORDER BY cl.numScores
+				ORDER BY cl.numScores DESC
 				Limit $rangeStart, $rangeEnd";
 		return $this->db->query($sql)->result_array();
 	}
@@ -326,7 +341,7 @@ class Data_model extends CI_Model {
 	public function getCompaniesInRange($rangeStart, $rangeEnd) {
 		$sql = "SELECT co.numClaims, co.Name AS companyName, co.companyID, co.Score AS companyScore
 				FROM Company co
-				ORDER BY co.numClaims
+				ORDER BY co.numClaims DESC
 				Limit $rangeStart, $rangeEnd";
 		return $this->db->query($sql)->result_array();
 	}
@@ -393,7 +408,7 @@ class Data_model extends CI_Model {
 				$name = $rawData[0]["Title"];
 			}
 		} else if ($type == "claimsWithTag") {
-			$rawData = $this->getClaimsWithTag($entityID);
+			$rawData = $this->getClaimsWithTagForTreemap($entityID);
 			
 			if (isset($rawData[0])) {
 				$name = $rawData[0]["Name"];
@@ -434,14 +449,17 @@ class Data_model extends CI_Model {
 					$companyName = $rawData[$i]["companyName"];
 					$companyID = $rawData[$i]["companyID"];
 					$score = $rawData[$i]["companyScore"];
-					$size = str_replace("'","", $rawData[$i]["numClaims"]);	
-					$claims .= '{"company" : "' . $companyName . '", "companyID" : "'. $companyID .'", "score" : "' . $score .'", "size" : ' . $size . '},';
+					$size = $rawData[$i]["numClaims"];
+					
+					$claims .= '{"name" : "' . $companyName . '", "company" : "' . $companyName . '", "companyID" : "'. $companyID .'", "score" : "' . $score .'", "size" : ' . $size . '},';
 				} else {
 					$title = str_replace("'","", $rawData[$i]["Title"]);
 					$claimID = $rawData[$i]["ClaimID"];
+					$score = $rawData[$i]["claimScore"];
 					$userName = $rawData[$i]["userName"];
 					$userID = $rawData[$i]["UserID"];
-					$size = str_replace("'","", $rawData[$i]["numScores"]);	
+					$size = $rawData[$i]["numScores"];
+					
 					$claimDescription = str_replace('"', "", $rawData[$i]["Description"]);
 					$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "description" : "' . $claimDescription . '", "score" : "' . $score .'", "size" : ' . $size . ', "userName": "'. $userName .'", "userID" : "'. $userID .'"},';
 				}

@@ -106,7 +106,7 @@
 			
 			$("#showAllClaimsButton").click(showAllClaims);
 			$("#claimsByCompanyButton").click(showTopCompaniesWithClaims);
-			$("#showAllCompaniesButton").click(showAllClaims);
+			$("#showAllCompaniesButton").click(showAllCompanies);
 		}
 		
 		function generateTreemap(data) {
@@ -114,7 +114,7 @@
 				.round(true)
 				.size([w, h])
 				.sticky(true)
-				.value(function(d) { return d.size; });
+				.value(function(d) { return d.size>0? d.size : 0; });
 
 			var svg = d3.select("#treemapCanvas")
 				.attr("class", "chart")
@@ -142,8 +142,8 @@
 				.attr("stroke-width", function (d) {return borderWidth;})*/
 			
 			claimCell.append("svg:rect")
-			  .attr("width", function(d) { return d.dx - borderWidth;})
-			  .attr("height", function(d) { return d.dy - borderWidth;})
+			  .attr("width", function(d) { return (d.dx - borderWidth) >= 0? (d.dx - borderWidth) : 0;})
+			  .attr("height", function(d) { return (d.dy - borderWidth) >= 0? (d.dy - borderWidth) : 0;})
 			  .attr("title", function(d) {return computeTitle(d);})
 			  .attr("rx", "10")
 			  .attr("ry", "10")
@@ -377,7 +377,7 @@
 			});
 		}
 		
-		function showAllClaims(e) {
+		function showAllCompanies(e) {
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
