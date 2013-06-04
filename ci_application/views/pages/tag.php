@@ -1,6 +1,14 @@
-
+<?php
+if (count($userComments) < 5) {
+?>
 	<div id="listview">
-		<?php
+<?php
+} else {
+?>
+	<div class="scrollBox">
+<?php
+}
+
 		// If the user has not submitted anything before, display message
 		if ($pageType == 'profile' && empty($listofclaims[0]['ClaimID'])) {
 		?>
