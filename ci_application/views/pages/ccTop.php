@@ -17,19 +17,15 @@
 							<?php
 							foreach ($list AS $tag) {
 							?>
-									<li<?php if($tag['uservoted']) { ?> class="userVoted" <?php } ?>>
+								<li>
+									<div class="fancyTags <?= $tag['uservoted'] ? 'userVoted' : 'notVoted' ?>">
 										<span class="tagName"><a href="/tag/<?=$tag['TagsID']?>"><?=$tag['Name']?></a></span>
 										<span>(</span>
 											<span class="tagTotal"><?=$tag['votes']?></span>
 										<span>)</span>
-										<span class="tagUpvote" tagtype="<?=$tagtype?>" tagid="<?=$tag['TagsID']?>" objectid="<?=$objectid?>" voted="<?=$tag['uservoted']?>" title='Approve tag'>
-											<?php if($tag['uservoted']) { ?>
-													-
-											<?php }else { ?>
-													+
-											<?php } ?>
-										</span>
-									</li>
+										<span class="tagUpvote" tagtype="<?=$tagtype?>" tagid="<?=$tag['TagsID']?>" objectid="<?=$objectid?>" voted="<?=$tag['uservoted']?>" title="<?=$tag['uservoted'] ? 'Disapprove tag' : 'Approve tag'?>"> &nbsp; </span>
+									</div>
+								</li>
 							<?php } ?>
 						</ul>
 					</dd>

@@ -210,15 +210,13 @@ $(document).ready(function() {
 		//Dom changes
 		var oldVotes = parseInt($(clicked.parent().children(".tagTotal")[0]).text());
 		if(!voted) {		//just voted, add vote
-			clicked.text('-');
 			clicked.attr('voted','1');
 			oldVotes ++;
-			clicked.parent().addClass('userVoted');
+			clicked.parent().removeClass('notVoted').addClass('userVoted');
 		}else {				//just unvoted, remove vote
-			clicked.text('+');
 			clicked.attr('voted','0');
 			oldVotes --;
-			clicked.parent().removeClass('userVoted');
+			clicked.parent().removeClass('userVoted').addClass('notVoted');
 		}
 		$(clicked.parent().children(".tagTotal")[0]).text(oldVotes);
 		$.ajax({
