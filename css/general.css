@@ -62,6 +62,7 @@ h1, h2, h3 {
 }
 
 h5 {
+	margin-top: 5px;
 	display: inline-block;
 }
 
@@ -378,6 +379,19 @@ input[type=button], input[type=submit] {
 		border:0px !important;
 	}
 /*-----------General treemap styles-----------*/
-	#treemapCanvas {
-		font-family: Cambria, serif;
-	}
+#treemapCanvas {
+	font-family: Cambria, serif;
+}
+
+#treemapCanvas .textWrapper{
+	overflow: hidden;
+}
+
+.tooltipster-content{
+	text-align: left !important;
+
+}
+
+
+	
+	

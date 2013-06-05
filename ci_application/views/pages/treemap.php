@@ -9,22 +9,26 @@
 	   treemaps
 	*
 	*/
-	if (isset($pageType) && $pageType == "home") {
+
+		$claimsByCompanyButtonClass = ($pageType == "home") ? "button active" : "button";
+		$showTopClaimsButtonClass = ($pageType == "claimBrowse") ? "button active" : "button";
+		$showTopCompaniesButtonClass = ($pageType == "companyBrowse") ? "button active" : "button";
+		$showTopTagsButtonClass = ($pageType == "tagBrowse") ? "button active" : "button";
 ?>
 	<div id = "treemapFilters">
-		<div id = "claimsByCompanyButton" class = "button active">
+		<div id = "claimsByCompanyButton" class = "<?=$claimsByCompanyButtonClass?>">
 			Claims by Company
 		</div>
 		
-		<div id = "showTopClaimsButton" class = "button">
+		<div id = "showTopClaimsButton" class = "<?=$showTopClaimsButtonClass?>">
 			Top Claims
 		</div>
 		
-		<div id = "showTopCompaniesButton" class = "button">
+		<div id = "showTopCompaniesButton" class = "<?=$showTopCompaniesButtonClass?>">
 			Top Companies
 		</div>
 		
-		<div class = "button">
+		<div id = "showTopTagsButton"  class = "<?=$showTopTagsButtonClass?>">
 			Top Tags
 		</div>
 	</div>
@@ -42,7 +46,7 @@
 		</div>
 	</div>
 <?php
-	}
+	
 ?>
 
 <!-- Start treemap -->
@@ -53,7 +57,7 @@
 <script type="text/javascript">
 	$(function () {
 		<?php
-		if (isset($pageType) && $pageType == "home") {
+		if (isset($pageType) && ($pageType == "home" || $pageType == "claimBrowse" || $pageType == "companyBrowse" || $pageType == "tagBrowse")) {
 		?>
 			var availVisibleHeight = $(window).height()+100 - $("#treemapCanvas").offset().top - $("footer").height() - 40;
 			var treemapHeight = (availVisibleHeight >= 500) ? availVisibleHeight : 500;
@@ -65,11 +69,10 @@
 		?>
 			var treemapHeight = 500;
 			var treemapWidth = $("#main").width();
-		<?php
-		} else if (isset($pageType) && $pageType == "claim") {
-		?>
-			var treemapHeight = 100;
-			var treemapWidth = 410;
+			
+			//Very kludgy. TODO: save data in variables, not DOM elements
+			$("#treemapFilters").hide();
+		
 		<?php	
 		}
 		?>
@@ -99,14 +102,18 @@
 		generateTreemap(jsonDataObj);
 	
 		function initializeEvents() {
+			//Initialize function to track mouse location
 			$(document).mousemove(function(e) {
 				mouseX = e.clientX;
 				mouseY = e.clientY;
 			}).mouseover();
 			
+			//Initialize treemap filters
 			$("#showTopClaimsButton").click(showTopClaims);
 			$("#claimsByCompanyButton").click(showTopCompaniesWithClaims);
 			$("#showTopCompaniesButton").click(showTopCompanies);
+			
+			$("*:not(#treemapCanvas)").click(clearTooltips);
 		}
 		
 		function generateTreemap(data) {
@@ -158,11 +165,12 @@
 			  .attr("y", function(d) { return padding})
 			  .attr("width", function(d) {return d.dx - padding})
 			  .attr("height", function(d) {return d.dy - padding})
-			  //.attr("title", function(d) {return computeTitle(d);})
+			  .attr("class", "textOuterWrapper")
 			  .style("pointer-events", "none")
 			  .append("xhtml:div")
 				  .attr("dy", ".35em")
 				  .attr("title", function(d) {return computeTitle(d);})
+				  .attr("class", "textInnerWrapper")
 				  .html(function(d) {return ((d.name.length < 100) ? d.name : (d.name.substring(0,100)+'...'));})
 				  .style("font-size", function(d) {return calculateFontSize(d.dx - 2*padding, d.dy - 2*padding, $(this).html());})
 				  .style("width", function(d) {return d.dx - padding})
@@ -181,7 +189,7 @@
 
 			makeTooltips("svg rect, svg div");
 			
-			<?php if (isset($pageType) && $pageType == "home") {
+			<?php if (isset($pageType) && ($pageType == "home" || $pageType == "claimBrowse" || $pageType == "companyBrowse" || $pageType == "tagBrowse")) {
 			?>
 			//Add company borders
 			var companyNodes = treemap.nodes(root)
@@ -208,16 +216,15 @@
 					.style("pointer-events", "none");
 				$(".companyCellContainer>g:nth-child(1)").detach();
 			}
-			//End company borders
 			<?php
 			}
 			?>
 			
-			d3.select(window).on("click", function() { zoom(root, svg); });
-			d3.select("select").on("change", function() {
+			//d3.select(window).on("click", function() { zoom(root, svg); });
+			/*d3.select("select").on("change", function() {
 				treemap.value(this.value == "size" ? size : count).nodes(root);
 				zoom(node, svg);
-			});
+			});*/
 		}
 		
 		function makeTooltips(selector) {
@@ -228,30 +235,39 @@
 				interactiveTolerance: 10000,
 				onlyOne: true,
 				maxWidth: 400,
-				timer: 20000,
+				delay: 700,
 				functionReady: function(origin, tooltip) {
 					var scrollTop = $(window).scrollTop();
 					var scrollLeft = $(window).scrollLeft();
-					var top = scrollTop + mouseY;
+					var top = scrollTop + mouseY - $(tooltip).height() - 10;
 					var left = scrollLeft + mouseX - $(tooltip).width()/2;
 
-					var rotation = 0;
-					
-					if (top + $(tooltip).height() > ($(window).height() - 50)) {
-						top = top - $(tooltip).height();
+					if (top - $(tooltip).height() < 0) {
+						//top = top + $(tooltip).height();
 					}
 					
 					if (left < 0) {
 						left = 0;
 					}
 					
+					if (left + $(tooltip).width() > $(window).width()) {
+						left = $(window).width() - tooltip.outerWidth();
+						//left = left - (left + tooltip.width() - $(window).width());
+					}
+					
 					$(tooltip).css({
 						"top": top + "px",
-						"left": left + "px",
+						"left": left + "px"
 					});
+					
+					$(".tooltipster-arrow").hide();
 				},
-				position: 'bottom'
+				position: 'top'
 			});
+		}
+		
+		function clearTooltips() {
+			$(".tooltipster-base").detach();
 		}
 				
 		function computeTitle(d) {
@@ -263,16 +279,21 @@
 			
 			if (typeof d.description !== 'undefined') {
 				html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
-			}	
-			<?php
-				if (isset($pageType) && $pageType == "home") {
-			  ?>
-				if (typeof d.companyID !== 'undefined' && typeof d.company !== 'undefined') {
-					html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
-				}
-			  <?php
-				}
-			?>
+			}
+
+			if ($("#claimsByCompanyButton").hasClass("active") || $("#showTopClaimsButton").hasClass("active")) {
+				html+="<h5>Total number of votes:</h5> " + d.size + "<br />";
+				html+="<h5>Average score:</h5> " + d.score + "<br />";
+			}
+
+			if (typeof d.companyID !== 'undefined' && typeof d.company !== 'undefined') {
+				html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
+			}
+			
+			if ($(showTopCompaniesButton).hasClass("active")) {
+				html+="<h5>Total number of claims:</h5> " + d.size + "<br />";
+				html+="<h5>Average score:</h5> " + d.score + "<br />";
+			}
 			
 			if (typeof d.userID !== 'undefined' && typeof d.userName !== 'undefined') {
 				html += "<h5>Submitted by: <a href = '/profile/" + d.userID + "'>" + d.userName + "</a></h5>";
@@ -339,6 +360,15 @@
 			  .attr("y", function(d) { return ky * padding;})
 			  .style("opacity", function(d) { return kx * d.dx > d.w ? 1 : 0; });
 
+		  //Resize text box
+		  var textWrapper = t.select(".textOuterWrapper")
+			  .attr("width", function(d) { return kx * d.dx - padding; })
+			  .attr("height", function(d) { return ky * d.dy - padding; })
+
+		  //Resize text
+		  textWrapper.select(".textInnerWrapper")
+			  .style("font-size", function(d) {return calculateFontSize(kx * d.dx - 2*padding, ky * d.dy - 2*padding, $(this).html());});
+			
 		  node = d;
 		  d3.event.stopPropagation();
 		}

@@ -355,6 +355,14 @@ class Data_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 	
+	public function getTagsInRange($rangeStart, $rangeEnd) {
+		$sql = "SELECT co.numClaims, co.Name AS companyName, co.companyID, co.Score AS companyScore
+				FROM Company co
+				ORDER BY co.numClaims DESC
+				Limit $rangeStart, $rangeEnd";
+		return $this->db->query($sql)->result_array();
+	}
+	
 	//Gets data for the top companies along with their claims and formats them as JSON to be used in a treemap view
 	public function getTopCompaniesWithClaimsJSON() {
 
@@ -438,13 +446,19 @@ class Data_model extends CI_Model {
 			$rawData = $this->getClaimsInRange(0, 100);
 			
 			if (isset($rawData[0])) {
-				$name = "all";
+				$name = "top claims";
 			}
 		} else if ($type == "companiesInRange") {
 			$rawData = $this->getCompaniesInRange(0, 100);
 			
 			if (isset($rawData[0])) {
-				$name = "all companies";
+				$name = "top companies";
+			}
+		} else if ($type == "tagsInRange") {
+			$rawData = $this->getTagsInRange(0, 100);
+			
+			if (isset($rawData[0])) {
+				$name = "top tags";
 			}
 		}
 		
