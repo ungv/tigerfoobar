@@ -16,16 +16,16 @@
 			Claims by Company
 		</div>
 		
-		<div id = "showAllClaimsButton" class = "button">
-			All Claims
+		<div id = "showTopClaimsButton" class = "button">
+			Top Claims
 		</div>
 		
-		<div id = "showAllCompaniesButton" class = "button">
-			All Companies
+		<div id = "showTopCompaniesButton" class = "button">
+			Top Companies
 		</div>
 		
 		<div class = "button">
-			All Tags
+			Top Tags
 		</div>
 	</div>
 	
@@ -104,9 +104,9 @@
 				mouseY = e.clientY;
 			}).mouseover();
 			
-			$("#showAllClaimsButton").click(showAllClaims);
+			$("#showTopClaimsButton").click(showTopClaims);
 			$("#claimsByCompanyButton").click(showTopCompaniesWithClaims);
-			$("#showAllCompaniesButton").click(showAllCompanies);
+			$("#showTopCompaniesButton").click(showTopCompanies);
 		}
 		
 		function generateTreemap(data) {
@@ -355,7 +355,7 @@
 			});
 		}
 		
-		function showAllClaims(e) {
+		function showTopClaims(e) {
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
@@ -367,7 +367,7 @@
 			});
 		}
 		
-		function showAllCompanies(e) {
+		function showTopCompanies(e) {
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
