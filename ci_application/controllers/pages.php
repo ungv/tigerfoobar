@@ -98,6 +98,11 @@ class Pages extends Root_Controller {
 			$data['pageType'] = 'claimBrowse';
 			
 			$this->load->view('templates/header', $data);
+			if ($claimID != -1) {
+				$this->load->view('pages/mainTop', $data);
+				$this->load->view('pages/notfound', $data);
+				$this->load->view('pages/mainBottom', $data);
+			}
 			$this->load->view('pages/treemap', $data);
 			$this->load->view('templates/footer');
 		}else { // else display the claim
@@ -147,7 +152,6 @@ class Pages extends Root_Controller {
 			$data['signedIn'] = true;
 		}			
 		if($companyID == -1 || !$this->data_model->getCompany($companyID)) {
-			//$this->homepage();
 			$data['headerTitle'] = 'View Top Companies - PatchWork';
 			$data['pageType'] = 'companyBrowse';
 
@@ -155,6 +159,11 @@ class Pages extends Root_Controller {
 			$data['treemapJSON'] = $this->data_model->getJSON("companiesInRange", null);
 			
 			$this->load->view('templates/header', $data);
+			if ($companyID != -1) {
+				$this->load->view('pages/mainTop', $data);
+				$this->load->view('pages/notfound', $data);
+				$this->load->view('pages/mainBottom', $data);
+			}			
 			$this->load->view('pages/treemap', $data);
 			$this->load->view('templates/footer');
 		}else {
@@ -192,18 +201,32 @@ class Pages extends Root_Controller {
 	public function tag($tagID = -1) {
 		$tagID = intval($tagID);
 		$data['listofclaims'] = $this->data_model->getClaimsWithTag($tagID);
+
+		$data['headerTitle'] = 'View Tag - PatchWork';
+		$data['pageType'] = 'tag';
+
+		$data['csFiles'] = array('general','tag','toggleview', 'tooltipster');
+		$data['jsFiles'] = array('general','tag','addClaim','toggleview');
+
 		if($tagID == -1 || !$data['listofclaims']) {
-			$this->homepage(); //!! change to TreemapSearch later
+			/*
+				load data top tags treemap and header here
+			*/
+			if ($tagID != -1) {
+				$this->load->view('templates/header', $data);
+				$this->load->view('pages/mainTop', $data);
+				$this->load->view('pages/notfound', $data);
+				$this->load->view('pages/mainBottom', $data);
+				$this->load->view('templates/footer');
+			}
+			/*
+				call treemap and footer here
+			*/
 		}else {
 			if ($this->is_logged_in()) {
 				$data['signedIn'] = true;
 			}
-			$data['headerTitle'] = 'View Tag - PatchWork';
-			$data['pageType'] = 'tag';
 
-			$data['csFiles'] = array('general','tag','toggleview', 'tooltipster');
-			$data['jsFiles'] = array('general','tag','addClaim','toggleview');
-			
 			$data['tagName'] = $this->data_model->getTag($tagID);
 			//$data['treemapJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
 			$data['treemapJSON'] = $this->data_model->getJSON("claimsWithTag",$tagID);
@@ -224,24 +247,28 @@ class Pages extends Root_Controller {
 		$userID = intval($userID);
 		//get userdata to check if user is logged in
 		$data['userdata'] = $this->session->all_userdata();
-
-		//handle case when no parameter is passed
-		if ($userID == -1 || !$this->data_model->getUser($userID)) {
-			if ($this->is_logged_in()) {
-				//user is logged in, set variable as the userid in session and continue as normal
-				$userID = $data['userdata']['userid'];
-			} else {
-				//if user is not logged in, redirect
-				$this->homepage();
-				return;
-			}
-		}
 		$data['headerTitle'] = 'View profile';
 		$data['pageType'] = 'profile';
 		
 		//files needed
 		$data['csFiles'] = array('general','profile','toggleview', 'tooltipster','tag');
 		$data['jsFiles'] = array('general','profile','addClaim','toggleview','tag');
+
+		//handle case when no parameter is passed
+		if ($userID == -1 || !$this->data_model->getUser($userID)) {
+			if ($this->is_logged_in()) {
+				//user is logged in, set variable as the userid in session to redirect to their own profile
+				$userID = $data['userdata']['userid'];
+			} else {
+				//if user is not logged in, show not found
+				$this->load->view('templates/header', $data);
+				$this->load->view('pages/mainTop', $data);
+				$this->load->view('pages/notfound', $data);
+				$this->load->view('pages/mainBottom', $data);
+				$this->load->view('templates/footer');
+				return;
+			}
+		}
 
 		//grab basic data
 		$data['curProfile'] = $userID;
