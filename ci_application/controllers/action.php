@@ -45,8 +45,8 @@ class Action extends Root_Controller {
 		Creates a brand new tag using the passed name
 	*/
 	public function createTag($tagName) {
-		$tagName = str_replace('%20', ' ', $tagName);
-		$tagtype = $this->uri->segment(4);
+		$tagName = $this->db->escape(str_replace('%20', ' ', $tagName));
+		$tagtype = $this->db->escape($this->uri->segment(4));
 		
 		$newTag = $this->action_model->createTag($tagName, $tagtype);
 		if(!$newTag) {
