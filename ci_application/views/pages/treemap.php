@@ -160,7 +160,7 @@
 				  .style("pointer-events", "auto")
 				  .on("mouseover", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "0.75");})
 				  .on("mouseout", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "1.0");})
-				  .on("click", function(d) {window.location.href = "/claim/" + d.claimID;});
+				  .on("click", function(d) {window.location.href = "<?=base_url()?>claim/" + d.claimID;});
 
 			makeTooltips("svg rect, svg div");
 			
@@ -293,16 +293,16 @@
 		}
 		
 		function computeTitle(d) {
-			var html = "<a href = '/claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
+			var html = "<a href = '<?=base_url()?>claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
 			html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
 			<?php
 				if (isset($pageType) && $pageType == "home") {
 			  ?>
-				html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
+				html+="<h5>Company: <a href = '<?=base_url()?>company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
 			  <?php
 				}
 			?>
-			html += "<h5>Submitted by: <a href = '/profile/" + d.userID + "'>" + d.userName + "</a></h5>";
+			html += "<h5>Submitted by: <a href = '<?=base_url()?>profile/" + d.userID + "'>" + d.userName + "</a></h5>";
 			return html;
 		}
 
@@ -332,7 +332,7 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
-			$.getJSON("/data/topCompaniesWithClaims", function(result){
+			$.getJSON("<?=base_url()?>data/topCompaniesWithClaims", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
 
@@ -344,7 +344,7 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
-			$.getJSON("/data/claimsInRange", function(result){
+			$.getJSON("<?=base_url()?>data/claimsInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
 
