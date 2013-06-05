@@ -320,20 +320,6 @@
 		function count(d) {
 		  return 1;
 		}
-		
-		// function computeTitle(d) {
-		// 	var html = "<a href = '<?=base_url()?>claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
-		// 	html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
-		// 	<?php
-		// 		if (isset($pageType) && $pageType == "home") {
-		// 	  ?>
-		// 		html+="<h5>Company: <a href = '<?=base_url()?>company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
-		// 	  <?php
-		// 		}
-		// 	?>
-		// 	html += "<h5>Submitted by: <a href = '<?=base_url()?>profile/" + d.userID + "'>" + d.userName + "</a></h5>";
-		// 	return html;
-		// }
 
 		function zoom(d, svg) {
 		  var kx = w / d.dx, ky = h / d.dy;
