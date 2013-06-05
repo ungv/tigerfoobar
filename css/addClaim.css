@@ -26,9 +26,9 @@
 	z-index: 200;
 }
 
-#pasteURL {
+/*#pasteURL {
 	width: 100%;
-}
+}*/
 
 #urlSubmit {
 	width: 350px;
@@ -70,13 +70,18 @@
 #successAlert {	
 	z-index: 300;
 	position: fixed;
-	left: 50%;
-	width: 200px;
+	left: 30%;
+	width: 140px !important;
 	margin-left: -100px;
-	top: 40%;
-	background-color: lightgray;
-	padding: 5px;
-	color: green;
+	top: 50%;
+	background-color: green;
+	padding: 10px;
+	color: white;
 	font-size: 20pt;
+	border-radius: 15px;
 	display: none;
+}
+
+#successAlert p {	
+	line-height: 20pt;
 }

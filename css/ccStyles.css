@@ -44,6 +44,13 @@
 		box-shadow: 2px 2px 10px rgba(94, 94, 94, 0.7);
 	}
 
+	#main > div > div:hover, #main > div > ul > li:hover {
+		background-color:#fff;
+		-webkit-box-shadow: 4px 4px 10px rgba(94, 94, 94, 0.7);
+		-moz-box-shadow: 4px 4px 10px rgba(94, 94, 94, 0.7);
+		box-shadow: 4px 4px 10px rgba(94, 94, 94, 0.7);
+	}
+
 /*------------------------Treemap View-----------------------------*/
 	#treemapCanvas {
 		margin: 20px auto;

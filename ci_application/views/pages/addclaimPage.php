@@ -12,7 +12,7 @@
 	</div>
 
 	<div class='arrow_box' style="margin-top: 20px;">
-		<p><strong>Step 3:</strong>Write a summary of your claim to explain why the comunity should care.</p>
+		<p><strong>Step 3:</strong>Write a summary of your claim to explain why the community should care.</p>
 	</div>
 
 	<div class='arrow_box' style="margin-top: 65px;">

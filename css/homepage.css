@@ -18,82 +18,6 @@
 	opacity: 1;
 }
 
-.rating {
-	float: left;
-	margin: 10px;
-}
-
-#submissions, #comments {
-	float: left;
-}
-
-#urlContainer {
-	margin-bottom: 0px !important;
-}
-
-#urlButton, #urlInput {
-	/*position: absolute;*/ /*made add claim button hide behind logout*/ 
-}
-
-#urlButton {
-	opacity: 0.6;
-}
-
-#urlButton:hover {
-	opacity: 1;
-}
-
-#urlButton img {
-	vertical-align: middle;
-	width: 20px;
-	margin-right: 5px;
-}
-
-#urlButton span {
-	font-size: 14pt;
-	vertical-align: middle;
-}
-
-#pasteURL {
-	width: 100%;
-}
-
-#urlSubmit {
-	width: 350px;
-	height: inherit;
-	margin-top: 50px;
-}
-
-#urlSubmit input, textarea {
-	margin-bottom: 5px;
-}
-
-#urlSubmit textarea {
-	width: 95%;
-}
-
-/* #urlSubmit p {
-	margin-left: 235px;
-} */
-
-/* #controlContainer {
-	float: right;
-	margin-right: 7px;
-} */
-
-#scoreDistribution {
-	display: none !important;
-}
-
-/* #assocCo {
-	width: 40%;
-	margin-top: 15px;
-}
- */
-#submit, #cancel {
-	float: right;
-}
-
 #treemapCanvas {
 	margin: auto;
 	margin-top: 30px;
@@ -119,16 +43,3 @@
 #treemapFilters  .button.active {
 	background-color: #7ed6d7;
 }
-
-.full {
-	width: 95%;
-}
-
-.half {
-	width: 50%;
-}
-
-.quarter {
-	width: 25%;
-}
-

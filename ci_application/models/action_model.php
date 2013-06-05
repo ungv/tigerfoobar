@@ -409,7 +409,7 @@ class Action_model extends CI_Model {
                 $this->db->insert('Claim_has_Tags', $claimTags);
             }
         }
-        return true;
+        return $claimID;
     }
 
     // Update database with users' rating for claims

@@ -59,3 +59,7 @@
 	top: 50%;
 	margin-top: -19px;
 }
+
+p {
+	line-height: 18px;
+}

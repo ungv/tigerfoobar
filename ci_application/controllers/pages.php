@@ -36,7 +36,7 @@ class Pages extends Root_Controller {
 		$data['pageTitle'] = 'Home';
 		$data['pageType'] = 'home';
 		
-		$data['csFiles'] = array('general','ccStyles','addClaim', 'tooltipster', 'homepage');
+		$data['csFiles'] = array('general','ccStyles',/*'addClaim',*/ 'tooltipster', 'homepage');
 		//load welcome css headers
 		$signedIn = $this->is_logged_in();
 		if(!$signedIn) {
@@ -44,13 +44,13 @@ class Pages extends Root_Controller {
 		} else {
 			$data['signedIn'] = true;
 		}
-		$data['jsFiles'] = array('general','score','addClaim','welcome');
+		$data['jsFiles'] = array('general','score',/*'addClaim',*/'welcome');
 		$data['treemapJSON'] = $this->data_model->getTopCompaniesWithClaimsJSON();
 
 		//Views
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
-		$this->load->view('pages/addClaim', $data);
+		// $this->load->view('pages/addClaim', $data);
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('pages/treemap', $data);
 		//if not logged in, show welcome message
@@ -72,8 +72,8 @@ class Pages extends Root_Controller {
 		$data['pageType'] = 'home';
 
 		//files needed
-		$data['csFiles'] = array('general','ccStyles','addClaim','addclaimPage');
-		$data['jsFiles'] = array('addclaimPage','general','ccScripts','addClaim','score');
+		$data['csFiles'] = array('general','ccStyles','addClaim','addclaimPage','tooltipster');
+		$data['jsFiles'] = array('general','score','addClaim','ccScripts');
 
 		//Views
 		$this->load->view('templates/header', $data);

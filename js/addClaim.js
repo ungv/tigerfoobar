@@ -25,32 +25,33 @@ $(document).ready(function() {
 		}
 	});
 
+	//------------this stuff is for dropping overlay to add claim-------------
 	//Click on button with text to convert to input
-	$('#urlButton').click(function() {
-		if (isLoggedIn('add a claim')) {
-			$('#urlButton').hide('fade', 200);
-			$('#urlInput').show('fade', 600);
-			$('#pasteURL').focus();
-		}
-	});
+	// $('#urlButton').click(function() {
+	// 	if (isLoggedIn('add a claim')) {
+	// 		$('#urlButton').hide('fade', 200);
+	// 		$('#urlInput').show('fade', 600);
+	// 		$('#pasteURL').focus();
+	// 	}
+	// });
 	
 	//Listen for paste event to popup add new claim form
-	$("#pasteURL").bind('paste', function() {
-		$('#urlInput').removeClass('quarter').addClass('threeQuarters');
-		$('#urlSubmit').show(200);
-		$('.lightsout').fadeIn();
-	});
+	// $("#pasteURL").bind('paste', function() {
+	// 	$('#urlInput').removeClass('quarter').addClass('threeQuarters');
+	// 	$('#urlSubmit').show(200);
+	// 	$('.lightsout').fadeIn();
+	// });
 
 	// Hide form and revert back to page refresh state
-	$(".cancelButton").click(function() {
-		$('#urlInput').removeClass('threeQuarters').addClass('quarter');
-		$('.popup').hide(200);
-		$("#pasteURL").val('');
-		$('#urlButton').show('fade', 600);
-		$('#urlInput').hide('fade', 200);
-		$('.lightsout').fadeOut();
-		return false;
-	});
+	// $(".cancelButton").click(function() {
+	// 	$('#urlInput').removeClass('threeQuarters').addClass('quarter');
+	// 	$('.popup').hide(200);
+	// 	$("#pasteURL").val('');
+	// 	$('#urlButton').show('fade', 600);
+	// 	$('#urlInput').hide('fade', 200);
+	// 	$('.lightsout').fadeOut();
+	// 	return false;
+	// });
 });
 
 
@@ -91,7 +92,10 @@ function addClaim() {
 				success: function(json) {
 					$('#successAlert').fadeIn();
 					$('#successAlert').fadeOut(3000);
-					window.location.reload();
+					if (json.message == "Successfully contacted server method!") {
+						console.log('success');
+						window.location = "/claim/" + json.claimid;
+					}
 				},
 				error: function() {
 					alert('Oops, are you logged in?');

@@ -26,7 +26,7 @@
 	<script src="<?=base_url()?>js/highcharts.js" type="text/javascript"></script>	
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
 	<header>
 		<h1><a href="<?=base_url()?>"><img id="logoImage" src="<?=base_url()?>img/patchwork_logo.png"/><span id="title_text">atchwork</span></a></h1>
 		<SECTION id='topbar'>
@@ -44,12 +44,13 @@
 		<!--Profile/login/register-->
 		<?php if($isLogged) { ?>
 			<span id="login_buttons">
+				<a id="urlButton" href="<?=base_url()?>addclaim/">+</a>
 				<a id="login_status" href="/profile/<?=$userid?>"><?= $username ?></a>
-				<a id="urlButton" href="#">+</a>
 				<a id="logout" href="/action/logout">logout</a>
 			</span>
 		<?php }else { ?>
 			<span id="login_buttons">
+				<a id="urlButton" href="<?=base_url()?>addclaim/">+</a>
 				<a id="login" href = "#">Log In</a>
 				<a id="signup" href = "#">Sign Up</a>
 			</span>
@@ -93,7 +94,7 @@
 			<p>
 				<a href="<?=base_url()?>claim">Claims</a> >> 
 				<a href="<?=base_url()?>company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a> >>
-				<strong><?=$claimInfo['ClaimTitle']?></strong>
+				<strong><?=strlen($claimInfo['ClaimTitle']) > 70 ? substr($claimInfo['ClaimTitle'], 0, 70) . '...' : $claimInfo['ClaimTitle']?></strong>
 			</p>
 		</div>
 

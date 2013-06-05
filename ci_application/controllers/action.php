@@ -186,8 +186,8 @@ class Action extends Root_Controller {
 		}else {
 			$userid = $this->session->userdata('userid');
 			$result = $this->action_model->addClaim($userid);
-			if($result) {	//database updated db, send success method
-				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			if(!empty($result)) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!","claimid":' . $result . '}';
 			}else {			//didn't work, inform user why
 	        	$this->output->set_status_header('400');
 	        	$data['json'] = '{"message":"Cannot Process Update"}'; 

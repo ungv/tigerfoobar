@@ -95,7 +95,7 @@ input.infocus, textarea.infocus {
 header{
 	/*vertical, then horizontal*/
 	width: 100%;
-	margin:0px auto 15px;
+	margin:0px auto 35px;
 	padding-top:3px;
 	
 	background-color: #0A6107;
@@ -256,7 +256,7 @@ footer, footer a{
 
 #main h1{
 	font-size: 28px;
-	margin-top: 30px;
+	/*margin-top: 30px;*/
 }
 
 #main > div , #main h1 {
