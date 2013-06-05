@@ -151,7 +151,7 @@ class Pages extends Root_Controller {
 			$data['pageType'] = 'company';
 
 			$data['csFiles'] = array('general','ccStyles','toggleview','tooltipster');
-			$data['jsFiles'] = array('general','ccScripts','addClaim','score','toggleview');
+			$data['jsFiles'] = array('general','ccScripts','score','toggleview');
 
 			//grab basic data
 			$companyData = $this->data_model->getCompany($companyID);
@@ -165,7 +165,7 @@ class Pages extends Root_Controller {
 				$data['companyClaimsNeg'] = $this->data_model->getCompanyClaimsNeg($companyID);
 				$data['companyTags'] = $this->data_model->getCompanyTags($companyID, $this->userid);
 				$data['scoreHistory'] = $this->data_model->getCompanyScoreHistoryJSON($companyID);
-				$data['treemapJSON'] = $this->data_model->getJSON("companyClaims",$companyID);
+				$data['treemapJSON'] = $this->data_model->getJSON("companyTopClaims", $companyID);
 				
 				$this->load->view('templates/header', $data);
 				$this->load->view('pages/mainTop', $data);

@@ -1,4 +1,14 @@
 <?php	
+	/* TODO 6/3/13
+	* Finish filters
+	* Position tooltips at the cursor position
+	* Enable /claim/ 
+		     /company/
+			 /tag/
+			 /profile/ (?)
+	   treemaps
+	*
+	*/
 	if (isset($pageType) && $pageType == "home") {
 ?>
 	<div id = "treemapFilters">
@@ -6,16 +16,16 @@
 			Claims by Company
 		</div>
 		
-		<div id = "showAllClaimsButton" class = "button">
-			All Claims
+		<div id = "showTopClaimsButton" class = "button">
+			Top Claims
+		</div>
+		
+		<div id = "showTopCompaniesButton" class = "button">
+			Top Companies
 		</div>
 		
 		<div class = "button">
-			All Companies
-		</div>
-		
-		<div class = "button">
-			All Tags
+			Top Tags
 		</div>
 	</div>
 	
@@ -94,8 +104,9 @@
 				mouseY = e.clientY;
 			}).mouseover();
 			
-			$("#showAllClaimsButton").click(showAllClaims);
+			$("#showTopClaimsButton").click(showTopClaims);
 			$("#claimsByCompanyButton").click(showTopCompaniesWithClaims);
+			$("#showTopCompaniesButton").click(showTopCompanies);
 		}
 		
 		function generateTreemap(data) {
@@ -103,7 +114,7 @@
 				.round(true)
 				.size([w, h])
 				.sticky(true)
-				.value(function(d) { return d.size; });
+				.value(function(d) { return d.size>0? d.size : 0; });
 
 			var svg = d3.select("#treemapCanvas")
 				.attr("class", "chart")
@@ -131,8 +142,8 @@
 				.attr("stroke-width", function (d) {return borderWidth;})*/
 			
 			claimCell.append("svg:rect")
-			  .attr("width", function(d) { return d.dx - borderWidth;})
-			  .attr("height", function(d) { return d.dy - borderWidth;})
+			  .attr("width", function(d) { return (d.dx - borderWidth) >= 0? (d.dx - borderWidth) : 0;})
+			  .attr("height", function(d) { return (d.dy - borderWidth) >= 0? (d.dy - borderWidth) : 0;})
 			  .attr("title", function(d) {return computeTitle(d);})
 			  .attr("rx", "10")
 			  .attr("ry", "10")
@@ -160,7 +171,13 @@
 				  .style("pointer-events", "auto")
 				  .on("mouseover", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "0.75");})
 				  .on("mouseout", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "1.0");})
-				  .on("click", function(d) {window.location.href = "<?=base_url()?>claim/" + d.claimID;});
+				  .on("click", function(d) {
+						if (typeof d.claimID !== 'undefined') { //The clicked item is a claim title
+							window.location.href = "<?=base_url()?>claim/" + d.claimID;
+						} else if (typeof d.companyID !== 'undefined') { //The clicked item is a company name
+							window.location.href = "<?=base_url()?>company/" + d.companyID;
+						}
+					});
 
 			makeTooltips("svg rect, svg div");
 			
@@ -170,25 +187,27 @@
 			var companyNodes = treemap.nodes(root)
 			.filter(function (d) {return d.children});
 
-			var companyCellContainer = svg.append("svg:g")
-			.attr("class", "companyCellContainer");
-			
-			var companyCell = companyCellContainer.selectAll(".companyCellContainer")
-			.data(companyNodes)
-			.enter()
-			.append("svg:g")
-				.attr("class", "cell")
-				.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-			.append("svg:rect")
-				.attr("width", function(d) { return d.dx - 1;})
-				.attr("height", function(d) { return d.dy - 1;})
-				.attr("rx", "10")
-				.attr("ry", "10")
-				.style("fill-opacity", function(d) { return "0.0";}) //Fix
-				.style("stroke", function(d) {return "white";})
-				.style("stroke-width", function(d) {return "5";})
-				.style("pointer-events", "none");
-			$(".companyCellContainer>g:nth-child(1)").detach();
+			if (companyNodes.length > 1) {
+				var companyCellContainer = svg.append("svg:g")
+				.attr("class", "companyCellContainer");
+				
+				var companyCell = companyCellContainer.selectAll(".companyCellContainer")
+				.data(companyNodes)
+				.enter()
+				.append("svg:g")
+					.attr("class", "cell")
+					.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+				.append("svg:rect")
+					.attr("width", function(d) { return d.dx - 1;})
+					.attr("height", function(d) { return d.dy - 1;})
+					.attr("rx", "10")
+					.attr("ry", "10")
+					.style("fill-opacity", function(d) { return "0.0";}) //Fix
+					.style("stroke", function(d) {return "white";})
+					.style("stroke-width", function(d) {return "5";})
+					.style("pointer-events", "none");
+				$(".companyCellContainer>g:nth-child(1)").detach();
+			}
 			//End company borders
 			<?php
 			}
@@ -202,7 +221,7 @@
 		}
 		
 		function makeTooltips(selector) {
-		//Tooltips
+			//Tooltips
 			$(selector).tooltipster({
 				trigger: 'hover',
 				interactive: true,
@@ -213,21 +232,13 @@
 				functionReady: function(origin, tooltip) {
 					var scrollTop = $(window).scrollTop();
 					var scrollLeft = $(window).scrollLeft();
-					var target = origin;
-					var targetCell = $(target).closest(".cell")[0];
-					var targetCellRect = targetCell.getBoundingClientRect();
-					
-					var top = targetCellRect.top + targetCellRect.height + scrollTop;
-					var left = targetCellRect.left + targetCellRect.width/2 - $(tooltip).width()/2 + scrollLeft;
-					
-					//var top = mouseX;
-					//var left = mouseY;
-					
+					var top = scrollTop + mouseY;
+					var left = scrollLeft + mouseX - $(tooltip).width()/2;
+
 					var rotation = 0;
 					
 					if (top + $(tooltip).height() > ($(window).height() - 50)) {
-						top = targetCellRect.top - $(tooltip).height() - 10 + scrollTop;
-						rotation = 180;
+						top = top - $(tooltip).height();
 					}
 					
 					if (left < 0) {
@@ -237,18 +248,36 @@
 					$(tooltip).css({
 						"top": top + "px",
 						"left": left + "px",
-						"transform" : "rotate(" + rotation +"deg)"
 					});
-					
-					$(".tooltipster-content").css({
-						"transform" : "rotate(" + rotation +"deg)"
-					});
-					
-					$(this).position = "top";
-					//$(".tooltipster-base").show();
 				},
 				position: 'bottom'
 			});
+		}
+				
+		function computeTitle(d) {
+			var html = ""
+			
+			if (typeof d.claimID !== 'undefined' && typeof d.name !== 'undefined') {
+				html += "<a href = '/claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
+			}
+			
+			if (typeof d.description !== 'undefined') {
+				html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
+			}	
+			<?php
+				if (isset($pageType) && $pageType == "home") {
+			  ?>
+				if (typeof d.companyID !== 'undefined' && typeof d.company !== 'undefined') {
+					html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
+				}
+			  <?php
+				}
+			?>
+			
+			if (typeof d.userID !== 'undefined' && typeof d.userName !== 'undefined') {
+				html += "<h5>Submitted by: <a href = '/profile/" + d.userID + "'>" + d.userName + "</a></h5>";
+			}
+			return html;
 		}
 		
 		function calculateFontSize(width, height, text) {
@@ -292,19 +321,19 @@
 		  return 1;
 		}
 		
-		function computeTitle(d) {
-			var html = "<a href = '<?=base_url()?>claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
-			html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
-			<?php
-				if (isset($pageType) && $pageType == "home") {
-			  ?>
-				html+="<h5>Company: <a href = '<?=base_url()?>company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
-			  <?php
-				}
-			?>
-			html += "<h5>Submitted by: <a href = '<?=base_url()?>profile/" + d.userID + "'>" + d.userName + "</a></h5>";
-			return html;
-		}
+		// function computeTitle(d) {
+		// 	var html = "<a href = '<?=base_url()?>claim/" + d.claimID + "'><h3>" + d.name + "</h3></a> <br/>";
+		// 	html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
+		// 	<?php
+		// 		if (isset($pageType) && $pageType == "home") {
+		// 	  ?>
+		// 		html+="<h5>Company: <a href = '<?=base_url()?>company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
+		// 	  <?php
+		// 		}
+		// 	?>
+		// 	html += "<h5>Submitted by: <a href = '<?=base_url()?>profile/" + d.userID + "'>" + d.userName + "</a></h5>";
+		// 	return html;
+		// }
 
 		function zoom(d, svg) {
 		  var kx = w / d.dx, ky = h / d.dy;
@@ -340,11 +369,23 @@
 			});
 		}
 		
-		function showAllClaims(e) {
+		function showTopClaims(e) {
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
 			$.getJSON("<?=base_url()?>data/claimsInRange", function(result){
+				//Clear old treemap
+				$("#treemapCanvas").empty();
+
+				generateTreemap(result);
+			});
+		}
+		
+		function showTopCompanies(e) {
+			$(".active").removeClass("active");
+			$(e.target).addClass("active");
+			
+			$.getJSON("/data/companiesInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
 
