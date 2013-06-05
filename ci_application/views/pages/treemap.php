@@ -16,6 +16,9 @@
 		$showTopTagsButtonClass = ($pageType == "tagBrowse") ? "button active" : "button";
 ?>
 	<div id = "treemapFilters">
+		<div id = "explore">
+			Explore:
+		</div>
 		<div id = "claimsByCompanyButton" class = "<?=$claimsByCompanyButtonClass?>">
 			Claims by Company
 		</div>

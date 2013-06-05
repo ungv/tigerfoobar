@@ -30,16 +30,23 @@
 	padding-left: 15px;
 }
 
+#treemapFilters > div {
+	margin-left: 10px;
+}
+
 #treemapFilters  .button {
 	padding: 5px;
 	margin-bottom: 10px;
-	margin-left: 10px;
 	float: left;
 	cursor: pointer;
-	
 	border: 2px solid #7ed6d7;;
 }
 
 #treemapFilters  .button.active {
 	background-color: #7ed6d7;
+}
+
+#explore {
+	font-size: 18pt;
+	margin-bottom: 7px;
 }
