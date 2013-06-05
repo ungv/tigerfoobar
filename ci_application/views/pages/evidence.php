@@ -1,5 +1,5 @@
 	<!--Start Evidence Content-->
-	<!-- <img id='flagButton' class='tooltip' src="/img/flag.png" 
+	<!-- <img id='flagButton' class='tooltip' src="<?=base_url()?>img/flag.png" 
 		title='This claim is 
 			<a id="flagNoncredible">Noncredible</a> or 
 				<a id="flagWrong">Wrong Company</a>'> -->
@@ -15,7 +15,7 @@
 					<dd><a href="<?=base_url()?>company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></dd>
 			</dl>
 			<hr>
-		<img id='flagButton' class='tooltip' src="/img/flag.png" 
+		<img id='flagButton' class='tooltip' src="<?=base_url()?>img/flag.png" 
 		title='This claim is 
 			<a id="flagNoncredible">Noncredible</a> or 
 				<a id="flagWrong">Wrong Company</a>'>		
