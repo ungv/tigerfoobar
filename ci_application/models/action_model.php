@@ -11,7 +11,7 @@ class Action_model extends CI_Model {
 	//sends a login request to the DB object
 	public function login() {
         //1. get data from post array
-        $username = $this->db->escape($this->security->xss_clean($this->input->post('username')));
+        $username = $this->security->xss_clean($this->input->post('username'));
         $password = do_hash($this->security->xss_clean($this->input->post('password')));
         
         //2. Check for user in db
@@ -61,10 +61,10 @@ class Action_model extends CI_Model {
     //Returns: false if the tag id is corrupt or if the query failed, 
     //true otherwise
     public function upvoteTag($userid) {
-        $tagid = $this->db->escape_str($this->security->xss_clean($this->input->post('industryID')));
-        $objectid = $this->db->escape_str($this->security->xss_clean($this->input->post('objectID')));
-        $tagtype = $this->db->escape($this->security->xss_clean($this->input->post('tagType')));
-        $voted = $this->db->escape_str($this->security->xss_clean($this->input->post('voted')));
+        $tagid = $this->security->xss_clean($this->input->post('industryID'));
+        $objectid = $this->security->xss_clean($this->input->post('objectID'));
+        $tagtype = $this->security->xss_clean($this->input->post('tagType'));
+        $voted = $this->security->xss_clean($this->input->post('voted'));
 
         //check tagid is for existing tag
         $isVotable = $this->db->get_where('Tags', array('TagsID' => $tagid , 'Type' => $tagtype));
@@ -100,9 +100,9 @@ class Action_model extends CI_Model {
 
     // flag stuff
     public function flagContent($userid) {
-        $targetID = $this->db->escape_str($this->security->xss_clean($this->input->post('targetID')));
-        $targetType = $this->db->escape($this->security->xss_clean($this->input->post('targetType')));
-        $flagType = $this->db->escape($this->security->xss_clean($this->input->post('flagType')));
+        $targetID = $this->security->xss_clean($this->input->post('targetID'));
+        $targetType = $this->security->xss_clean($this->input->post('targetType'));
+        $flagType = $this->security->xss_clean($this->input->post('flagType'));
         
         // check if user already voted on this comment
         $hasVoted = $this->db->get_where('Flags', array('userID' => $userid , 'target_id' => $targetID, 'target_type' => $targetType));
@@ -148,8 +148,8 @@ class Action_model extends CI_Model {
     public function voteComment($userid) {
         $ClaimID = $this->db->escape_str($this->security->xss_clean($this->input->post('ClaimID')));
         $CommentID = $this->db->escape_str($this->security->xss_clean($this->input->post('CommentID')));
-        $voted = $this->db->escape_str($this->security->xss_clean($this->input->post('voted')));
-        $value = $this->db->escape_str($this->security->xss_clean($this->input->post('value')));
+        $voted = $this->security->xss_clean($this->input->post('voted'));
+        $value = $this->security->xss_clean($this->input->post('value'));
         $nowTime = date('Y-m-d H:i:s', time()-21600);
 
         // check if user already voted on this comment
@@ -222,9 +222,9 @@ class Action_model extends CI_Model {
 
     //adds user to the system
     public function addUser() {
-        $username = $this->db->escape($this->security->xss_clean($this->input->post('username')));
+        $username = $this->security->xss_clean($this->input->post('username'));
         $password = do_hash($this->security->xss_clean($this->input->post('password')));
-        $email = $this->db->escape($this->security->xss_clean($this->input->post('email')));
+        $email = $this->security->xss_clean($this->input->post('email'));
 
         // Check to see if username already exists
         $query = $this->db->get_where('User', array('Name' => $username));
@@ -244,8 +244,8 @@ class Action_model extends CI_Model {
 
     //Updates the user profile with new information
     public function updateProfile($userid) {
-        $col = $this->db->escape($this->security->xss_clean($this->input->post('col')));
-        $newInfo = $this->db->escape($this->security->xss_clean($this->input->post('newInfo')));
+        $col = $this->security->xss_clean($this->input->post('col'));
+        $newInfo = $this->security->xss_clean($this->input->post('newInfo'));
         if ($col == 'Password')
             $newInfo = do_hash($newInfo);
 
@@ -295,12 +295,12 @@ class Action_model extends CI_Model {
     // Adds a claim to the database
     // Clean input values for security
     public function addClaim($userid) {
-        $url = $this->db->escape($this->security->xss_clean($this->input->post('url')));
-        $title = $this->db->escape($this->security->xss_clean($this->input->post('title')));
-        $desc = $this->db->escape($this->security->xss_clean($this->input->post('desc')));
+        $url = $this->security->xss_clean($this->input->post('url'));
+        $title = $this->security->xss_clean($this->input->post('title'));
+        $desc = $this->security->xss_clean($this->input->post('desc'));
         $company = $this->db->escape_like_str($this->security->xss_clean($this->input->post('company')));
-        $rating = $this->db->escape_str($this->security->xss_clean($this->input->post('rating')));
-        $tags = $this->db->escape($this->security->xss_clean($this->input->post('tags')));
+        $rating = $this->security->xss_clean($this->input->post('rating'));
+        $tags = $this->security->xss_clean($this->input->post('tags'));
         $nowTime = date('Y-m-d H:i:s', time()-21600);
 
         if ($url == '' || $title == '' || $company == '' || $rating == '') {
@@ -414,7 +414,7 @@ class Action_model extends CI_Model {
 
     // Update database with users' rating for claims
     public function sendRating($userid) {
-        $rating = $this->db->escape_str($this->security->xss_clean($this->input->post('rating')));
+        $rating = $this->security->xss_clean($this->input->post('rating'));
         $claimID = $this->db->escape_str($this->security->xss_clean($this->input->post('claimID')));
         $nowTime = date('Y-m-d H:i:s', time()-21600);
 
@@ -511,10 +511,10 @@ class Action_model extends CI_Model {
     }
 
     public function addComment($userid) {
-        $claimID = $this->db->escape_str($this->security->xss_clean($this->input->post('claimID')));
-        $comment = $this->db->escape($this->security->xss_clean($this->input->post('comment')));
-        $parentCommentID = $this->db->escape_str($this->security->xss_clean($this->input->post('parentCommentID')));
-        $level = $this->db->escape_str($this->security->xss_clean($this->input->post('level')));
+        $claimID = $this->security->xss_clean($this->input->post('claimID'));
+        $comment = $this->security->xss_clean($this->input->post('comment'));
+        $parentCommentID = $this->security->xss_clean($this->input->post('parentCommentID'));
+        $level = $this->security->xss_clean($this->input->post('level'));
 
         $commentData = array(
                 'ClaimID' => $claimID,

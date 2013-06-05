@@ -20,7 +20,7 @@ $(document).ready(function() {
 	});
 
 	// Clear out all other selections and show clicked box as selected
-	$('input[name=claimscore]').click(function() {
+	$('label[name=claimscore]').click(function() {
 		resetScale();
 		$(this).addClass('selectedRating');
 	});
