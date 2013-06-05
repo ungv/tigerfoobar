@@ -90,7 +90,7 @@ function updatecheck(elem) {
 function updateProfile(col, newInfo) {
 	$.ajax({
 		type: 'POST',
-		url: '/action/updateProfile',
+		url: '/~bc28/action/updateProfile',
 		data: {
 			col: col,
 			newInfo: newInfo
@@ -118,7 +118,7 @@ function updateProfile(col, newInfo) {
 function dropAccount(password) {
 	$.ajax({
 		type: 'POST',
-		url: '/action/dropAccount',
+		url: '/~bc28/action/dropAccount',
 		data: {
 			password: password
 		},

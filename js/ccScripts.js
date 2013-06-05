@@ -21,7 +21,7 @@ $(document).ready(function() {
 		if (isLoggedIn('to rate this claim')) {
 			$.ajax({
 				type: 'POST',
-				url: '/action/sendRating',
+				url: '/~bc28/action/sendRating',
 				data: {
 					rating: $(this).attr('value'),
 					claimID: $(this).attr('claimid')
@@ -101,7 +101,7 @@ $(document).ready(function() {
 		$(clicked.parent().find(".downNum")).text(oldDownVotes);		
 		$.ajax({
 			type: 'POST',
-			url: '/action/voteComment',
+			url: '/~bc28/action/voteComment',
 			data: {
 				ClaimID: $('#discussionContainer').attr('claimid'),
 				CommentID: parseInt($(clicked).attr('for')),
@@ -169,7 +169,7 @@ $(document).ready(function() {
 	
 		$.ajax({
 			type: 'POST',
-			url: '/action/flagContent',
+			url: '/~bc28/action/flagContent',
 			data: {
 				targetID: targetID,
 				targetType: targetType,
@@ -221,7 +221,7 @@ $(document).ready(function() {
 		$(clicked.parent().children(".tagTotal")[0]).text(oldVotes);
 		$.ajax({
 			type: 'POST',
-			url: '/action/upvoteTag',
+			url: '/~bc28/action/upvoteTag',
 			data: {
 				industryID: $(clicked).attr('tagid'),
 				objectID: $(clicked).attr('objectid'), //the objet (claim or company) being affected
@@ -343,7 +343,7 @@ $(document).ready(function() {
 		var newID;
 		$.ajax({
 			type: 'POST',
-			url: '/action/createTag/'+name+"/"+newType,
+			url: '/~bc28/action/createTag/'+name+"/"+newType,
 			success: function(r) {	//Return saying tag was created
 				if(parseInt(r) != -1) {
 					voteOnNewTag(parseInt(r),name);
@@ -425,7 +425,7 @@ $(document).ready(function() {
 		}
 		$.ajax({
 			type: 'POST',
-			url: '/action/addComment',
+			url: '/~bc28/action/addComment',
 			data: {
 				claimID: $('#discussionContainer').attr('claimID'),
 				comment: ($(this).parent().find('textarea')).val(),

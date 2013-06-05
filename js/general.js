@@ -239,7 +239,7 @@ function sendLogin() {
 	$password = $('#login_password').val();
 	$.ajax({
 		type: 'POST',
-		url: '/action/login',
+		url: '/~bc28/action/login',
 		data: {
 			username: $username,
 			password: $password
@@ -286,7 +286,7 @@ function addUser() {
 	$email = $('#signupPopup input[name="email"]').val();
 	$.ajax({
 		type: 'POST',
-		url: '/action/addUser',
+		url: '/~bc28/action/addUser',
 		data: {
 			username: $username,
 			password: $password,

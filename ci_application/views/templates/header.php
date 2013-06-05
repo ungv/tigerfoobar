@@ -46,7 +46,7 @@
 			<span id="login_buttons">
 				<a id="login_status" href="/profile/<?=$userid?>"><?= $username ?></a>
 				<a id="urlButton" href="#">+</a>
-				<a id="logout" href="/action/logout">logout</a>
+				<a id="logout" href="<?=base_url()?>action/logout">logout</a>
 			</span>
 		<?php }else { ?>
 			<span id="login_buttons">
