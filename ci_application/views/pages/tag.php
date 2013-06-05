@@ -1,11 +1,11 @@
 <?php
-if (count($userComments) < 5) {
+if ($pageType == 'profile' && count($userComments) < 5) {
 ?>
 	<div id="listview">
 <?php
 } else {
 ?>
-	<div class="scrollBox">
+	<div id="listview" class="scrollBox">
 <?php
 }
 

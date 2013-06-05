@@ -7,7 +7,7 @@
 			</h1>
 		</div>
 		<?php
-		if (!empty($tagInfo)) {
+		if (!empty($listofclaims)) {
 		?>
 		<div><h4><em>Claims or companies associated with this tag:</em></h4></div>
 		<?php
