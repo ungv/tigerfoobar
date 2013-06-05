@@ -78,7 +78,7 @@ function addClaim() {
 			// }, 10000);
 			$.ajax({
 				type: 'POST',
-				url: '/~bc28/action/addClaim',
+				url: '/action/addClaim',
 				data: {
 					url: $url,
 					title: $title,
