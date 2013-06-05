@@ -88,7 +88,16 @@ class Pages extends Root_Controller {
 	//claim page
 	public function claim($claimID = -1) {
 		if($claimID == -1) {
-			$this->homepage(); //!! change to TreemapSearch later
+			//$this->homepage(); //!! change to TreemapSearch later
+			
+			$data['headerTitle'] = 'View Top Claims - PatchWork';
+			$data['csFiles'] = array('general', 'tooltipster', 'homepage');
+			$data['treemapJSON'] = $this->data_model->getJSON("claimsInRange", null);
+			$data['pageType'] = 'claimBrowse';
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/treemap', $data);
+			$this->load->view('templates/footer');
 		}else {
 			if ($this->is_logged_in()) {
 				$data['signedIn'] = true;
@@ -142,7 +151,15 @@ class Pages extends Root_Controller {
 	//company page
 	public function company($companyID = -1) {
 		if($companyID == -1 || !$this->data_model->getCompany($companyID)) {
-			$this->homepage();
+			//$this->homepage();
+			$data['headerTitle'] = 'View Top Companies - PatchWork';
+			$data['csFiles'] = array('general', 'tooltipster', 'homepage');
+			$data['treemapJSON'] = $this->data_model->getJSON("companiesInRange", null);
+			$data['pageType'] = 'companyBrowse';
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/treemap', $data);
+			$this->load->view('templates/footer');
 		}else {
 			if ($this->is_logged_in()) {
 				$data['signedIn'] = true;

@@ -61,6 +61,7 @@ h1, h2, h3 {
 }
 
 h5 {
+	margin-top: 5px;
 	display: inline-block;
 }
 
@@ -349,59 +350,69 @@ input[type=button], input[type=submit] {
 
 /*------------AutoComplete--------------*/
 
-	.autoCompleteResult{
-		width:915px;
-		background-color:#fff;
-	}
+.autoCompleteResult{
+	width:915px;
+	background-color:#fff;
+}
 
-	.autoCompleteHeader{
-		background-color:#444;
-		color:#fff;
-		width:905px;
-		padding:5px 0px 5px 5px;
-		border-radius: 4px;
-	}
+.autoCompleteHeader{
+	background-color:#444;
+	color:#fff;
+	width:905px;
+	padding:5px 0px 5px 5px;
+	border-radius: 4px;
+}
 
-	.autoCompleteResult .resultScore{
-		display:inline-block;
-		margin-left:20px;
-		padding-left:3px;
-		padding-right:3px;
-		border:1px solid #ccc;
-		border-radius:3px;
-		color:#fff;
-	}
+.autoCompleteResult .resultScore{
+	display:inline-block;
+	margin-left:20px;
+	padding-left:3px;
+	padding-right:3px;
+	border:1px solid #ccc;
+	border-radius:3px;
+	color:#fff;
+}
 
-	.claimResult .resultScore{
-		background-color:#B06307;
-	}
+.claimResult .resultScore{
+	background-color:#B06307;
+}
 
-	.companyResult .resultScore{
-		background-color:#075B8C;
-	}
+.companyResult .resultScore{
+	background-color:#075B8C;
+}
 
-	.tagResult .resultScore{
-		background-color:#666;
-	}
+.tagResult .resultScore{
+	background-color:#666;
+}
 
-	.claimResult a{
-		color:#B06307 !important;
-	}
+.claimResult a{
+	color:#B06307 !important;
+}
 
-	.companyResult a{
-		color:#075B8C !important;
-	}
+.companyResult a{
+	color:#075B8C !important;
+}
 
-	.ui-menu-item a.ui-state-focus{
-		margin:0px !important;
-		border-image-width:0px !important;
-	}
+.ui-menu-item a.ui-state-focus{
+	margin:0px !important;
+	border-image-width:0px !important;
+}
 
-	li.ui-menu-item a {
-    	display: block;
-    	font-weight:bold;
-	}
+li.ui-menu-item a {
+	display: block;
+	font-weight:bold;
+}
+
 /*-----------General treemap styles-----------*/
-	#treemapCanvas {
-		font-family: Cambria, serif;
-	}
+
+#treemapCanvas {
+	font-family: Cambria, serif;
+}
+
+#treemapCanvas .textWrapper{
+	overflow: hidden;
+}
+
+.tooltipster-content{
+	text-align: left !important;
+}
