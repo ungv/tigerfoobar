@@ -5,7 +5,7 @@
 
 	<div id='aboutPage'>
 		<h2>The cycle is broken.</h2>
-		<img src="/img/cycle.png">
+		<img src="<?=base_url()?>img/cycle.png">
 		<p>When companies create products and services, they make a lot of decisions. Every choice has the potential to do good or to do harm. How do we know which companies to trust? </p>
 		<p></p>
 

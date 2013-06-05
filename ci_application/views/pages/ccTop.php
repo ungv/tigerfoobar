@@ -19,7 +19,7 @@
 							?>
 								<li>
 									<div class="fancyTags <?= $tag['uservoted'] ? 'userVoted' : 'notVoted' ?>">
-										<span class="tagName"><a href="/tag/<?=$tag['TagsID']?>"><?=$tag['Name']?></a></span>
+										<span class="tagName"><a href="<?=base_url()?>tag/<?=$tag['TagsID']?>"><?=$tag['Name']?></a></span>
 										<span>(</span>
 											<span class="tagTotal"><?=$tag['votes']?></span>
 										<span>)</span>

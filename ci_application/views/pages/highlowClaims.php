@@ -17,7 +17,7 @@
 			</div>
 			<div class="rightContainer">
 				<div class="claimTitle">
-					<a href="/claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a>
+					<a href="<?=base_url()?>claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a>
 				</div>
 				<div class="claimTags">
 					Tags: [need help with this query]
@@ -44,7 +44,7 @@
 			</div>
 			<div class="rightContainer">
 				<div class="claimTitle">
-					<a href="/claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a>
+					<a href="<?=base_url()?>claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a>
 				</div>
 				<div class="claimTags">
 					Tags: [need help with this query]

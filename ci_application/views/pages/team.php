@@ -1,7 +1,7 @@
 	<h1>Team Tiger Foobar</h1>
 	<ul id='team'>
 		<li>
-			<img src="img/tiger.jpg">
+			<img src="<?=base_url()?>img/tiger.jpg">
 			<h2>Sean</h2>
 			<p>A guy that worked on this site.</p>
 			<p>Favorite Tiger: </p>
@@ -11,7 +11,7 @@
 		<hr>
 		
 		<li>
-			<img src="img/tiger.jpg">
+			<img src="<?=base_url()?>img/tiger.jpg">
 			<h2>Brian</h2>
 			<p>A guy that worked on this site.</p>
 			<p>Favorite Tiger: White Tiger</p>
@@ -21,7 +21,7 @@
 		<hr>
 		
 		<li>
-			<img src="img/tiger.jpg">
+			<img src="<?=base_url()?>img/tiger.jpg">
 			<h2>Lauren</h2>
 			<p>A girl that worked on this site.</p>
 			<p>Favorite Tiger: </p>
@@ -31,7 +31,7 @@
 		<hr>
 		
 		<li>
-			<img src="img/tiger.jpg">
+			<img src="<?=base_url()?>img/tiger.jpg">
 			<h2>Victor</h2>
 			<p>A guy that worked on this site.</p>
 			<p>Favorite Tiger: </p>
@@ -41,7 +41,7 @@
 		<hr>
 		
 		<li>
-			<img src="img/tiger.jpg">
+			<img src="<?=base_url()?>img/tiger.jpg">
 			<h2>Scott Kuehnert</h2>
 			<p>A guy that worked on this site.</p>
 			<p>Favorite Tiger: Snow Leopard</p>

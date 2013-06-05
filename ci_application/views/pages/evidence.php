@@ -12,7 +12,7 @@
 				<dt>Source </dt>
 					<dd><a href="<?=$claimInfo['Link']?>" target="_blank"><?=parse_url($claimInfo['Link'])['host']?></a></dd>
 				<dt>Company </dt>
-					<dd><a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></dd>
+					<dd><a href="<?=base_url()?>company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></dd>
 			</dl>
 			<hr>
 		<img id='flagButton' class='tooltip' src="/img/flag.png" 
@@ -21,7 +21,7 @@
 				<a id="flagWrong">Wrong Company</a>'>		
 			<dl>
 				<dt>Submitted </dt>
-					<dd><?=date("F j, Y", strtotime($claimInfo['ClaimTime']))?>, by <a href="/profile/<?=$claimInfo['UserID']?>"><?=$claimInfo['UserName']?></a></dd>
+					<dd><?=date("F j, Y", strtotime($claimInfo['ClaimTime']))?>, by <a href="<?=base_url()?>profile/<?=$claimInfo['UserID']?>"><?=$claimInfo['UserName']?></a></dd>
 			</dl>
 		<?php if ($pageType != 'company') {	//loading claim
 				$objectid = $claimInfo['ClaimID'];
@@ -39,7 +39,7 @@
 						?>
 							<li>
 								<div class="fancyTags <?= $tag['uservoted'] ? 'userVoted' : 'notVoted' ?>">
-									<span class="tagName"><a href="/tag/<?=$tag['TagsID']?>"><?=$tag['Name']?></a></span>
+									<span class="tagName"><a href="<?=base_url()?>tag/<?=$tag['TagsID']?>"><?=$tag['Name']?></a></span>
 									<span>(</span>
 										<span class="tagTotal"><?=$tag['votes']?></span>
 									<span>)</span>

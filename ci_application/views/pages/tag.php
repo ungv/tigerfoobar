@@ -21,8 +21,8 @@ if (count($userComments) < 5) {
 			foreach ($listofclaims as $claim) {
 			?>
 			<li id="<?=$claim['Score']?>">
-				<p><a href="/claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a></p>
-				<p style="float: right;">Linked to <a href="/company/<?=$claim['CompanyID']?>"><?=$claim['CoName']?></a></p>
+				<p><a href="<?=base_url()?>claim/<?=$claim['ClaimID']?>"><?=$claim['Title']?></a></p>
+				<p style="float: right;">Linked to <a href="<?=base_url()?>company/<?=$claim['CompanyID']?>"><?=$claim['CoName']?></a></p>
 			</li>
 			<?php
 			}

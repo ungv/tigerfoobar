@@ -19,7 +19,7 @@
 				By sharing objective articles and facts about corporations and their products,
 				as well as being part of a global peer review system, we can create a generation
 				of consumer activists that makes the best possible decisions. 
-				<a href="/about">Learn More</a>
+				<a href="<?=base_url()?>about">Learn More</a>
 			</p>
 		</div>
 		<div id="videoContainer">

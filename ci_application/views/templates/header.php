@@ -6,7 +6,7 @@
 <head>
 	<title><?= $headerTitle ?></title>
 
-	<link rel="icon" type="image/png" href="/img/favicon.png" />
+	<link rel="icon" type="<?=base_url()?>image/png" href="/img/favicon.png" />
 
 	<?php 
 	/*Our Stylesheets*/
@@ -14,21 +14,21 @@
 		<link href="<?= base_url() . 'css/' . $csFile . '.css' ?>" type="text/css" rel="stylesheet" />
 	<?php } ?>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="/css/tagit-awesome-blue.css">
+	<link rel="stylesheet" href="<?=base_url()?>css/tagit-awesome-blue.css">
 
 	<?php /*jQuery Scripts*/?>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
-	<script src="/js/jquery.validate.min.js" type="text/javascript"></script>
-	<script src="/js/additional-methods.min.js" type="text/javascript"></script>
-	<script src="/js/jquery.tooltipster.min.js" type="text/javascript"></script>
-	<script src="/js/tagit.js" type="text/javascript"></script>	
-	<script src="/js/highcharts.js" type="text/javascript"></script>	
+	<script src="<?=base_url()?>js/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="<?=base_url()?>js/additional-methods.min.js" type="text/javascript"></script>
+	<script src="<?=base_url()?>js/jquery.tooltipster.min.js" type="text/javascript"></script>
+	<script src="<?=base_url()?>js/tagit.js" type="text/javascript"></script>	
+	<script src="<?=base_url()?>js/highcharts.js" type="text/javascript"></script>	
 </head>
 
 <body>
 	<header>
-		<h1><a href="/"><img id="logoImage" src="/img/patchwork_logo.png"/><span id="title_text">atchwork</span></a></h1>
+		<h1><a href="<?=base_url()?>"><img id="logoImage" src="/img/patchwork_logo.png"/><span id="title_text">atchwork</span></a></h1>
 		<SECTION id='topbar'>
 			<!--Search box-->
 			<input id="searchInput" type="text" placeholder="Search for companies or products/services"/>
@@ -91,8 +91,8 @@
 ?>
 		<div id='navv'>
 			<p>
-				<a href="/claim">Claims</a> >> 
-				<a href="/company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a> >>
+				<a href="<?=base_url()?>claim">Claims</a> >> 
+				<a href="<?=base_url()?>company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a> >>
 				<strong><?=$claimInfo['ClaimTitle']?></strong>
 			</p>
 		</div>
@@ -102,7 +102,7 @@
 ?>
 		<div id='navv'>
 			<p>
-				<a href="/company">Companies</a> >> 
+				<a href="<?=base_url()?>company">Companies</a> >> 
 				<strong><?=$companyInfo['Name']?></strong>
 			</p>
 		</div>
