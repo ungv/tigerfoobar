@@ -18,23 +18,29 @@ $(document).ready(function() {
 	/*------Rating the claim-------*/
 	// Add or update user's rating on this claim
 	$('input[name=claimscore]').click(function() {
-		if (isLoggedIn('to rate this claim')) {
-			$.ajax({
-				type: 'POST',
-				url: '/action/sendRating',
-				data: {
-					rating: $(this).attr('value'),
-					claimID: $(this).attr('claimid')
-				},
-				dataType: 'json',
-				success: function(json) {
-					alert('Thanks for rating this claim! Go ahead and add a comment below!');
-					window.location.reload();
-				},
-				error: function() {
-					console.log('error in rating the claim');
-				}
-			});
+		$rating = $(this).attr('value');
+		if ($rating != -3 || $rating != -2 || $rating != -1 || $rating != 1 || $rating != 2 || $rating != 3) {
+			alert("Hey, don't mess with us!");
+			window.location.reload(true);
+		} else {
+			if (isLoggedIn('to rate this claim')) {
+				$.ajax({
+					type: 'POST',
+					url: '/action/sendRating',
+					data: {
+						rating: $(this).attr('value'),
+						claimID: $(this).attr('claimid')
+					},
+					dataType: 'json',
+					success: function(json) {
+						alert('Thanks for rating this claim! Go ahead and add a comment below!');
+						window.location.reload();
+					},
+					error: function() {
+						console.log('error in rating the claim');
+					}
+				});
+			}
 		}
 	});
 

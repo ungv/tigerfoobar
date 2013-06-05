@@ -64,6 +64,10 @@ function addClaim() {
 		$desc = $('textarea').val();
 		$company = $('#assocCo').tagit('tags');
 		$rating = $('input[name=score]:checked').val();
+		if ($rating != -3 || $rating != -2 || $rating != -1 || $rating != 1 || $rating != 2 || $rating != 3) {
+			alert("Hey don't mess with us!");
+			window.location.reload(true);
+		}
 		$tags = $('#tagsSearch').tagit('tags');
 
 		// For some reason, ajax only allows plain objects
