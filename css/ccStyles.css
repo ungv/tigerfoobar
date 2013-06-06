@@ -83,7 +83,7 @@
 	#tagSection .tagUpvote {
 		padding-left:6px;
 		font-size: 18pt;
-		margin-top: -12px;
+		margin-top: -2px;
 	}
 
 	.tagUpvote:hover {
@@ -92,9 +92,8 @@
 	}
 
 	.fancyTags span {
-		vertical-align: middle;
+		vertical-align: top;
 		display: inline-block;
-		margin-top: -10px;
 	}
 
 	.fancyTags:before {
@@ -112,7 +111,7 @@
 		margin-left: 10px;
 		padding-left: 5px;
 		padding-right: 10px;
-		padding-top: 4px;
+		line-height: 25px;
 	}
 
 	.userVoted:before {
