@@ -109,6 +109,7 @@ class Pages extends Root_Controller {
 		}else { // else display the claim
 			if ($this->is_logged_in()) {
 				$data['signedIn'] = true;
+				$data['thisUser'] = $this->userid;
 			}
 			$data['headerTitle'] = 'View Claim - PatchWork';
 			$data['pageType'] = 'claim';

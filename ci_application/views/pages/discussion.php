@@ -15,7 +15,7 @@
 			<div id="newCommentBox" style="display: none;">
 				<textarea cols="100%" placeholder="Your comments on this article"></textarea>
 				<button id="newThread" class="submitButton submitReply" value="">Submit</button>
-				<button class="cancelButton cancelReply" value="">cancel</button>				
+				<button class="cancelButton cancelReply" value="">cancel</button>
 			</div>
 			<?php 
 			if (empty($comments)) {
@@ -56,9 +56,26 @@
 									}
 								}
 							}
+
 						?>
+
 						<h4>By: <a href="<?=base_url()?>profile/<?=$comment['UserID']?>"><?=$comment['Name']?></a> <em style="font-size: 9pt; color: darkgray;">(<?=floor($timesince) . ' ' . $identifier?>)</em></h4>
-						<p><?=$comment['Comment']?></p>
+						<?php
+							if ($comment['UserID'] == $thisUser) {
+						?>
+						<div style="position: relative;">
+							<textarea type="text" rows="5" class="outfocus editBox" style="width: 90%; display: none;"></textarea>
+							<p class="editable"><?=$comment['Comment']?></p>
+							<img class="editbutton" src="/img/contribute_icon.png" title="Edit Comment" style="top: -20px;"/>
+							<button class="submitButton updateEdit">Submit</button>
+						</div>
+						<?php 
+							} else {
+						?>
+							<p><?=$comment['Comment']?></p>
+						<?php
+							}
+						?>
 						<div class="buttonsContainer" style="opacity: 0.4;">
 							<p>(+<span class="upNum"><?=$comment['Ups']?></span> | -<span class="downNum"><?=$comment['Downs']?></span>)</p>
 							<input type="radio" id="<?=$comment['CommentID']?>upvote" name="commentVoting" >

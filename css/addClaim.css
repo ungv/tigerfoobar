@@ -60,13 +60,6 @@
 	display: none;
 }*/
 
-.loadingGif {
-	background-image: url('/img/loading.gif');
-	background-repeat: no-repeat;
-	width: 32px;
-	height: 32px;
-}
-
 #successAlert {	
 	z-index: 300;
 	position: fixed;

@@ -207,7 +207,69 @@ $(document).ready(function() {
 		autocompleteLi.appendTo(ul);
 		return autocompleteLi;
 	};;
-});
+
+
+	/*-----------Editing interactions---------------*/
+	$('.editbutton').click(function() {
+		$submitclicked = false;
+		$editable = $(this).parent().find('.editable');
+		$newInput = $(this).parent().find('.editBox');
+		$newInput.show().val($editable.text());
+		$newInput.focus();
+		$newInput.blur(function() {
+			if (!$submitclicked) {
+				$editButton.show();
+				$editable.show();
+				$newInput.hide();
+				$updateButton.hide();
+			}
+		});
+		$type = $(this).attr('title');
+		if ($type == 'Edit Title') {
+			$table = 'Claim';
+			$col = 'Title';
+			$forid = 'ClaimID';
+		} else if ($type == 'Edit Synopsis') {
+			$table = 'Claim';
+			$col = 'Description';
+			$forid = 'ClaimID';
+		} else if ($type == 'Edit Comment') {
+			$table = 'Discussion';
+			$col = 'Comment';
+			$forid = 'CommentID';
+		}
+		$withid = $('#discussionContainer').attr('claimid');
+		$editButton = $(this);
+		$editButton.hide();
+		$editable.hide();
+		$updateButton = $(this).parent().find('.updateEdit');
+		$updateButton.show();
+		$updateButton.mousedown(function() {
+			$submitclicked = true;
+			$updateButton.text('').addClass('loadingGif').attr('disabled', 'disabled');
+			$newText = $(this).parent().find('.editBox').val();
+			$.ajax({
+				type: 'POST',
+				url: '/action/updateEdit',
+				data: {
+					table: $table,
+					col: $col,
+					forid: $forid,
+					newText: $newText,
+					withid: $withid
+				},
+				dataType: 'json',
+				success: function(json) {
+					window.location.reload(true);
+				},
+				error: function() {
+					console.log("Ooops, something weird with updating edits");
+				}
+			});
+		});
+	});
+
+}); // end document ready
 
 function resizeSearchBar() {
 	var searchBar = $("#searchInput");

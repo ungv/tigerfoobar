@@ -526,4 +526,21 @@ class Action_model extends CI_Model {
         $this->db->insert('Discussion', $commentData);
         return true;
     }
+
+    public function updateEdit($userid) {
+        $table = $this->security->xss_clean($this->input->post('table'));
+        $col = $this->security->xss_clean($this->input->post('col'));
+        $forid = $this->security->xss_clean($this->input->post('forid'));
+        $newText = $this->security->xss_clean($this->input->post('newText'));
+        $withid = $this->security->xss_clean($this->input->post('withid'));
+
+        $data = array(
+                $col => $newText
+                );
+        $where = array(
+                $forid => $withid
+                );
+        $this->db->update($table, $data, $where);
+        return true;
+    }
 }
