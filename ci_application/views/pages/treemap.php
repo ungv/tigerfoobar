@@ -366,7 +366,7 @@
 			$(e.target).addClass("active");
 			
 			//Clear old treemap and place loading gif in the middle of it
-			$("#treemapCanvas").prepend('<div class="loadingOverlay"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			$("#treemapCanvas").prepend('<div class="loadingOverlay" style = "width : '+parseInt($("#treemapCanvas").width() + 10) + 'px; height : '+parseInt($("#treemapCanvas").height() + 10) +'px;"><img src = "/img/loading.gif" alt = "loading" /></div>');
 			
 			$.getJSON("/data/topCompaniesWithClaims", function(result){
 				//Clear old treemap
@@ -382,12 +382,12 @@
 			$(e.target).addClass("active");
 			
 			//Clear old treemap and place loading gif in the middle of it
-			$("#treemapCanvas").prepend('<div class="loadingOverlay"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			$("#treemapCanvas").prepend('<div class="loadingOverlay" style = "width : '+parseInt($("#treemapCanvas").width() + 10) + 'px; height : '+parseInt($("#treemapCanvas").height() + 10) +'px;"><img src = "/img/loading.gif" alt = "loading" /></div>');
 			
 			$.getJSON("/data/claimsInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
-				$(".loadingOverlay").hide();
+				$(".loadingOverlay").detach();
 
 				generateTreemap(result);
 			});
@@ -398,7 +398,7 @@
 			$(e.target).addClass("active");
 			
 			//Clear old treemap and place loading gif in the middle of it
-			$("#treemapCanvas").prepend('<div class="loadingOverlay"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			$("#treemapCanvas").prepend('<div class="loadingOverlay" style = "width : '+parseInt($("#treemapCanvas").width() + 10) + 'px; height : '+parseInt($("#treemapCanvas").height() + 10) +'px;"><img src = "/img/loading.gif" alt = "loading" /></div>');
 			
 			$.getJSON("/data/companiesInRange", function(result){
 				//Clear old treemap
@@ -414,7 +414,7 @@
 			$(e.target).addClass("active");
 			
 			//Clear old treemap and place loading gif in the middle of it
-			$("#treemapCanvas").prepend('<div class="loadingOverlay"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			$("#treemapCanvas").prepend('<div class="loadingOverlay" style = "width : '+parseInt($("#treemapCanvas").width() + 10) + 'px; height : '+parseInt($("#treemapCanvas").height() + 10) +'px;"><img src = "/img/loading.gif" alt = "loading" /></div>');
 			
 			$.getJSON("/data/tagsInRange", function(result){
 				//Clear old treemap
