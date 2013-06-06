@@ -299,7 +299,7 @@
 		}
 		
 		function calculateFontSize(width, height, text) {
-				var maxSize = 50;
+				var maxSize = 40;
 				var currSize = maxSize;
 				var sizingDiv = $("<div></div>");
 				$("body").append(sizingDiv);
@@ -307,23 +307,14 @@
 		
 				sizingDiv.css({"max-width": width + 50, "font-size": maxSize, "display":"inline-block", "visibility":"hidden", "word-spacing":"" });
 				
-				var trueWidth = sizingDiv.width();
-				if (trueWidth>width) {
-					currSize = (width/trueWidth)*currSize;
+				var count = 0;
+				while(sizingDiv.height() > height && count<(maxSize-10)) {
+					if (count>maxSize-10) 
+						break;
+					var currSize = currSize - 1;
 					sizingDiv.css("font-size", currSize);
+					count ++;
 				}
-				
-				var trueHeight = sizingDiv.height();
-				if (trueHeight>height) {
-					currSize = (height/trueHeight)*currSize;
-					sizingDiv.css("font-size", currSize);
-				}
-				/*
-				var trueFontSizeHeight = (height/trueHeight)*maxSize;
-				sizingDiv.css("font-size", trueFontSizeHeight);
-				
-				var newTrueWidth = sizingDiv.width();
-				var newTrueFontSizeWidth = (width/newTrueWidth)*trueFontSizeHeight;*/
 				
 				sizingDiv.remove();
 				
