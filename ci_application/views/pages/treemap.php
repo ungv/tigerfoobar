@@ -178,9 +178,9 @@
 				  .on("mouseout", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "1.0");})
 				  .on("click", function(d) {
 						if (typeof d.claimID !== 'undefined') { //The clicked item is a claim title
-							window.location.href = "<?=base_url()?>claim/" + d.claimID;
+							window.location.href = "/claim/" + d.claimID;
 						} else if (typeof d.companyID !== 'undefined') { //The clicked item is a company name
-							window.location.href = "<?=base_url()?>company/" + d.companyID;
+							window.location.href = "/company/" + d.companyID;
 						}
 					});
 
