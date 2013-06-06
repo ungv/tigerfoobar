@@ -39,15 +39,12 @@
 							echo($tmp['host']);
 						?>
 						</a>
-						<img id='flagButton' class='tooltip' src="<?=base_url()?>img/flag.png" 
+						<img id='flagButton' class='tooltip' src="<?=base_url()?>img/flag.png" title='This claim is <a id="flagNoncredible">Noncredible</a> or <a id="flagWrong">Wrong Company</a>'>		
 					</dd>
 				<dt>Company </dt>
 					<dd><a href="<?=base_url()?>company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></dd>
 			</dl>
 			<hr>
-		title='This claim is 
-			<a id="flagNoncredible">Noncredible</a> or 
-				<a id="flagWrong">Wrong Company</a>'>		
 			<dl>
 				<dt>Submitted </dt>
 					<dd><?=date("F j, Y", strtotime($claimInfo['ClaimTime']))?>, by <a href="<?=base_url()?>profile/<?=$claimInfo['UserID']?>"><?=$claimInfo['UserName']?></a></dd>
