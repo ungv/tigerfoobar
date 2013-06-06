@@ -10,7 +10,13 @@
 				<dt>Synopsis </dt>
 					<dd><?=$claimInfo['Description']?></dd>
 				<dt>Source </dt>
-					<dd><a href="<?=$claimInfo['Link']?>" target="_blank"><?=parse_url($claimInfo['Link'])['host']?></a></dd>
+					<dd><a href="<?=$claimInfo['Link']?>" target="_blank">
+						<?php
+							$tmp = parse_url($claimInfo['Link']);
+							echo($tmp['host']);
+						?>
+						</a>
+					</dd>
 				<dt>Company </dt>
 					<dd><a href="<?=base_url()?>company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></dd>
 			</dl>

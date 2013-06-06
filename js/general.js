@@ -200,7 +200,7 @@ $(document).ready(function() {
 					'<span class="resultScore">' + item.score + '</span></a>');
 			//!! can changes later to label industry
 			autocompleteLi.addClass(item.type+"Result")
-			$(autocompleteLi.children("a")[0]).attr("href","http://127.0.0.1/" + item.type + "/" + item.id);
+			$(autocompleteLi.children("a")[0]).attr("href","/" + item.type + "/" + item.id);
 		}
 		autocompleteLi.appendTo(ul);
 		return autocompleteLi;
