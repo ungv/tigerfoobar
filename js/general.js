@@ -207,6 +207,59 @@ $(document).ready(function() {
 		autocompleteLi.appendTo(ul);
 		return autocompleteLi;
 	};;
+
+
+	/*-----------Editing interactions---------------*/
+	$('.editbutton').click(function() {
+		$editable = $(this).parent().find('.editable');
+		$newInput = $(this).parent().find('input');
+		$newInput.show().val($editable.text());
+		$newInput.focus();
+		$newInput.blur(function() {
+			$editButton.show();
+			$editable.show();
+			$newInput.hide();
+			$updateButton.hide();
+		});
+		$type = $(this).attr('title');
+		if ($type == 'Edit Title') {
+			$table = 'Claim';
+			$col = 'Title';
+			$forid = 'ClaimID';
+		} else if ($type == 'Edit Synopsis') {
+			$table = 'Claim';
+			$col = 'Description';
+			$forid = 'ClaimID';
+		}
+		$withid = $('#discussionContainer').attr('claimid');
+		$editButton = $(this);
+		$editButton.hide();
+		$editable.hide();
+		$updateButton = $(this).parent().find('.updateEdit');
+		$updateButton.show().click(function() {
+			$updateButton.text('').addClass('loadingGif').attr('disabled', 'disabled');
+			$newText = $(this).parent().find('input').val();
+			$.ajax({
+				type: 'POST',
+				url: '/action/updateEdit',
+				data: {
+					table: $table,
+					col: $col,
+					forid: $forid,
+					newText: $newText,
+					withid: $withid
+				},
+				dataType: 'json',
+				success: function(json) {
+					window.location.reload(true);
+				},
+				error: function() {
+					alert("Oops, couldn't update your edit.");
+				}
+			});
+		});
+	});
+
 });
 
 function resizeSearchBar() {

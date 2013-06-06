@@ -39,7 +39,12 @@
 	<?php
 	}else {
 	?>
-		<h1><a href="<?=$claimInfo['Link']?>"><?=$claimInfo['ClaimTitle']?></a></h1>
+		<div style="position: relative;">
+			<input type="text" class="outfocus" style="width: 90%; display: none;">
+			<h1><a href="<?=$claimInfo['Link']?>" class="editable" target="_blank"><?=$claimInfo['ClaimTitle']?></a></h1>
+			<img class="editbutton" src="/img/contribute_icon.png" title="Edit Title" />
+			<button class="submitButton updateEdit">Submit</button>
+		</div>
 	<?php
 	}
 	?>

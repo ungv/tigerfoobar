@@ -8,7 +8,14 @@
 		<div id='evidenceContent' class="content">
 			<dl>
 				<dt>Synopsis </dt>
-					<dd><?=$claimInfo['Description']?></dd>
+					<dd>
+						<div style="position: relative;">
+							<input type="text" class="outfocus" style="width: 90%; display: none;">
+							<p class="editable"><?=$claimInfo['Description']?></p>
+							<img class="editbutton" src="/img/contribute_icon.png" title="Edit Synopsis" />
+							<button class="submitButton updateEdit">Submit</button>
+						</div>
+					</dd>
 				<dt>Source </dt>
 					<dd><a href="<?=$claimInfo['Link']?>" target="_blank">
 						<?php

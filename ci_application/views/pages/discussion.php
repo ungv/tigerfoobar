@@ -1,5 +1,5 @@
 	<!--Start Discussion content-->
-	<div id="discussionContainer" class="container" claimid="<?=$claimID?>">
+	<div id="discussionContainer" class="container" claimid="<?=$claimID?>" theirclaim="<?=$claimInfo['UserID'] == $thisUser ? '1' : '0'?>">
 		<h2>Discussion</h2>
 		<div id="discussionContent" class="content">
 			<div>

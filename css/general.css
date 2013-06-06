@@ -416,3 +416,33 @@ li.ui-menu-item a {
 .tooltipster-content{
 	text-align: left !important;
 }
+
+/*-----------Edit Button styles-----------*/
+.editbutton {
+	width: 20px;
+	position: absolute;
+	right: 0;
+	top: 10px;
+	opacity: 0.4;
+}
+
+.editbutton:hover {
+	opacity: 1;
+}
+
+.updateEdit {
+	position: absolute;
+	right: 0;
+	top: -10px;
+	padding: 7px;
+	display: none;
+}
+
+/*-----------Loading Gif-----------*/
+
+.loadingGif {
+	background-image: url('/img/loading.gif');
+	background-repeat: no-repeat;
+	width: 32px;
+	height: 32px;
+}
