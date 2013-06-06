@@ -365,7 +365,7 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
-			$.getJSON("<?=base_url()?>data/topCompaniesWithClaims", function(result){
+			$.getJSON("/data/topCompaniesWithClaims", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
 
@@ -377,7 +377,7 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
-			$.getJSON("<?=base_url()?>data/claimsInRange", function(result){
+			$.getJSON("/data/claimsInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
 
