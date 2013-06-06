@@ -155,8 +155,11 @@
 	}
 
 	#newtag_name, #addTag{
-		margin-left:90px;
 		margin-bottom:4px;
+	}
+
+	#newtag_name {
+		margin-left:90px;
 	}
 
 	.originalTagPreview{
