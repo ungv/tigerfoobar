@@ -46,9 +46,9 @@
 
 	#main > div > div:hover, #main > div > ul > li:hover {
 		background-color:#fff;
-		-webkit-box-shadow: 4px 4px 10px rgba(94, 94, 94, 0.7);
-		-moz-box-shadow: 4px 4px 10px rgba(94, 94, 94, 0.7);
-		box-shadow: 4px 4px 10px rgba(94, 94, 94, 0.7);
+		-webkit-box-shadow: 3px 3px 10px rgba(94, 94, 94, 0.7);
+		-moz-box-shadow: 3px 3px 10px rgba(94, 94, 94, 0.7);
+		box-shadow: 3px 3px 10px rgba(94, 94, 94, 0.7);
 	}
 
 /*------------------------Treemap View-----------------------------*/
@@ -157,9 +157,9 @@
 		margin-bottom:4px;
 	}
 
-	#newtag_name {
+	/*#newtag_name {
 		margin-left:90px;
-	}
+	}*/
 
 	.originalTagPreview{
 		color:#B06307;

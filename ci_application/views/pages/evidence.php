@@ -39,12 +39,12 @@
 							echo($tmp['host']);
 						?>
 						</a>
+						<img id='flagButton' class='tooltip' src="<?=base_url()?>img/flag.png" 
 					</dd>
 				<dt>Company </dt>
 					<dd><a href="<?=base_url()?>company/<?=$claimInfo['CompanyID']?>"><?=$claimInfo['CoName']?></a></dd>
 			</dl>
 			<hr>
-		<img id='flagButton' class='tooltip' src="<?=base_url()?>img/flag.png" 
 		title='This claim is 
 			<a id="flagNoncredible">Noncredible</a> or 
 				<a id="flagWrong">Wrong Company</a>'>		
@@ -76,13 +76,15 @@
 								</div>
 							</li>
 						<?php } ?>
-					<li><a id="addTag" href="#" <?php if(!$isLogged) { ?>style="display:none;"<?php } ?> title='Add new tag'>+</a></li>
+					<li>
+						<a id="addTag" href="#" <?php if(!$isLogged) { ?>style="display:none;"<?php } ?> title='Add new tag'>+</a>
+						<div id="newTagPopup" style="display:none;">
+							<input id="newtag_name" tagtype="<?=$tagtype?>" type="text" placeholder="Type a tag name"/>
+						</div>
+					</li>
 					</ul>
 				</dd>
 				
-				<div id="newTagPopup" style="display:none;">
-					<input id="newtag_name" tagtype="<?=$tagtype?>" type="text" placeholder="Type a tag name"/>
-				</div>
 			</dl>
 
 		<?php } ?>
