@@ -431,13 +431,13 @@ class Data_model extends CI_Model {
 			$claims = '';
 			$rating = $topCompanies[$i]["companyScore"];			
 			while (($i < count($topCompanies)) && $topCompanies[$i]["companyName"] == $currCompany) {
-				$title = str_replace("'","", $topCompanies[$i]["Title"]);
-				$size = str_replace("'","", $topCompanies[$i]["numScores"]);
+				$title = preg_replace("/[^ \w]+/", "", $topCompanies[$i]["Title"]);
+				$size =  preg_replace("/[^ \w]+/", "", $topCompanies[$i]["numScores"]);
 				$score = $topCompanies[$i]["claimScore"];
 				$claimID = $topCompanies[$i]["ClaimID"];
 				$userName = $topCompanies[$i]["userName"];
 				$userID = $topCompanies[$i]["UserID"];
-				$claimDescription = str_replace('"', "", $topCompanies[$i]["Description"]);
+				$claimDescription =  preg_replace("/[^ \w]+/", "", $topCompanies[$i]["Description"]);
 				
 				$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "description" : "' . $claimDescription . '", "score" : "' . $score .'", "size" : ' . $size . ', "userName": "'. $userName .'", "userID" : "'. $userID .'", "company" : "'. $currCompany .'", "companyID" : "'. $companyID .'"},';
 				$i++;
