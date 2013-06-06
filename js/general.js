@@ -211,15 +211,18 @@ $(document).ready(function() {
 
 	/*-----------Editing interactions---------------*/
 	$('.editbutton').click(function() {
+		$submitclicked = false;
 		$editable = $(this).parent().find('.editable');
 		$newInput = $(this).parent().find('.editBox');
 		$newInput.show().val($editable.text());
 		$newInput.focus();
 		$newInput.blur(function() {
-			$editButton.show();
-			$editable.show();
-			$newInput.hide();
-			$updateButton.hide();
+			if (!$submitclicked) {
+				$editButton.show();
+				$editable.show();
+				$newInput.hide();
+				$updateButton.hide();
+			}
 		});
 		$type = $(this).attr('title');
 		if ($type == 'Edit Title') {
@@ -240,7 +243,9 @@ $(document).ready(function() {
 		$editButton.hide();
 		$editable.hide();
 		$updateButton = $(this).parent().find('.updateEdit');
-		$updateButton.show().mousedown(function() {
+		$updateButton.show();
+		$updateButton.mousedown(function() {
+			$submitclicked = true;
 			$updateButton.text('').addClass('loadingGif').attr('disabled', 'disabled');
 			$newText = $(this).parent().find('.editBox').val();
 			$.ajax({
@@ -258,13 +263,13 @@ $(document).ready(function() {
 					window.location.reload(true);
 				},
 				error: function() {
-					alert("Oops, couldn't update your edit.");
+					console.log("Ooops, something weird with updating edits");
 				}
 			});
 		});
 	});
 
-});
+}); // end document ready
 
 function resizeSearchBar() {
 	var searchBar = $("#searchInput");
