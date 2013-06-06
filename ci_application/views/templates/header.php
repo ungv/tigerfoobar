@@ -6,7 +6,7 @@
 <head>
 	<title><?= $headerTitle ?></title>
 
-	<link rel="icon" type="<?=base_url()?>image/png" href="/img/faviconNew.png" />
+	<link rel="icon" type="<?=base_url()?>image/png" href="/img/favicon.png" />
 
 	<?php 
 	/*Our Stylesheets*/
