@@ -3,10 +3,17 @@
 	//echo date_default_timezone_get();
 ?>
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:og="http://ogp.me/ns#"
+xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 	<title><?= $headerTitle ?></title>
 
-	<link rel="icon" type="<?=base_url()?>image/png" href="/img/favicon.png" />
+	<?php // Facebook Open Graph meta tag ?>
+	<meta property="og:image" content="<?=base_url()?>img/logo.png" />
+
+	<link rel="icon" type="image/png" href="<?=base_url()?>img/favicon.png" />
+	<link rel="image_src" type="image/png" href="<?=base_url()?>img/logo.png" />
 
 	<?php 
 	/*Our Stylesheets*/
