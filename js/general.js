@@ -212,7 +212,7 @@ $(document).ready(function() {
 	/*-----------Editing interactions---------------*/
 	$('.editbutton').click(function() {
 		$editable = $(this).parent().find('.editable');
-		$newInput = $(this).parent().find('input');
+		$newInput = $(this).parent().find('.editBox');
 		$newInput.show().val($editable.text());
 		$newInput.focus();
 		$newInput.blur(function() {
@@ -230,15 +230,19 @@ $(document).ready(function() {
 			$table = 'Claim';
 			$col = 'Description';
 			$forid = 'ClaimID';
+		} else if ($type == 'Edit Comment') {
+			$table = 'Discussion';
+			$col = 'Comment';
+			$forid = 'CommentID';
 		}
 		$withid = $('#discussionContainer').attr('claimid');
 		$editButton = $(this);
 		$editButton.hide();
 		$editable.hide();
 		$updateButton = $(this).parent().find('.updateEdit');
-		$updateButton.show().click(function() {
+		$updateButton.show().mousedown(function() {
 			$updateButton.text('').addClass('loadingGif').attr('disabled', 'disabled');
-			$newText = $(this).parent().find('input').val();
+			$newText = $(this).parent().find('.editBox').val();
 			$.ajax({
 				type: 'POST',
 				url: '/action/updateEdit',

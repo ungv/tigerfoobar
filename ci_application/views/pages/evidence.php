@@ -9,12 +9,26 @@
 			<dl>
 				<dt>Synopsis </dt>
 					<dd>
+						<?php
+						if ($claimInfo['UserID'] == $thisUser) {
+						?>
 						<div style="position: relative;">
-							<input type="text" class="outfocus" style="width: 90%; display: none;">
+							<input type="text" class="outfocus editBox" style="width: 90%; display: none;">
 							<p class="editable"><?=$claimInfo['Description']?></p>
-							<img class="editbutton" src="/img/contribute_icon.png" title="Edit Synopsis" />
+							<img class="editbutton" src="/img/contribute_icon.png" title="Edit Synopsis" style="top: 0px;" />
 							<button class="submitButton updateEdit">Submit</button>
 						</div>
+						<?php
+						} else {
+							if ($claimInfo['Description'] == '') {
+							?>
+								[No description provided]
+							<?php
+							} else {
+								$claimInfo['Description'];
+							}
+						}
+						?>
 					</dd>
 				<dt>Source </dt>
 					<dd><a href="<?=$claimInfo['Link']?>" target="_blank">
