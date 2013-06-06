@@ -10,7 +10,7 @@
 				<dt>Synopsis </dt>
 					<dd>
 						<?php
-						if ($claimInfo['UserID'] == $thisUser) {
+						if (isset($thisUser) && $claimInfo['UserID'] == $thisUser) {
 						?>
 						<div style="position: relative;">
 							<input type="text" class="outfocus editBox" style="width: 90%; display: none;">
@@ -22,10 +22,12 @@
 						} else {
 							if ($claimInfo['Description'] == '') {
 							?>
-								[No description provided]
+								<p><em>No description provided</em></p>
 							<?php
 							} else {
-								$claimInfo['Description'];
+							?>
+								<p><?=$claimInfo['Description']?></p>
+							<?php
 							}
 						}
 						?>

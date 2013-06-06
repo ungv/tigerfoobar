@@ -61,7 +61,7 @@
 
 						<h4>By: <a href="<?=base_url()?>profile/<?=$comment['UserID']?>"><?=$comment['Name']?></a> <em style="font-size: 9pt; color: darkgray;">(<?=floor($timesince) . ' ' . $identifier?>)</em></h4>
 						<?php
-							if ($comment['UserID'] == $thisUser) {
+							if (isset($thisUser) && $comment['UserID'] == $thisUser) {
 						?>
 						<div style="position: relative;">
 							<textarea type="text" rows="5" class="outfocus editBox" style="width: 90%; display: none;"></textarea>
