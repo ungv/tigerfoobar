@@ -86,7 +86,7 @@
 		color: green;
 	}
 
-	#tagSection .tagUpvote:hover {
+	.tagUpvote:hover {
 		color: black;
 		cursor: pointer;
 	}
@@ -122,12 +122,14 @@
 
 	.notVoted:before {
 		background: url('/img/tag.png') no-repeat left 0;
-
 	}
 
 	.notVoted {
 		background: url('/img/tag.png') no-repeat right -67px;
+	}
 
+	.tagHover {
+		background: url('/img/tag.png') no-repeat right -67px;
 	}
 
 /*-----------------------Add New Tag---------------------------*/

@@ -1,3 +1,4 @@
+	<div id="dynamicSpacing"></div>
 
 	<footer>
 		<div id='bottomBar'>

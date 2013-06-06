@@ -3,9 +3,13 @@ $(document).ready(function() {
 	//Method found in general.js
 	resetScale();
 
+	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
 	applyColors(parseFloat($('#averageScore').text()), $('#averageScore'), 'color');
 	applyColors(parseFloat($('#averageScore').text()), $('#scoreContent'), 'border-left', '5px solid ');
-	applyColors(parseFloat($('#averageScore').text()), $('#claimPopTags li'), 'background-color');
+	if (parseFloat($('#averageScore').text()) == 0) {
+		$('#averageScore').css('color', '#888888');
+		$('#scoreContent').css('border-left', '5px solid #888888');
+	}
 	
 	$.each($('.claimScore'), function() {
 		applyColors(parseFloat($(this).text()), $(this).parent(), 'background-color');

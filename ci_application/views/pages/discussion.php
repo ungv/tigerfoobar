@@ -57,7 +57,7 @@
 								}
 							}
 						?>
-						<h4>By: <?=$comment['Name']?> <em style="font-size: 9pt; color: darkgray;">(<?=floor($timesince) . ' ' . $identifier?>)</em></h4>
+						<h4>By: <a href="<?=base_url()?>profile/<?=$comment['UserID']?>"><?=$comment['Name']?></a> <em style="font-size: 9pt; color: darkgray;">(<?=floor($timesince) . ' ' . $identifier?>)</em></h4>
 						<p><?=$comment['Comment']?></p>
 						<div class="buttonsContainer" style="opacity: 0.4;">
 							<p>(+<span class="upNum"><?=$comment['Ups']?></span> | -<span class="downNum"><?=$comment['Downs']?></span>)</p>

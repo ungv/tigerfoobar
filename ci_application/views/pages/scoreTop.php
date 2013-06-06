@@ -43,6 +43,6 @@
 							$string += 'This claim has not been rated by anyone yet. Submit a rating below!';
 						}
 						?>
-					<span id="scoreInfo">(<?=$string?>)</span>
+					<span id="scoreInfo">(<?=$string == '0' ? 'No claims or ratings for this company' : $string?>)</span>
 				</div>
 	<!--End ScoreTop content-->

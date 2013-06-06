@@ -139,8 +139,8 @@ class Pages extends Root_Controller {
 			$this->load->view('pages/scoreRight', $data);
 			$this->load->view('pages/highcharts', $data);
 			$this->load->view('pages/scoreBottom', $data);
-			// $this->load->view('pages/treemap', $data);
 			$this->load->view('pages/discussion', $data);
+			$this->load->view('pages/mainBottom', $data);
 			$this->load->view('templates/footer');
 		}
 	}

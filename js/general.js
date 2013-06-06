@@ -6,6 +6,11 @@
 var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#5cffae', '#31b373', '#106138'];
 
 $(document).ready(function() {
+	/*--------Dynamic div above footer positioning-----------------*/
+	$divTop = parseInt($('#dynamicSpacing').position().top);
+	$footerH = parseInt($('footer').height());
+	$windowH = parseInt($(window).height());
+	$('#dynamicSpacing').css('height', $windowH - $footerH - $divTop);
 
 	/*--------FORM VALIDATION (DOCUMENTATION http://docs.jquery.com/Plugins/Validation)--------*/
 	// Call jQuery validate plugin that injects messages for required fields on form submit
