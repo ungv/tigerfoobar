@@ -23,10 +23,7 @@ $(document).ready(function() {
 	// Add or update user's rating on this claim
 	$('input[name=claimscore]').click(function() {
 		$rating = $(this).attr('value');
-		if ($rating != -3 || $rating != -2 || $rating != -1 || $rating != 1 || $rating != 2 || $rating != 3) {
-			alert("Hey, don't mess with us!");
-			window.location.reload(true);
-		} else {
+		if ($rating == -3 || $rating == -2 || $rating == -1 || $rating == 1 || $rating == 2 || $rating == 3) {
 			if (isLoggedIn('to rate this claim')) {
 				$.ajax({
 					type: 'POST',
@@ -37,7 +34,7 @@ $(document).ready(function() {
 					},
 					dataType: 'json',
 					success: function(json) {
-						alert('Thanks for rating this claim! Go ahead and add a comment below!');
+						// alert('Thanks for rating this claim! Go ahead and add a comment below!');
 						window.location.reload();
 					},
 					error: function() {
@@ -45,6 +42,10 @@ $(document).ready(function() {
 					}
 				});
 			}
+		} else {
+			alert("Hey, don't mess with us!");
+			window.location.reload(true);
+			return;
 		}
 	});
 
