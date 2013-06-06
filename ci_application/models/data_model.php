@@ -517,28 +517,28 @@ class Data_model extends CI_Model {
 		for ($i = 0; $i < count($rawData); $i++) {
 				
 				if ($type == "tagsInRange") {
-					$tagName = $rawData[$i]["tagName"];
+					$tagName = preg_replace("/[^ \w]+/", "", $rawData[$i]["tagName"]);
 					$tagID = $rawData[$i]["tagID"];
 					$score = $rawData[$i]["tagScore"];
 					$size = $rawData[$i]["size"];
 					
 					$claims .= '{"name" : "' . $tagName . '", "tagID" : "' . $tagID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
 				} else if ($type == "companiesInRange") {
-					$companyName = $rawData[$i]["companyName"];
+					$companyName = preg_replace("/[^ \w]+/", "", $rawData[$i]["companyName"]);
 					$companyID = $rawData[$i]["companyID"];
 					$score = $rawData[$i]["companyScore"];
 					$size = $rawData[$i]["numClaims"];
 					
 					$claims .= '{"name" : "' . $companyName . '", "company" : "' . $companyName . '", "companyID" : "'. $companyID .'", "score" : "' . $score .'", "size" : ' . $size . '},';
 				} else {
-					$title = str_replace("'","", $rawData[$i]["Title"]);
+					$title = preg_replace("/[^ \w]+/", "", $rawData[$i]["Title"]);
 					$claimID = $rawData[$i]["ClaimID"];
 					$score = $rawData[$i]["claimScore"];
-					$userName = $rawData[$i]["userName"];
+					$userName = preg_replace("/[^ \w]+/", "",$rawData[$i]["userName"]);
 					$userID = $rawData[$i]["UserID"];
 					$size = $rawData[$i]["numScores"];
 					
-					$claimDescription = str_replace('"', "", $rawData[$i]["Description"]);
+					$claimDescription = preg_replace("/[^ \w]+/", "", $rawData[$i]["Description"]);
 					$claims .= '{"name" : "' . $title . '", "claimID" : "' . $claimID . '", "description" : "' . $claimDescription . '", "score" : "' . $score .'", "size" : ' . $size . ', "userName": "'. $userName .'", "userID" : "'. $userID .'"},';
 				}
 		}
