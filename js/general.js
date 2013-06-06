@@ -71,7 +71,7 @@ $(document).ready(function() {
 		hidePopups();
 	});
 
-	/*------Signing Up------*/
+	/*------Sigining Up------*/
 
 	//Show signin box onclick
 	$('#signup').click(function() {
@@ -105,8 +105,10 @@ $(document).ready(function() {
 	$('.lightsout').css('height', $(document).height());
 
 	//Adjust height of overlay to fill screen when browser gets resized  
+	//Also adjust search bar width if necessary
 	$(window).bind("resize", function(){  
-		$(".lightsout").css("height", $(window).height());  
+		$(".lightsout").css("height", $(window).height()); 
+		resizeSearchBar();
 	}); 
 
 	$('.lightsout').click(function () {
@@ -200,12 +202,21 @@ $(document).ready(function() {
 					'<span class="resultScore">' + item.score + '</span></a>');
 			//!! can changes later to label industry
 			autocompleteLi.addClass(item.type+"Result")
-			$(autocompleteLi.children("a")[0]).attr("href","/" + item.type + "/" + item.id);
+			$(autocompleteLi.children("a")[0]).attr("href","http://127.0.0.1/" + item.type + "/" + item.id);
 		}
 		autocompleteLi.appendTo(ul);
 		return autocompleteLi;
 	};;
 });
+
+function resizeSearchBar() {
+	var searchBar = $("#searchInput");
+	var logo = $("#logoBanner");
+	var rightButtons = $("#login_buttons");
+	
+	var availWidth = $(window).width();
+	
+}
 
 /*--------Public functions that need to be accessed by other JS files----------*/
 
@@ -235,6 +246,30 @@ function applyColors(thisVal, $element, styling, stylewith) {
 	} else if (thisVal > 2) {
 		$element.css(styling, stylewith + colors[6]);
 	}
+}
+
+//Sends the passed login parameters to server onclick
+function sendLogin() {
+	$('#login_fail').hide(200);
+	$username = $('#login_username').val();
+	$password = $('#login_password').val();
+	$.ajax({
+		type: 'POST',
+		url: '/action/login',
+		data: {
+			username: $username,
+			password: $password
+		},
+		dataType: 'json',
+		success: function(json) {
+			hidePopups();
+			window.location.reload();
+		},
+		error: function() {
+			$('#login_fail').show(200);
+			$('#login_password').val('');
+		}
+	});
 }
 
 //Resets and recolors the kudos scale to get rid of border color
@@ -279,28 +314,6 @@ function addUser() {
 		},
 		error: function() {
 			$('#username_exists').show(200);
-		}
-	});
-}
-
-//Sends the passed login parameters to server onclick
-function sendLogin($username, $password) {
-	$('#login_fail').hide(200);
-	$.ajax({
-		type: 'POST',
-		url: '/action/login',
-		data: {
-			username: $username,
-			password: $password
-		},
-		dataType: 'json',
-		success: function(json) {
-			hidePopups();
-			window.location.reload();
-		},
-		error: function() {
-			$('#login_fail').show(200);
-			$('#login_password').val('');
 		}
 	});
 }

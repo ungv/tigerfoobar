@@ -6,7 +6,7 @@
 <head>
 	<title><?= $headerTitle ?></title>
 
-	<link rel="icon" type="<?=base_url()?>image/png" href="/img/favicon.png" />
+	<link rel="icon" type="<?=base_url()?>image/png" href="/img/faviconNew.png" />
 
 	<?php 
 	/*Our Stylesheets*/
@@ -28,7 +28,7 @@
 
 <body style="overflow-x: hidden;">
 	<header>
-		<h1><a href="<?=base_url()?>"><img id="logoImage" src="<?=base_url()?>img/patchwork_logo.png"/><span id="title_text">atchwork</span></a></h1>
+		<h1 id = "logoBanner"><a href="<?=base_url()?>"><img id="logoImage" src="<?=base_url()?>img/patchwork_logo.png"/><span id="title_text">atchwork</span></a></h1>
 		<SECTION id='topbar'>
 			<!--Search box-->
 			<input id="searchInput" type="text" placeholder="Search for companies or products/services"/>
@@ -55,7 +55,7 @@
 				<a id="signup" href = "#">Sign Up</a>
 			</span>
 		<?php } ?>
-		<form id="loginForm" action="javascript:sendLogin($('#login_username').val(), $('#login_password').val())">
+		<form id="loginForm" action="javascript:sendLogin()">
 			<div id="loginPopup" class="popup" style="display:none;">
 				<h3>Login to your Account</h3>
 				<p id="login_fail" style="display: none; color: red;">Login failed, please try again.</p>

@@ -1,19 +1,12 @@
 <?php	
 	/* TODO 6/3/13
 	* Finish filters
-	* Position tooltips at the cursor position
-	* Enable /claim/ 
-		     /company/
-			 /tag/
-			 /profile/ (?)
-	   treemaps
 	*
 	*/
-
-		$claimsByCompanyButtonClass = ($pageType == "home") ? "button active" : "button";
-		$showTopClaimsButtonClass = ($pageType == "claimBrowse") ? "button active" : "button";
-		$showTopCompaniesButtonClass = ($pageType == "companyBrowse") ? "button active" : "button";
-		$showTopTagsButtonClass = ($pageType == "tagBrowse") ? "button active" : "button";
+	$claimsByCompanyButtonClass = ($pageType == "home") ? "button active" : "button";
+	$showTopClaimsButtonClass = ($pageType == "claimBrowse") ? "button active" : "button";
+	$showTopCompaniesButtonClass = ($pageType == "companyBrowse") ? "button active" : "button";
+	$showTopTagsButtonClass = ($pageType == "tagBrowse") ? "button active" : "button";
 ?>
 	<div id = "treemapFilters">
 		<div id = "explore">
@@ -115,6 +108,7 @@
 			$("#showTopClaimsButton").click(showTopClaims);
 			$("#claimsByCompanyButton").click(showTopCompaniesWithClaims);
 			$("#showTopCompaniesButton").click(showTopCompanies);
+			$("#showTopTagsButton").click(showTopTags);
 			
 			$("*:not(#treemapCanvas)").click(clearTooltips);
 		}
@@ -222,12 +216,6 @@
 			<?php
 			}
 			?>
-			
-			//d3.select(window).on("click", function() { zoom(root, svg); });
-			/*d3.select("select").on("change", function() {
-				treemap.value(this.value == "size" ? size : count).nodes(root);
-				zoom(node, svg);
-			});*/
 		}
 		
 		function makeTooltips(selector) {
@@ -283,7 +271,8 @@
 			if (typeof d.description !== 'undefined') {
 				html += "<p><h5>Description:</h5> " + (d.description.substring(0,100)+'...') + "</p>"
 			}
-
+			
+			//TODO: Fix this mess; save the state in variables rather than button
 			if ($("#claimsByCompanyButton").hasClass("active") || $("#showTopClaimsButton").hasClass("active")) {
 				html+="<h5>Total number of votes:</h5> " + d.size + "<br />";
 				html+="<h5>Average score:</h5> " + d.score + "<br />";
@@ -293,8 +282,13 @@
 				html+="<h5>Company: <a href = '/company/" + d.companyID + "'>" + d.company + "</a></h5><br />";
 			}
 			
-			if ($(showTopCompaniesButton).hasClass("active")) {
+			if ($("#showTopCompaniesButton").hasClass("active")) {
 				html+="<h5>Total number of claims:</h5> " + d.size + "<br />";
+				html+="<h5>Average score:</h5> " + d.score + "<br />";
+			}
+			if ($("#showTopTagsButton").hasClass("active")) {
+				html+="<a href = '/tag/" + d.tagID + "'><h5>" + d.name + "</h5></a><br />";
+				html+="<h5>Total times used:</h5> " + d.size + "<br />";
 				html+="<h5>Average score:</h5> " + d.score + "<br />";
 			}
 			
@@ -380,7 +374,7 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
-			$.getJSON("/data/topCompaniesWithClaims", function(result){
+			$.getJSON("<?=base_url()?>data/topCompaniesWithClaims", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
 
@@ -392,7 +386,7 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
-			$.getJSON("/data/claimsInRange", function(result){
+			$.getJSON("<?=base_url()?>data/claimsInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
 
@@ -405,6 +399,18 @@
 			$(e.target).addClass("active");
 			
 			$.getJSON("/data/companiesInRange", function(result){
+				//Clear old treemap
+				$("#treemapCanvas").empty();
+
+				generateTreemap(result);
+			});
+		}
+		
+		function showTopTags(e) {
+			$(".active").removeClass("active");
+			$(e.target).addClass("active");
+			
+			$.getJSON("/data/tagsInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
 

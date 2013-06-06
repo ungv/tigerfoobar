@@ -398,9 +398,14 @@ class Data_model extends CI_Model {
 	}
 	
 	public function getTagsInRange($rangeStart, $rangeEnd) {
-		$sql = "SELECT co.numClaims, co.Name AS companyName, co.companyID, co.Score AS companyScore
-				FROM Company co
-				ORDER BY co.numClaims DESC
+		$sql = "SELECT t.Name as tagName, t.TagsID as tagID, count(t.TagsID) as size, avg(c.Score) as tagScore
+				FROM Tags t
+				JOIN Claim_has_Tags ct
+				ON ct.Tags_TagsID = t.TagsID
+				JOIN Claim c
+				ON c.ClaimID = ct.Claim_ClaimID
+				GROUP BY t.Name
+				ORDER BY count(t.TagsID) DESC
 				Limit $rangeStart, $rangeEnd";
 		return $this->db->query($sql)->result_array();
 	}
@@ -510,7 +515,15 @@ class Data_model extends CI_Model {
 		$claims = "";
 		
 		for ($i = 0; $i < count($rawData); $i++) {
-				if ($type == "companiesInRange") {
+				
+				if ($type == "tagsInRange") {
+					$tagName = $rawData[$i]["tagName"];
+					$tagID = $rawData[$i]["tagID"];
+					$score = $rawData[$i]["tagScore"];
+					$size = $rawData[$i]["size"];
+					
+					$claims .= '{"name" : "' . $tagName . '", "tagID" : "' . $tagID . '", "score" : "' . $score .'", "size" : ' . $size . '},';
+				} else if ($type == "companiesInRange") {
 					$companyName = $rawData[$i]["companyName"];
 					$companyID = $rawData[$i]["companyID"];
 					$score = $rawData[$i]["companyScore"];

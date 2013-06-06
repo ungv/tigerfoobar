@@ -209,9 +209,11 @@ class Pages extends Root_Controller {
 		$data['jsFiles'] = array('general','tag','addClaim','toggleview');
 
 		if($tagID == -1 || !$data['listofclaims']) {
-			/*
-				load data top tags treemap and header here
-			*/
+			$data['headerTitle'] = 'View Top Tags - PatchWork';
+			$data['pageType'] = 'tagBrowse';
+			$data['csFiles'] = array('general', 'tooltipster', 'homepage');
+			$data['treemapJSON'] = $this->data_model->getJSON("tagsInRange", null);
+			
 			if ($tagID != -1) {
 				$this->load->view('templates/header', $data);
 				$this->load->view('pages/mainTop', $data);
@@ -219,6 +221,10 @@ class Pages extends Root_Controller {
 				$this->load->view('pages/mainBottom', $data);
 				$this->load->view('templates/footer');
 			}
+			
+			$this->load->view('templates/header', $data);		
+			$this->load->view('pages/treemap', $data);
+			$this->load->view('templates/footer');
 			/*
 				call treemap and footer here
 			*/

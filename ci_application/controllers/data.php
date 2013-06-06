@@ -112,4 +112,10 @@ class Data extends CI_Controller {
 		$data['json'] = "{" . $companyJSON . "}";
 		$this->load->view('data/json_view', $data);
 	}
+	
+	public function tagsInRange() {
+		$companyJSON = $this->data_model->getJSON("tagsInRange", null);
+		$data['json'] = "{" . $companyJSON . "}";
+		$this->load->view('data/json_view', $data);
+	}
 }
