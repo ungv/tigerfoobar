@@ -82,12 +82,13 @@
 
 	#tagSection .tagUpvote {
 		padding-left:6px;
-		padding-right:6px;
-		color: green;
+		display: inline-block;
+		font-size: 16pt;
+		margin-top: -3px;
 	}
 
 	.tagUpvote:hover {
-		color: black;
+		color: black !important;
 		cursor: pointer;
 	}
 
@@ -120,6 +121,14 @@
 		background: url('/img/tag.png') no-repeat right -97px;
 	}
 
+	.userVoted span.tagUpvote {
+		color: #0087C7;
+	}	
+
+	.notVoted span.tagUpvote {
+		color: gray;
+	}
+
 	.notVoted:before {
 		background: url('/img/tag.png') no-repeat left 0;
 	}
@@ -128,9 +137,6 @@
 		background: url('/img/tag.png') no-repeat right -67px;
 	}
 
-	.tagHover {
-		background: url('/img/tag.png') no-repeat right -67px;
-	}
 
 /*-----------------------Add New Tag---------------------------*/
 

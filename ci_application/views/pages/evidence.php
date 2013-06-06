@@ -43,7 +43,7 @@
 									<span>(</span>
 										<span class="tagTotal"><?=$tag['votes']?></span>
 									<span>)</span>
-									<span class="tagUpvote" tagtype="<?=$tagtype?>" tagid="<?=$tag['TagsID']?>" objectid="<?=$objectid?>" voted="<?=$tag['uservoted']?>" title="<?=$tag['uservoted'] ? 'Disapprove tag' : 'Approve tag'?>"> &nbsp; </span>
+									<span class="tagUpvote" tagtype="<?=$tagtype?>" tagid="<?=$tag['TagsID']?>" objectid="<?=$objectid?>" voted="<?=$tag['uservoted']?>" title="<?=$tag['uservoted'] ? 'Disapprove tag' : 'Approve tag'?>">&#9650;</span>
 								</div>
 							</li>
 						<?php } ?>

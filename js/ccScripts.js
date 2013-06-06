@@ -386,7 +386,7 @@ $(document).ready(function() {
 						'		<span class="tagTotal">0</span>' +
 						'	<span>)</span>' +
 						'	<span class="tagUpvote" tagtype="' + tagtype + '" tagid="'+ id + '" objectid="'+ $('#taglist').attr('objectid') +'" voted="0">' +
-						'	&nbsp;' +
+						'	&#9650;' +
 						'	</span>' +
 						'	</div>'
 			});
