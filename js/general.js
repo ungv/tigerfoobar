@@ -71,7 +71,7 @@ $(document).ready(function() {
 		hidePopups();
 	});
 
-	/*------Sigining Up------*/
+	/*------Signing Up------*/
 
 	//Show signin box onclick
 	$('#signup').click(function() {
@@ -237,30 +237,6 @@ function applyColors(thisVal, $element, styling, stylewith) {
 	}
 }
 
-//Sends the passed login parameters to server onclick
-function sendLogin() {
-	$('#login_fail').hide(200);
-	$username = $('#login_username').val();
-	$password = $('#login_password').val();
-	$.ajax({
-		type: 'POST',
-		url: '/action/login',
-		data: {
-			username: $username,
-			password: $password
-		},
-		dataType: 'json',
-		success: function(json) {
-			hidePopups();
-			window.location.reload();
-		},
-		error: function() {
-			$('#login_fail').show(200);
-			$('#login_password').val('');
-		}
-	});
-}
-
 //Resets and recolors the kudos scale to get rid of border color
 function resetScale() {
 	$.each($('.scoreBox'), function(i) {
@@ -303,6 +279,28 @@ function addUser() {
 		},
 		error: function() {
 			$('#username_exists').show(200);
+		}
+	});
+}
+
+//Sends the passed login parameters to server onclick
+function sendLogin($username, $password) {
+	$('#login_fail').hide(200);
+	$.ajax({
+		type: 'POST',
+		url: '/action/login',
+		data: {
+			username: $username,
+			password: $password
+		},
+		dataType: 'json',
+		success: function(json) {
+			hidePopups();
+			window.location.reload();
+		},
+		error: function() {
+			$('#login_fail').show(200);
+			$('#login_password').val('');
 		}
 	});
 }
