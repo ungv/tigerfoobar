@@ -365,10 +365,14 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
+			//Clear old treemap and place loading gif in the middle of it
+			$("#treemapCanvas").prepend('<div class="loadingOverlay"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			
 			$.getJSON("/data/topCompaniesWithClaims", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
-
+				$(".loadingOverlay").hide();
+				
 				generateTreemap(result);
 			});
 		}
@@ -377,9 +381,13 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
+			//Clear old treemap and place loading gif in the middle of it
+			$("#treemapCanvas").prepend('<div class="loadingOverlay"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			
 			$.getJSON("/data/claimsInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
+				$(".loadingOverlay").hide();
 
 				generateTreemap(result);
 			});
@@ -389,9 +397,13 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
+			//Clear old treemap and place loading gif in the middle of it
+			$("#treemapCanvas").prepend('<div class="loadingOverlay"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			
 			$.getJSON("/data/companiesInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
+				$(".loadingOverlay").hide();
 
 				generateTreemap(result);
 			});
@@ -401,9 +413,13 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
+			//Clear old treemap and place loading gif in the middle of it
+			$("#treemapCanvas").prepend('<div class="loadingOverlay"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			
 			$.getJSON("/data/tagsInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
+				$(".loadingOverlay").hide();
 
 				generateTreemap(result);
 			});
