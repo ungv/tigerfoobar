@@ -391,7 +391,7 @@ $(document).ready(function() {
 						'	</span>' +
 						'	</div>'
 			});
-			$('#taglist').append(newLink);
+			$('#taglist > li:last').before(newLink);
 			$("#newtag_name").val(""); //clear textbox
 			//call current vote method, triger click
 			$(newLink.find('.tagUpvote')[0]).click(function() {

@@ -178,9 +178,9 @@
 				  .on("mouseout", function (d) {$(this).parent().siblings("rect").css("fill-opacity", "1.0");})
 				  .on("click", function(d) {
 						if (typeof d.claimID !== 'undefined') { //The clicked item is a claim title
-							window.location.href = "<?=base_url()?>claim/" + d.claimID;
+							window.location.href = "/claim/" + d.claimID;
 						} else if (typeof d.companyID !== 'undefined') { //The clicked item is a company name
-							window.location.href = "<?=base_url()?>company/" + d.companyID;
+							window.location.href = "/company/" + d.companyID;
 						}
 					});
 
@@ -365,10 +365,14 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
-			$.getJSON("<?=base_url()?>data/topCompaniesWithClaims", function(result){
+			//Clear old treemap and place loading gif in the middle of it
+			$("#treemapCanvas").prepend('<div class="loadingOverlay" style = "width : '+parseInt($("#treemapCanvas").width() + 10) + 'px; height : '+parseInt($("#treemapCanvas").height() + 10) +'px;"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			
+			$.getJSON("/data/topCompaniesWithClaims", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
-
+				$(".loadingOverlay").hide();
+				
 				generateTreemap(result);
 			});
 		}
@@ -377,9 +381,13 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
-			$.getJSON("<?=base_url()?>data/claimsInRange", function(result){
+			//Clear old treemap and place loading gif in the middle of it
+			$("#treemapCanvas").prepend('<div class="loadingOverlay" style = "width : '+parseInt($("#treemapCanvas").width() + 10) + 'px; height : '+parseInt($("#treemapCanvas").height() + 10) +'px;"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			
+			$.getJSON("/data/claimsInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
+				$(".loadingOverlay").detach();
 
 				generateTreemap(result);
 			});
@@ -389,9 +397,13 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
+			//Clear old treemap and place loading gif in the middle of it
+			$("#treemapCanvas").prepend('<div class="loadingOverlay" style = "width : '+parseInt($("#treemapCanvas").width() + 10) + 'px; height : '+parseInt($("#treemapCanvas").height() + 10) +'px;"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			
 			$.getJSON("/data/companiesInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
+				$(".loadingOverlay").hide();
 
 				generateTreemap(result);
 			});
@@ -401,9 +413,13 @@
 			$(".active").removeClass("active");
 			$(e.target).addClass("active");
 			
+			//Clear old treemap and place loading gif in the middle of it
+			$("#treemapCanvas").prepend('<div class="loadingOverlay" style = "width : '+parseInt($("#treemapCanvas").width() + 10) + 'px; height : '+parseInt($("#treemapCanvas").height() + 10) +'px;"><img src = "/img/loading.gif" alt = "loading" /></div>');
+			
 			$.getJSON("/data/tagsInRange", function(result){
 				//Clear old treemap
 				$("#treemapCanvas").empty();
+				$(".loadingOverlay").hide();
 
 				generateTreemap(result);
 			});

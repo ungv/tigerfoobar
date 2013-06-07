@@ -417,6 +417,19 @@ li.ui-menu-item a {
 	text-align: left !important;
 }
 
+.loadingOverlay {
+	position: absolute;
+	margin-top: 17px;
+
+    background-color: rgba(255,255,255, 0.8);
+}
+
+
+.loadingOverlay img{
+	margin-left: 50%;
+	margin-top: 250px;
+}
+
 /*-----------Edit Button styles-----------*/
 .editbutton {
 	width: 20px;
