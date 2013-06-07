@@ -46,16 +46,18 @@ $(document).ready(function() {
 		tagSource: companyList,
 		maxTags: 1,
 		select: true,
-		triggerKeys: ['enter', 'comma'],
-		highlightOnExistColor: '#000'
+		triggerKeys: ['enter'],
+		highlightOnExistColor: '#000',
+		seperatorKeys: ['semicolon']
 	});
 
 	// Input field for entering tags from "Add new claim" form
 	$('#tagsSearch').tagit({
 		tagSource: tagsList,
 		select: true,
-		triggerKeys: ['enter', 'comma'],
-		highlightOnExistColor: '#000'
+		triggerKeys: ['enter'],
+		highlightOnExistColor: '#000',
+		seperatorKeys: ['semicolon']
 	});
 	
  	/*------------Logging In-----------*/
