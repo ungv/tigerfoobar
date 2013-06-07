@@ -22,6 +22,7 @@
 				<a href="<?=base_url()?>about">Learn More</a>
 			</p>
 		</div>
+		<?php /*
 		<div id="videoContainer">
 			<iframe src="http://player.vimeo.com/video/63653873?badge=0&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=&amp;" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen>
 			</iframe> 
@@ -33,9 +34,10 @@
 					from <a href="http://vimeo.com/user3480016">e</a> on 
 					<a href="http://vimeo.com">Vimeo</a>.
 				</p>
-				*/
+				
 			?>
 		</div>
+		*/ ?>
 		<div id="welcomeButtons">
 			<button class="submitButton">Explore now</button>
 		</div>

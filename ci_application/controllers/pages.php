@@ -308,7 +308,7 @@ class Pages extends Root_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/mainTop', $data);
-		$this->load->view('pages/welcomeActions', $data);
+		//$this->load->view('pages/welcomeActions', $data);
 		$this->load->view('pages/about');
 		$this->load->view('pages/mainBottom', $data);
 		$this->load->view('templates/footer');
