@@ -203,6 +203,7 @@ class Pages extends Root_Controller {
 	public function tag($tagID = -1) {
 		$tagID = intval($tagID);
 		$data['listofclaims'] = $this->data_model->getClaimsWithTag($tagID);
+		$data['tagName'] = $this->data_model->getTag($tagID);
 
 		$data['headerTitle'] = 'View Tag - PatchWork';
 		$data['pageType'] = 'tag';
@@ -210,7 +211,7 @@ class Pages extends Root_Controller {
 		$data['csFiles'] = array('general','tag','toggleview', 'tooltipster');
 		$data['jsFiles'] = array('general','tag','addClaim','toggleview');
 
-		if($tagID == -1 || !$data['listofclaims']) {
+		if($tagID == -1 || !$data['tagName']) {
 			$data['headerTitle'] = 'View Top Tags - PatchWork';
 			$data['pageType'] = 'tagBrowse';
 			$data['csFiles'] = array('general', 'tooltipster', 'homepage');
@@ -235,7 +236,6 @@ class Pages extends Root_Controller {
 				$data['signedIn'] = true;
 			}
 
-			$data['tagName'] = $this->data_model->getTag($tagID);
 			//$data['treemapJSON'] = $this->data_model->getTopClaimsWithTagJSON($tagID);
 			$data['treemapJSON'] = $this->data_model->getJSON("claimsWithTag",$tagID);
 			
