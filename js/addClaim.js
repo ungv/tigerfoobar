@@ -25,9 +25,12 @@ $(document).ready(function() {
 		}
 	});
 
+	$('#newClaimForm input, textarea').focus(function() {
+		isLoggedIn('add a claim');
+	});
+	
 	$('#pasteURL').blur(function() {
-		$url = $('#pasteURL').val();
-		console.log($url);
+		$url = $('#pasteURL').val().split('#')[0];
 		$.ajax({
 			type: 'POST',
 			url: '/action/urlFound',
@@ -38,10 +41,11 @@ $(document).ready(function() {
 			success: function(json) {
 				// alert user that this url has already been submitted
 				$('#urlCheck').html('This url has already been submitted <a href="/claim/' + json.claimID + '">here</a>').show();
+				$('button').attr('disabled', 'disabled');
 			},
 			error: function() {
 				// let user continue adding this claim
-				console.log('this exact url does not exist in database yet');
+				console.log('no url found');
 			}
 		});
 
@@ -81,7 +85,7 @@ $(document).ready(function() {
 // Form #newClaimForm calls this function on form submit
 function addClaim() {
 	if (isLoggedIn('add a claim')) {
-		$url = $('#pasteURL').val();
+		$url = $('#pasteURL').val().split('#')[0];
 		$title = $('input[name=title]').val();
 		$desc = $('textarea').val();
 		$company = $('#assocCo').tagit('tags');

@@ -451,6 +451,10 @@ li.ui-menu-item a {
 	display: none;
 }
 
+#evidenceContent .editable {
+	width: 780px;
+}
+
 /*-----------Loading Gif-----------*/
 
 .loadingGif {

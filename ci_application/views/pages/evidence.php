@@ -13,7 +13,7 @@
 						if (isset($thisUser) && $claimInfo['UserID'] == $thisUser) {
 						?>
 						<div style="position: relative;">
-							<input type="text" class="outfocus editBox" style="width: 90%; display: none;">
+							<textarea type="text" rows="5" class="outfocus editBox" style="width: 90%; display: none;"></textarea>
 							<p class="editable"><?=$claimInfo['Description']?></p>
 							<img class="editbutton" src="/img/contribute_icon.png" title="Edit Synopsis" style="top: 0px;" />
 							<button class="submitButton updateEdit">Submit</button>
