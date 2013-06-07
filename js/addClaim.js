@@ -25,6 +25,28 @@ $(document).ready(function() {
 		}
 	});
 
+	$('#pasteURL').blur(function() {
+		$url = $('#pasteURL').val();
+		console.log($url);
+		$.ajax({
+			type: 'POST',
+			url: '/action/urlFound',
+			data: {
+				url: $url
+			},
+			dataType: 'json',
+			success: function(json) {
+				// alert user that this url has already been submitted
+				$('#urlCheck').html('This url has already been submitted <a href="/claim/' + json.claimID + '">here</a>').show();
+			},
+			error: function() {
+				// let user continue adding this claim
+				console.log('this exact url does not exist in database yet');
+			}
+		});
+
+	});
+
 	//------------this stuff is for dropping overlay to add claim-------------
 	//Click on button with text to convert to input
 	// $('#urlButton').click(function() {

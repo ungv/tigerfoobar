@@ -36,6 +36,11 @@
 	margin-top: 10px;
 }
 
+.message {
+	display: none;
+	color: red;
+}
+
 #urlSubmit input, textarea {
 	margin-bottom: 5px;
 }
