@@ -16,7 +16,6 @@ $(document).ready(function() {
 
 	function searchBarResize() {
 		$searchBarSpace = $(window).width() - $loginButtonSpace - $logoSpace;
-		console.log("rest " + $searchBarSpace);
 		if ($searchBarSpace < 1000) {
 			if ($searchBarSpace < 870)
 				$('#title_text').text('');
@@ -388,21 +387,51 @@ function isLoggedIn($action) {
 function addUser() {
 	$username = $('#signupPopup input[name="username"]').val();
 	$password = $('#signupPopup input[name="password"]').val();
+	$password2 = $('#signupPopup input[name="password2"]').val();
 	$email = $('#signupPopup input[name="email"]').val();
-	$.ajax({
-		type: 'POST',
-		url: '/action/addUser',
-		data: {
-			username: $username,
-			password: $password,
-			email: $email
-		},
-		dataType: 'json',
-		success: function(json) {
-			sendLogin($username, $password);
-		},
-		error: function() {
-			$('#username_exists').show(200);
-		}
-	});
+	if ($password == $password2) {
+		$.ajax({
+			type: 'POST',
+			url: '/action/addUser',
+			data: {
+				username: $username,
+				password: $password,
+				email: $email
+			},
+			dataType: 'json',
+			success: function(json) {
+				sendLogin($username, $password);
+			},
+			error: function() {
+				$('#signupPopup p.errorMsg').show(200).text('Username already exists. Please try a different one.');
+			}
+		});
+	} else {
+		$('#signupPopup p.errorMsg').show(200).text('Passwords do not match.');
+	}
+}
+
+// TODO: Emails password to user
+function forgotPass() {
+	$email = $('#signupPopup input[name="email"]').val();
+	if ($password == $password2) {
+		$.ajax({
+			type: 'POST',
+			url: '/action/addUser',
+			data: {
+				username: $username,
+				password: $password,
+				email: $email
+			},
+			dataType: 'json',
+			success: function(json) {
+				sendLogin($username, $password);
+			},
+			error: function() {
+				$('#signupPopup p.errorMsg').show(200).text('Username already exists. Please try a different one.');
+			}
+		});
+	} else {
+		$('#signupPopup p.errorMsg').show(200).text('Passwords do not match.');
+	}
 }
