@@ -62,7 +62,7 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 				<a id="signup" href = "#">Sign Up</a>
 			</span>
 		<?php } ?>
-		<form id="loginForm" action="javascript:sendLogin()">
+		<form id="loginForm" action="javascript:sendLogin($('#login_username').val(), $('#login_password').val())">
 			<div id="loginPopup" class="popup" style="display:none;">
 				<h3>Login to your Account</h3>
 				<p id="login_fail" style="display: none; color: red;">Login failed, please try again.</p>

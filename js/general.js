@@ -313,10 +313,8 @@ function applyColors(thisVal, $element, styling, stylewith) {
 }
 
 //Sends the passed login parameters to server onclick
-function sendLogin() {
+function sendLogin($username, $password) {
 	$('#login_fail').hide(200);
-	$username = $('#login_username').val();
-	$password = $('#login_password').val();
 	$.ajax({
 		type: 'POST',
 		url: '/action/login',

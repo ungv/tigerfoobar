@@ -21,10 +21,7 @@ class Action extends Root_Controller {
 	/*
 		Login Using User passed data
 	*/
-	public function login() {
-		// return false;
-		//Disabled for capstone
-		
+	public function login() {		
 		$result = $this->action_model->login();
         if($result){ 	//if logged in, return json user info
         	$id = $this->session->userdata('userid');
@@ -130,9 +127,6 @@ class Action extends Root_Controller {
 		Adds a new user to the database, username/password required, email optional
 	*/
 	public function addUser() {
-		return false;
-		//Disabled for capstone
-		/*
 		$result = $this->action_model->addUser();
 		if($result) {	//database updated db, send success method
 			$data['json'] = '{"message":"Successfully contacted server method!"}';
@@ -141,7 +135,6 @@ class Action extends Root_Controller {
         	$data['json'] = '{"message":"Cannot Process Update"}'; 
 		}
 		$this->load->view('data/json_view', $data);
-		*/
 	}
 
 	/*
