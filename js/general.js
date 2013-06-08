@@ -16,17 +16,20 @@ $(document).ready(function() {
 
 	function searchBarResize() {
 		$searchBarSpace = $(window).width() - $loginButtonSpace - $logoSpace;
+		console.log("rest " + $searchBarSpace);
 		if ($searchBarSpace < 1000) {
+			if ($searchBarSpace < 870)
+				$('#title_text').text('');
+			else 
+				$('#title_text').text('atchwork');
 			$('#topbar').css('width', parseInt(0.5 * $searchBarSpace + 385) + 'px');
 			$margin = ($(window).width() - 915)/2;
 			if ($margin <= 0)
 				$margin = 0;
 			$('#topbar').css('margin', '0 auto 0 ' + $margin + 'px');
-			$('#title_text').text('');
 		} else {
 			$('#topbar').css('margin', '0 auto');
 			$('#topbar').css('width', '900px');
-			$('#title_text').text('atchwork');
 		}
 	}
 
