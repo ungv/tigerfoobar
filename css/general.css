@@ -119,12 +119,13 @@ header, #logoImage{
 }
 
 #topbar {
-	width: 915px;
+	width: 900px;
 	max-width:70%;
 	margin: 0 auto;
 	/*background-color: #4D7938;*/
 	/*position: relative;*/
 	overflow:hidden;
+	padding-right: 15px;
 }
 
 #logoImage{
@@ -351,7 +352,7 @@ input[type=button], input[type=submit] {
 /*------------AutoComplete--------------*/
 
 .autoCompleteResult{
-	width:915px;
+	/*width:915px;*/
 	background-color:#fff;
 }
 
