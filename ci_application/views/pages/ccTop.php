@@ -27,12 +27,15 @@
 									</div>
 								</li>
 							<?php } ?>
+
+							<?php if($isLogged) { ?>
 							<li>
-								<a id="addTag" href="#" <?php if(!$isLogged) { ?>style="display:none;"<?php } ?> title='Add new tag'>+</a>
+								<a id="addTag" href="#" title='Add new tag'>+</a>
 								<div id="newTagPopup" style="display:none;">
 									<input id="newtag_name" tagtype="<?=$tagtype?>" type="text" placeholder="Type a tag name"/>
 								</div>
 							</li>
+							<?php } ?>
 						</ul>
 					</dd>
 				</dl>

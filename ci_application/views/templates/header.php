@@ -79,7 +79,7 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 				<p id="login_fail" style="display: none; color: red;">Login failed, please try again.</p>
 				<input id="login_username" type="text" placeholder="Your codename"/>
 				<input id="login_password" type="password" placeholder="Your top secret password"/>
-				<p><a href="#" id="forgotPassword">Forgot password</a></p>
+				<!-- <p><a href="#" id="forgotPassword">Forgot password</a></p> -->
 				<button type="submit" id="login_submit" class="submitButton">Log in</button>
 				<button type="button" id="login_cancel" class="cancelButton">cancel</button>
 			</div>

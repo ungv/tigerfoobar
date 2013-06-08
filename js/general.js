@@ -57,7 +57,7 @@ $(document).ready(function() {
 				required: "^We can't just call you nothing..."
 			},
 			password: {
-				required: "^Hmm, no password seems kinda fishy"
+				required: "^Hmm, having no password seems kinda fishy"
 			}
 		}
 	});

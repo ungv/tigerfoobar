@@ -265,16 +265,6 @@ $(document).ready(function() {
 		$('#newtag_name').val("");
 	});
 
-	//Autocomplete for adding new industry
-	var projects = [
-		{
-			value: "jquery",
-			label: "jQuery",
-			desc: "the write less, do more, JavaScript library",
-			icon: "jquery_32x32.png"
-		}
-	];
-
 	//Called when typing into new industry/new tag text box
 	//Feteches list of claim tags or industries from server
 	$( "#newtag_name" ).autocomplete({
