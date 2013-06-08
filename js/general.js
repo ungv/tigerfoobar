@@ -6,6 +6,30 @@
 var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#5cffae', '#31b373', '#106138'];
 
 $(document).ready(function() {
+	/*--------Dynamic search bar-----------------*/
+	$logoSpace = parseInt($('#logoBanner').css('width'));
+	$loginButtonSpace = parseInt($('#login_buttons').css('width'));
+	searchBarResize();
+	$(window).resize(function() {
+		searchBarResize();
+	});
+
+	function searchBarResize() {
+		$searchBarSpace = $(window).width() - $loginButtonSpace - $logoSpace;
+		if ($searchBarSpace < 1000) {
+			$('#topbar').css('width', parseInt(0.5 * $searchBarSpace + 385) + 'px');
+			$margin = ($(window).width() - 915)/2;
+			if ($margin <= 0)
+				$margin = 0;
+			$('#topbar').css('margin', '0 auto 0 ' + $margin + 'px');
+			$('#title_text').text('');
+		} else {
+			$('#topbar').css('margin', '0 auto');
+			$('#topbar').css('width', '900px');
+			$('#title_text').text('atchwork');
+		}
+	}
+
 	/*--------Dynamic div above footer positioning-----------------*/
 	$divTop = parseInt($('#dynamicSpacing').position().top);
 	$footerH = parseInt($('footer').height());
@@ -178,7 +202,7 @@ $(document).ready(function() {
 
 		},
 		open: function() { 
-			$('.ui-menu').width(915); 
+			$('.ui-menu').width(parseInt($searchBarSpace - 90) + 'px'); 
 			//$(".ui-menu-item").hide();
 			//$(".ui-autocomplete").hide();
 			//$("#autoCompleteResults").show();
