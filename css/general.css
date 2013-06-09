@@ -464,3 +464,24 @@ li.ui-menu-item a {
 	width: 32px;
 	height: 32px;
 }
+
+
+/*-----------Alert message-----------*/
+.alertMessage {	
+	z-index: 300;
+	position: fixed;
+	left: 30%;
+	width: 140px !important;
+	margin-left: -100px;
+	top: 50%;
+	background-color: green;
+	padding: 10px;
+	color: white;
+	font-size: 20pt;
+	border-radius: 15px;
+	display: none;
+}
+
+.alertMessage p {	
+	line-height: 20pt;
+}

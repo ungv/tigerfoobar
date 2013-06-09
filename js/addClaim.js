@@ -27,6 +27,9 @@ $(document).ready(function() {
 
 	$('#newClaimForm input, textarea').focus(function() {
 		isLoggedIn('add a claim');
+		$('#addClaim').attr('disabled', 'disabled');
+		$('#addClaim').css('background-color','lightgray');
+		$('#addClaim').css('border-color','darkgray');
 	});
 	
 	$('#pasteURL').blur(function() {
@@ -122,8 +125,9 @@ function addClaim() {
 				},
 				dataType: 'json',
 				success: function(json) {
-					$('#successAlert').fadeIn();
-					$('#successAlert').fadeOut(3000);
+					$('.alertMessage').text('Your claim has been submitted!');
+					$('.alertMessage').fadeIn();
+					$('.alertMessage').fadeOut(3000);
 					if (json.message == "Successfully contacted server method!") {
 						console.log('success');
 						window.location = "/claim/" + json.claimid;

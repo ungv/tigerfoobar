@@ -375,7 +375,8 @@ function resetScale() {
 // Pass in the string to finish the alert text content
 function isLoggedIn($action) {
 	if ($('#main').attr('signedin') != 1) {
-		alert('Please log in to ' + $action);
+		$('.alertMessage').text('Please log in to ' + $action).show(200);
+		$('.alertMessage').fadeOut(5000);
 		$('#loginPopup').show(200);
 		window.scrollTo(0, 0);
 		return false;

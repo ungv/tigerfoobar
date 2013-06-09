@@ -27,7 +27,3 @@
 			<!-- <button type="button" class="cancelButton">cancel</button> -->
 		</div>
 	</form>
-
-	<div id="successAlert">
-		<p>Your claim has been submitted!</p>
-	</div>

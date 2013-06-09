@@ -130,3 +130,4 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 	</header>
 
 	<div class="lightsout"></div>
+	<div class="alertMessage"><p></p></div>
