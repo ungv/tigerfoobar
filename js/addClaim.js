@@ -27,9 +27,6 @@ $(document).ready(function() {
 
 	$('#newClaimForm input, textarea').focus(function() {
 		isLoggedIn('add a claim');
-		$('#addClaim').attr('disabled', 'disabled');
-		$('#addClaim').css('background-color','lightgray');
-		$('#addClaim').css('border-color','darkgray');
 	});
 	
 	$('#pasteURL').blur(function() {

@@ -379,6 +379,9 @@ function isLoggedIn($action) {
 		$('.alertMessage').fadeOut(5000);
 		$('#loginPopup').show(200);
 		window.scrollTo(0, 0);
+		$('.submitButton').attr('disabled', 'disabled');
+		$('.submitButton').css('background-color','lightgray');
+		$('.submitButton').css('border-color','darkgray');		
 		return false;
 	}
 	return true;
