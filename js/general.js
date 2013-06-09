@@ -378,10 +378,10 @@ function isLoggedIn($action) {
 		$('.alertMessage').text('Please log in to ' + $action).show(200);
 		$('.alertMessage').fadeOut(5000);
 		$('#loginPopup').show(200);
+		$('#newClaimForm button.submitButton').attr('disabled', 'disabled');
+		$('#newClaimForm button.submitButton').css('background-color','lightgray');
+		$('#newClaimForm button.submitButton').css('border-color','darkgray');		
 		window.scrollTo(0, 0);
-		$('.submitButton').attr('disabled', 'disabled');
-		$('.submitButton').css('background-color','lightgray');
-		$('.submitButton').css('border-color','darkgray');		
 		return false;
 	}
 	return true;
