@@ -204,7 +204,7 @@ $(document).ready(function() {
 
 		},
 		open: function() { 
-			$('.ui-menu').width(parseInt($searchBarSpace - 90) + 'px'); 
+			$('.ui-menu').width(parseInt(0.5 * $searchBarSpace + 385) + 'px'); 
 			//$(".ui-menu-item").hide();
 			//$(".ui-autocomplete").hide();
 			//$("#autoCompleteResults").show();
@@ -216,7 +216,8 @@ $(document).ready(function() {
 		if(item.type == "header") {
 			autocompleteLi = $( "<li>" , {
 				"class": "autoCompleteHeader",
-				"text" : item.name
+				"text" : item.name,
+				"style": "width:" + parseInt(0.5 * $searchBarSpace + 385) + "px;"
 			});
 		}else if(item.type == "empty") {
 			autocompleteLi = $( "<li>" , {

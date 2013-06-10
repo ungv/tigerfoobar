@@ -267,6 +267,11 @@ footer, footer a{
 	margin-right: auto;
 }
 
+div, input, textarea, label {
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+}
+
 #main h1 a{
 	color:#666;
 }
@@ -359,7 +364,6 @@ input[type=button], input[type=submit] {
 .autoCompleteHeader{
 	background-color:#444;
 	color:#fff;
-	width:905px;
 	padding:5px 0px 5px 5px;
 	border-radius: 4px;
 }
