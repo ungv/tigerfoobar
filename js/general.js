@@ -6,6 +6,32 @@
 var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#5cffae', '#31b373', '#106138'];
 
 $(document).ready(function() {
+	/*--------Dynamic search bar-----------------*/
+	$logoSpace = parseInt($('#logoBanner').css('width'));
+	$loginButtonSpace = parseInt($('#login_buttons').css('width'));
+	searchBarResize();
+	$(window).resize(function() {
+		searchBarResize();
+	});
+
+	function searchBarResize() {
+		$searchBarSpace = $(window).width() - $loginButtonSpace - $logoSpace;
+		if ($searchBarSpace < 1000) {
+			if ($searchBarSpace < 870)
+				$('#title_text').text('');
+			else 
+				$('#title_text').text('atchwork');
+			$('#topbar').css('width', parseInt(0.5 * $searchBarSpace + 385) + 'px');
+			$margin = ($(window).width() - 915)/2;
+			if ($margin <= 0)
+				$margin = 0;
+			$('#topbar').css('margin', '0 auto 0 ' + $margin + 'px');
+		} else {
+			$('#topbar').css('margin', '0 auto');
+			$('#topbar').css('width', '900px');
+		}
+	}
+
 	/*--------Dynamic div above footer positioning-----------------*/
 	$divTop = parseInt($('#dynamicSpacing').position().top);
 	$footerH = parseInt($('footer').height());
@@ -31,7 +57,7 @@ $(document).ready(function() {
 				required: "^We can't just call you nothing..."
 			},
 			password: {
-				required: "^Hmm, no password seems kinda fishy"
+				required: "^Hmm, having no password seems kinda fishy"
 			}
 		}
 	});
@@ -46,16 +72,18 @@ $(document).ready(function() {
 		tagSource: companyList,
 		maxTags: 1,
 		select: true,
-		triggerKeys: ['enter', 'comma'],
-		highlightOnExistColor: '#000'
+		triggerKeys: ['enter'],
+		highlightOnExistColor: '#000',
+		seperatorKeys: ['semicolon']
 	});
 
 	// Input field for entering tags from "Add new claim" form
 	$('#tagsSearch').tagit({
 		tagSource: tagsList,
 		select: true,
-		triggerKeys: ['enter', 'comma'],
-		highlightOnExistColor: '#000'
+		triggerKeys: ['enter'],
+		highlightOnExistColor: '#000',
+		seperatorKeys: ['semicolon']
 	});
 	
  	/*------------Logging In-----------*/
@@ -176,7 +204,7 @@ $(document).ready(function() {
 
 		},
 		open: function() { 
-			$('.ui-menu').width(915); 
+			$('.ui-menu').width(parseInt(0.5 * $searchBarSpace + 385) + 'px'); 
 			//$(".ui-menu-item").hide();
 			//$(".ui-autocomplete").hide();
 			//$("#autoCompleteResults").show();
@@ -188,7 +216,8 @@ $(document).ready(function() {
 		if(item.type == "header") {
 			autocompleteLi = $( "<li>" , {
 				"class": "autoCompleteHeader",
-				"text" : item.name
+				"text" : item.name,
+				"style": "width:" + parseInt(0.5 * $searchBarSpace + 385) + "px;"
 			});
 		}else if(item.type == "empty") {
 			autocompleteLi = $( "<li>" , {
@@ -202,7 +231,7 @@ $(document).ready(function() {
 					'<span class="resultScore">' + item.score + '</span></a>');
 			//!! can changes later to label industry
 			autocompleteLi.addClass(item.type+"Result")
-			$(autocompleteLi.children("a")[0]).attr("href","http://127.0.0.1/" + item.type + "/" + item.id);
+			$(autocompleteLi.children("a")[0]).attr("href","/" + item.type + "/" + item.id);
 		}
 		autocompleteLi.appendTo(ul);
 		return autocompleteLi;
@@ -311,10 +340,8 @@ function applyColors(thisVal, $element, styling, stylewith) {
 }
 
 //Sends the passed login parameters to server onclick
-function sendLogin() {
+function sendLogin($username, $password) {
 	$('#login_fail').hide(200);
-	$username = $('#login_username').val();
-	$password = $('#login_password').val();
 	$.ajax({
 		type: 'POST',
 		url: '/action/login',
@@ -349,8 +376,12 @@ function resetScale() {
 // Pass in the string to finish the alert text content
 function isLoggedIn($action) {
 	if ($('#main').attr('signedin') != 1) {
-		alert('Please log in to ' + $action);
+		$('.alertMessage').text('Please log in to ' + $action).show(200);
+		$('.alertMessage').fadeOut(5000);
 		$('#loginPopup').show(200);
+		$('#newClaimForm button.submitButton').attr('disabled', 'disabled');
+		$('#newClaimForm button.submitButton').css('background-color','lightgray');
+		$('#newClaimForm button.submitButton').css('border-color','darkgray');		
 		window.scrollTo(0, 0);
 		return false;
 	}
@@ -361,21 +392,51 @@ function isLoggedIn($action) {
 function addUser() {
 	$username = $('#signupPopup input[name="username"]').val();
 	$password = $('#signupPopup input[name="password"]').val();
+	$password2 = $('#signupPopup input[name="password2"]').val();
 	$email = $('#signupPopup input[name="email"]').val();
-	$.ajax({
-		type: 'POST',
-		url: '/action/addUser',
-		data: {
-			username: $username,
-			password: $password,
-			email: $email
-		},
-		dataType: 'json',
-		success: function(json) {
-			sendLogin($username, $password);
-		},
-		error: function() {
-			$('#username_exists').show(200);
-		}
-	});
+	if ($password == $password2) {
+		$.ajax({
+			type: 'POST',
+			url: '/action/addUser',
+			data: {
+				username: $username,
+				password: $password,
+				email: $email
+			},
+			dataType: 'json',
+			success: function(json) {
+				sendLogin($username, $password);
+			},
+			error: function() {
+				$('#signupPopup p.errorMsg').show(200).text('Username already exists. Please try a different one.');
+			}
+		});
+	} else {
+		$('#signupPopup p.errorMsg').show(200).text('Passwords do not match.');
+	}
+}
+
+// TODO: Emails password to user
+function forgotPass() {
+	$email = $('#signupPopup input[name="email"]').val();
+	if ($password == $password2) {
+		$.ajax({
+			type: 'POST',
+			url: '/action/addUser',
+			data: {
+				username: $username,
+				password: $password,
+				email: $email
+			},
+			dataType: 'json',
+			success: function(json) {
+				sendLogin($username, $password);
+			},
+			error: function() {
+				$('#signupPopup p.errorMsg').show(200).text('Username already exists. Please try a different one.');
+			}
+		});
+	} else {
+		$('#signupPopup p.errorMsg').show(200).text('Passwords do not match.');
+	}
 }

@@ -119,12 +119,13 @@ header, #logoImage{
 }
 
 #topbar {
-	width: 915px;
+	width: 900px;
 	max-width:70%;
 	margin: 0 auto;
 	/*background-color: #4D7938;*/
 	/*position: relative;*/
 	overflow:hidden;
+	padding-right: 15px;
 }
 
 #logoImage{
@@ -266,6 +267,11 @@ footer, footer a{
 	margin-right: auto;
 }
 
+div, input, textarea, label {
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+}
+
 #main h1 a{
 	color:#666;
 }
@@ -351,14 +357,13 @@ input[type=button], input[type=submit] {
 /*------------AutoComplete--------------*/
 
 .autoCompleteResult{
-	width:915px;
+	/*width:915px;*/
 	background-color:#fff;
 }
 
 .autoCompleteHeader{
 	background-color:#444;
 	color:#fff;
-	width:905px;
 	padding:5px 0px 5px 5px;
 	border-radius: 4px;
 }
@@ -451,6 +456,10 @@ li.ui-menu-item a {
 	display: none;
 }
 
+#evidenceContent .editable {
+	width: 780px;
+}
+
 /*-----------Loading Gif-----------*/
 
 .loadingGif {
@@ -458,4 +467,25 @@ li.ui-menu-item a {
 	background-repeat: no-repeat;
 	width: 32px;
 	height: 32px;
+}
+
+
+/*-----------Alert message-----------*/
+.alertMessage {	
+	z-index: 300;
+	position: fixed;
+	left: 30%;
+	width: 140px !important;
+	margin-left: -100px;
+	top: 50%;
+	background-color: green;
+	padding: 10px;
+	color: white;
+	font-size: 20pt;
+	border-radius: 15px;
+	display: none;
+}
+
+.alertMessage p {	
+	line-height: 20pt;
 }

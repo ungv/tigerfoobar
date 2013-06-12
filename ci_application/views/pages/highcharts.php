@@ -64,7 +64,7 @@ $(function () {
                 },
                 lineWidth: 1,
                 marker: {
-                    enabled: false
+                    enabled: true
                 },
                 shadow: false,
                 states: {

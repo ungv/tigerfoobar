@@ -25,6 +25,32 @@ $(document).ready(function() {
 		}
 	});
 
+	$('#newClaimForm input, textarea').focus(function() {
+		isLoggedIn('add a claim');
+	});
+	
+	$('#pasteURL').blur(function() {
+		$url = $('#pasteURL').val().split('#')[0];
+		$.ajax({
+			type: 'POST',
+			url: '/action/urlFound',
+			data: {
+				url: $url
+			},
+			dataType: 'json',
+			success: function(json) {
+				// alert user that this url has already been submitted
+				$('#urlCheck').html('This url has already been submitted <a href="/claim/' + json.claimID + '">here</a>').show();
+				$('button').attr('disabled', 'disabled');
+			},
+			error: function() {
+				// let user continue adding this claim
+				console.log('no url found');
+			}
+		});
+
+	});
+
 	//------------this stuff is for dropping overlay to add claim-------------
 	//Click on button with text to convert to input
 	// $('#urlButton').click(function() {
@@ -59,7 +85,7 @@ $(document).ready(function() {
 // Form #newClaimForm calls this function on form submit
 function addClaim() {
 	if (isLoggedIn('add a claim')) {
-		$url = $('#pasteURL').val();
+		$url = $('#pasteURL').val().split('#')[0];
 		$title = $('input[name=title]').val();
 		$desc = $('textarea').val();
 		$company = $('#assocCo').tagit('tags');
@@ -96,8 +122,9 @@ function addClaim() {
 				},
 				dataType: 'json',
 				success: function(json) {
-					$('#successAlert').fadeIn();
-					$('#successAlert').fadeOut(3000);
+					$('.alertMessage').text('Your claim has been submitted!');
+					$('.alertMessage').fadeIn();
+					$('.alertMessage').fadeOut(3000);
 					if (json.message == "Successfully contacted server method!") {
 						console.log('success');
 						window.location = "/claim/" + json.claimid;

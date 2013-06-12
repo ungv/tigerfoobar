@@ -36,6 +36,11 @@
 	margin-top: 10px;
 }
 
+.message {
+	display: none;
+	color: red;
+}
+
 #urlSubmit input, textarea {
 	margin-bottom: 5px;
 }
@@ -59,22 +64,3 @@
 	margin-top: 10px;
 	display: none;
 }*/
-
-#successAlert {	
-	z-index: 300;
-	position: fixed;
-	left: 30%;
-	width: 140px !important;
-	margin-left: -100px;
-	top: 50%;
-	background-color: green;
-	padding: 10px;
-	color: white;
-	font-size: 20pt;
-	border-radius: 15px;
-	display: none;
-}
-
-#successAlert p {	
-	line-height: 20pt;
-}

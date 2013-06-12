@@ -181,6 +181,8 @@
 							window.location.href = "/claim/" + d.claimID;
 						} else if (typeof d.companyID !== 'undefined') { //The clicked item is a company name
 							window.location.href = "/company/" + d.companyID;
+						} else if (typeof d.tagID !== 'undefined') { //The clicked item is a tag name
+							window.location.href = "/tag/" + d.tagID;
 						}
 					});
 

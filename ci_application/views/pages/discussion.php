@@ -65,14 +65,14 @@
 						?>
 						<div style="position: relative;">
 							<textarea type="text" rows="5" class="outfocus editBox" style="width: 90%; display: none;"></textarea>
-							<p class="editable"><?=$comment['Comment']?></p>
-							<img class="editbutton" src="/img/contribute_icon.png" title="Edit Comment" style="top: -20px;"/>
+							<p class="editable"><?=auto_link($comment['Comment'], 'both', TRUE)?></p>
+							<img class="editbutton" src="/img/contribute_icon.png" title="Edit Comment" style="top: -15px;"/>
 							<button class="submitButton updateEdit">Submit</button>
 						</div>
 						<?php 
 							} else {
 						?>
-							<p><?=$comment['Comment']?></p>
+							<p><?=auto_link($comment['Comment'], 'both', TRUE)?></p>
 						<?php
 							}
 						?>

@@ -62,12 +62,24 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 				<a id="signup" href = "#">Sign Up</a>
 			</span>
 		<?php } ?>
-		<form id="loginForm" action="javascript:sendLogin()">
+		<!-- <form id="forgotPassForm" action="javascript:forgotPass()">
+			<div id="forgotPassPopup" class="popup" style="display:none;">
+				<h3>Password Retrieval</h3>
+				<p class="errorMsg" style="display: none; color: red;"></p>
+				<input id="login_username" type="text" placeholder="Your codename"/>
+				<input id="login_password" type="password" placeholder="Your top secret password"/>
+				<p><a href="#" id="forgotPassword">Forgot password</a></p>
+				<button type="submit" id="login_submit" class="submitButton">Log in</button>
+				<button type="button" id="login_cancel" class="cancelButton">cancel</button>
+			</div>
+		</form> -->
+		<form id="loginForm" action="javascript:sendLogin($('#login_username').val(), $('#login_password').val())">
 			<div id="loginPopup" class="popup" style="display:none;">
 				<h3>Login to your Account</h3>
 				<p id="login_fail" style="display: none; color: red;">Login failed, please try again.</p>
 				<input id="login_username" type="text" placeholder="Your codename"/>
 				<input id="login_password" type="password" placeholder="Your top secret password"/>
+				<!-- <p><a href="#" id="forgotPassword">Forgot password</a></p> -->
 				<button type="submit" id="login_submit" class="submitButton">Log in</button>
 				<button type="button" id="login_cancel" class="cancelButton">cancel</button>
 			</div>
@@ -75,11 +87,10 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 		<form id="signupForm" action="javascript:addUser()">
 			<div id="signupPopup" class="popup" style="display: none;">
 				<h3>Create an account and start helping others!</h3>
-				<p id="username_exists" style="display: none; color: red;">
-					This username already exists, please try a different one.
-				</p>
+				<p class="errorMsg" style="display: none; color: red;"></p>
 				<input type="text" name="username" placeholder="Desired codename"/>
 				<input type="password" name="password" placeholder="Top secret password"/>
+				<input type="password" name="password2" placeholder="Password again"/>
 				<input type="text" name="email" placeholder="Email (*optional)"/>
 				<p>
 					*We only require an email to help you recover a lost username/password and will never spam you with anything, ever!
@@ -88,7 +99,6 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 				<button type="button" id="signup_cancel" class="cancelButton">Wait, no...</button>
 			</div>
 		</form>
-		<?		?>
 	
 <?php
 	// Navigation - Breadcrumbs
@@ -120,3 +130,4 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 	</header>
 
 	<div class="lightsout"></div>
+	<div class="alertMessage"><p></p></div>

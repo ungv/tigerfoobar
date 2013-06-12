@@ -510,6 +510,7 @@ class Action_model extends CI_Model {
         return true;
     }
 
+    // adds a comment to discussions on claim pages
     public function addComment($userid) {
         $claimID = $this->security->xss_clean($this->input->post('claimID'));
         $comment = $this->security->xss_clean($this->input->post('comment'));
@@ -527,6 +528,7 @@ class Action_model extends CI_Model {
         return true;
     }
 
+    // updates text on claim pages
     public function updateEdit($userid) {
         $table = $this->security->xss_clean($this->input->post('table'));
         $col = $this->security->xss_clean($this->input->post('col'));
@@ -542,5 +544,17 @@ class Action_model extends CI_Model {
                 );
         $this->db->update($table, $data, $where);
         return true;
+    }
+
+    // checks to see if this url has already been submitted
+    public function urlFound($userid) {
+        $url = $this->security->xss_clean($this->input->post('url'));
+
+        $query = $this->db->get_where('Claim', array('Link' => $url));
+
+        if($query->num_rows() != 0) {
+            return $query->row()->ClaimID;
+        }
+        return false;
     }
 }

@@ -33,7 +33,6 @@ class Action extends Root_Controller {
         	$data['json'] = '{"error":"Incorrect username or password"}';
         }   
         $this->load->view('data/json_view', $data); 
-       	
 	}
 
 	public function logout() {
@@ -127,7 +126,6 @@ class Action extends Root_Controller {
 		Adds a new user to the database, username/password required, email optional
 	*/
 	public function addUser() {
-		
 		$result = $this->action_model->addUser();
 		if($result) {	//database updated db, send success method
 			$data['json'] = '{"message":"Successfully contacted server method!"}';
@@ -136,7 +134,6 @@ class Action extends Root_Controller {
         	$data['json'] = '{"message":"Cannot Process Update"}'; 
 		}
 		$this->load->view('data/json_view', $data);
-		
 	}
 
 	/*
@@ -259,5 +256,22 @@ class Action extends Root_Controller {
 			}
 		}
 		$this->load->view('data/json_view', $data);		
+	}
+
+	/*
+		Checks if entered url is already in system
+	*/
+	public function urlFound() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->urlFound($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!", "claimID":' . $result . '}';
+			}
+		}
+		$this->load->view('data/json_view', $data);
 	}
 }
