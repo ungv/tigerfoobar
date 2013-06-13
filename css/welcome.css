@@ -96,6 +96,15 @@
 
 	#actions a {
 		float: left;
+		margin-right: 5px;
+	}
+
+	#actions a:hover {
+		background-color: #E2EEBE;
+	    -webkit-transition: all 2s ease;
+	    -moz-transition: all 2s ease;
+	    -o-transition: all 2s ease;
+	    transition: all 2s ease;    		
 	}
 
 	#actions div {
@@ -103,7 +112,6 @@
 		border: 1px solid;
 		width: 280px;	
 		height: 130px;
-		margin-right: 5px;
 	}
 
 	#actions div img {

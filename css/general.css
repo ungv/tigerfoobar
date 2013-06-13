@@ -32,7 +32,7 @@ body{
 	text-align: left;
 }
 
-a, input, label, li, textarea, #urlButton, button {
+a, input, label, li, textarea, #urlButton, button, .button {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;

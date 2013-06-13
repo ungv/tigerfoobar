@@ -35,7 +35,7 @@
 	margin-left: 10px;
 }
 
-#treemapFilters  .button {
+#treemapFilters .button {
 	padding: 5px;
 	margin-bottom: 10px;
 	float: left;
@@ -43,7 +43,11 @@
 	border: 2px solid #7ed6d7;;
 }
 
-#treemapFilters  .button.active {
+#treemapFilters .button:hover {
+	background-color: #9FEAEB;
+}
+
+#treemapFilters .button.active {
 	background-color: #7ed6d7;
 }
 
