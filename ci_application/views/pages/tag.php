@@ -1,21 +1,22 @@
 <?php
-if ($pageType == 'profile' && count($userComments) < 5) {
-?>
-	<div id="listview">
+// If the user has not submitted anything before, display message
+if ($pageType == 'profile' && empty($listofclaims[0]['ClaimID'])) { ?>
+	<p style="margin-bottom: 20px;">You haven't submitted any content yet! Get started with the button at the top!</p>
+	<style type="text/css">
+		#treemapFilters, #treemapIncrementDecrement, #treemapCanvas, #toggleviewContainer {
+			display: none;
+		}
+	</style>
 <?php
-} else {
-?>
-	<div id="listview" class="scrollBox">
-<?php
+	return false;
 }
 
-		// If the user has not submitted anything before, display message
-		if ($pageType == 'profile' && empty($listofclaims[0]['ClaimID'])) {
-		?>
-			<p>You haven't submitted any content yet! Get started with the button at the top!</p>
-		<?php
-		} else {
-		?>
+if ($pageType == 'profile' && count($listofclaims) < 5) { ?>
+	<div id="listview">
+<?php } else { ?>
+	<div id="listview" class="scrollBox">
+<?php } ?>
+
 		<ul id="claimsList">
 			<?php
 			foreach ($listofclaims as $claim) {
@@ -26,7 +27,6 @@ if ($pageType == 'profile' && count($userComments) < 5) {
 			</li>
 			<?php
 			}
-		}
 		?>
 		</ul>
 	</div>

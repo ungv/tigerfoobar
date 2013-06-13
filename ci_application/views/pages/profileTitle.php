@@ -50,4 +50,4 @@
 		?>
 	</div>
 
-	<h3 style="margin-bottom: 10px;">Submissions:</h3>
+	<h3>Submissions:</h3>
