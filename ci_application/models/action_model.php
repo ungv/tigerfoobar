@@ -271,6 +271,22 @@ class Action_model extends CI_Model {
         return false;
     }
 
+    //Checks old password before updating new one
+    public function passCheck($userid) {
+        $password = do_hash($this->security->xss_clean($this->input->post('password')));
+
+        //2. Check for user in db
+        $query = $this->db->get_where('User', array('UserID' => $userid));
+        //3. Verify row exists
+        if($query->num_rows() == 1 && $query->row()->Password == $password)
+        {
+            // If user exists and entered password matches stored password
+            return true;
+        }
+        // else return false, no user found or pw incorrect
+        return false;
+    }
+
     //Drops the user profile from database
     public function dropAccount($userid) {
         $password = do_hash($this->security->xss_clean($this->input->post('password')));

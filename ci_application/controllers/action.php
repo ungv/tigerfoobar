@@ -157,6 +157,26 @@ class Action extends Root_Controller {
 	}
 
 	/*
+		Checks old password before updating new one
+	*/
+	public function passCheck() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->passCheck($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!"}';
+			}else {			//didn't work, inform user why
+	        	$this->output->set_status_header('400');
+	        	$data['json'] = '{"message":"Cannot Process Update"}'; 
+			}
+		}
+		$this->load->view('data/json_view', $data);
+	}
+
+	/*
 		Drops the user profile from database
 	*/
 	public function dropAccount() {

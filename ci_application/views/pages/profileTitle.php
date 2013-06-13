@@ -20,7 +20,8 @@
 			<div id="changePassBox" class="popup" style="display: none;">
 				<div class="emptyMsg" style="color: red; display: none;">You definitely don't want a blank password...</div>
 				<div id="passMatchMsg" style="color: red; display: none;">Passwords do not match</div>
-				<input class="focusthis" type="password" name="newPass" placeholder="new password" />
+				<input class="focusthis" type="password" name="oldPass" placeholder="current password" />
+				<input type="password" name="newPass" placeholder="new password" />
 				<input type="password" name="newPass2" placeholder="password again" />
 				<button class="submitButton" type="submit">Update</button>
 				<button class="cancelButton" type="button">cancel</button>

@@ -277,6 +277,7 @@ div, input, textarea, label {
 }
 	
 /*SignupPopup------------------------*/
+
 input {
 	opacity: 1;
 }
@@ -488,4 +489,10 @@ li.ui-menu-item a {
 
 .alertMessage p {	
 	line-height: 20pt;
+}
+
+/*----------Button Disabled-------------*/
+.disabled {
+	background-color: lightgray;
+	border-color: darkgray;
 }

@@ -380,8 +380,7 @@ function isLoggedIn($action) {
 		$('.alertMessage').fadeOut(5000);
 		$('#loginPopup').show(200);
 		$('#newClaimForm button.submitButton').attr('disabled', 'disabled');
-		$('#newClaimForm button.submitButton').css('background-color','lightgray');
-		$('#newClaimForm button.submitButton').css('border-color','darkgray');		
+		$('#newClaimForm button.submitButton').addClass('disabled');
 		window.scrollTo(0, 0);
 		return false;
 	}

@@ -57,6 +57,29 @@ $(document).ready(function() {
 			$(this).removeClass('topBorder');
 		}
 	});
+
+	$('input[name=oldPass]').blur(function() {
+		$elem = $('input[name=oldPass]');
+		$.ajax({
+			type: 'POST',
+			url: '/action/passCheck',
+			data: {
+				password: $elem.val()
+			},
+			dataType: 'json',
+			success: function(json) {
+				//user entered correct current password
+				$elem.parent().find('.submitButton').attr('disabled', 'false');
+				$elem.parent().find('.submitButton').removeClass('disabled');
+				$('#passMatchMsg').hide(200);
+			},
+			error: function() {
+				$('#passMatchMsg').text('Current password incorrect.').show(200);
+				$elem.parent().find('.submitButton').attr('disabled', 'disabled');
+				$elem.parent().find('.submitButton').addClass('disabled');
+			}
+		});
+	});
 });
 
 function updatecheck(elem) {
