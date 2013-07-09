@@ -261,8 +261,8 @@ class Data_model extends CI_Model {
 	// ------------- METHODS FOR PROFILE VIEW ---------------
 	
 	// Get user information
-	public function getUser($userID) {
-		$query = $this->db->get_where('User', array('UserID' => $userID));
+	public function getUser($username) {
+		$query = $this->db->get_where('User', array('Name' => $username));
 		$results = $query->result_array();
 		if ($results != null)
 			return $results[0];

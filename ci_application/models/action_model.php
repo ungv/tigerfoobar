@@ -432,7 +432,7 @@ class Action_model extends CI_Model {
     public function sendRating($userid) {
         $rating = $this->security->xss_clean($this->input->post('rating'));
         $claimID = $this->db->escape_str($this->security->xss_clean($this->input->post('claimID')));
-        $nowTime = date('Y-m-d H:i:s', time()-21600);
+        $nowTime = date('Y-m-d H:i:s', time());
 
         // Keep track of the claim's old and new scores
         $newScore = 0;

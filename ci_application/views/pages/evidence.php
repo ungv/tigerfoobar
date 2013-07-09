@@ -47,7 +47,7 @@
 			<hr>
 			<dl>
 				<dt>Submitted </dt>
-					<dd><?=date("F j, Y", strtotime($claimInfo['ClaimTime']))?>, by <a href="<?=base_url()?>profile/<?=$claimInfo['UserID']?>"><?=$claimInfo['UserName']?></a></dd>
+					<dd><?=date("F j, Y", strtotime($claimInfo['ClaimTime']))?>, by <a href="<?=base_url()?>profile/<?=$claimInfo['UserName']?>"><?=$claimInfo['UserName']?></a></dd>
 			</dl>
 		<?php if ($pageType != 'company') {	//loading claim
 				$objectid = $claimInfo['ClaimID'];

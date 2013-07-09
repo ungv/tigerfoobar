@@ -295,7 +295,7 @@
 			}
 			
 			if (typeof d.userID !== 'undefined' && typeof d.userName !== 'undefined') {
-				html += "<h5>Submitted by: <a href = '/profile/" + d.userID + "'>" + d.userName + "</a></h5>";
+				html += "<h5>Submitted by: <a href = '/profile/" + d.userName + "'>" + d.userName + "</a></h5>";
 			}
 			return html;
 		}

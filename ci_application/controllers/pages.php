@@ -251,8 +251,9 @@ class Pages extends Root_Controller {
 	}
 
 	//profile page
-	public function profile($userID = -1) {
-		$userID = intval($userID);
+	public function profile($username = -1) {
+		$userID = intval($this->data_model->getUser($username)['UserID']);
+
 		//get userdata to check if user is logged in
 		$data['userdata'] = $this->session->all_userdata();
 		$data['headerTitle'] = 'View profile';
@@ -262,25 +263,22 @@ class Pages extends Root_Controller {
 		$data['csFiles'] = array('general','profile','toggleview', 'tooltipster','tag');
 		$data['jsFiles'] = array('general','profile','addClaim','toggleview','tag');
 
-		//handle case when no parameter is passed
-		if ($userID == -1 || !$this->data_model->getUser($userID)) {
-			if ($this->is_logged_in()) {
-				//user is logged in, set variable as the userid in session to redirect to their own profile
-				$userID = $data['userdata']['userid'];
-			} else {
-				//if user is not logged in, show not found
-				$this->load->view('templates/header', $data);
-				$this->load->view('pages/mainTop', $data);
-				$this->load->view('pages/notfound', $data);
-				$this->load->view('pages/mainBottom', $data);
-				$this->load->view('templates/footer');
-				return;
-			}
+		//if no user specified and user is logged in, redirect to their own profile page
+		if ($username == -1 && $this->is_logged_in()) {
+			header('Location: /profile/' . $data['userdata']['username']);
+		//if user not found or user not logged in, show not found
+		} else if (!$this->data_model->getUser($username)) {
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/mainTop', $data);
+			$this->load->view('pages/notfound', $data);
+			$this->load->view('pages/mainBottom', $data);
+			$this->load->view('templates/footer');
+			return;
 		}
 
 		//grab basic data
 		$data['curProfile'] = $userID;
-		$data['userInfo'] = $this->data_model->getUser($userID);
+		$data['userInfo'] = $this->data_model->getUser($username);
 		$data['listofclaims'] = $this->data_model->getUserClaims($userID);
 		$data['userComments'] = $this->data_model->getUserComments($userID);
 		$data['userVotes'] = $this->data_model->getUserVotes($userID);

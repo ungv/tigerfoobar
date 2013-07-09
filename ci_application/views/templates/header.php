@@ -52,7 +52,7 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 		<?php if($isLogged) { ?>
 			<span id="login_buttons">
 				<a id="urlButton" href="<?=base_url()?>addclaim/">+</a>
-				<a id="login_status" href="/profile/<?=$userid?>"><?= $username ?></a>
+				<a id="login_status" href="/profile/<?=$username?>"><?= $username ?></a>
 				<a id="logout" href="/action/logout">logout</a>
 			</span>
 		<?php }else { ?>

@@ -395,6 +395,11 @@ $(document).ready(function() {
 
 	/*-----------------Discussion-----------------------*/
 
+	// Searches comment text for @ symbol to link to users
+	$('.commentContent').each(function() {
+		console.log($(this).html());
+	});
+
 	// Injects a new textbox to start a thread
 	$('#newComment').click(function() {
 		// $('#newCommentPopup').show(200);
@@ -410,7 +415,9 @@ $(document).ready(function() {
 	$('.reply').click(function() {
 		if (isLoggedIn('reply to this comment')) {
 			$parentLi = $(this).parent().parent().attr('id');
+			$parentCreator = $(this).parent().parent().find('h4 a').text();
 			$('#' + $parentLi + 'reply').show();
+			$('#' + $parentLi + 'reply textarea').text('@' + $parentCreator + ', ');
 			$('#' + $parentLi + 'reply textarea').focus();
 		}
 	});

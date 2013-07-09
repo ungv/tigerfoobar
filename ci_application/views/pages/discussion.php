@@ -59,20 +59,21 @@
 
 						?>
 
-						<h4>By: <a href="<?=base_url()?>profile/<?=$comment['UserID']?>"><?=$comment['Name']?></a> <em style="font-size: 9pt; color: darkgray;">(<?=floor($timesince) . ' ' . $identifier?>)</em></h4>
+						<h4>By: <a href="<?=base_url()?>profile/<?=$comment['Name']?>"><?=$comment['Name']?></a> <em style="font-size: 9pt; color: darkgray;">(<?=floor($timesince) . ' ' . $identifier?>)</em></h4>
 						<?php
 							if (isset($thisUser) && $comment['UserID'] == $thisUser) {
 						?>
 						<div style="position: relative;">
 							<textarea type="text" rows="5" class="outfocus editBox" style="width: 90%; display: none;"></textarea>
 							<p class="editable"><?=auto_link($comment['Comment'], 'both', TRUE)?></p>
-							<img class="editbutton" src="/img/contribute_icon.png" title="Edit Comment" style="top: -15px;"/>
+							<img class="editbutton" src="/img/contribute_icon.png" title="Edit Comment" style="top: -20px;"/>
 							<button class="submitButton updateEdit">Submit</button>
 						</div>
 						<?php 
 							} else {
+							//preg_replace('/@(.*),?/', '<a href="' . base_url() . 'profile/$1">@$1</a>', 
 						?>
-							<p><?=auto_link($comment['Comment'], 'both', TRUE)?></p>
+							<p class="commentContent"><?=nl2br(auto_link($comment['Comment'], 'both', TRUE))?></p>
 						<?php
 							}
 						?>
@@ -87,7 +88,7 @@
 						</div>
 					</li>
 					<li id="<?=$comment['CommentID']?>commentreply" class="replyBox" style="display: none; left: <?=($comment['level']+1) * 15?>px; margin-right: <?=($comment['level']+1) * 15?>px">
-						<textarea cols="100%" placeholder="Reply to this comment"></textarea>
+						<textarea cols="100%"></textarea>
 						<button class="submitButton submitReply" value="">Submit</button>
 						<button class="cancelButton cancelReply" value="">cancel</button>
 					</li>
