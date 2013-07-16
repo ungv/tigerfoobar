@@ -41,10 +41,10 @@ $(document).ready(function() {
 						var user = json.user.split(',');
 						var notificationTypes = json.notificationTypes.split(',');
 						var post = json.post.split(',');
-						var notifications = 0;
-						if (notificationTypes.length < 15) notifications = notificationTypes.length;
-						else notifications = 15;
-						for (var i = 0; i < notifications; i++) {
+						var shown = 0;
+						if (notificationTypes.length < 15) shown = notificationTypes.length-1;
+						else shown = 15;
+						for (var i = 0; i < shown; i++) {
 							var message = "";
 							switch(notificationTypes[i]) {
 								case 'co':
@@ -61,7 +61,8 @@ $(document).ready(function() {
 									break;
 							}
 							$li = $('<li>').html(message);
-							if (notifications - i <= newNotificationsNo) {
+							console.log(shown + ", " + i + ", " + newNotificationsNo);
+							if (shown - i <= newNotificationsNo) {
 								$li.css('background-color','lightgray');
 							}
 							$('#notificationsList ul').prepend($li);
