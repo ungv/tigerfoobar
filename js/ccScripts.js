@@ -395,11 +395,6 @@ $(document).ready(function() {
 
 	/*-----------------Discussion-----------------------*/
 
-	// Searches comment text for @ symbol to link to users
-	$('.commentContent').each(function() {
-		console.log($(this).html());
-	});
-
 	// Injects a new textbox to start a thread
 	$('#newComment').click(function() {
 		// $('#newCommentPopup').show(200);

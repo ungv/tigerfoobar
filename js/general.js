@@ -3,9 +3,86 @@
 */
 // Global array to keep colors consistent
 //				-3 			-2 			-1 			0 			1 		2 			3
-var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#5cffae', '#31b373', '#106138'];
+var colors = ['#FF7640', '#FF9B73', '#FFCEBA', '#FEF5CA', '#b3f3ff', '#8AD8E7', '#37B6CE'];
+
+// old colors
+// var colors = ['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#5cffae', '#31b373', '#106138'];
+
 
 $(document).ready(function() {
+	/*--------Notifications-----------------*/
+	if ($('#main').attr('signedin')) {
+		var newNotificationsNo = 0;
+		$.ajax({
+			type: 'POST',
+			url: '/action/notifications',
+			dataType: 'json',
+			success: function(json) {
+				if (json.notifications != 0)
+					$('#notifications').addClass('hasNew');
+				$('#notifications').text(json.notifications);
+				newNotificationsNo = json.notifications;
+			},
+			error: function() {
+				console.log('Error in retrieving number of notifications');
+			}
+		});
+	}
+
+	$('#notifications').click(function() {
+		if ($('#notificationsList').attr('style') == 'display: none;') {
+			$('#notificationsList').show(200);
+			if ($(this).hasClass('notloaded')) {
+				$.ajax({
+					type: 'POST',
+					url: '/action/notificationTypes',
+					dataType: 'json',
+					success: function(json) {
+						var user = json.user.split(',');
+						var notificationTypes = json.notificationTypes.split(',');
+						var post = json.post.split(',');
+						var notifications = 0;
+						if (notificationTypes.length < 15) notifications = notificationTypes.length;
+						else notifications = 15;
+						for (var i = 0; i < notifications; i++) {
+							var message = "";
+							switch(notificationTypes[i]) {
+								case 'co':
+									message = '<a href="/claim/' + post[i] + '">' + user[i] + ' commented on your claim</a>';
+									break;
+								case 're':
+									message = '<a href="/claim/' + post[i] + '">' + user[i] + ' replied to your comment</a>';
+									break;
+								case 'ra':
+									message = '<a href="/claim/' + post[i] + '">' + user[i] + ' rated your claim</a>';
+									break;
+								case 'vo':
+									message = '<a href="/claim/' + post[i] + '">' + user[i] + ' voted on your comment</a>';
+									break;
+							}
+							$li = $('<li>').html(message);
+							if (notifications - i <= newNotificationsNo) {
+								$li.css('background-color','lightgray');
+							}
+							$('#notificationsList ul').prepend($li);
+						}
+						$('#notifications').removeClass('notloaded').removeClass('hasNew');
+						$('#notifications').text('0');
+					},
+					error: function() {
+						console.log('Error in retrieving notifications');
+					}
+				});
+			}
+		} else {
+			$('#notificationsList').hide(200);
+		}
+		$('#closeNotes').click(function() {
+			$('#notificationsList').hide(200);
+		});
+	});
+
+
 	/*--------Dynamic search bar-----------------*/
 	$logoSpace = parseInt($('#logoBanner').css('width'));
 	$loginButtonSpace = parseInt($('#login_buttons').css('width'));
@@ -145,27 +222,6 @@ $(document).ready(function() {
 	});
 
 	/*--------Auto Complete Info-------*/
-
-	var projects = [
-			{
-				value: "jquery",
-				label: "jQuery",
-				desc: "the write less, do more, JavaScript library",
-				icon: "jquery_32x32.png"
-			},
-			{
-				value: "jquery-ui",
-				label: "jQuery UI",
-				desc: "the official user interface library for jQuery",
-				icon: "jqueryui_32x32.png"
-			},
-			{
-				value: "sizzlejs",
-				label: "Sizzle JS",
-				desc: "a pure-JavaScript CSS selector engine",
-				icon: "sizzlejs_32x32.png"
-			}
-		];
 
 	//Grabs a list of companies, cliams, and tags relavent to
 	//the text the user has typed in the search box

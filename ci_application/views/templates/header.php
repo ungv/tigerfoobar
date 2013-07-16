@@ -51,6 +51,7 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 		<!--Profile/login/register-->
 		<?php if($isLogged) { ?>
 			<span id="login_buttons">
+				<a id="notifications" class="notloaded" style="cursor: pointer;">0</a>
 				<a id="urlButton" href="<?=base_url()?>addclaim/">+</a>
 				<a id="login_status" href="/profile/<?=$username?>"><?= $username ?></a>
 				<a id="logout" href="/action/logout">logout</a>
@@ -73,6 +74,10 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 				<button type="button" id="login_cancel" class="cancelButton">cancel</button>
 			</div>
 		</form> -->
+		<div id="notificationsList" class="popup" style="display: none;">
+			<h4 style="margin-left: 5px;">Notifications</h4>
+			<ul style="cursor: pointer;"><li id="closeNotes" style="text-align: center;">Close</li></ul>
+		</div>
 		<form id="loginForm" action="javascript:sendLogin($('#login_username').val(), $('#login_password').val())">
 			<div id="loginPopup" class="popup" style="display:none;">
 				<h3>Login to your Account</h3>

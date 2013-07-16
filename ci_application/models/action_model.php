@@ -217,6 +217,18 @@ class Action_model extends CI_Model {
                                     AND CommentID = $CommentID";
                 $this->db->query($updateVoteCount);
             }
+
+        $query = $this->db->get_where('Discussion', array('ClaimID' => $ClaimID, 'CommentID' => $CommentID));
+        $author = $query->row()->UserID;
+        if ($userid != $author) {
+            $sql = "UPDATE User
+                    SET Notifications = Notifications+1,
+                    User = concat(User, '$userid,'),
+                    NotificationTypes = concat(NotificationTypes, 'vo,'),
+                    Post = concat(Post, '$ClaimID,')
+                    WHERE UserID = $author";
+            $this->db->query($sql);
+        }
         return $result;
     }
 
@@ -523,6 +535,18 @@ class Action_model extends CI_Model {
             'CompanyID' => $company
             );
         $this->db->update('Company', $recalculated, $where);
+
+        $query = $this->db->get_where('Claim', array('ClaimID' => $claimID));
+        $author = $query->row()->UserID;
+        if ($userid != $author) {
+            $sql = "UPDATE User
+                    SET Notifications = Notifications+1,
+                    User = concat(User, '$userid,'),
+                    NotificationTypes = concat(NotificationTypes, 'ra,'),
+                    Post = concat(Post, '$claimID,')
+                    WHERE UserID = $author";
+            $this->db->query($sql);
+        }
         return true;
     }
 
@@ -541,6 +565,30 @@ class Action_model extends CI_Model {
                 'level' => $level
                 );
         $this->db->insert('Discussion', $commentData);
+
+        if ($level == 0) {
+            $query = $this->db->get_where('Claim', array('ClaimID' => $claimID));
+            $author = $query->row()->UserID;
+            $sql = "UPDATE User
+                    SET Notifications = Notifications+1,
+                    User = concat(User, '$userid,'),
+                    NotificationTypes = concat(NotificationTypes, 'co,'),
+                    Post = concat(Post, '$claimID,')
+                    WHERE UserID = $author";
+            $this->db->query($sql);
+        } else {
+            $query = $this->db->get_where('Discussion', array('ClaimID' => $claimID, 'CommentID' => $parentCommentID));
+            $author = $query->row()->UserID;
+            if ($userid != $author) {
+                $sql = "UPDATE User
+                        SET Notifications = Notifications+1,
+                        User = concat(User, '$userid,'),
+                        NotificationTypes = concat(NotificationTypes, 're,'),
+                        Post = concat(Post, '$claimID,')
+                        WHERE UserID = $author";
+                $this->db->query($sql);
+            }
+        }
         return true;
     }
 
@@ -570,6 +618,45 @@ class Action_model extends CI_Model {
 
         if($query->num_rows() != 0) {
             return $query->row()->ClaimID;
+        }
+        return false;
+    }
+
+    // request for number of user's notifications
+    public function notifications($userid) {
+        $query = $this->db->get_where('User', array('UserID' => $userid));
+
+        if($query->num_rows() != 0) {
+            return $query->row()->Notifications;
+        }
+        return false;
+    }
+
+    // request for user's notifications
+    public function notificationTypes($userid) {
+        $query = $this->db->get_where('User', array('UserID' => $userid));
+        $user = substr($query->row()->User, 0, -1);
+        $notificationTypes = $query->row()->NotificationTypes;
+        $post = $query->row()->Post;
+
+        $this->db->update('User', array('Notifications' => 0), array('UserID' => $userid));
+
+        $users = explode(',', $user);
+        $usernames = '';
+        foreach ($users as $user) {
+            $sql = $this->db->get_where('User', array('UserID' => $user));
+            $username = $sql->row()->Name;
+            $usernames .= $username . ',';
+        }
+
+        $data = array(
+            "user" => $usernames,
+            "notificationTypes" => $notificationTypes,
+            "post" => $post,
+            );
+
+        if($query->num_rows() != 0) {
+            return $data;
         }
         return false;
     }

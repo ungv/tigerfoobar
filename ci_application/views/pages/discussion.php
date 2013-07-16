@@ -65,15 +65,14 @@
 						?>
 						<div style="position: relative;">
 							<textarea type="text" rows="5" class="outfocus editBox" style="width: 90%; display: none;"></textarea>
-							<p class="editable"><?=auto_link($comment['Comment'], 'both', TRUE)?></p>
+							<p class="editable"><?=preg_replace('/@(\w+)?/', '<a href="' . base_url() . 'profile/$1">@$1</a>', nl2br(auto_link($comment['Comment'], 'both', TRUE)))?></p>
 							<img class="editbutton" src="/img/contribute_icon.png" title="Edit Comment" style="top: -20px;"/>
 							<button class="submitButton updateEdit">Submit</button>
 						</div>
 						<?php 
 							} else {
-							//preg_replace('/@(.*),?/', '<a href="' . base_url() . 'profile/$1">@$1</a>', 
 						?>
-							<p class="commentContent"><?=nl2br(auto_link($comment['Comment'], 'both', TRUE))?></p>
+							<p class="commentContent"><?=preg_replace('/@(\w+)?/', '<a href="' . base_url() . 'profile/$1">@$1</a>', nl2br(auto_link($comment['Comment'], 'both', TRUE)))?></p>
 						<?php
 							}
 						?>

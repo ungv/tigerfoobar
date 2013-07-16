@@ -289,7 +289,41 @@ class Action extends Root_Controller {
 			$userid = $this->session->userdata('userid');
 			$result = $this->action_model->urlFound($userid);
 			if($result) {	//database updated db, send success method
-				$data['json'] = '{"message":"Successfully contacted server method!", "claimID":' . $result . '}';
+				$data['json'] = '{"message":"Successfully contacted server method!", "claimID":"' . $result . '"}';
+			}
+		}
+		$this->load->view('data/json_view', $data);
+	}
+
+	/*
+		Requests number of user's notifications
+	*/
+	public function notifications() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->notifications($userid);
+			if($result || $result == 0) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!", "notifications":"' . $result . '"}';
+			}
+		}
+		$this->load->view('data/json_view', $data);
+	}
+
+	/*
+		Requests user's notifications
+	*/
+	public function notificationTypes() {
+		if(!$this->is_logged_in()) {
+			$this->output->set_status_header('400');
+        	$data['json'] = '{"message":"Not Logged In"}'; 
+		}else {
+			$userid = $this->session->userdata('userid');
+			$result = $this->action_model->notificationTypes($userid);
+			if($result) {	//database updated db, send success method
+				$data['json'] = '{"message":"Successfully contacted server method!", "user":"' . $result['user'] . '", "notificationTypes":"' . $result['notificationTypes'] . '", "post":"' . $result['post'] . '"}';
 			}
 		}
 		$this->load->view('data/json_view', $data);

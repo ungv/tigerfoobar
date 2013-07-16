@@ -83,7 +83,9 @@
 			mouseY,
 			bgColor = d3.scale.quantile()
 			   .domain([-3, -2, -1, 0, 1, 2, 3])
-			   .range(['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64']),
+			   // old colors
+			   // .range(['#FF4900', '#FF7640', '#FF9B73', '#FEF5CA', '#61D7A4', '#36D792', '#00AF64']),
+			   .range(['#FF7640', '#FF9B73', '#FFCEBA', '#FEF5CA', '#b3f3ff', '#8AD8E7', '#37B6CE']),
 			borderColor = d3.scale.category10(),
 			borderWidth = 1,
 			domain = document.domain,

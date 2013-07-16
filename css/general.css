@@ -98,10 +98,9 @@ header{
 	width: 100%;
 	margin:0px auto 35px;
 	padding-top:3px;
-	
-	background-color: #0A6107;
+	background-color: #5AA0AD;
+	/*background-color: #0A6107;*/
 	padding-top: 2px;
-
 	top: 0;
 	left: 0;
 	border-bottom:3px solid #f0f0f0;
@@ -178,7 +177,8 @@ header span {
 
 #login_buttons a{
 	border-radius: 2px;
-	background-color:#E2EEBE;
+	background-color:whiteSmoke;
+	/*background-color:#E2EEBE;*/
 	color:#0A6107;
 	font-weight: bold;
 	padding: 5px 10px 5px 10px;
@@ -212,12 +212,44 @@ header span {
 	color: green;
 }
 
+/*Notifications---------------------------*/
+#notificationsList {
+	right: 40px;
+	top: 55px;
+	padding: 0px;
+}
+
+#notificationsList li {
+	border-radius: 0px;
+	margin: 0px;
+	width: 100%;
+}
+
+#notificationsList li:hover {
+	background-color: darkgray !important;
+}
+
+#notificationsList a {
+	display: block;
+	color: black;
+	padding: 10px;
+}
+
+#notificationsList a:hover {
+	text-decoration: none;
+}
+
+.hasNew {
+	background-color: #F90 !important;
+}
 
 /*Footer---------------------------*/
 
 footer {
-	background-color: #004509;
+	background-color: #ffceba;
+	/*background-color: #004509;*/
 	width: 100%;
+	opacity: 0.7;
 }
 
 footer, footer a{
@@ -228,8 +260,10 @@ footer, footer a{
 	width: 915px;
 	padding: 15px;
 	margin: 0 auto;
-	background-color: #003904;
+	background-color: #ff9b73;
+	/*background-color: #003904;*/
 	text-align: center;
+	opacity: 0.7;
 }
 
 #bottomBar ul {

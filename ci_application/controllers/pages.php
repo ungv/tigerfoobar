@@ -252,7 +252,8 @@ class Pages extends Root_Controller {
 
 	//profile page
 	public function profile($username = -1) {
-		$userID = intval($this->data_model->getUser($username)['UserID']);
+		$user = $this->data_model->getUser($username);
+		$userID = intval($user['UserID']);
 
 		//get userdata to check if user is logged in
 		$data['userdata'] = $this->session->all_userdata();
