@@ -34,7 +34,7 @@
 							// Calculate time past since comment posted
 							// PHP time() is in Europe/Paris (+9) timezone, but MySQL server time is UTC (+3),
 							// So need to subtract 6 hours to adjust
-							$timesince = date(time() - strtotime($comment['Time'])) - 21600;
+							$timesince = date(time() - strtotime($comment['Time']));
 							$identifier = 'seconds ago';
 							if ($timesince >= 60) {
 								$timesince = $timesince / 60;
